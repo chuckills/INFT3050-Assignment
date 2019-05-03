@@ -1,0 +1,37 @@
+﻿using Assignment_1.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Assignment_1
+{
+    public partial class Payment : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            //Cost.Text = Request.QueryString["cost"];
+        }
+
+        // Redirects to payment confirmation message and removes current shopping cart 
+        // from session.
+        protected void PaymentConfirmLink_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session.Remove("Cart");
+            HttpContext.Current.Session["Cart"] = new ShoppingCart();
+            Response.Redirect("~/PaymentConfirmation.aspx");
+        }
+
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (IsValid)
+            {
+                Response.Redirect("~/PaymentResponse.aspx");
+            }
+        }
+    }
+}

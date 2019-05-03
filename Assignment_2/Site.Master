@@ -1,0 +1,164 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Assignment_1.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Jersey Sure!</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/Content/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <%-- Navigation --%>
+        <%-- Define the login status to display appropriate navigation menu --%>
+        <% string LoginStatus = HttpContext.Current.Session["LoginStatus"] as string; %>
+
+        <nav class="navbar navbar-expand-lg navbar-dark header-black static-top">
+          <div class="container">
+            <a class="navbar-brand" href="Default.aspx">
+                  <img src="Images/Jersey.png" alt="Jersey Sure Logo" id="hero-logo">
+                </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a runat="server" href="~/" class="nav-link">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <% // An admin should not be able to purchase products; instead manage products.
+                    // The below dynamically displays the correct link according to the user account.
+                    if (!LoginStatus.Equals("Admin"))
+                    { %>
+                        <li class="nav-item">
+                            <a runat="server" href="~/Products" class="nav-link">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a runat="server" href="~/About" class="nav-link">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a runat="server" href="~/Contact" class="nav-link">Contact</a>
+                        </li>
+                 <% }
+                    else
+                    { %>
+                        <li class="nav-item dropdown">
+                            <a runat="server" href="#" 
+                                class="nav-link dropdown-toggle admin-nav-link" id="A2" data-toggle="dropdown">Product Management</a>
+                            <div class="dropdown-menu">
+                                <a runat="server" href="~/AdminItemManagement" class="dropdown-item">Update/Remove Product</a>
+                                <a runat="server" href="~/AdminItemManagementInsert" class="dropdown-item">Insert Product</a>
+                            </div>
+                        </li>
+                 <% } %>
+                <li class="nav-item dropdown">
+                  <a runat="server" href="~/Account" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Account</a>
+                    <div class="dropdown-menu">
+                    <% // Only display if user is logged in to an account (admin or user).
+                        if (!LoginStatus.Equals("LoggedOut"))
+                        { %>
+                            <a runat="server" href="~/Logout" class="dropdown-item">Logout</a>
+                        <% // Only allow purchase history if a user; i.e. admin should not be able to make purchases
+                            if (LoginStatus.Equals("User"))
+                            { %>
+                                <a runat="server" href="~/PurchaseHistory" class="dropdown-item">Purchase History</a>
+                        <%  } %>
+                            <div class="dropdown-divider"></div>
+                            <a runat="server" href="~/AccountSettings" class="dropdown-item">Settings</a> 
+                    <%  }
+
+                        // Otherwise give the option to login 
+                        else
+                        { %>
+                            <a runat="server" href="~/Login" class="dropdown-item">Login</a>
+                    <%  } %>
+                    </div>
+                </li>
+                <% // Display admin tab in main navigation bar if user is an admin
+                    if (LoginStatus.Equals("Admin"))
+                    { %>
+                        <li class="nav-item dropdown">
+                            <a runat="server" href="#" class="nav-link dropdown-toggle admin-nav-link" id="A1" data-toggle="dropdown">Admin</a>
+                            <div class="dropdown-menu">
+                                <a runat="server" href="~/AdminRegistration" class="dropdown-item">Admin Registration</a>
+                                <a runat="server" href="~/AdminManageUserAccounts" class="dropdown-item">Manage User Accounts</a>
+                                <a runat="server" href="~/AdminPostageOptions" class="dropdown-item">Postage Options</a>
+                            </div>
+                        </li>
+                 <% }
+                    // Only display cart and product search to a non-admin user
+                    else
+                    { %>
+                        <li class="nav-item">
+                          <a runat="server" href="~/Cart" class="nav-link">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- Search form -->
+                            <asp:Panel runat="server" DefaultButton="SubmitSearch">
+                                <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" Placeholder="Search Products..."></asp:TextBox>
+                                <asp:Button ID="SubmitSearch" runat="server" Text="Button" OnClick="SubmitSearch_Click" CssClass="hide" />
+                            </asp:Panel>
+                            
+
+                            <%--<div class="active-pink-4 mb-4 search-navbar">
+                                <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" Placeholder="Search Products..."></asp:TextBox>
+                                <asp:Button ID="SubmitSearch" runat="server" Text="Button" OnClick="SubmitSearch_Click" CssClass="hide" />
+                            </div>
+
+                            <script>
+                                function button_click(objTextBox,objBtnID)
+                                {
+                                    if(window.event.keyCode==13)
+                                    {
+                                        document.getElementById(objBtnID).focus();
+                                        document.getElementById(objBtnID).click();
+                                    }
+                                }
+                            </script>--%>
+                        </li>
+                 <% } %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+    </form>
+</body>
+</html>
