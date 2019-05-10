@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Assignment_2 {
+namespace Assignment_2.UL {
     
     
     public partial class Registration {

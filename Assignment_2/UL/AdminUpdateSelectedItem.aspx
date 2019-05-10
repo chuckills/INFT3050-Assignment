@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Update Item" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminUpdateSelectedItem.aspx.cs" Inherits="Assignment_2.AdminUpdateSelectedItem" %>
+﻿<%@ Page Title="Update Item" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminUpdateSelectedItem.aspx.cs" Inherits="Assignment_2.UL.AdminUpdateSelectedItem" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <%-- Page to update a product details --%>

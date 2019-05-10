@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Modify User Account" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AccountSettings.aspx.cs" Inherits="Assignment_2.AccountSettings" %>
+﻿<%@ Page Title="Modify User Account" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AccountSettings.aspx.cs" Inherits="Assignment_2.UL.AccountSettings" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   
 <br />

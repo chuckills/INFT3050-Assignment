@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ProductPage" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="SingleProductPage.aspx.cs" Inherits="Assignment_2.SingleProductPage" %>
+﻿<%@ Page Title="ProductPage" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="SingleProductPage.aspx.cs" Inherits="Assignment_2.UL.SingleProductPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container margin-space-top-100">
         <div class="row">
@@ -68,7 +68,7 @@
     </div>
 
     <%-- Input spinner for quantity input --%>
-    <script src="Scripts/bootstrap-input-spinner.js"></script>
+    <script src="/Scripts/bootstrap-input-spinner.js"></script>
     <script>
         $("#MainContent_tbxQuantity").inputSpinner()
     </script>

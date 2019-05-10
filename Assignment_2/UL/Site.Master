@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Assignment_2.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Assignment_2.UL.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -9,11 +9,11 @@
     <title><%: Page.Title %> - Jersey Sure!</title>
 
     <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
+        <%: Scripts.Render("~/UL/bundles/modernizr") %>
     </asp:PlaceHolder>
 
     <webopt:bundlereference runat="server" path="~/UL/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/UL/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="~/UL/Content/style.css" rel="stylesheet">
 
 </head>

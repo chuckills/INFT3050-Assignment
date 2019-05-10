@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Thank You" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="ContactResponse.aspx.cs" Inherits="Assignment_2.ContactResponse" %>
+﻿<%@ Page Title="Thank You" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="ContactResponse.aspx.cs" Inherits="Assignment_2.UL.ContactResponse" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <br />

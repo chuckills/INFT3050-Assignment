@@ -136,7 +136,7 @@
     <Content Include="UL\Content\bootstrap.min.css" />
     <Content Include="UL\Content\Site.css" />
     <Content Include="UL\Content\style.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="UL\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\JerseySure.sql" />
     <Content Include="UL\GuestRegistration.aspx" />
@@ -260,6 +260,7 @@
     <Content Include="UL\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\Purchase.cs" />
     <Compile Include="UL\AccountSettings.aspx.cs">
       <DependentUpon>AccountSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -456,7 +457,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BL\" />
     <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>

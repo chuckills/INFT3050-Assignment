@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Payment Confirmation" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="PaymentConfirmation.aspx.cs" Inherits="Assignment_2.PaymentConfirmation" %>
+﻿<%@ Page Title="Payment Confirmation" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="PaymentConfirmation.aspx.cs" Inherits="Assignment_2.UL.PaymentConfirmation" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row">

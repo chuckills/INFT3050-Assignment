@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Shopping Cart" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="Assignment_2.Cart" %>
+﻿<%@ Page Title="Shopping Cart" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="Assignment_2.UL.Cart" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <h2 class="margin-space-top-50 tag-spacing-bottom"><%: Title %></h2>
