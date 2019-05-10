@@ -462,8 +462,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UserLayer\Admin\" />
-    <Folder Include="UserLayer\Client\" />
+    <Folder Include="BL\" />
+    <Folder Include="DAL\" />
+    <Folder Include="UL\Admin\" />
+    <Folder Include="UL\Client\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
