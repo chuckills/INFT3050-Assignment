@@ -7,7 +7,7 @@ using System.Web;
 /// Model to represent the a shopping cart item.
 /// </summary>
 
-namespace Assignment_2.Models
+namespace Assignment_2.BL
 {
     public class CartItem
     {

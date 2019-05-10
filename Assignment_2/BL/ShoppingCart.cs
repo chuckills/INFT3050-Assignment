@@ -8,7 +8,7 @@ using System.Web;
 /// Model to represent the entire shopping cart for the current session.
 /// </summary>
 
-namespace Assignment_2.Models
+namespace Assignment_2.BL
 {
     public class ShoppingCart
     {

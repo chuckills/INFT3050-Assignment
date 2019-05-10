@@ -7,7 +7,7 @@ using System.Web;
 /// Temporary model for proof of concept to provide login functionality
 /// </summary>
 
-namespace Assignment_2.Models
+namespace Assignment_2.BL
 {
     public class User
     {
