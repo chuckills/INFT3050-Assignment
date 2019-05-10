@@ -19,7 +19,7 @@ namespace Assignment_2
         {
             if (IsValid)
             {
-                Response.Redirect("~/UL/Default.aspx");
+                Response.Redirect("~/UL/Default");
             }
         }
     }

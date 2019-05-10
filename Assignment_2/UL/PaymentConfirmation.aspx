@@ -8,7 +8,7 @@
                     Thank you for your purchase, a digital receipt has been sent to your email. 
                     We hope you chose to shop again with us in the future!
                 </p>
-                <asp:HyperLink ID="ReturnHome" runat="server" NavigateUrl="~/UL/Default.aspx">Return to Home Page</asp:HyperLink>
+                <asp:HyperLink ID="ReturnHome" runat="server" NavigateUrl="~/UL/Default">Return to Home Page</asp:HyperLink>
             </div>
         </div>
     </div>

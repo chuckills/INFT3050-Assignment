@@ -32,13 +32,13 @@ namespace Assignment_2
                 {
                     // Check if customer
                     HttpContext.Current.Session["LoginStatus"] = "User";
-                    Response.Redirect("~/UL/Default.aspx");
+                    Response.Redirect("~/UL/Default");
                 }
                 else if (username.Equals(admin.Username) && password.Equals(admin.Password))
                 {
                     // Check if admin
                     HttpContext.Current.Session["LoginStatus"] = "Admin";
-                    Response.Redirect("~/UL/Default.aspx");
+                    Response.Redirect("~/UL/Default");
                 }
                 else
                 {

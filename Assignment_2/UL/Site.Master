@@ -14,7 +14,7 @@
 
     <webopt:bundlereference runat="server" path="~/UL/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="/Content/style.css" rel="stylesheet">
+    <link href="~/UL/Content/style.css" rel="stylesheet">
 
 </head>
 <body>
@@ -45,7 +45,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark header-black static-top">
           <div class="container">
-            <a class="navbar-brand" href="Default.aspx">
+            <a class="navbar-brand" href="Default">
                   <img src="Images/Jersey.png" alt="Jersey Sure Logo" id="hero-logo">
                 </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

@@ -7,6 +7,6 @@ Your payment has been successful
 
 <br /><br />
 
-<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/UL/Default.aspx">Return home</asp:HyperLink>
+<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/UL/Default">Return home</asp:HyperLink>
 
 </asp:Content>
