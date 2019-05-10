@@ -1,4 +1,4 @@
-﻿using Assignment_1.Models;
+﻿using Assignment_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class Login : System.Web.UI.Page
     {
@@ -32,13 +32,13 @@ namespace Assignment_1
                 {
                     // Check if customer
                     HttpContext.Current.Session["LoginStatus"] = "User";
-                    Response.Redirect("~/Default.aspx");
+                    Response.Redirect("~/UL/Default.aspx");
                 }
                 else if (username.Equals(admin.Username) && password.Equals(admin.Password))
                 {
                     // Check if admin
                     HttpContext.Current.Session["LoginStatus"] = "Admin";
-                    Response.Redirect("~/Default.aspx");
+                    Response.Redirect("~/UL/Default.aspx");
                 }
                 else
                 {

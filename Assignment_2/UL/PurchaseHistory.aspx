@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PurchaseHistory.aspx.cs" Inherits="Assignment_1.PurchaseHistory" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="PurchaseHistory.aspx.cs" Inherits="Assignment_2.PurchaseHistory" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     

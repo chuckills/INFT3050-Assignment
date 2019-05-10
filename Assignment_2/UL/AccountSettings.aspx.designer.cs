@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Assignment_1 {
+namespace Assignment_2 {
     
     
     public partial class AccountSettings {

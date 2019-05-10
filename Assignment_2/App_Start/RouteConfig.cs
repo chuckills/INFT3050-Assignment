@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public static class RouteConfig
     {

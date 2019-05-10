@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Assignment_1.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Assignment_2.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:bundlereference runat="server" path="~/UL/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/style.css" rel="stylesheet">
 
@@ -26,14 +26,14 @@
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="bootstrap" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/UL/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
             </Scripts>
@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a runat="server" href="~/" class="nav-link">Home
+                    <a runat="server" href="~/UL/Default" class="nav-link">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
@@ -63,13 +63,13 @@
                     if (!LoginStatus.Equals("Admin"))
                     { %>
                         <li class="nav-item">
-                            <a runat="server" href="~/Products" class="nav-link">Shop</a>
+                            <a runat="server" href="~/UL/Products" class="nav-link">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" href="~/About" class="nav-link">About Us</a>
+                            <a runat="server" href="~/UL/About" class="nav-link">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" href="~/Contact" class="nav-link">Contact</a>
+                            <a runat="server" href="~/UL/Contact" class="nav-link">Contact</a>
                         </li>
                  <% }
                     else
@@ -78,31 +78,31 @@
                             <a runat="server" href="#" 
                                 class="nav-link dropdown-toggle admin-nav-link" id="A2" data-toggle="dropdown">Product Management</a>
                             <div class="dropdown-menu">
-                                <a runat="server" href="~/AdminItemManagement" class="dropdown-item">Update/Remove Product</a>
-                                <a runat="server" href="~/AdminItemManagementInsert" class="dropdown-item">Insert Product</a>
+                                <a runat="server" href="~/UL/AdminItemManagement" class="dropdown-item">Update/Remove Product</a>
+                                <a runat="server" href="~/UL/AdminItemManagementInsert" class="dropdown-item">Insert Product</a>
                             </div>
                         </li>
                  <% } %>
                 <li class="nav-item dropdown">
-                  <a runat="server" href="~/Account" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Account</a>
+                  <a runat="server" href="~/UL/Account" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">Account</a>
                     <div class="dropdown-menu">
                     <% // Only display if user is logged in to an account (admin or user).
                         if (!LoginStatus.Equals("LoggedOut"))
                         { %>
-                            <a runat="server" href="~/Logout" class="dropdown-item">Logout</a>
+                            <a runat="server" href="~/UL/Logout" class="dropdown-item">Logout</a>
                         <% // Only allow purchase history if a user; i.e. admin should not be able to make purchases
                             if (LoginStatus.Equals("User"))
                             { %>
-                                <a runat="server" href="~/PurchaseHistory" class="dropdown-item">Purchase History</a>
+                                <a runat="server" href="~/UL/PurchaseHistory" class="dropdown-item">Purchase History</a>
                         <%  } %>
                             <div class="dropdown-divider"></div>
-                            <a runat="server" href="~/AccountSettings" class="dropdown-item">Settings</a> 
+                            <a runat="server" href="~/UL/AccountSettings" class="dropdown-item">Settings</a> 
                     <%  }
 
                         // Otherwise give the option to login 
                         else
                         { %>
-                            <a runat="server" href="~/Login" class="dropdown-item">Login</a>
+                            <a runat="server" href="~/UL/Login" class="dropdown-item">Login</a>
                     <%  } %>
                     </div>
                 </li>
@@ -112,9 +112,9 @@
                         <li class="nav-item dropdown">
                             <a runat="server" href="#" class="nav-link dropdown-toggle admin-nav-link" id="A1" data-toggle="dropdown">Admin</a>
                             <div class="dropdown-menu">
-                                <a runat="server" href="~/AdminRegistration" class="dropdown-item">Admin Registration</a>
-                                <a runat="server" href="~/AdminManageUserAccounts" class="dropdown-item">Manage User Accounts</a>
-                                <a runat="server" href="~/AdminPostageOptions" class="dropdown-item">Postage Options</a>
+                                <a runat="server" href="~/UL/AdminRegistration" class="dropdown-item">Admin Registration</a>
+                                <a runat="server" href="~/UL/AdminManageUserAccounts" class="dropdown-item">Manage User Accounts</a>
+                                <a runat="server" href="~/UL/AdminPostageOptions" class="dropdown-item">Postage Options</a>
                             </div>
                         </li>
                  <% }
@@ -122,7 +122,7 @@
                     else
                     { %>
                         <li class="nav-item">
-                          <a runat="server" href="~/Cart" class="nav-link">Cart</a>
+                          <a runat="server" href="~/UL/Cart" class="nav-link">Cart</a>
                         </li>
                         <li class="nav-item">
                             <!-- Search form -->

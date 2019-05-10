@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class Logout : System.Web.UI.Page
     {
@@ -13,7 +13,7 @@ namespace Assignment_1
         {
             // Change Login Status and redirect to home page
             HttpContext.Current.Session["LoginStatus"] = "LoggedOut";
-            Response.Redirect("~/");
+            Response.Redirect("~/UL/");
         }
     }
 }

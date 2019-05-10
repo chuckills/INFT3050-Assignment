@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Insert Product" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminItemManagementInsert.aspx.cs" Inherits="Assignment_1.AdminItemManagementInsert" %>
+﻿<%@ Page Title="Insert Product" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminItemManagementInsert.aspx.cs" Inherits="Assignment_2.AdminItemManagementInsert" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
 <%-- Page to enter details of a product --%>

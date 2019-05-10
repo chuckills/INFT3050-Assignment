@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class AdminManageUserAccounts : System.Web.UI.Page
     {
@@ -20,7 +20,7 @@ namespace Assignment_1
 
         protected void ViewTransactions_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/PurchaseHistory.aspx");
+            Response.Redirect("~/UL/PurchaseHistory.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)

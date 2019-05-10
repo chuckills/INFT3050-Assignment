@@ -1,4 +1,4 @@
-﻿using Assignment_1.Models;
+﻿using Assignment_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class Cart : System.Web.UI.Page
     {
@@ -56,7 +56,7 @@ namespace Assignment_1
                     cart.Items.RemoveAt(ItemList.Items[i].DisplayIndex);
                 }
             }
-            Response.Redirect("~/Cart.aspx");
+            Response.Redirect("~/UL/Cart.aspx");
         }
 
         // Attaches total cost of cart as parameter and redirects to payment form
@@ -68,12 +68,12 @@ namespace Assignment_1
 
             if ((HttpContext.Current.Session["LoginStatus"] as string).Equals("LoggedOut"))
             {
-                Response.Redirect("~/GuestRegistration.aspx");
+                Response.Redirect("~/UL/GuestRegistration.aspx");
             }
             else
             {
-                //Response.Redirect("~/Payment.aspx?cost=" + cartTotal);
-                Response.Redirect("~/Payment.aspx");
+                //Response.Redirect("~/UL/Payment.aspx?cost=" + cartTotal);
+                Response.Redirect("~/UL/Payment.aspx");
             }
         }
     }

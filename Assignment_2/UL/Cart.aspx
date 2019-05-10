@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Shopping Cart" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="Assignment_1.Cart" %>
+﻿<%@ Page Title="Shopping Cart" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Cart.aspx.cs" Inherits="Assignment_2.Cart" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <h2 class="margin-space-top-50 tag-spacing-bottom"><%: Title %></h2>
@@ -9,7 +9,7 @@
                 <ul class="list-group list-group-flush">
 
                     <%-- Lists the cart items --%>
-                    <asp:ListView ID="ItemList" runat="server" ItemType="Assignment_1.Models.CartItem"
+                    <asp:ListView ID="ItemList" runat="server" ItemType="Assignment_2.Models.CartItem"
                         SelectMethod="GetCartItems">
                         <EmptyDataTemplate>
                             <li class="list-group-item">Cart is currently empty...</li>
@@ -48,7 +48,7 @@
                     <asp:LinkButton ID="btnEmptyCart" runat="server" CssClass="btn btn-danger" OnClick="btnEmptyCart_Click">Empty Cart</asp:LinkButton>
                 </div>
                 <div>
-                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Products.aspx">Continue shopping?</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/UL/Products.aspx">Continue shopping?</asp:HyperLink>
                 </div>
             </div>
         </div>

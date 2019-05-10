@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class GuestRegistration : System.Web.UI.Page
     {
@@ -40,7 +40,7 @@ namespace Assignment_1
             // Redirect if form submission was valid
             if (IsValid)
             {
-                Response.Redirect("~/Payment.aspx");
+                Response.Redirect("~/UL/Payment.aspx");
             }
         }
     }

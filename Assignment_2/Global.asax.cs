@@ -1,4 +1,4 @@
-﻿using Assignment_1.Models;
+﻿using Assignment_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public class Global : HttpApplication
     {

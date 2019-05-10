@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Assignment_1.Login" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Assignment_2.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
 <%-- Combined user and admin login page --%>
@@ -23,7 +23,7 @@
                     <asp:Label ID="LoginErrorLabel" runat="server" ForeColor="Red"></asp:Label>
                 </div>
                 <div>
-                    <asp:HyperLink ID="RegistrationLink" runat="server" NavigateUrl="~/Registration.aspx">Don't have an account? Register</asp:HyperLink>
+                    <asp:HyperLink ID="RegistrationLink" runat="server" NavigateUrl="~/UL/Registration.aspx">Don't have an account? Register</asp:HyperLink>
                 </div>
             </div>
             <div class="col"></div>

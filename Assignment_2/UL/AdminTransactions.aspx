@@ -1,4 +1,4 @@
-﻿<%@ Page Title="User Account Transactions" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminTransactions.aspx.cs" Inherits="Assignment_1.AdminTransactions" %>
+﻿<%@ Page Title="User Account Transactions" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminTransactions.aspx.cs" Inherits="Assignment_2.AdminTransactions" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <%-- This page is a placeholder for future functionality --%>

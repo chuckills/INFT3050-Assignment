@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Assignment_1</RootNamespace>
-    <AssemblyName>Assignment_1</AssemblyName>
+    <RootNamespace>Assignment_2</RootNamespace>
+    <AssemblyName>Assignment_2</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -113,6 +113,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Assignment_2.dll" />
+    <Content Include="bin\Assignment_2.pdb" />
     <Content Include="UL\About.aspx" />
     <Content Include="UL\AccountSettings.aspx" />
     <Content Include="UL\AdminItemManagement.aspx" />
@@ -123,25 +125,23 @@
     <Content Include="UL\AdminTransactions.aspx" />
     <Content Include="UL\AdminUpdateSelectedItem.aspx" />
     <Content Include="App_Data\DropDB.sql" />
-    <Content Include="bin\Assignment_1.dll" />
-    <Content Include="bin\Assignment_1.pdb" />
     <Content Include="UL\Cart.aspx" />
     <Content Include="UL\Contact.aspx" />
     <Content Include="UL\ContactResponse.aspx" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\style.css" />
+    <Content Include="UL\Content\bootstrap-grid.css" />
+    <Content Include="UL\Content\bootstrap-grid.min.css" />
+    <Content Include="UL\Content\bootstrap-reboot.css" />
+    <Content Include="UL\Content\bootstrap-reboot.min.css" />
+    <Content Include="UL\Content\bootstrap.css" />
+    <Content Include="UL\Content\bootstrap.min.css" />
+    <Content Include="UL\Content\Site.css" />
+    <Content Include="UL\Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\JerseySure.sql" />
     <Content Include="UL\GuestRegistration.aspx" />
-    <Content Include="Images\JerseyAdmin.png" />
-    <Content Include="Images\jerseys\Jersey.png" />
+    <Content Include="UL\Images\JerseyAdmin.png" />
+    <Content Include="UL\Images\jerseys\Jersey.png" />
     <Content Include="UL\Login.aspx" />
     <Content Include="UL\Logout.aspx" />
     <Content Include="UL\Default.aspx" />
@@ -150,119 +150,113 @@
     <Content Include="UL\PaymentResponse.aspx" />
     <Content Include="UL\PurchaseHistory.aspx" />
     <Content Include="UL\Registration.aspx" />
-    <Content Include="Scripts\bootstrap-input-spinner.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="UL\Content\bootstrap.min.css.map" />
+    <Content Include="UL\Content\bootstrap.css.map" />
+    <Content Include="UL\Content\bootstrap-reboot.min.css.map" />
+    <Content Include="UL\Content\bootstrap-reboot.css.map" />
+    <Content Include="UL\Content\bootstrap-grid.min.css.map" />
+    <Content Include="UL\Content\bootstrap-grid.css.map" />
     <Content Include="obj\Release\Assignment_1.csproj.CoreCompileInputs.cache" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Images\giannis-antetokounmpo.jpg" />
-    <Content Include="Images\hero-img-mainpage.jpg" />
-    <Content Include="Images\Jersey.png" />
-    <Content Include="Images\jerseys\andre-drummond-back.png" />
-    <Content Include="Images\jerseys\andre-drummond-front.png" />
-    <Content Include="Images\jerseys\anthony-davis-back.jpeg" />
-    <Content Include="Images\jerseys\anthony-davis-front.jpeg" />
-    <Content Include="Images\jerseys\ben-simmons-back.png" />
-    <Content Include="Images\jerseys\ben-simmons-front.png" />
-    <Content Include="Images\jerseys\damian-lilliard-back.png" />
-    <Content Include="Images\jerseys\damian-lilliard-front.png" />
-    <Content Include="Images\jerseys\demar-derozan-back.jpg" />
-    <Content Include="Images\jerseys\demar-derozan-front.jpg" />
-    <Content Include="Images\jerseys\devin-booker-back.png" />
-    <Content Include="Images\jerseys\devin-booker-front.png" />
-    <Content Include="Images\jerseys\giannis-antetokounmpo-back.png" />
-    <Content Include="Images\jerseys\giannis-antetokounmpo-front.png" />
-    <Content Include="Images\jerseys\hassan-whiteside-back.png" />
-    <Content Include="Images\jerseys\hassan-whiteside-front.png" />
-    <Content Include="Images\jerseys\james-harden-back.png" />
-    <Content Include="Images\jerseys\james-harden-front.png" />
-    <Content Include="Images\jerseys\john-wall-back.png" />
-    <Content Include="Images\jerseys\john-wall-front.png" />
-    <Content Include="Images\jerseys\kat-back.jpg" />
-    <Content Include="Images\jerseys\kat-front.jpg" />
-    <Content Include="Images\jerseys\kawhi-leonard-back.jpg" />
-    <Content Include="Images\jerseys\kawhi-leonard-front.jpg" />
-    <Content Include="Images\jerseys\kemba-walker-back.png" />
-    <Content Include="Images\jerseys\kemba-walker-front.png" />
-    <Content Include="Images\jerseys\kyrie-irving-back.jpg" />
-    <Content Include="Images\jerseys\kyrie-irving-front.jpg" />
-    <Content Include="Images\jerseys\lebron-james-back.jpg" />
-    <Content Include="Images\jerseys\lebron-james-front.jpg" />
-    <Content Include="Images\jerseys\mike-conley-back.jpg" />
-    <Content Include="Images\jerseys\mike-conley-front.jpg" />
-    <Content Include="Images\jerseys\russell-westbrook-back.png" />
-    <Content Include="Images\jerseys\russell-westbrook-front.png" />
-    <Content Include="Images\jerseys\steph-curry-back.png" />
-    <Content Include="Images\jerseys\steph-curry-front.png" />
-    <Content Include="Images\jerseys\victor-oladipo-back.jpg" />
-    <Content Include="Images\jerseys\victor-oladipo-front.jpg" />
-    <Content Include="Images\jerseys\zach-lavine-back.png" />
-    <Content Include="Images\jerseys\zach-lavine-front.png" />
-    <Content Include="Images\kyrie-irving.jpg" />
-    <Content Include="Images\lebron-james.jpg" />
-    <Content Include="Images\wade-back.jpg" />
+    <Content Include="UL\Images\giannis-antetokounmpo.jpg" />
+    <Content Include="UL\Images\hero-img-mainpage.jpg" />
+    <Content Include="UL\Images\Jersey.png" />
+    <Content Include="UL\Images\jerseys\andre-drummond-back.png" />
+    <Content Include="UL\Images\jerseys\andre-drummond-front.png" />
+    <Content Include="UL\Images\jerseys\anthony-davis-back.jpeg" />
+    <Content Include="UL\Images\jerseys\anthony-davis-front.jpeg" />
+    <Content Include="UL\Images\jerseys\ben-simmons-back.png" />
+    <Content Include="UL\Images\jerseys\ben-simmons-front.png" />
+    <Content Include="UL\Images\jerseys\damian-lilliard-back.png" />
+    <Content Include="UL\Images\jerseys\damian-lilliard-front.png" />
+    <Content Include="UL\Images\jerseys\demar-derozan-back.jpg" />
+    <Content Include="UL\Images\jerseys\demar-derozan-front.jpg" />
+    <Content Include="UL\Images\jerseys\devin-booker-back.png" />
+    <Content Include="UL\Images\jerseys\devin-booker-front.png" />
+    <Content Include="UL\Images\jerseys\giannis-antetokounmpo-back.png" />
+    <Content Include="UL\Images\jerseys\giannis-antetokounmpo-front.png" />
+    <Content Include="UL\Images\jerseys\hassan-whiteside-back.png" />
+    <Content Include="UL\Images\jerseys\hassan-whiteside-front.png" />
+    <Content Include="UL\Images\jerseys\james-harden-back.png" />
+    <Content Include="UL\Images\jerseys\james-harden-front.png" />
+    <Content Include="UL\Images\jerseys\john-wall-back.png" />
+    <Content Include="UL\Images\jerseys\john-wall-front.png" />
+    <Content Include="UL\Images\jerseys\kat-back.jpg" />
+    <Content Include="UL\Images\jerseys\kat-front.jpg" />
+    <Content Include="UL\Images\jerseys\kawhi-leonard-back.jpg" />
+    <Content Include="UL\Images\jerseys\kawhi-leonard-front.jpg" />
+    <Content Include="UL\Images\jerseys\kemba-walker-back.png" />
+    <Content Include="UL\Images\jerseys\kemba-walker-front.png" />
+    <Content Include="UL\Images\jerseys\kyrie-irving-back.jpg" />
+    <Content Include="UL\Images\jerseys\kyrie-irving-front.jpg" />
+    <Content Include="UL\Images\jerseys\lebron-james-back.jpg" />
+    <Content Include="UL\Images\jerseys\lebron-james-front.jpg" />
+    <Content Include="UL\Images\jerseys\mike-conley-back.jpg" />
+    <Content Include="UL\Images\jerseys\mike-conley-front.jpg" />
+    <Content Include="UL\Images\jerseys\russell-westbrook-back.png" />
+    <Content Include="UL\Images\jerseys\russell-westbrook-front.png" />
+    <Content Include="UL\Images\jerseys\steph-curry-back.png" />
+    <Content Include="UL\Images\jerseys\steph-curry-front.png" />
+    <Content Include="UL\Images\jerseys\victor-oladipo-back.jpg" />
+    <Content Include="UL\Images\jerseys\victor-oladipo-front.jpg" />
+    <Content Include="UL\Images\jerseys\zach-lavine-back.png" />
+    <Content Include="UL\Images\jerseys\zach-lavine-front.png" />
+    <Content Include="UL\Images\kyrie-irving.jpg" />
+    <Content Include="UL\Images\lebron-james.jpg" />
+    <Content Include="UL\Images\wade-back.jpg" />
     <Content Include="UL\Products.aspx" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\popper-utils.js" />
-    <Content Include="Scripts\popper-utils.min.js" />
-    <Content Include="Scripts\popper.js" />
-    <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Scripts\WebForms\DetailsView.js" />
-    <Content Include="Scripts\WebForms\Focus.js" />
-    <Content Include="Scripts\WebForms\GridView.js" />
-    <Content Include="Scripts\WebForms\Menu.js" />
-    <Content Include="Scripts\WebForms\MenuStandards.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
-    <Content Include="Scripts\WebForms\SmartNav.js" />
-    <Content Include="Scripts\WebForms\TreeView.js" />
-    <Content Include="Scripts\WebForms\WebForms.js" />
-    <Content Include="Scripts\WebForms\WebParts.js" />
-    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="UL\Scripts\bootstrap-input-spinner.js" />
+    <Content Include="UL\Scripts\bootstrap.bundle.js" />
+    <Content Include="UL\Scripts\bootstrap.bundle.min.js" />
+    <Content Include="UL\Scripts\bootstrap.js" />
+    <Content Include="UL\Scripts\bootstrap.min.js" />
+    <Content Include="UL\Scripts\esm\popper-utils.js" />
+    <Content Include="UL\Scripts\esm\popper-utils.min.js" />
+    <Content Include="UL\Scripts\esm\popper.js" />
+    <Content Include="UL\Scripts\esm\popper.min.js" />
+    <None Include="UL\Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="UL\Scripts\jquery-3.3.1.js" />
+    <Content Include="UL\Scripts\jquery-3.3.1.min.js" />
+    <Content Include="UL\Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="UL\Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="UL\Scripts\modernizr-2.8.3.js" />
+    <Content Include="UL\Scripts\popper-utils.js" />
+    <Content Include="UL\Scripts\popper-utils.min.js" />
+    <Content Include="UL\Scripts\popper.js" />
+    <Content Include="UL\Scripts\popper.min.js" />
+    <Content Include="UL\Scripts\umd\popper-utils.js" />
+    <Content Include="UL\Scripts\umd\popper-utils.min.js" />
+    <Content Include="UL\Scripts\umd\popper.js" />
+    <Content Include="UL\Scripts\umd\popper.min.js" />
+    <Content Include="UL\Scripts\WebForms\DetailsView.js" />
+    <Content Include="UL\Scripts\WebForms\Focus.js" />
+    <Content Include="UL\Scripts\WebForms\GridView.js" />
+    <Content Include="UL\Scripts\WebForms\Menu.js" />
+    <Content Include="UL\Scripts\WebForms\MenuStandards.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="UL\Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="UL\Scripts\WebForms\SmartNav.js" />
+    <Content Include="UL\Scripts\WebForms\TreeView.js" />
+    <Content Include="UL\Scripts\WebForms\WebForms.js" />
+    <Content Include="UL\Scripts\WebForms\WebParts.js" />
+    <Content Include="UL\Scripts\WebForms\WebUIValidation.js" />
     <Content Include="UL\SingleProductPage.aspx" />
     <Content Include="UL\Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Bundle.config" />
+    <Content Include="Bundle.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UL\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -467,17 +461,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\README.md" />
-    <Content Include="Scripts\popper.min.js.map" />
-    <Content Include="Scripts\popper.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.map" />
-    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="UL\Scripts\bootstrap.bundle.js.map" />
+    <Content Include="UL\Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="UL\Scripts\bootstrap.js.map" />
+    <Content Include="UL\Scripts\bootstrap.min.js.map" />
+    <Content Include="UL\Scripts\esm\popper-utils.js.map" />
+    <Content Include="UL\Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="UL\Scripts\esm\popper.js.map" />
+    <Content Include="UL\Scripts\esm\popper.min.js.map" />
+    <Content Include="UL\Scripts\jquery-3.3.1.min.map" />
+    <Content Include="UL\Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="UL\Scripts\popper-utils.js.map" />
+    <Content Include="UL\Scripts\popper-utils.min.js.map" />
+    <Content Include="UL\Scripts\popper.js.map" />
+    <Content Include="UL\Scripts\popper.min.js.map" />
+    <Content Include="UL\Scripts\README.md" />
+    <Content Include="UL\Scripts\umd\popper-utils.js.map" />
+    <Content Include="UL\Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="UL\Scripts\umd\popper.js.map" />
+    <Content Include="UL\Scripts\umd\popper.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -486,7 +488,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <TypeScriptCompile Include="UL\Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

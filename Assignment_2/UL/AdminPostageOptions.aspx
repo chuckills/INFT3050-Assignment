@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Edit Postage Options" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminPostageOptions.aspx.cs" Inherits="Assignment_1.AdminPostageOptions" %>
+﻿<%@ Page Title="Edit Postage Options" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminPostageOptions.aspx.cs" Inherits="Assignment_2.AdminPostageOptions" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         
 <br />

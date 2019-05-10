@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Item Management" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminItemManagement.aspx.cs" Inherits="Assignment_1.AdminManage" %>
+﻿<%@ Page Title="Item Management" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminItemManagement.aspx.cs" Inherits="Assignment_2.AdminManage" %>
 
 <%-- This page will be functionally redesigned once database functions are supported --%>
 

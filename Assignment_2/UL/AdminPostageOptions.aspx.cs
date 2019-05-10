@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class AdminPostageOptions : System.Web.UI.Page
     {
@@ -36,7 +36,7 @@ namespace Assignment_1
             if (IsValid)
             {
                 postageList.Add(tbxMethodName.Text + ", " + tbxDescription.Text + ", " + tbxAvgTime.Text + ", " + "$" + tbxPrice.Text);
-                Response.Redirect("~/AdminPostageOptions.aspx");
+                Response.Redirect("~/UL/AdminPostageOptions.aspx");
             }
         }
 
@@ -67,7 +67,7 @@ namespace Assignment_1
 
                 // Update session of postage options and redirect 
                 Session["PostList"] = postageList;
-                Response.Redirect("~/AdminPostageOptions.aspx");
+                Response.Redirect("~/UL/AdminPostageOptions.aspx");
             }
         }
     }

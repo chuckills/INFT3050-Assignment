@@ -1,4 +1,4 @@
-﻿<%@ Page Title="ProductPage" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="SingleProductPage.aspx.cs" Inherits="Assignment_1.SingleProductPage" %>
+﻿<%@ Page Title="ProductPage" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="SingleProductPage.aspx.cs" Inherits="Assignment_2.SingleProductPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container margin-space-top-100">
         <div class="row">
@@ -25,13 +25,13 @@
                 <!-- Validator for quantity selection -->
                 <div class="center-text">
                     <asp:RequiredFieldValidator ID="rfvQuantity" runat="server" ErrorMessage="Please select a quantity" ControlToValidate="tbxQuantity" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" />
-                    <asp:RegularExpressionValidator ID="rxvQuantity" runat="server" ErrorMessage="Select a whole number" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxQuantity" ValidationExpression="\d+" />
+                    <asp:RegularExpressionValidator ID="rxvQuantity" runat="server" ErrorMessage="Select a whole number" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxQuantity" ValidationExpression="[1-9]+\d*" />
                     
                     </div>
 
                 <!-- Quantity -->
                 <div id="quantity-select" class="input-group d-flex justify-content-center">
-                    <asp:TextBox ID="tbxQuantity" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                    <asp:TextBox ID="tbxQuantity" runat="server" CssClass="form-control" TextMode="Number" PlaceHolder="0"></asp:TextBox>
                 </div>
 
                 <!-- Add to cart -->

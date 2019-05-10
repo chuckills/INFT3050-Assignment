@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class SiteMaster : MasterPage
     {
@@ -17,7 +17,7 @@ namespace Assignment_1
 
         protected void SubmitSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Products.aspx");
+            Response.Redirect("~/UL/Products.aspx");
         }
     }
 }

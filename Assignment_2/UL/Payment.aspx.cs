@@ -1,4 +1,4 @@
-﻿using Assignment_1.Models;
+﻿using Assignment_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Assignment_1
+namespace Assignment_2
 {
     public partial class Payment : System.Web.UI.Page
     {
@@ -22,7 +22,7 @@ namespace Assignment_1
         {
             HttpContext.Current.Session.Remove("Cart");
             HttpContext.Current.Session["Cart"] = new ShoppingCart();
-            Response.Redirect("~/PaymentConfirmation.aspx");
+            Response.Redirect("~/UL/PaymentConfirmation.aspx");
         }
 
 
@@ -30,7 +30,7 @@ namespace Assignment_1
         {
             if (IsValid)
             {
-                Response.Redirect("~/PaymentResponse.aspx");
+                Response.Redirect("~/UL/PaymentResponse.aspx");
             }
         }
     }
