@@ -38,7 +38,7 @@ namespace Assignment_2.DAL
 			using (SqlConnection connection = new SqlConnection(cs))
 			{
 				SqlDataAdapter adapter = new SqlDataAdapter();
-				SqlCommand command = new SqlCommand("usp_getProduct", connection);
+				SqlCommand command = new SqlCommand("usp_selectProduct", connection);
 				
 				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.AddWithValue("@productNumber", productNumber);

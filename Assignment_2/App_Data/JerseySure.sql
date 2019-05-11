@@ -2,7 +2,7 @@
 -- INFT3050 Assignment 1
 -- Database creation script
 
-/*
+
 --==================================================================================
 -- This section was used to create the database on SQL Server Developer Edition
 -- Uncomment if you need to run. I don't think this is needed though.
@@ -15,12 +15,16 @@ GO
 
 USE JerseySure
 GO
-*/
+
 
 --==================================================================================
 --==================================================================================
+--**********************************************************************************
+--**********************************************************************************
+-- Ben said it was OK to leave the login part commented for now
+--**********************************************************************************
+--**********************************************************************************
 
-/*
 --==================================================================================
 -- This section was used to create the database user login
 -- Uncomment if you need to run it
@@ -34,21 +38,17 @@ GO
 EXECUTE	sp_addsrvrolemember jerseysure, sysadmin
 GO
 
-USE [..\path\to\APP_DATA\JERSEYSURE.MDF] -- you may need to change this if you need to run it
-GO	
-
 CREATE USER jerseysure
 	FOR	LOGIN jerseysure
 	WITH DEFAULT_SCHEMA = dbo
 GO
-*/
 
 
 --===================================================================================
     -- Database Types, Procedures and Functions
 --===================================================================================
 
--- TVP for inerting player details
+-- TVP for inserting player details
 CREATE TYPE PLAYERTYPE AS TABLE
 (
     playID INT,
@@ -56,12 +56,12 @@ CREATE TYPE PLAYERTYPE AS TABLE
     playLastName VARCHAR(30),
     teamID CHAR(3),
     jerNumber INT,
-    PRIMARY KEY (playID, playFirstName, playLastName, teamID, jerNumber)
+    PRIMARY KEY (playFirstName, playLastName, teamID, jerNumber)
 )
 GO
 
 -- Stored procedure to insert player details
-CREATE PROCEDURE usp_addPlayer
+CREATE PROCEDURE usp_addPlayers
   @player PLAYERTYPE READONLY
 AS
 BEGIN
@@ -73,6 +73,46 @@ BEGIN
   FROM @player
 END
 GO
+
+CREATE PROCEDURE usp_addNewPlayer
+  @player PLAYERTYPE READONLY
+AS
+BEGIN
+  INSERT INTO Player (playFirstName, playLastName)
+  SELECT playFirstName, playLastName
+  FROM @player
+  INSERT INTO JerseyNumber (playID, jerNumber, teamID)
+  SELECT SCOPE_IDENTITY(), jerNumber, teamID
+  FROM @player
+END
+GO
+
+CREATE PROCEDURE usp_getProducts
+AS
+BEGIN
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
+    FROM Product pr, Team t, Player pl, Image i
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID
+END
+GO
+
+CREATE PROCEDURE usp_selectProduct
+    @productNumber VARCHAR(8)
+AS
+BEGIN
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
+    FROM Product pr, Team t, Player pl, Image i
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID and pr.prodNumber = @productNumber
+END
+GO
+
+/*DECLARE
+  @playerData PLAYERTYPE
+INSERT INTO @playerData(playFirstName, playLastName, teamID, jerNumber)
+    VALUES ('Mike', 'Hunt', 'UTA', 11)
+
+EXEC usp_addNewPlayer @playerData
+GO*/
 
 --===================================================================================
     -- Database Build
@@ -211,9 +251,9 @@ CREATE TABLE Orders
     ordGST MONEY NOT NULL, -- ordTotal * 0.1
     ordPaid BIT DEFAULT 0 NOT NULL, -- Paid or not paid?
     shipID INT NOT NULL, -- ID of the shipping method
-	userID INT NOT NULL, -- ID of the user
-	UNIQUE (ordID, userID),
-    FOREIGN KEY (shipID) REFERENCES Shipping(shipID),	
+	userID INT NOT NULL, -- ID of the user,
+	UNIQUE(ordID, userID),
+    FOREIGN KEY (shipID) REFERENCES Shipping(shipID),
     FOREIGN KEY (userID) REFERENCES Users(userID)
 )
 
@@ -264,14 +304,36 @@ CREATE TABLE PayPalPM
 -- Team
 --===================================================================================
 INSERT INTO Team (teamID, teamLocale, teamName)
-    VALUES ('BOS', 'Boston', 'Celtics'),
-           ('GSW', 'Golden State', 'Warriors'),
-           ('LAL', 'Los Angeles', 'Lakers'),
-           ('HOU', 'Houson', 'Rockets'),
-           ('PHX', 'Phoenix', 'Suns'),
-           ('OKC', 'Oklahoma City', 'Thunder'),
+    VALUES ('ATL', 'Atlanta', 'Hawks'),
+           ('BKN', 'Brooklyn', 'Nets'),
+           ('BOS', 'Boston', 'Celtics'),
            ('CHA', 'Charlotte', 'Hornets'),
-           ('IND', 'Indiana', 'Pacers')
+           ('CHI', 'Chicago', 'Bulls'),
+           ('CLE', 'Cleveland', 'Cavaliers'),
+           ('DAL', 'Dallas', 'Mavericks'),
+           ('DEN', 'Denver', 'Nuggets'),
+           ('DET', 'Detroit', 'Pistons'),
+           ('GSW', 'Golden State', 'Warriors'),
+           ('HOU', 'Houston', 'Rockets'),
+           ('IND', 'Indiana', 'Pacers'),
+           ('LAC', 'Los Angeles', 'Clippers'),
+           ('LAL', 'Los Angeles', 'Lakers'),
+           ('MEM', 'Memphis', 'Grizzlies'),
+           ('MIA', 'Miami', 'Heat'),
+           ('MIL', 'Milwaukee', 'Bucks'),
+           ('MIN', 'Minnesota', 'Timberwolves'),
+           ('NOP', 'New Orleans', 'Pelicans'),
+           ('NYK', 'New York', 'Knicks'),
+           ('OKC', 'Oklahoma City', 'Thunder'),
+           ('ORL', 'Orlando', 'Magic'),
+           ('PHI', 'Philadelphia', '76ers'),
+           ('PHX', 'Phoenix', 'Suns'),
+           ('POR', 'Portland', 'Trail Blazers'),
+           ('SAC', 'Sacramento', 'Kings'),
+           ('SAS', 'San Antonio', 'Spurs'),
+           ('TOR', 'Toronto', 'Raptors'),
+           ('UTA', 'Utah', 'Jazz'),
+           ('WAS', 'Washington', 'Wizards')
 GO
 
 -- Image
@@ -311,7 +373,7 @@ INSERT INTO @playerData
            (7, 'Kemba', 'Walker', 'CHA', 15),
            (8, 'Victor', 'Oladipo', 'IND', 4)
 
-EXEC usp_addPlayer @playerData
+EXEC usp_addPlayers @playerData
 GO
 
 SET IDENTITY_INSERT Player OFF
@@ -331,14 +393,14 @@ GO
 --===================================================================================
 
 INSERT INTO Product (prodDescription, prodPrice, teamID, playID, imgID)
-    VALUES ('Boston Celtics Kyrie Irving number 11 Jersey', 100, 'BOS', 1, 1),
-           ('Golden State Warriors Steph Curry number 30 Jersey', 100, 'GSW', 2, 2),
-           ('Los Angeles Lakers Lebron James number 23 Jersey', 100, 'LAL', 3, 3),
-           ('Houston Rockets James Harden number 13 Jersey', 100, 'HOU', 4, 4),
-           ('Phoenix Suns Devin Booker number 1 Jersey', 100, 'PHX', 5, 5),
-           ('Oklahoma City Thunder Russell Westbrook number 0 Jersey', 100, 'OKC', 6, 6),
-           ('Charlotte Hornets Kemba Walker number 15 Jersey', 100, 'CHA', 7, 7),
-           ('Indiana Pacers Victor Oladipo number 4 Jersey', 100, 'IND', 8, 8)
+    VALUES ('Number 11 Swingman Jersey', 100, 'BOS', 1, 1),
+           ('Number 30 Swingman Jersey', 100, 'GSW', 2, 2),
+           ('Number 23 Swingman Jersey', 100, 'LAL', 3, 3),
+           ('Number 13 Swingman Jersey', 100, 'HOU', 4, 4),
+           ('Number 1 Swingman Jersey', 100, 'PHX', 5, 5),
+           ('Number 0 Swingman Jersey', 100, 'OKC', 6, 6),
+           ('Number 15 Swingman Jersey', 100, 'CHA', 7, 7),
+           ('Number 4 Swingman Jersey', 100, 'IND', 8, 8)
 GO
 
 -- Stock

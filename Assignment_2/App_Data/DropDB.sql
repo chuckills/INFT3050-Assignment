@@ -28,7 +28,13 @@ DROP TABLE Address
 GO
 DROP TABLE Users
 GO
-DROP PROCEDURE usp_addPlayer
+DROP PROCEDURE usp_addNewPlayer
+GO
+DROP PROCEDURE usp_addPlayers
+GO
+DROP PROCEDURE usp_getProducts
+GO
+DROP PROCEDURE usp_selectProduct
 GO
 DROP TYPE PLAYERTYPE
 GO
