@@ -10,7 +10,7 @@ namespace Assignment_2.DAL
 {
 	public class Select
 	{
-		/*public static DataSet getProducts()
+		public static DataSet getProducts()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
@@ -27,7 +27,7 @@ namespace Assignment_2.DAL
 
 			return productDataSet;
 
-		}*/
+		}
 
 	}
 }

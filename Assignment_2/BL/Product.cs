@@ -9,10 +9,10 @@ namespace Assignment_2.BL
 {
 	public class Product
 	{
-		/*public static DataSet getProducts()
+		public static DataSet getProducts()
 		{
 			return Select.getProducts();
-		}*/
+		}
 		
 
 	}
