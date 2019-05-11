@@ -13,6 +13,15 @@ namespace Assignment_2.UL {
     public partial class SingleProductPage {
         
         /// <summary>
+        /// rptInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptInfo;
+        
+        /// <summary>
         /// rfvSize control.
         /// </summary>
         /// <remarks>
@@ -65,5 +74,14 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnAddToCart;
+        
+        /// <summary>
+        /// rptJersey control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptJersey;
     }
 }

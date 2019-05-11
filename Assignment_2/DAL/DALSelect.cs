@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Assignment_2.DAL
 {
-	public class Select
+	public class DALSelect
 	{
 		public static DataSet getProducts()
 		{
@@ -27,6 +27,27 @@ namespace Assignment_2.DAL
 
 			return productDataSet;
 
+		}
+
+		public static DataSet selectProduct(string productNumber)
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+			DataSet productDataSet = new DataSet();
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+				SqlDataAdapter adapter = new SqlDataAdapter();
+				SqlCommand command = new SqlCommand("usp_getProduct", connection);
+				
+				command.CommandType = CommandType.StoredProcedure;
+				command.Parameters.AddWithValue("@productNumber", productNumber);
+				adapter.SelectCommand = command;
+
+				adapter.Fill(productDataSet);
+			}
+
+			return productDataSet;
 		}
 
 	}

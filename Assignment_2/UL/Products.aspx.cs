@@ -12,12 +12,16 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        Repeater1.DataSource = Product.getProducts();
+	        Repeater1.DataSource = BLProduct.getProducts();
 			Repeater1.DataBind();
         }
 
 		protected void btnBuy_Click(object sender, EventArgs e)
 		{
+			LinkButton btnBuy = sender as LinkButton;
+
+			Session["productNumber"] = btnBuy.CommandArgument;
+
 			Response.Redirect("~/UL/SingleProductPage");
 		}
 	}

@@ -2,11 +2,19 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container margin-space-top-100">
         <div class="row">
+            <!-- Item description -->
             <div class="col-sm">
-                <!-- Item description -->
-                <h2 id="product-title" class="center-text">Kyrie Irving Boston Celtics </h2>
-                <h3 class="center-text padding-bottom-15">Swingman Jersey</h3>
-                <h4 class="center-text tag-spacing-bottom">$100</h4>
+                <asp:Repeater ID="rptInfo" runat="server">
+                    <ItemTemplate>
+                        <h2 id="product-title" class="center-text">
+                            <%# DataBinder.Eval(Container.DataItem, "playFirstName") + " " + DataBinder.Eval(Container.DataItem, "playLastName")
+                                + " " + DataBinder.Eval(Container.DataItem, "teamLocale") + " " + DataBinder.Eval(Container.DataItem, "teamName")%> 
+                        </h2>
+                        <h3 class="center-text padding-bottom-15"><%# DataBinder.Eval(Container.DataItem, "prodDescription") %></h3>
+                        
+                        <h4 class="center-text tag-spacing-bottom"><%# string.Format("{0:C0}", DataBinder.Eval(Container.DataItem, "prodPrice")) %></h4>
+                    </ItemTemplate>
+                </asp:Repeater>
                 <h4 class="center-text">Size</h4>
                 <!-- Validator for size radio list -->
                 <div class="center-text">
@@ -40,29 +48,33 @@
                 </div>
             </div>
             <div class="col-sm">
-                <!-- Product images -->
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
-                  <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                  </ol>
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img class="d-block" src="Images\jerseys\kyrie-irving-front.jpg" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                      <img class="d-block" src="Images\jerseys\kyrie-irving-back.jpg" alt="Second slide">
-                    </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
+                <asp:Repeater ID="rptJersey" runat="server">
+                    <ItemTemplate>
+                        <!-- Product images -->
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block" src="Images/jerseys/<%# DataBinder.Eval(Container.DataItem, "imgFront") %>" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class="d-block" src="Images/jerseys/<%# DataBinder.Eval(Container.DataItem, "imgBack") %>" alt="Second slide">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
         </div>
     </div>

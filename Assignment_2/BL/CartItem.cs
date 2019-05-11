@@ -11,8 +11,8 @@ namespace Assignment_2.BL
 {
     public class CartItem
     {
-        // Model variables
-        public string Name { get; set; }
+		// Model variables
+		public string Name { get; set; }
         public string Size { get; set; }
         public int Quantity { get; set; }
 

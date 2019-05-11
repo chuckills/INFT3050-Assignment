@@ -15,7 +15,8 @@ namespace Assignment_2.UL
             // Calculate total cost of the cart
             int total = 0;
             ShoppingCart cart = HttpContext.Current.Session["Cart"] as ShoppingCart;
-            foreach (var item in cart.Items)
+
+			foreach (var item in cart.Items)
             {
                 total += item.Quantity * 100;
             }

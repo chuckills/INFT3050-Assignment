@@ -9,7 +9,7 @@
                 <ul class="list-group list-group-flush">
 
                     <%-- Lists the cart items --%>
-                    <asp:ListView ID="ItemList" runat="server" ItemType="Assignment_2.Models.CartItem"
+                    <asp:ListView ID="ItemList" runat="server" ItemType="Assignment_2.BL.CartItem"
                         SelectMethod="GetCartItems">
                         <EmptyDataTemplate>
                             <li class="list-group-item">Cart is currently empty...</li>

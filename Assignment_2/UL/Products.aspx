@@ -10,7 +10,7 @@
                         <img alt="" src="Images/jerseys/<%# DataBinder.Eval(Container.DataItem, "imgFront") %>" class="d-block w-100" />
                         <h3 class="product-price-title"><%# string.Format("{0:C0}", DataBinder.Eval(Container.DataItem, "prodPrice")) %></h3>
                         <div class="d-flex justify-content-center">
-                            <asp:LinkButton ID="btnBuy" runat="server" class="product-buy-btn btn btn-danger" onClick="btnBuy_Click">Buy</asp:LinkButton>
+                            <asp:LinkButton ID="btnBuy" runat="server" CssClass="product-buy-btn btn btn-danger" onClick="btnBuy_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "prodNumber") %>'>Buy</asp:LinkButton>
                         </div> 
                         <br/>
                     </div>
