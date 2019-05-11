@@ -265,6 +265,7 @@
     <Compile Include="BL\Purchase.cs" />
     <Compile Include="DAL\Archive.cs" />
     <Compile Include="DAL\Insert.cs" />
+    <Compile Include="DAL\Select.cs" />
     <Compile Include="DAL\Update.cs" />
     <Compile Include="UL\AccountSettings.aspx.cs">
       <DependentUpon>AccountSettings.aspx</DependentUpon>
