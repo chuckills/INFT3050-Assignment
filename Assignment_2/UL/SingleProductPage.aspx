@@ -59,6 +59,7 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <img class="d-block" src="Images/jerseys/<%# DataBinder.Eval(Container.DataItem, "imgFront") %>" alt="First slide">
+                                    <%# Session["image"] = DataBinder.Eval(Container.DataItem, "imgFront") %>
                                 </div>
                                 <div class="carousel-item">
                                     <img class="d-block" src="Images/jerseys/<%# DataBinder.Eval(Container.DataItem, "imgBack") %>" alt="Second slide">

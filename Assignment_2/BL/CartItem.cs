@@ -16,11 +16,14 @@ namespace Assignment_2.BL
         public string Size { get; set; }
         public int Quantity { get; set; }
 
-        public CartItem(string name, string size, int quantity)
+		public string Image { get; set; }
+
+        public CartItem(string name, string size, int quantity, string image)
         {
             Name = name;
             Size = size;
             Quantity = quantity;
+            Image = image;
         }
 
         // String representation for model and display on user views

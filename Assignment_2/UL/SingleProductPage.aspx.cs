@@ -25,7 +25,7 @@ namespace Assignment_2.UL
             if (IsValid)
             {
 				ShoppingCart cart = HttpContext.Current.Session["Cart"] as ShoppingCart;
-                cart.AddCartItem(new CartItem((string)Session["productNumber"], rblSizeOption.SelectedItem.Text, int.Parse(tbxQuantity.Text)));
+                cart.AddCartItem(new CartItem((string)Session["productNumber"], rblSizeOption.SelectedItem.Text, int.Parse(tbxQuantity.Text), (string)Session["image"]));
 
                 Response.Redirect("~/UL/Cart.aspx");
             }

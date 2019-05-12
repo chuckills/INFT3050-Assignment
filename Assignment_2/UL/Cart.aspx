@@ -7,7 +7,6 @@
         <div class="row">
             <div class="col">
                 <ul class="list-group list-group-flush">
-
                     <%-- Lists the cart items --%>
                     <asp:ListView ID="ItemList" runat="server" ItemType="Assignment_2.BL.CartItem"
                         SelectMethod="GetCartItems">
@@ -18,7 +17,7 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col">
-                                        <img alt="" src="Images\jerseys\kyrie-irving-front.jpg" class="cart-product-icon" />
+                                        <img alt="" src="Images\jerseys\<%#:Item.Image %>" class="cart-product-icon" />
                                     </div>
                                     <div class="col-6 center-text">
                                         <%#:Item.ToString() %>
@@ -30,7 +29,6 @@
                             </li>
                         </ItemTemplate>
                     </asp:ListView>
-
                 </ul>
             </div>
             
