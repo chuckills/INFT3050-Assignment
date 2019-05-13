@@ -10,18 +10,18 @@ using System.Web;
 
 namespace Assignment_2.BL
 {
-    public class ShoppingCart
+    public class BLShoppingCart
     {
         // Model data
-        public List<CartItem> Items { get; set; }
+        public List<BLCartItem> Items { get; set; }
 
-        public ShoppingCart()
+        public BLShoppingCart()
         {
-            Items = new List<CartItem>();
+            Items = new List<BLCartItem>();
         }
 
         // Adds a new product and its corresponding quantity to the shopping cart model
-        public void AddCartItem(CartItem item)
+        public void AddCartItem(BLCartItem item)
         {
             Items.Add(item);
         }
@@ -30,7 +30,7 @@ namespace Assignment_2.BL
         public override string ToString()
         {
             String output = "";
-            foreach (CartItem item in Items)
+            foreach (BLCartItem item in Items)
             {
                 output += item.ToString() +Environment.NewLine;
             }

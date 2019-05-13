@@ -9,16 +9,15 @@ using System.Web;
 
 namespace Assignment_2.BL
 {
-    public class CartItem
+    public class BLCartItem
     {
 		// Model variables
 		public string Name { get; set; }
         public string Size { get; set; }
         public int Quantity { get; set; }
-
 		public string Image { get; set; }
 
-        public CartItem(string name, string size, int quantity, string image)
+        public BLCartItem(string name, string size, int quantity, string image)
         {
             Name = name;
             Size = size;

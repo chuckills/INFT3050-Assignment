@@ -260,13 +260,13 @@
     <Content Include="UL\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BL\Login.cs" />
+    <Compile Include="BL\BLLogin.cs" />
     <Compile Include="BL\BLProduct.cs" />
-    <Compile Include="BL\Purchase.cs" />
-    <Compile Include="DAL\Archive.cs" />
-    <Compile Include="DAL\Insert.cs" />
+    <Compile Include="BL\BLPurchase.cs" />
+    <Compile Include="DAL\DALArchive.cs" />
+    <Compile Include="DAL\DALInsert.cs" />
     <Compile Include="DAL\DALSelect.cs" />
-    <Compile Include="DAL\Update.cs" />
+    <Compile Include="DAL\DALUpdate.cs" />
     <Compile Include="UL\AccountSettings.aspx.cs">
       <DependentUpon>AccountSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -384,8 +384,8 @@
     <Compile Include="UL\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BL\ShoppingCart.cs" />
-    <Compile Include="BL\CartItem.cs" />
+    <Compile Include="BL\BLShoppingCart.cs" />
+    <Compile Include="BL\BLCartItem.cs" />
     <Compile Include="BL\User.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />

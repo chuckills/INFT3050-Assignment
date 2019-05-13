@@ -12,10 +12,12 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			rptInfo.DataSource = BLProduct.selectProduct((string)Session["productNumber"]);
+			BLProduct product = new BLProduct();
+
+			rptInfo.DataSource = product.selectProduct((string)Session["productNumber"]);
 			rptInfo.DataBind();
 
-			rptJersey.DataSource = BLProduct.selectProduct((string)Session["productNumber"]);
+			rptJersey.DataSource = product.selectProduct((string)Session["productNumber"]);
 			rptJersey.DataBind();
 		}
 
@@ -24,8 +26,8 @@ namespace Assignment_2.UL
         {
             if (IsValid)
             {
-				ShoppingCart cart = HttpContext.Current.Session["Cart"] as ShoppingCart;
-                cart.AddCartItem(new CartItem((string)Session["productNumber"], rblSizeOption.SelectedItem.Text, int.Parse(tbxQuantity.Text), (string)Session["image"]));
+				BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
+                cart.AddCartItem(new BLCartItem((string)Session["productNumber"], rblSizeOption.SelectedItem.Text, int.Parse(tbxQuantity.Text), (string)Session["image"]));
 
                 Response.Redirect("~/UL/Cart.aspx");
             }

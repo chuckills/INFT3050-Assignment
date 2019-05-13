@@ -12,7 +12,9 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        Repeater1.DataSource = BLProduct.getProducts();
+			BLProduct products = new BLProduct();
+
+	        Repeater1.DataSource = products.getProducts();
 			Repeater1.DataBind();
         }
 

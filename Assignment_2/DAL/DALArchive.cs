@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Assignment_2.DAL
 {
-	public class Insert
+	public class DALArchive
 	{
 	}
 }

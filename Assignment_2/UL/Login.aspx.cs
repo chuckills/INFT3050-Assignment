@@ -20,31 +20,33 @@ namespace Assignment_2.UL
         {
             if (IsValid)
             {
-                // Values from the login input
-                string username = UsernameTextBox.Text;
-                string password = PasswordTextBox.Text;
+				BLLogin login = new BLLogin();
+				
+				bool status;
 
-                // Get default credentials for user and admin 
-                User customer = HttpContext.Current.Session["User"] as User;
-                User admin = HttpContext.Current.Session["Admin"] as User;
+				int result = login.login(UsernameTextBox.Text, PasswordTextBox.Text, out status);
 
-                if (username.Equals(customer.Username) && password.Equals(customer.Password))
-                {
-                    // Check if customer
-                    HttpContext.Current.Session["LoginStatus"] = "User";
-                    Response.Redirect("~/UL/Default");
-                }
-                else if (username.Equals(admin.Username) && password.Equals(admin.Password))
-                {
-                    // Check if admin
-                    HttpContext.Current.Session["LoginStatus"] = "Admin";
-                    Response.Redirect("~/UL/Default");
-                }
-                else
-                {
-                    // Login unsuccessful
-                    LoginErrorLabel.Text = "Login credentials are incorrect. Try again.";
-                }
+				switch (result)
+				{
+					case(0):
+						LoginErrorLabel.Text = "Username does not exist. Try again.";
+						break;
+					case (-1):
+						LoginErrorLabel.Text = "Password incorrect. Try again.";
+						break;
+					default:
+						Session["UserID"] = result.ToString();
+						if (status)
+						{
+							Session["LoginStatus"] = "Admin";
+						}
+						else
+						{
+							Session["LoginStatus"] = "User";
+						}
+						Response.Redirect("~/UL/Default");
+						break;
+				}
             }
         }
     }

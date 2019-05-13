@@ -14,7 +14,7 @@ namespace Assignment_2.UL
         {
             // Calculate total cost of the cart
             int total = 0;
-            ShoppingCart cart = HttpContext.Current.Session["Cart"] as ShoppingCart;
+            BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
 
 			foreach (var item in cart.Items)
             {
@@ -25,9 +25,9 @@ namespace Assignment_2.UL
         }
 
         // Returns currently stored cart items in the session
-        public List<CartItem> GetCartItems()
+        public List<BLCartItem> GetCartItems()
         {
-            ShoppingCart cart = HttpContext.Current.Session["Cart"] as ShoppingCart;
+            BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
             return cart.Items;
         }
 
@@ -35,14 +35,14 @@ namespace Assignment_2.UL
         protected void btnEmptyCart_Click(object sender, EventArgs e)
         {
             HttpContext.Current.Session.Remove("Cart");
-            HttpContext.Current.Session["Cart"] = new ShoppingCart();
+            HttpContext.Current.Session["Cart"] = new BLShoppingCart();
             Page.Response.Redirect(Page.Request.Url.ToString(), true);
         }
 
         // Remove specified cart item from the shopping cart
         protected void btnRemove_Click(object sender, EventArgs e)
         {
-            ShoppingCart cart = Session["Cart"] as ShoppingCart;
+            BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
             CheckBox selected;
 
             ListViewDataItem currDataItem;

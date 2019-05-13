@@ -9,14 +9,16 @@ namespace Assignment_2.BL
 {
 	public class BLProduct
 	{
-		public static DataSet getProducts()
+		public DataSet getProducts()
 		{
-			return DALSelect.getProducts();
+			DALSelect products = new DALSelect();
+			return products.getProducts();
 		}
 
-		public static DataSet selectProduct(string productNumber)
+		public DataSet selectProduct(string productNumber)
 		{
-			return DALSelect.selectProduct(productNumber);
+			DALSelect product = new DALSelect();
+			return product.selectProduct(productNumber);
 		}
 	}
 }

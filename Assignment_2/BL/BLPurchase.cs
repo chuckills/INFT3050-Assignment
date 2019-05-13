@@ -5,7 +5,8 @@ using System.Web;
 
 namespace Assignment_2.BL
 {
-	public class Login
+	public class BLPurchase
 	{
+		
 	}
 }

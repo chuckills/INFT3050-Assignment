@@ -21,7 +21,7 @@ namespace Assignment_2.UL
         protected void PaymentConfirmLink_Click(object sender, EventArgs e)
         {
             HttpContext.Current.Session.Remove("Cart");
-            HttpContext.Current.Session["Cart"] = new ShoppingCart();
+            HttpContext.Current.Session["Cart"] = new BLShoppingCart();
             Response.Redirect("~/UL/PaymentConfirmation.aspx");
         }
 

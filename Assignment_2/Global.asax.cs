@@ -22,7 +22,7 @@ namespace Assignment_2
         void Session_Start(object sender, EventArgs e)
         {
             // Initialise shopping cart to empty for each session
-            HttpContext.Current.Session["Cart"] = new ShoppingCart();
+            HttpContext.Current.Session["Cart"] = new BLShoppingCart();
 
             // Add admin user to session
             HttpContext.Current.Session["Admin"] = new User("admin@jerseysure.com", "admin", true);
