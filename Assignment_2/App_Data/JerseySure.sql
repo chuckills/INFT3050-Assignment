@@ -107,24 +107,22 @@ END
 GO
 
 CREATE PROCEDURE usp_userLogin
- @user VARCHAR(255), @pass VARCHAR(255), @status BIT OUTPUT
+ @user VARCHAR(255), @pass VARCHAR(255), @result INT OUTPUT, @status BIT OUTPUT
 AS
 BEGIN
-    DECLARE @result int;
-    DECLARE @password VARCHAR(255);
+    DECLARE @password VARCHAR(255)
     IF EXISTS (SELECT userUserName FROM Users WHERE @user = userUserName)
         BEGIN
             SELECT @password = userPassword, @result = userID, @status = userAdmin FROM Users WHERE userUserName = @user
             IF (@pass != @password)
                 BEGIN
-                    SET @result = -1;
+                    SET @result = -1
                 END
         END
     ELSE
         BEGIN
-            SET @result = 0;
+            SET @result = 0
         END
-    RETURN @result;
 END
 GO
 
