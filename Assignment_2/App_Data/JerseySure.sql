@@ -116,11 +116,13 @@ BEGIN
             SELECT @password = userPassword, @result = userID, @status = userAdmin FROM Users WHERE userUserName = @user
             IF (@pass != @password)
                 BEGIN
+                    SET @status = 0
                     SET @result = -1
                 END
         END
     ELSE
         BEGIN
+            SET @status = 0
             SET @result = 0
         END
 END
