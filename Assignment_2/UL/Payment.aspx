@@ -46,6 +46,10 @@
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
+            <asp:TableCell runat="server"><asp:Label ID="lblAmount" CssClass="h2" runat="server"></asp:Label></asp:TableCell>
+           
+        </asp:TableRow>
+        <asp:TableRow runat="server">
             <asp:TableCell runat="server"><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/></asp:TableCell>
             <asp:TableCell runat="server"></asp:TableCell>
         </asp:TableRow>

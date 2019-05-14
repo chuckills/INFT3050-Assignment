@@ -14,29 +14,25 @@ namespace Assignment_2.UL
         {
             // Calculate total cost of the cart
             int total = 0;
-            BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
-
-			foreach (var item in cart.Items)
-            {
-                total += item.Quantity * 100;
-            }
+            BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
+			
             // Display updated cost
-            Cost.Text = "$" +total.ToString() +".00";
+            Cost.Text = string.Format("{0:C}", cart.Amount);
         }
 
         // Returns currently stored cart items in the session
         public List<BLCartItem> GetCartItems()
         {
-            BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
+            BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
             return cart.Items;
         }
 
         // Initialises shopping cart object in the session to empty
         protected void btnEmptyCart_Click(object sender, EventArgs e)
         {
-            HttpContext.Current.Session.Remove("Cart");
-            HttpContext.Current.Session["Cart"] = new BLShoppingCart();
-            Page.Response.Redirect(Page.Request.Url.ToString(), true);
+            Session.Remove("Cart");
+            Session["Cart"] = new BLShoppingCart();
+            Response.Redirect(Request.Url.ToString(), true);
         }
 
         // Remove specified cart item from the shopping cart
@@ -55,6 +51,7 @@ namespace Assignment_2.UL
                 if (selected.Checked)
                 {
                     cart.Items.RemoveAt(ItemList.Items[i].DisplayIndex);
+					cart.calculate();
                 }
             }
             Response.Redirect("~/UL/Cart.aspx");
@@ -67,13 +64,12 @@ namespace Assignment_2.UL
 
             Session["Cost"] = cartTotal;
 
-            if ((HttpContext.Current.Session["LoginStatus"] as string).Equals("LoggedOut"))
+            if (Session["LoginStatus"].ToString().Equals("LoggedOut"))
             {
                 Response.Redirect("~/UL/GuestRegistration.aspx");
             }
             else
             {
-                //Response.Redirect("~/UL/Payment.aspx?cost=" + cartTotal);
                 Response.Redirect("~/UL/Payment.aspx");
             }
         }

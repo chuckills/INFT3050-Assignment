@@ -14,13 +14,15 @@ namespace Assignment_2.BL
 		// Model variables
 		public string Name { get; set; }
         public string Size { get; set; }
-        public int Quantity { get; set; }
+		public double Price { get; set; }
+		public int Quantity { get; set; }
 		public string Image { get; set; }
 
-        public BLCartItem(string name, string size, int quantity, string image)
+        public BLCartItem(string name, string size, double price, int quantity, string image)
         {
             Name = name;
             Size = size;
+            Price = price;
             Quantity = quantity;
             Image = image;
         }

@@ -14,6 +14,7 @@ namespace Assignment_2.BL
     {
         // Model data
         public List<BLCartItem> Items { get; set; }
+        public double Amount { get; set; }
 
         public BLShoppingCart()
         {
@@ -24,15 +25,25 @@ namespace Assignment_2.BL
         public void AddCartItem(BLCartItem item)
         {
             Items.Add(item);
+            Amount += item.Quantity * item.Price;
+		}
+
+        public void calculate()
+        {
+	        Amount = 0;
+	        foreach (BLCartItem item in Items)
+			{
+				Amount += item.Quantity * item.Price;
+			}
         }
 
         // Returns string representation of shopping cart model
         public override string ToString()
         {
-            String output = "";
+            string output = "";
             foreach (BLCartItem item in Items)
             {
-                output += item.ToString() +Environment.NewLine;
+                output += item + Environment.NewLine;
             }
             return output;
         }
