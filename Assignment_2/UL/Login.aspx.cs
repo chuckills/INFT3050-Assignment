@@ -35,6 +35,7 @@ namespace Assignment_2.UL
 						LoginErrorLabel.Text = "Password incorrect. Try again.";
 						break;
 					default:
+						Session["UserName"] = UsernameTextBox.Text;
 						Session["UserID"] = result.ToString();
 						if (status)
 						{

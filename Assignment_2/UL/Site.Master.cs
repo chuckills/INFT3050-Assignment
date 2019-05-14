@@ -11,8 +11,7 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*SearchTextBox.Attributes.Add(
-                "onkeypress", "button_click(this,'" + SubmitSearch + "')");*/
+	        
         }
 
         protected void SubmitSearch_Click(object sender, EventArgs e)
