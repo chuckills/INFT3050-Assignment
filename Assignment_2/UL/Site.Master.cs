@@ -11,7 +11,14 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        
+	        if (Session["UserName"] != null)
+	        {
+		        lblUser.Text = "Hi, " + Session["UserName"].ToString();
+	        }
+	        else
+	        {
+		        lblUser.Text = "";
+	        }
         }
 
         protected void SubmitSearch_Click(object sender, EventArgs e)
