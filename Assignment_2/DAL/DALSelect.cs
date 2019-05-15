@@ -22,7 +22,7 @@ namespace Assignment_2.DAL
 
 				adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-				adapter.Fill(productDataSet);
+				adapter.Fill(productDataSet, "Products");
 			}
 
 			return productDataSet;
@@ -44,50 +44,44 @@ namespace Assignment_2.DAL
 					command.Parameters.AddWithValue("@productNumber", productNumber);
 					adapter.SelectCommand = command;
 
-					adapter.Fill(productDataSet);
+					adapter.Fill(productDataSet, "Product");
 				}
 			}
 
 			return productDataSet;
 		}
 
-		public int login(string user, string pass, out bool status)
+		public DataSet getUserData(string user, out bool result)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
-			int result;
+			DataSet userDataSet = new DataSet();
 
 			using (SqlConnection connection = new SqlConnection(cs))
 			{
-				SqlCommand command = new SqlCommand("usp_userLogin", connection);
-				
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.AddWithValue("@user", user);
-				command.Parameters.AddWithValue("@pass", pass);
+				SqlDataAdapter adapter = new SqlDataAdapter();
+				using (SqlCommand command = new SqlCommand("usp_getUser", connection))
+				{
+					command.CommandType = CommandType.StoredProcedure;
 
-				SqlParameter admin = new SqlParameter();
-				admin.ParameterName = "@status";
-				admin.SqlDbType = SqlDbType.Bit;
-				admin.Direction = ParameterDirection.Output;
+					SqlParameter found = new SqlParameter();
+					found.ParameterName = "@result";
+					found.SqlDbType = SqlDbType.Int;
+					found.Direction = ParameterDirection.Output;
 
-				command.Parameters.Add(admin);
+					command.Parameters.Add(found);
 
-				SqlParameter userID = new SqlParameter();
-				userID.ParameterName = "@result";
-				userID.SqlDbType = SqlDbType.Int;
-				userID.Direction = ParameterDirection.Output;
+					command.Parameters.AddWithValue("@user", user);
 
-				command.Parameters.Add(userID);
+					adapter.SelectCommand = command;
 
-				connection.Open();
-				command.ExecuteNonQuery();
+					adapter.Fill(userDataSet, "User");
 
-				status = (bool)admin.Value;
-				result = (int)userID.Value;
+					result = Convert.ToBoolean(found.Value);
+				}
 			}
 
-			return result;
+			return userDataSet;
 		}
-
 	}
 }

@@ -106,35 +106,20 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE usp_userLogin
- @user VARCHAR(255), @pass VARCHAR(255), @result INT OUTPUT, @status BIT OUTPUT
+CREATE PROCEDURE usp_getUser
+    @user VARCHAR(255), @result BIT OUTPUT
 AS
 BEGIN
-    DECLARE @password VARCHAR(255)
     IF EXISTS (SELECT userUserName FROM Users WHERE @user = userUserName)
         BEGIN
-            SELECT @password = userPassword, @result = userID, @status = userAdmin FROM Users WHERE userUserName = @user
-            IF (@pass != @password)
-                BEGIN
-                    SET @status = 0
-                    SET @result = -1
-                END
+            SET @result = 1
+            SELECT * FROM Users WHERE userUserName = @user;
         END
     ELSE
         BEGIN
-            SET @status = 0
             SET @result = 0
         END
 END
-GO
-
-/*DECLARE
-  @playerData PLAYERTYPE
-INSERT INTO @playerData(playFirstName, playLastName, teamID, jerNumber)
-    VALUES ('Mike', 'Hunt', 'UTA', 11)
-
-EXEC usp_addNewPlayer @playerData
-GO*/
 
 --===================================================================================
     -- Database Build
@@ -275,7 +260,7 @@ CREATE TABLE Orders
     shipID INT NOT NULL, -- ID of the shipping method
 	userID INT NOT NULL, -- ID of the user,
 	UNIQUE(ordID, userID),
-    FOREIGN KEY (shipID) REFERENCES Shipping(shipID),
+    FOREIGN KEY (shipID) REFERENCES Shipping(shipID),	
     FOREIGN KEY (userID) REFERENCES Users(userID)
 )
 
@@ -465,8 +450,8 @@ GO
 
 INSERT INTO Users (userID, userFirstName, userLastName, userEmail, userPhone, userUserName, userPassword, userAdmin)
     VALUES (1, 'Tyrrion', 'Lannister', 'shorty@kingslanding.co.uk', '0421224567', 'shorty69', 'sizematters', 0),
-           (2, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'username', 'password', 1),
-           (3, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'johnsmith', 'MoreSecurePassword', 0)
+           (2, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'username', 'password', 0),
+           (3, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'johnsmith@jerseysure.com.au', 'MoreSecurePassword', 1)
 GO
 
 SET IDENTITY_INSERT Users OFF

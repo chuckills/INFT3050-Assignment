@@ -20,24 +20,22 @@ namespace Assignment_2.UL
         {
             if (IsValid)
             {
-				BLLogin login = new BLLogin();
-				
-				bool status;
+				BLUser user = new BLUser();
 
-				int result = login.login(UsernameTextBox.Text, PasswordTextBox.Text, out status);
+				int result = user.login(UsernameTextBox.Text, PasswordTextBox.Text);
 
 				switch (result)
 				{
 					case(0):
 						LoginErrorLabel.Text = "Username does not exist. Try again.";
 						break;
-					case (-1):
+					case (1):
 						LoginErrorLabel.Text = "Password incorrect. Try again.";
 						break;
 					default:
-						Session["UserName"] = UsernameTextBox.Text;
-						Session["UserID"] = result.ToString();
-						if (status)
+						Session["User"] = user;
+						Session["UserName"] = user.userUserName;
+						if (user.userAdmin)
 						{
 							Session["LoginStatus"] = "Admin";
 						}

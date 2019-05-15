@@ -13,13 +13,31 @@ namespace Assignment_2.UL {
     public partial class SingleProductPage {
         
         /// <summary>
-        /// rptInfo control.
+        /// lblTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptInfo;
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+        
+        /// <summary>
+        /// lblDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescription;
+        
+        /// <summary>
+        /// lblPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPrice;
         
         /// <summary>
         /// rfvSize control.
@@ -76,12 +94,21 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.LinkButton btnAddToCart;
         
         /// <summary>
-        /// rptJersey control.
+        /// imgFront control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptJersey;
+        protected global::System.Web.UI.WebControls.Image imgFront;
+        
+        /// <summary>
+        /// imgBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgBack;
     }
 }

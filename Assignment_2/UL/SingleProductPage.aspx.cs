@@ -15,26 +15,36 @@ namespace Assignment_2.UL
         {
 			BLProduct product = new BLProduct();
 
-			DataSet productData = product.selectProduct(Session["productNumber"].ToString());
+			product = product.selectProduct(Session["productNumber"].ToString());
 
-			rptInfo.DataSource = productData;
+			Session["Product"] = product;
+
+			lblTitle.Text = product.playFirstName + " " + product.playLastName + " " + product.teamLocale + " " + product.teamName;
+			lblDescription.Text = product.prodDescription;
+			lblPrice.Text = string.Format("{0:C0}", product.prodPrice);
+
+			imgFront.ImageUrl = "Images\\jerseys\\" + product.image[0];
+
+
+			imgBack.ImageUrl = "Images\\jerseys\\" + product.image[1];
+			//Images\jerseys\
+
+			/*rptInfo.DataSource = productData;
 			rptInfo.DataBind();
 
 			rptJersey.DataSource = productData;
-			rptJersey.DataBind();
+			rptJersey.DataBind();*/
+		}
 
-			Session["Product"] = productData.Tables[0].Rows[0];
-        }
-
-        // Adds current product to cart; gets shopping cart model from session and updates (then writes back to session).
-        protected void btnAddToCart_Click(object sender, EventArgs e)
+		// Adds current product to cart; gets shopping cart model from session and updates (then writes back to session).
+		protected void btnAddToCart_Click(object sender, EventArgs e)
         {
             if (IsValid)
             {
-	            DataRow productData = Session["Product"] as DataRow;
+	            BLProduct productData = Session["Product"] as BLProduct;
 
 				BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
-                cart.AddCartItem(new BLCartItem((string)productData.ItemArray[0], rblSizeOption.SelectedItem.Text, Convert.ToDouble(productData.ItemArray[2]), int.Parse(tbxQuantity.Text), (string)Session["image"]));
+                cart.AddCartItem(new BLCartItem(productData, rblSizeOption.SelectedItem.Text, int.Parse(tbxQuantity.Text)));
 
                 Response.Redirect("~/UL/Cart.aspx");
             }

@@ -25,7 +25,7 @@ namespace Assignment_2.BL
         public void AddCartItem(BLCartItem item)
         {
             Items.Add(item);
-            Amount += item.Quantity * item.Price;
+            Amount += item.Quantity * item.Product.prodPrice;
 		}
 
         public void calculate()
@@ -33,7 +33,7 @@ namespace Assignment_2.BL
 	        Amount = 0;
 	        foreach (BLCartItem item in Items)
 			{
-				Amount += item.Quantity * item.Price;
+				Amount += item.Quantity * item.Product.prodPrice;
 			}
         }
 

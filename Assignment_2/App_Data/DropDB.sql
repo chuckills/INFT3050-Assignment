@@ -36,7 +36,7 @@ DROP PROCEDURE usp_getProducts
 GO
 DROP PROCEDURE usp_selectProduct
 GO
-DROP PROCEDURE usp_userLogin
+DROP PROCEDURE usp_getUser
 GO
 DROP TYPE PLAYERTYPE
 GO
