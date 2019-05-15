@@ -27,13 +27,6 @@ namespace Assignment_2.UL
 
 
 			imgBack.ImageUrl = "Images\\jerseys\\" + product.image[1];
-			//Images\jerseys\
-
-			/*rptInfo.DataSource = productData;
-			rptInfo.DataBind();
-
-			rptJersey.DataSource = productData;
-			rptJersey.DataBind();*/
 		}
 
 		// Adds current product to cart; gets shopping cart model from session and updates (then writes back to session).
