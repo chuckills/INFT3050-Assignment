@@ -7,14 +7,14 @@
 -- This section was used to create the database on SQL Server Developer Edition
 -- Uncomment if you need to run. I don't think this is needed though.
 --==================================================================================
-use master
+/*use master
 go
 
 CREATE DATABASE JerseySure
 GO
 
 USE JerseySure
-GO
+GO*/
 
 
 --==================================================================================
@@ -29,7 +29,7 @@ GO
 -- This section was used to create the database user login
 -- Uncomment if you need to run it
 --==================================================================================
-CREATE LOGIN jerseysure WITH PASSWORD = N'password'
+/*CREATE LOGIN jerseysure WITH PASSWORD = N'password'
 GO	
 
 EXECUTE	sp_addsrvrolemember jerseysure, dbcreator
@@ -41,7 +41,7 @@ GO
 CREATE USER jerseysure
 	FOR	LOGIN jerseysure
 	WITH DEFAULT_SCHEMA = dbo
-GO
+GO*/
 
 
 --===================================================================================
@@ -87,39 +87,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE usp_getProducts
-AS
-BEGIN
-    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
-    FROM Product pr, Team t, Player pl, Image i
-    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID
-END
-GO
 
-CREATE PROCEDURE usp_selectProduct
-    @productNumber VARCHAR(8)
-AS
-BEGIN
-    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
-    FROM Product pr, Team t, Player pl, Image i
-    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID and pr.prodNumber = @productNumber
-END
-GO
-
-CREATE PROCEDURE usp_getUser
-    @user VARCHAR(255), @result BIT OUTPUT
-AS
-BEGIN
-    IF EXISTS (SELECT userUserName FROM Users WHERE @user = userUserName)
-        BEGIN
-            SET @result = 1
-            SELECT * FROM Users WHERE userUserName = @user;
-        END
-    ELSE
-        BEGIN
-            SET @result = 0
-        END
-END
 
 --===================================================================================
     -- Database Build
@@ -519,3 +487,37 @@ GO
 INSERT INTO PayPalPM
     VALUES ('johnsmith@jerseyshure.com.au', 2)
 GO
+
+CREATE PROCEDURE usp_getProducts
+AS
+BEGIN
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
+    FROM Product pr, Team t, Player pl, Image i
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID
+END
+GO
+
+CREATE PROCEDURE usp_selectProduct
+    @productNumber VARCHAR(8)
+AS
+BEGIN
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
+    FROM Product pr, Team t, Player pl, Image i
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID and pr.prodNumber = @productNumber
+END
+GO
+
+CREATE PROCEDURE usp_getUser
+    @user VARCHAR(255), @result BIT OUTPUT
+AS
+BEGIN
+    IF EXISTS (SELECT userUserName FROM Users WHERE @user = userUserName)
+        BEGIN
+            SET @result = 1
+            SELECT * FROM Users WHERE userUserName = @user;
+        END
+    ELSE
+        BEGIN
+            SET @result = 0
+        END
+END
