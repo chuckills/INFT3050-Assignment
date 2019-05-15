@@ -12,9 +12,9 @@ namespace Assignment_2.UL
         protected void Page_Load(object sender, EventArgs e)
         {
             // Change Login Status and redirect to home page
-            HttpContext.Current.Session["LoginStatus"] = "LoggedOut";
+            Session["LoginStatus"] = "LoggedOut";
             Session["UserName"] = null;
-            Session["UserID"] = null;
+            Session["User"] = null;
             Response.Redirect("~/UL/");
         }
     }
