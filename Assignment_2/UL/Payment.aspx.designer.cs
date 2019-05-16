@@ -22,15 +22,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.Table tblDetails;
         
         /// <summary>
-        /// lblCardNumber control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCardNumber;
-        
-        /// <summary>
         /// tbxCardNumber control.
         /// </summary>
         /// <remarks>
@@ -58,15 +49,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvNumber;
         
         /// <summary>
-        /// lblCardName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCardName;
-        
-        /// <summary>
         /// tbxCardName control.
         /// </summary>
         /// <remarks>
@@ -83,15 +65,6 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvName;
-        
-        /// <summary>
-        /// lblExpiration control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblExpiration;
         
         /// <summary>
         /// tbxExpiration control.
@@ -119,15 +92,6 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvExpiration;
-        
-        /// <summary>
-        /// lblCSC control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCSC;
         
         /// <summary>
         /// tbxCSC control.

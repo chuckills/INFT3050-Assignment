@@ -7,9 +7,9 @@
                 <asp:Label ID="lblTitle" runat="server" CssClass="h2"></asp:Label>
                 <br/>
                 <asp:Label ID="lblDescription" runat="server" CssClass="h3"></asp:Label>
-                <br/><br/>
+                <br/><hr/>
                 <asp:Label ID="lblPrice" runat="server" CssClass="h4"></asp:Label>
-                <br/>
+                <hr/>
                 <h4 class="center-text">Size</h4>
                 <!-- Validator for size radio list -->
                 <div class="center-text">

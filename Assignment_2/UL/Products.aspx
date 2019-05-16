@@ -12,7 +12,7 @@
                         <div class="d-flex justify-content-center">
                             <asp:LinkButton ID="btnBuy" runat="server" CssClass="product-buy-btn btn btn-danger" onClick="btnBuy_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "prodNumber") %>'>Buy</asp:LinkButton>
                         </div> 
-                        <br/>
+                        <hr/>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>

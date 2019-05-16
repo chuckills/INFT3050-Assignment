@@ -22,15 +22,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.Table tblDetails;
         
         /// <summary>
-        /// lblName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblName;
-        
-        /// <summary>
         /// tbxName control.
         /// </summary>
         /// <remarks>
@@ -49,15 +40,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvName;
         
         /// <summary>
-        /// lblEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
-        
-        /// <summary>
         /// tbxEmail control.
         /// </summary>
         /// <remarks>
@@ -74,15 +56,6 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmail;
-        
-        /// <summary>
-        /// lblQuery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuery;
         
         /// <summary>
         /// tbxQuery control.

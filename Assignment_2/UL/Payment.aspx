@@ -4,13 +4,13 @@
     
 <br />
 <h1>Payment</h1>
-
+    <hr/>
     <%-- Table for Card Details --%>
 
     <asp:Table ID="tblDetails" runat="server">
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblCardNumber" runat="server" Text="Credit card number" AssociatedControlID="tbxCardNumber"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxCardNumber" runat="server" TextMode="Number"></asp:TextBox></asp:TableCell>
+            <asp:TableCell runat="server">Credit card number</asp:TableCell>
+            <asp:TableCell runat="server"><asp:TextBox ID="tbxCardNumber" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox></asp:TableCell>
             
             <%-- Validation for card number --%>
             <asp:TableCell runat="server">
@@ -19,25 +19,25 @@
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblCardName" runat="server" Text="Name on credit card" AssociatedControlID="tbxCardName"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxCardName" runat="server"></asp:TextBox></asp:TableCell>
+            <asp:TableCell runat="server">Name on credit card</asp:TableCell>
+            <asp:TableCell runat="server"><asp:TextBox ID="tbxCardName" CssClass="form-control" runat="server"></asp:TextBox></asp:TableCell>
             
             <%-- Validation for name --%>
             <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxCardName" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblExpiration" runat="server" Text="Expiration date MMYY" AssociatedControlID="tbxExpiration"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxExpiration" runat="server" Width="50" TextMode="Number"></asp:TextBox></asp:TableCell>
+            <asp:TableCell runat="server">Expiration date MM-YYYY</asp:TableCell>
+            <asp:TableCell runat="server"><asp:TextBox ID="tbxExpiration" CssClass="form-control" runat="server"></asp:TextBox></asp:TableCell>
             
             <%-- Validation for expiration date --%>
             <asp:TableCell runat="server">
                 <asp:RequiredFieldValidator ID="rfvExpiration" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxExpiration" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="rxvExpiration" runat="server" ErrorMessage="Invalid Expiry" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxExpiration" ValidationExpression="\d{4}"></asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="rxvExpiration" runat="server" ErrorMessage="Invalid Expiry" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxExpiration" ValidationExpression="\([0][1-9]|[1][0-2])-[2-9][0-9]{3}$"></asp:RegularExpressionValidator>
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblCSC" runat="server" Text="Card security code" AssociatedControlID="tbxCSC"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxCSC" runat="server" Width="50" TextMode="Number"></asp:TextBox></asp:TableCell>
+            <asp:TableCell runat="server">Card security code></asp:TableCell>
+            <asp:TableCell runat="server"><asp:TextBox ID="tbxCSC" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox></asp:TableCell>
            
             <%-- Validation for CSC --%>
             <asp:TableCell runat="server">
@@ -46,12 +46,16 @@
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblAmount" CssClass="h2" runat="server"></asp:Label></asp:TableCell>
-           
+            <asp:TableCell ColumnSpan="2" runat="server"><hr/></asp:TableCell> 
+        </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell ColumnSpan="2" runat="server"><h3>Total Amount : </h3><asp:Label ID="lblAmount" CssClass="h3" runat="server"></asp:Label></asp:TableCell> 
+        </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell ColumnSpan="2" runat="server"><hr/></asp:TableCell> 
         </asp:TableRow>
         <asp:TableRow runat="server">
             <asp:TableCell runat="server"><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/></asp:TableCell>
-            <asp:TableCell runat="server"></asp:TableCell>
         </asp:TableRow>
     </asp:Table>  
        

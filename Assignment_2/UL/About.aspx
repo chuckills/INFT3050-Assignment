@@ -4,7 +4,8 @@
     
     <br />
     <h2>About</h2>
+    <hr/>
     <h3>Got Jerseys!</h3>
-    <p>Jersey Sure is a joint development project from DilboSoft, Choice Computing, and Booth Enterprises</p>
+    <p>Jersey Sure is a joint development project from Booth Enterprises, Choice Computing and DilboSoft</p>
     
 </asp:Content>
