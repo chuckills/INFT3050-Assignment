@@ -12,8 +12,8 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        Repeater1.DataSource = BLProduct.getProducts();
-			Repeater1.DataBind();
+	        rptProducts.DataSource = BLProduct.getProducts();
+	        rptProducts.DataBind();
         }
 
 		protected void btnBuy_Click(object sender, EventArgs e)

@@ -13,5 +13,10 @@ namespace Assignment_2.UL
         {
 
         }
-    }
+
+		protected void AddProductButton_Click(object sender, EventArgs e)
+		{
+
+		}
+	}
 }

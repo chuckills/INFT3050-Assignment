@@ -83,5 +83,23 @@ namespace Assignment_2.DAL
 
 			return userDataSet;
 		}
+
+		public DataSet getTeams()
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+			DataSet teamsDataSet = new DataSet();
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+				SqlDataAdapter adapter = new SqlDataAdapter("usp_getTeams", connection);
+
+				adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+				adapter.Fill(teamsDataSet, "Teams");
+			}
+
+			return teamsDataSet;
+		}
 	}
 }

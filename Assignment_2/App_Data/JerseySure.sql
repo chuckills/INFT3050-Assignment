@@ -30,7 +30,7 @@ GO*/
 -- Uncomment if you need to run it
 --==================================================================================
 /*CREATE LOGIN jerseysure WITH PASSWORD = N'password'
-GO	
+GO
 
 EXECUTE	sp_addsrvrolemember jerseysure, dbcreator
 GO
@@ -129,7 +129,6 @@ CREATE TABLE Image
     imgID INT IDENTITY PRIMARY KEY,
     imgFront VARCHAR(40) NOT NULL, -- Front view file
     imgBack VARCHAR(40) NOT NULL, -- Back view file
-    imgSmall VARCHAR(40) NOT NULL -- Small size
 )
 
 -- Details to identify the products carried
@@ -228,7 +227,7 @@ CREATE TABLE Orders
     shipID INT NOT NULL, -- ID of the shipping method
 	userID INT NOT NULL, -- ID of the user,
 	UNIQUE(ordID, userID),
-    FOREIGN KEY (shipID) REFERENCES Shipping(shipID),	
+    FOREIGN KEY (shipID) REFERENCES Shipping(shipID),
     FOREIGN KEY (userID) REFERENCES Users(userID)
 )
 
@@ -317,15 +316,15 @@ GO
 SET IDENTITY_INSERT Image ON
 GO
 
-INSERT INTO Image (imgID, imgFront, imgBack, imgSmall)
-    VALUES (1, 'kyrie-irving-front.jpg', 'kyrie-irving-back.jpg', 'bos-small.jpg'),
-           (2, 'steph-curry-front.png', 'steph-curry-back.png', 'gsw-small.jpg'),
-           (3, 'lebron-james-front.jpg', 'lebron-james-back.jpg', 'lal-small.jpg'),
-           (4, 'james-harden-front.png', 'james-harden-back.png', 'hou-small.jpg'),
-           (5, 'devin-booker-front.png', 'devin-booker-back.png', 'phx-small.jpg'),
-           (6, 'russell-westbrook-front.png', 'russell-westbrook-back.png', 'okc-small.jpg'),
-           (7, 'kemba-walker-front.png', 'kemba-walker-back.png', 'cha-small.jpg'),
-           (8, 'victor-oladipo-front.jpg', 'victor-oladipo-back.jpg', 'ind-small.jpg')
+INSERT INTO Image (imgID, imgFront, imgBack)
+    VALUES (1, 'kyrie-irving-front.jpg', 'kyrie-irving-back.jpg'),
+           (2, 'steph-curry-front.png', 'steph-curry-back.png'),
+           (3, 'lebron-james-front.jpg', 'lebron-james-back.jpg'),
+           (4, 'james-harden-front.png', 'james-harden-back.png'),
+           (5, 'devin-booker-front.png', 'devin-booker-back.png'),
+           (6, 'russell-westbrook-front.png', 'russell-westbrook-back.png'),
+           (7, 'kemba-walker-front.png', 'kemba-walker-back.png'),
+           (8, 'victor-oladipo-front.jpg', 'victor-oladipo-back.jpg')
 
 SET IDENTITY_INSERT Image OFF
 GO
@@ -491,9 +490,9 @@ GO
 CREATE PROCEDURE usp_getProducts
 AS
 BEGIN
-    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
-    FROM Product pr, Team t, Player pl, Image i
-    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
+    FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID
 END
 GO
 
@@ -501,9 +500,9 @@ CREATE PROCEDURE usp_selectProduct
     @productNumber VARCHAR(8)
 AS
 BEGIN
-    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, i.imgFront, i.imgBack, i.imgSmall
-    FROM Product pr, Team t, Player pl, Image i
-    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID and pr.prodNumber = @productNumber
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
+    FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID AND pr.prodNumber = @productNumber
 END
 GO
 
@@ -521,3 +520,11 @@ BEGIN
             SET @result = 0
         END
 END
+GO
+
+CREATE PROCEDURE  usp_getTeams
+AS
+BEGIN
+    SELECT teamID, concat(teamLocale, ' ' + teamName) AS teamFull FROM Team
+END
+GO

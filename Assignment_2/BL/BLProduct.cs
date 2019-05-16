@@ -17,12 +17,19 @@ namespace Assignment_2.BL
 		public string teamName { get; set; }
 		public string playFirstName { get; set; }
 		public string playLastName { get; set; }
+		public int jerNumber { get; set; }
 		public string[] image { get; set; }
 
 		public static DataSet getProducts()
 		{
 			DALSelect products = new DALSelect();
 			return products.getProducts();
+		}
+
+		public static DataSet getTeams()
+		{
+			DALSelect teams = new DALSelect();
+			return teams.getTeams();
 		}
 
 		public BLProduct selectProduct(string productNumber)
@@ -39,10 +46,10 @@ namespace Assignment_2.BL
 			teamName = productData["teamName"].ToString();
 			playFirstName = productData["playFirstName"].ToString();
 			playLastName = productData["playLastName"].ToString();
-			image = new string[3];
+			jerNumber = Convert.ToInt32(productData["jerNumber"]);
+			image = new string[2];
 			image[0] = productData["imgFront"].ToString();
 			image[1] = productData["imgBack"].ToString();
-			image[2] = productData["imgSmall"].ToString();
 
 			return this;
 		}

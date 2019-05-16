@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row margin-space-top-20">
-            <asp:Repeater ID="Repeater1" runat="server">
+            <asp:Repeater ID="rptProducts" runat="server">
                 <ItemTemplate>
                     <div class="col-sm-3">
                         <h2 class="product-buy-heading"><%# DataBinder.Eval(Container.DataItem, "playFirstName") + "<br/>" + DataBinder.Eval(Container.DataItem, "playLastName")%></h2>
