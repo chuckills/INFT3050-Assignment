@@ -570,7 +570,7 @@ CREATE PROCEDURE usp_addUser
     @postState VARCHAR(3),
     @postZip INT
 AS
-BEGIN
+BEGIN TRANSACTION
     INSERT INTO Users (userFirstName, userLastName, userEmail, userPhone, userPassword, userAdmin, userActive)
         VALUES (@userFirst, @userLast, @userEmail, @userPhone, @userPassword, @userAdmin, @userActive)
     DECLARE @userID INT
@@ -603,7 +603,7 @@ BEGIN
             END
         INSERT INTO AddressTypes
             VALUES ('P', @userID, @addID)
-END
+COMMIT TRANSACTION
 GO
 
 CREATE PROCEDURE  usp_getTeams
