@@ -99,7 +99,7 @@ namespace Assignment_2.DAL
 				SqlDataAdapter adapter = new SqlDataAdapter("usp_getUsers", connection);
 
 				adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-
+				
 				adapter.Fill(teamsDataSet, "Users");
 			}
 

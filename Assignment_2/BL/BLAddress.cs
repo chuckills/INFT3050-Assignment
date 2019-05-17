@@ -28,5 +28,18 @@ namespace Assignment_2.BL
 
 			return this;
 		}
+
+		public static BLAddress fillAddress(char type, string street, string suburb, string state, int zip)
+		{
+			BLAddress address = new BLAddress();
+
+			address.addType = type;
+			address.addStreet = street;
+			address.addSuburb = suburb;
+			address.addState = state;
+			address.addZip = zip;
+
+			return address;
+		}
 	}
 }

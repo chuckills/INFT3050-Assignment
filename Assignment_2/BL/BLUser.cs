@@ -36,19 +36,7 @@ namespace Assignment_2.BL
 
 				if (userActive)
 				{
-					using (MD5 md5Hash = MD5.Create())
-					{
-						byte[] passHash = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
-
-						StringBuilder sb = new StringBuilder();
-
-						foreach (byte b in passHash)
-						{
-							sb.Append(b.ToString("x2"));
-						}
-
-						pass = sb.ToString();
-					}
+					pass = hashPassword(pass);
 
 					if (pass == userPassword)
 					{
@@ -65,6 +53,25 @@ namespace Assignment_2.BL
 
 			return 0;
 	    }
+
+		private static string hashPassword(string pass)
+		{
+			using (MD5 md5Hash = MD5.Create())
+			{
+				byte[] passHash = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+
+				StringBuilder sb = new StringBuilder();
+
+				foreach (byte b in passHash)
+				{
+					sb.Append(b.ToString("x2"));
+				}
+
+				pass = sb.ToString();
+			}
+
+			return pass;
+		}
 
 		private void fillUser(DataRow userData)
 		{
@@ -103,6 +110,17 @@ namespace Assignment_2.BL
 			fillUser(userData);
 
 			return this;
+		}
+
+		public static int addUser(BLUser newUser)
+		{
+			DALInsert user = new DALInsert();
+
+			newUser.userPassword = hashPassword(newUser.userPassword);
+
+			int rows = user.addNewUser(newUser);
+
+			return rows;
 		}
 
     }
