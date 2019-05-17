@@ -4,6 +4,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
      <div class="container">
+         <h2>Product Management</h2>
+
          <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged">
              <Columns>  
                  <asp:BoundField DataField="prodNumber" HeaderText="ID" ReadOnly="True" />  

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using Assignment_2.DAL;
 
@@ -29,26 +31,23 @@ namespace Assignment_2.BL
 
 			DataRow userData = login.getUserData(user, out found);
 
-		    userID = Convert.ToInt32(userData["userID"]);
-		    userFirstName = userData["userFirstName"].ToString();
-			userLastName = userData["userLastName"].ToString();
-			userEmail = userData["userEmail"].ToString();
-			userPhone = userData["userPhone"].ToString();
-			userUserName = userData["userUserName"].ToString();
-			userPassword = userData["userPassword"].ToString();
-			userAdmin = Convert.ToBoolean(userData["userAdmin"]);
-			userActive = Convert.ToBoolean(userData["userActive"]);
-			if (!userAdmin)
-			{
-				billAddress = new BLAddress().getAddress(userID, 'B');
-			}
-			else
-			{
-				billAddress = null;
-			}
-			postAddress = new BLAddress().getAddress(userID, 'P');
+		    fillUser(userData);
+			
+		    using (MD5 md5Hash = MD5.Create())
+		    {
+			    byte[] passHash = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
 
-			if (found)
+			    StringBuilder sb = new StringBuilder();
+
+			    foreach (byte b in passHash)
+			    {
+				    sb.Append(b.ToString("x2"));
+			    }
+
+			    pass = sb.ToString();
+		    }
+
+		    if (found)
 			{
 				if (userActive)
 				{
@@ -68,10 +67,44 @@ namespace Assignment_2.BL
 			return 0;
 	    }
 
+		private void fillUser(DataRow userData)
+		{
+			userID = Convert.ToInt32(userData["userID"]);
+			userFirstName = userData["userFirstName"].ToString();
+			userLastName = userData["userLastName"].ToString();
+			userEmail = userData["userEmail"].ToString();
+			userPhone = userData["userPhone"].ToString();
+			userUserName = userData["userUserName"].ToString();
+			userPassword = userData["userPassword"].ToString();
+			userAdmin = Convert.ToBoolean(userData["userAdmin"]);
+			userActive = Convert.ToBoolean(userData["userActive"]);
+
+			if (!userAdmin)
+			{
+				billAddress = new BLAddress().getAddress(userID, 'B');
+			}
+			else
+			{
+				billAddress = null;
+			}
+			postAddress = new BLAddress().getAddress(userID, 'P');
+		}
+
 		public static DataSet getUsers()
 		{
 			DALSelect users = new DALSelect();
 			return users.getUsers();
+		}
+
+		public BLUser getUser(int userID)
+		{
+			DALSelect user = new DALSelect();
+
+			DataRow userData = user.getSingleUser(userID);
+
+			fillUser(userData);
+
+			return this;
 		}
 
     }

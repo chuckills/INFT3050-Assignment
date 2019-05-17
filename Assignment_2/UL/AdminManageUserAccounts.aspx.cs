@@ -16,11 +16,21 @@ namespace Assignment_2.UL
 			gvUsers.DataBind();
         }
 
-        /* 
+		protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			GridViewRow row = gvUsers.SelectedRow;
+
+			BLUser user = new BLUser();
+
+			Session["User"] = user.getUser(Convert.ToInt32(row.Cells[0].Text));
+			Response.Redirect("~/UL/AdminUpdateSelectedUser.aspx");
+		}
+
+		/* 
          * Temporary Functionality follows these comments
          */
 
-        /*protected void ViewTransactions_Click(object sender, EventArgs e)
+		/*protected void ViewTransactions_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/UL/PurchaseHistory.aspx");
         }
@@ -55,5 +65,5 @@ namespace Assignment_2.UL
                 label.Text = "Suspended";
             }
         }*/
-    }
+	}
 }

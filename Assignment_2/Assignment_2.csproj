@@ -123,11 +123,13 @@
     <Content Include="UL\AdminPostageOptions.aspx" />
     <Content Include="UL\AdminRegistration.aspx" />
     <Content Include="UL\AdminTransactions.aspx" />
+    <Content Include="UL\AdminUpdateSelectedUser.aspx" />
     <Content Include="UL\AdminUpdateSelectedItem.aspx" />
     <Content Include="App_Data\DropDB.sql" />
     <Content Include="UL\Cart.aspx" />
     <Content Include="UL\Contact.aspx" />
     <Content Include="UL\ContactResponse.aspx" />
+    <Content Include="UL\AdminManageUserInsert.aspx" />
     <Content Include="UL\Content\bootstrap-grid.css" />
     <Content Include="UL\Content\bootstrap-grid.min.css" />
     <Content Include="UL\Content\bootstrap-reboot.css" />
@@ -319,6 +321,13 @@
     <Compile Include="UL\AdminTransactions.aspx.designer.cs">
       <DependentUpon>AdminTransactions.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UL\AdminUpdateSelectedUser.aspx.cs">
+      <DependentUpon>AdminUpdateSelectedUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\AdminUpdateSelectedUser.aspx.designer.cs">
+      <DependentUpon>AdminUpdateSelectedUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UL\AdminUpdateSelectedItem.aspx.cs">
       <DependentUpon>AdminUpdateSelectedItem.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -358,6 +367,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="UL\AdminManageUserInsert.aspx.cs">
+      <DependentUpon>AdminManageUserInsert.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\AdminManageUserInsert.aspx.designer.cs">
+      <DependentUpon>AdminManageUserInsert.aspx</DependentUpon>
     </Compile>
     <Compile Include="UL\GuestRegistration.aspx.cs">
       <DependentUpon>GuestRegistration.aspx</DependentUpon>

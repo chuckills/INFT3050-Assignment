@@ -10,7 +10,7 @@
 namespace Assignment_2.UL {
     
     
-    public partial class Registration {
+    public partial class AdminUpdateSelectedUser {
         
         /// <summary>
         /// tblDetails control.
@@ -211,15 +211,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvBillPostcode;
         
         /// <summary>
-        /// cbxPostageSame control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbxPostageSame;
-        
-        /// <summary>
         /// tblPost control.
         /// </summary>
         /// <remarks>
@@ -319,13 +310,13 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.Table tblLogin;
         
         /// <summary>
-        /// tbxUsername control.
+        /// tbxUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxUsername;
+        protected global::System.Web.UI.WebControls.TextBox tbxUserName;
         
         /// <summary>
         /// rfvUsername control.
@@ -337,66 +328,30 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUsername;
         
         /// <summary>
-        /// tbxPassword control.
+        /// cbxAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxPassword;
+        protected global::System.Web.UI.WebControls.CheckBox cbxAdmin;
         
         /// <summary>
-        /// rfvPassword control.
+        /// cbxActive control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword;
+        protected global::System.Web.UI.WebControls.CheckBox cbxActive;
         
         /// <summary>
-        /// rxvPassword control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvPassword;
-        
-        /// <summary>
-        /// tbxPassword2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbxPassword2;
-        
-        /// <summary>
-        /// cpvPassword2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator cpvPassword2;
-        
-        /// <summary>
-        /// rfvPassword2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword2;
-        
-        /// <summary>
-        /// btnSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }

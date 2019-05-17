@@ -102,6 +102,28 @@ namespace Assignment_2.DAL
 			return teamsDataSet;
 		}
 
+		public DataRow getSingleUser(int userID)
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+			DataSet userDataSet = new DataSet();
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+				SqlDataAdapter adapter = new SqlDataAdapter();
+				SqlCommand command = new SqlCommand("usp_getSingleUser", connection);
+
+				command.CommandType = CommandType.StoredProcedure;
+				command.Parameters.AddWithValue("@user", userID);
+				adapter.SelectCommand = command;
+
+				adapter.Fill(userDataSet, "User");
+
+			}
+
+			return userDataSet.Tables["User"].Rows[0];
+		}
+
 		public DataSet getTeams()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;

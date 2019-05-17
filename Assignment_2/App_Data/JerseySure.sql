@@ -418,9 +418,9 @@ SET IDENTITY_INSERT Users ON
 GO
 
 INSERT INTO Users (userID, userFirstName, userLastName, userEmail, userPhone, userUserName, userPassword, userAdmin)
-    VALUES (1, 'Tyrrion', 'Lannister', 'shorty@kingslanding.co.uk', '0421224567', 'shorty69', 'sizematters', 0),
-           (2, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'username', 'password', 0),
-           (3, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'johnsmith@jerseysure.com.au', 'MoreSecurePassword', 1)
+    VALUES (1, 'Tyrrion', 'Lannister', 'shorty@kingslanding.co.uk', '0421224567', 'shorty69', '912bc7f5d88ac69a0fe7ac6736f351e5', 0), -- sizematters
+           (2, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'username', '5f4dcc3b5aa765d61d8327deb882cf99', 0), -- password
+           (3, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'johnsmith@jerseysure.com.au', '4e54eb9af1eb17eab96ac08c03493557', 1) -- MoreSecurePassword
 GO
 
 SET IDENTITY_INSERT Users OFF
@@ -531,6 +531,16 @@ BEGIN
         BEGIN
             SET @result = 0
         END
+END
+GO
+
+CREATE PROCEDURE usp_getSingleUser
+    @user INT
+AS
+BEGIN
+    SELECT *
+    FROM Users
+    WHERE userID = @user
 END
 GO
 
