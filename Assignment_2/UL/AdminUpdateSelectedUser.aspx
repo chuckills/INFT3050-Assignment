@@ -152,12 +152,6 @@
                         <asp:TableHeaderCell runat="server">Login details</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow runat="server">
-                        <asp:TableCell runat="server">Username</asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxUserName" runat="server" CssClass="form-control"></asp:TextBox></asp:TableCell>
-                        <%--Validation--%>
-                        <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow runat="server">
                         <asp:TableCell runat="server">Admin&nbsp;<asp:CheckBox ID="cbxAdmin" runat="server" /></asp:TableCell>
                         <asp:TableCell runat="server">Active&nbsp;<asp:CheckBox ID="cbxActive" runat="server" /></asp:TableCell>
                         <asp:TableCell runat="server"></asp:TableCell>

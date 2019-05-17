@@ -37,7 +37,7 @@ namespace Assignment_2.UL
 						break;
 					default:
 						Session["CurrentUser"] = user;
-						Session["UserName"] = user.userUserName;
+						Session["UserName"] = user.userEmail;
 						if (user.userAdmin)
 						{
 							Session["LoginStatus"] = "Admin";

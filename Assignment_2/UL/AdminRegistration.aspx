@@ -26,23 +26,6 @@
             <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvLastName" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxLastName" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblEmail" runat="server" Text="Email address" AssociatedControlID="tbxEmail"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail" runat="server" TextMode="Email"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for email --%>
-            <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblEmail2" runat="server" Text="Confirm email address" AssociatedControlID="tbxEmail2"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail2" runat="server" TextMode="Email"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for email2 --%>
-            <asp:TableCell runat="server">
-                <asp:CompareValidator ID="cpvEmail2" runat="server" ErrorMessage="Emails do not match" CssClass="text-danger" ControlToCompare="tbxEmail" ControlToValidate="tbxEmail2" Operator="Equal" SetFocusOnError="True" Display="Dynamic"></asp:CompareValidator>
-                <asp:RequiredFieldValidator ID="rfvEmail2" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail2" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
             <asp:TableCell runat="server"><asp:Label ID="lblPhone" runat="server" Text="Phone number" AssociatedControlID="tbxPhone"></asp:Label></asp:TableCell>
             <asp:TableCell runat="server"><asp:TextBox ID="tbxPhone" runat="server" TextMode="Phone"></asp:TextBox></asp:TableCell>
             
@@ -117,7 +100,7 @@
             <asp:TableCell runat="server"><asp:TextBox ID="tbxUsername" runat="server"></asp:TextBox></asp:TableCell>
             
             <%-- Validation for username --%>
-            <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
+            <asp:TableCell runat="server">@jerseysure.com.au<asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
             <asp:TableCell runat="server"><asp:Label ID="lblPassword" runat="server" Text="Password" AssociatedControlID="tbxPassword"></asp:Label></asp:TableCell>

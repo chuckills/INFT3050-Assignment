@@ -81,7 +81,11 @@ namespace Assignment_2.DAL
 				
 			}
 
-			return userDataSet.Tables["User"].Rows[0];
+			if(result)
+				return userDataSet.Tables["User"].Rows[0];
+			
+			return null;
+			
 		}
 
 		public DataSet getUsers()

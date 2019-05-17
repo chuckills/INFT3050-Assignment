@@ -172,13 +172,11 @@ CREATE TABLE Users
     userID INT IDENTITY PRIMARY KEY,
     userFirstName VARCHAR(30) NOT NULL,
     userLastName VARCHAR(30) NOT NULL,
-    userEmail VARCHAR(255) NOT NULL,
+    userEmail VARCHAR(255) UNIQUE NOT NULL,
     userPhone CHAR(10) NOT NULL,
-    userUserName VARCHAR(255) UNIQUE NOT NULL,
     userPassword VARCHAR(255) NOT NULL,
     userAdmin BIT DEFAULT 0 NOT NULL,
     userActive BIT DEFAULT 1 NOT NULL,
-    UNIQUE (userEmail, userAdmin), -- User can hold one of each account type
     CHECK (len(userPassword) >= 6)
 )
 
@@ -417,10 +415,10 @@ GO
 SET IDENTITY_INSERT Users ON
 GO
 
-INSERT INTO Users (userID, userFirstName, userLastName, userEmail, userPhone, userUserName, userPassword, userAdmin)
-    VALUES (1, 'Tyrrion', 'Lannister', 'shorty@kingslanding.co.uk', '0421224567', 'shorty69', '912bc7f5d88ac69a0fe7ac6736f351e5', 0), -- sizematters
-           (2, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'username', '5f4dcc3b5aa765d61d8327deb882cf99', 0), -- password
-           (3, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', 'johnsmith@jerseysure.com.au', '4e54eb9af1eb17eab96ac08c03493557', 1) -- MoreSecurePassword
+INSERT INTO Users (userID, userFirstName, userLastName, userEmail, userPhone, userPassword, userAdmin)
+    VALUES (1, 'Tyrrion', 'Lannister', 'shorty@kingslanding.co.uk', '0421224567', '912bc7f5d88ac69a0fe7ac6736f351e5', 0), -- sizematters
+           (2, 'John', 'Smith', 'johnsmith@gmail.com', '0434434434', '5f4dcc3b5aa765d61d8327deb882cf99', 0), -- password
+           (3, 'John', 'Smith', 'johnsmith@jerseysure.com.au', '0434434434', '4e54eb9af1eb17eab96ac08c03493557', 1) -- MoreSecurePassword
 GO
 
 SET IDENTITY_INSERT Users OFF
@@ -520,12 +518,12 @@ CREATE PROCEDURE usp_getUser
     @user VARCHAR(255), @result BIT OUTPUT
 AS
 BEGIN
-    IF EXISTS (SELECT userUserName FROM Users WHERE @user = userUserName)
+    IF EXISTS (SELECT userEmail FROM Users WHERE @user = userEmail)
         BEGIN
             SET @result = 1
             SELECT *
             FROM Users
-            WHERE userUserName = @user
+            WHERE userEmail = @user
         END
     ELSE
         BEGIN
@@ -559,8 +557,7 @@ CREATE PROCEDURE usp_addUser
     @userLast VARCHAR(30),
     @userEmail VARCHAR(255),
     @userPhone CHAR(10),
-    @userUserName VARCHAR(255),
-    @userPassword VARCHAR(255),
+    @userPassword CHAR(32),
     @userAdmin BIT,
     @userActive BIT,
     @billStreet VARCHAR(255),
@@ -573,8 +570,8 @@ CREATE PROCEDURE usp_addUser
     @postZip INT
 AS
 BEGIN
-    INSERT INTO Users (userFirstName, userLastName, userEmail, userPhone, userUserName, userPassword, userAdmin, userActive)
-        VALUES (@userFirst, @userLast, @userEmail, @userPhone, @userUserName, @userPassword, @userAdmin, @userActive)
+    INSERT INTO Users (userFirstName, userLastName, userEmail, userPhone, userPassword, userAdmin, userActive)
+        VALUES (@userFirst, @userLast, @userEmail, @userPhone, @userPassword, @userAdmin, @userActive)
     DECLARE @userID INT
     DECLARE @addID INT
     SET @userID = SCOPE_IDENTITY()

@@ -18,7 +18,6 @@ namespace Assignment_2.UL
 			tbxEmail.Text = user.userEmail;
 			tbxEmail2.Text = user.userEmail;
 			tbxPhone.Text = user.userPhone;
-			tbxUserName.Text = user.userUserName;
 			cbxActive.Checked = user.userActive;
 			cbxAdmin.Checked = user.userAdmin;
 			tbxBillAddress.Text = user.billAddress.addStreet;

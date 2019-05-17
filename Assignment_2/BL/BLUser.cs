@@ -16,7 +16,6 @@ namespace Assignment_2.BL
 		public string userLastName { get; set; }
 		public string userEmail { get; set; }
 		public string userPhone { get; set; }
-		public string userUserName { get; set; }
 	    public bool userAdmin { get; set; }
 		public bool userActive { get; set; }
 		public BLAddress billAddress { get; set; }
@@ -31,26 +30,26 @@ namespace Assignment_2.BL
 
 			DataRow userData = login.getUserData(user, out found);
 
-		    fillUser(userData);
-			
-		    using (MD5 md5Hash = MD5.Create())
-		    {
-			    byte[] passHash = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
-
-			    StringBuilder sb = new StringBuilder();
-
-			    foreach (byte b in passHash)
-			    {
-				    sb.Append(b.ToString("x2"));
-			    }
-
-			    pass = sb.ToString();
-		    }
-
 		    if (found)
 			{
+				fillUser(userData);
+
 				if (userActive)
 				{
+					using (MD5 md5Hash = MD5.Create())
+					{
+						byte[] passHash = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+
+						StringBuilder sb = new StringBuilder();
+
+						foreach (byte b in passHash)
+						{
+							sb.Append(b.ToString("x2"));
+						}
+
+						pass = sb.ToString();
+					}
+
 					if (pass == userPassword)
 					{
 						return userID;
@@ -74,7 +73,6 @@ namespace Assignment_2.BL
 			userLastName = userData["userLastName"].ToString();
 			userEmail = userData["userEmail"].ToString();
 			userPhone = userData["userPhone"].ToString();
-			userUserName = userData["userUserName"].ToString();
 			userPassword = userData["userPassword"].ToString();
 			userAdmin = Convert.ToBoolean(userData["userAdmin"]);
 			userActive = Convert.ToBoolean(userData["userActive"]);
