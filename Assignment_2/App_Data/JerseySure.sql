@@ -45,7 +45,7 @@ GO*/
 
 
 --===================================================================================
-    -- Database Types, Procedures and Functions
+    -- Database Types, Procedures and Functions for Build
 --===================================================================================
 
 -- TVP for inserting player details
@@ -138,6 +138,7 @@ CREATE TABLE Product
     prodNumber AS cast(teamID + replicate('0', 5 - len(prodID)) + cast (prodID AS VARCHAR) AS VARCHAR(8)) PERSISTED PRIMARY KEY, -- Generates a value such as GSW00001
     prodDescription TEXT NOT NULL, -- Describes the product
     prodPrice MONEY NOT NULL,
+    prodActive BIT DEFAULT 1 NOT NULL,
     teamID CHAR(3) NOT NULL,
     playID INT NOT NULL,
     imgID INT NOT NULL,
@@ -176,6 +177,7 @@ CREATE TABLE Users
     userUserName VARCHAR(255) UNIQUE NOT NULL,
     userPassword VARCHAR(255) NOT NULL,
     userAdmin BIT DEFAULT 0 NOT NULL,
+    userActive BIT DEFAULT 1 NOT NULL,
     UNIQUE (userEmail, userAdmin), -- User can hold one of each account type
     CHECK (len(userPassword) >= 6)
 )
@@ -446,8 +448,8 @@ INSERT INTO AddressTypes
     VALUES ('P', 1, 1),
            ('B', 1, 2),
            ('P', 2, 3),
-           ('P', 3, 3),
-           ('B', 3, 3)
+           ('B', 2, 3),
+           ('P', 3, 3)
 GO
 
 -- Orders
@@ -490,7 +492,7 @@ GO
 CREATE PROCEDURE usp_getProducts
 AS
 BEGIN
-    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
     FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
     WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID
 END
@@ -500,9 +502,17 @@ CREATE PROCEDURE usp_selectProduct
     @productNumber VARCHAR(8)
 AS
 BEGIN
-    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
     FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
     WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID AND pr.prodNumber = @productNumber
+END
+GO
+
+CREATE PROCEDURE usp_getUsers
+AS
+BEGIN
+    SELECT *
+    FROM Users
 END
 GO
 
@@ -513,12 +523,78 @@ BEGIN
     IF EXISTS (SELECT userUserName FROM Users WHERE @user = userUserName)
         BEGIN
             SET @result = 1
-            SELECT * FROM Users WHERE userUserName = @user;
+            SELECT *
+            FROM Users
+            WHERE userUserName = @user
         END
     ELSE
         BEGIN
             SET @result = 0
         END
+END
+GO
+
+CREATE PROCEDURE usp_getAddress
+    @user INT, @type CHAR(1)
+AS
+BEGIN
+    SELECT addStreet, addSuburb, addState, addZip, addStreet, addSuburb, addState, addZip
+    FROM AddressTypes t, Address a
+    WHERE t.userID = @user AND t.atType = @type AND t.addID = a.addID
+END
+GO
+
+CREATE PROCEDURE usp_addUser
+    @userFirst VARCHAR(30),
+    @userLast VARCHAR(30),
+    @userEmail VARCHAR(255),
+    @userPhone CHAR(10),
+    @userUserName VARCHAR(255),
+    @userPassword VARCHAR(255),
+    @userAdmin BIT,
+    @userActive BIT,
+    @billStreet VARCHAR(255),
+    @billSuburb VARCHAR(30),
+    @billState VARCHAR(3),
+    @billZip INT,
+    @postStreet VARCHAR(255),
+    @postSuburb VARCHAR(30),
+    @postState VARCHAR(3),
+    @postZip INT
+AS
+BEGIN
+    INSERT INTO Users (userFirstName, userLastName, userEmail, userPhone, userUserName, userPassword, userAdmin, userActive)
+        VALUES (@userFirst, @userLast, @userEmail, @userPhone, @userUserName, @userPassword, @userAdmin, @userActive)
+    DECLARE @userID INT
+    DECLARE @addID INT
+    SET @userID = SCOPE_IDENTITY()
+    IF @userAdmin != 1
+        BEGIN
+            IF NOT EXISTS(SELECT * FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState)
+                BEGIN
+                    INSERT INTO Address(addStreet, addSuburb, addState, addZip)
+                        VALUES(@billStreet, @billSuburb, @billState, @billZip)
+                    SET @addID = SCOPE_IDENTITY()
+                END
+            ELSE
+                BEGIN
+                    SELECT @addID = addID FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState
+                END
+            INSERT INTO AddressTypes
+                VALUES ('B', @userID, @addID)
+        END
+        IF NOT EXISTS(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
+            BEGIN
+                INSERT INTO Address(addStreet, addSuburb, addState, addZip)
+                    VALUES(@postStreet, @postSuburb, @postState, @postZip)
+                SET @addID = SCOPE_IDENTITY()
+            END
+        ELSE
+            BEGIN
+                SELECT @addID = addID FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState
+            END
+        INSERT INTO AddressTypes
+            VALUES ('P', @userID, @addID)
 END
 GO
 

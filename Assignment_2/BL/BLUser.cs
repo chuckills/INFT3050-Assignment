@@ -5,10 +5,6 @@ using System.Linq;
 using System.Web;
 using Assignment_2.DAL;
 
-/// <summary>
-/// Temporary model for proof of concept to provide login functionality
-/// </summary>
-
 namespace Assignment_2.BL
 {
     public class BLUser
@@ -20,8 +16,10 @@ namespace Assignment_2.BL
 		public string userPhone { get; set; }
 		public string userUserName { get; set; }
 	    public bool userAdmin { get; set; }
-
-	    private string userPassword;
+		public bool userActive { get; set; }
+		public BLAddress billAddress { get; set; }
+		public BLAddress postAddress { get; set; }
+	    public string userPassword { get; set; }
 
 		public int login(string user, string pass)
 	    {
@@ -29,7 +27,7 @@ namespace Assignment_2.BL
 
 		    bool found;
 
-			DataRow userData = login.getUserData(user, out found).Tables["User"].Rows[0];
+			DataRow userData = login.getUserData(user, out found);
 
 		    userID = Convert.ToInt32(userData["userID"]);
 		    userFirstName = userData["userFirstName"].ToString();
@@ -39,21 +37,42 @@ namespace Assignment_2.BL
 			userUserName = userData["userUserName"].ToString();
 			userPassword = userData["userPassword"].ToString();
 			userAdmin = Convert.ToBoolean(userData["userAdmin"]);
+			userActive = Convert.ToBoolean(userData["userActive"]);
+			if (!userAdmin)
+			{
+				billAddress = new BLAddress().getAddress(userID, 'B');
+			}
+			else
+			{
+				billAddress = null;
+			}
+			postAddress = new BLAddress().getAddress(userID, 'P');
 
 			if (found)
 			{
-				if (pass == userPassword)
+				if (userActive)
 				{
-					return userID;
+					if (pass == userPassword)
+					{
+						return userID;
+					}
+				}
+				else
+				{
+					return -2;
 				}
 
-				return 1;
+				return -1;
 			}
 
 			return 0;
 	    }
-		
 
+		public static DataSet getUsers()
+		{
+			DALSelect users = new DALSelect();
+			return users.getUsers();
+		}
 
     }
 }

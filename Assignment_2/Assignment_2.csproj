@@ -260,6 +260,7 @@
     <Content Include="UL\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\BLAddress.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="BL\BLPurchase.cs" />
     <Compile Include="BL\INFT3050PaymentFactory.cs" />

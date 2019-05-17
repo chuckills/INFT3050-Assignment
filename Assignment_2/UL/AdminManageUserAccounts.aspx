@@ -4,7 +4,12 @@
     <%-- This page will be functionally redesigned once database functions are supported --%>
     
     <div class="container">
-        <div class="row">
+        <asp:GridView ID="gvUsers" runat="server">
+            
+
+        </asp:GridView>
+
+        <%--<div class="row">
             <div class="col"></div>
             <div class="col-8">
                 <h2 class="margin-space-top-20 padding-bottom-15"><%: Title %></h2>
@@ -42,6 +47,6 @@
                 </ul>
             </div>
             <div class="col"></div>
-        </div>
+        </div>--%>
     </div>
 </asp:Content>

@@ -29,8 +29,11 @@ namespace Assignment_2.UL
 					case(0):
 						LoginErrorLabel.Text = "Username does not exist. Try again.";
 						break;
-					case (1):
+					case (-1):
 						LoginErrorLabel.Text = "Password incorrect. Try again.";
+						break;
+					case (-2):
+						LoginErrorLabel.Text = "User account is suspended. Contact admin.";
 						break;
 					default:
 						Session["User"] = user;

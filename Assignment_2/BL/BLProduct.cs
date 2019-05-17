@@ -36,7 +36,7 @@ namespace Assignment_2.BL
 		{
 			DALSelect product = new DALSelect();
 
-			DataRow productData = product.selectProduct(productNumber).Tables["Product"].Rows[0];
+			DataRow productData = product.selectProduct(productNumber);
 
 			prodNumber = productData["prodNumber"].ToString();
 			prodDescription = productData["prodDescription"].ToString();

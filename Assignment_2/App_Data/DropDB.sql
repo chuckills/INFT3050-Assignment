@@ -38,7 +38,13 @@ DROP PROCEDURE usp_selectProduct
 GO
 DROP PROCEDURE usp_getUser
 GO
+DROP PROCEDURE usp_getUsers
+GO
+DROP PROCEDURE usp_addUser
+GO
 DROP PROCEDURE usp_getTeams
+GO
+DROP PROCEDURE usp_getAddress
 GO
 DROP TYPE PLAYERTYPE
 GO

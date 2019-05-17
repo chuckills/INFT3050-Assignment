@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Assignment_2.BL;
 
 namespace Assignment_2.UL
 {
@@ -11,14 +12,15 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+	        gvUsers.DataSource = BLUser.getUsers();
+			gvUsers.DataBind();
         }
 
         /* 
          * Temporary Functionality follows these comments
          */
 
-        protected void ViewTransactions_Click(object sender, EventArgs e)
+        /*protected void ViewTransactions_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/UL/PurchaseHistory.aspx");
         }
@@ -52,6 +54,6 @@ namespace Assignment_2.UL
                 button.Text = "Activate";
                 label.Text = "Suspended";
             }
-        }
+        }*/
     }
 }

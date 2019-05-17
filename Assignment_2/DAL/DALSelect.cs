@@ -29,7 +29,7 @@ namespace Assignment_2.DAL
 
 		}
 
-		public DataSet selectProduct(string productNumber)
+		public DataRow selectProduct(string productNumber)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
@@ -38,20 +38,20 @@ namespace Assignment_2.DAL
 			using (SqlConnection connection = new SqlConnection(cs))
 			{
 				SqlDataAdapter adapter = new SqlDataAdapter();
-				using (SqlCommand command = new SqlCommand("usp_selectProduct", connection))
-				{
-					command.CommandType = CommandType.StoredProcedure;
-					command.Parameters.AddWithValue("@productNumber", productNumber);
-					adapter.SelectCommand = command;
+				SqlCommand command = new SqlCommand("usp_selectProduct", connection);
+				
+				command.CommandType = CommandType.StoredProcedure;
+				command.Parameters.AddWithValue("@productNumber", productNumber);
+				adapter.SelectCommand = command;
 
-					adapter.Fill(productDataSet, "Product");
-				}
+				adapter.Fill(productDataSet, "Product");
+				
 			}
 
-			return productDataSet;
+			return productDataSet.Tables["Product"].Rows[0];
 		}
 
-		public DataSet getUserData(string user, out bool result)
+		public DataRow getUserData(string user, out bool result)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
@@ -60,28 +60,46 @@ namespace Assignment_2.DAL
 			using (SqlConnection connection = new SqlConnection(cs))
 			{
 				SqlDataAdapter adapter = new SqlDataAdapter();
-				using (SqlCommand command = new SqlCommand("usp_getUser", connection))
-				{
-					command.CommandType = CommandType.StoredProcedure;
+				SqlCommand command = new SqlCommand("usp_getUser", connection);
+				
+				command.CommandType = CommandType.StoredProcedure;
 
-					SqlParameter found = new SqlParameter();
-					found.ParameterName = "@result";
-					found.SqlDbType = SqlDbType.Int;
-					found.Direction = ParameterDirection.Output;
+				SqlParameter found = new SqlParameter();
+				found.ParameterName = "@result";
+				found.SqlDbType = SqlDbType.Int;
+				found.Direction = ParameterDirection.Output;
 
-					command.Parameters.Add(found);
+				command.Parameters.Add(found);
 
-					command.Parameters.AddWithValue("@user", user);
+				command.Parameters.AddWithValue("@user", user);
 
-					adapter.SelectCommand = command;
+				adapter.SelectCommand = command;
 
-					adapter.Fill(userDataSet, "User");
+				adapter.Fill(userDataSet, "User");
 
-					result = Convert.ToBoolean(found.Value);
-				}
+				result = Convert.ToBoolean(found.Value);
+				
 			}
 
-			return userDataSet;
+			return userDataSet.Tables["User"].Rows[0];
+		}
+
+		public DataSet getUsers()
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+			DataSet teamsDataSet = new DataSet();
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+				SqlDataAdapter adapter = new SqlDataAdapter("usp_getUsers", connection);
+
+				adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+				adapter.Fill(teamsDataSet, "Users");
+			}
+
+			return teamsDataSet;
 		}
 
 		public DataSet getTeams()
@@ -100,6 +118,30 @@ namespace Assignment_2.DAL
 			}
 
 			return teamsDataSet;
+		}
+
+		public DataRow getAddress(int user, char type)
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+			DataSet addressDataSet = new DataSet();
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+
+				SqlDataAdapter adapter = new SqlDataAdapter();
+				SqlCommand command = new SqlCommand("usp_getAddress", connection);
+
+				command.CommandType = CommandType.StoredProcedure;
+				command.Parameters.AddWithValue("@user", user);
+				command.Parameters.AddWithValue("@type", type);
+
+				adapter.SelectCommand = command;
+
+				adapter.Fill(addressDataSet, "Address");
+			}
+
+			return addressDataSet.Tables["Address"].Rows[0];
 		}
 	}
 }
