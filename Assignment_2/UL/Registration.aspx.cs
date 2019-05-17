@@ -38,22 +38,21 @@ namespace Assignment_2.UL
                 ddlPostState.SelectedIndex = ddlBillState.SelectedIndex;
                 tbxPostPostCode.Text = tbxBillPostCode.Text;
             }
-
             // Redirect if form submission was valid
             if (IsValid)
             {
-				BLUser newUser = new BLUser();
-				
-				newUser.userFirstName = tbxFirstName.Text;
-				newUser.userLastName = tbxLastName.Text;
-				newUser.userEmail = tbxEmail.Text;
-				newUser.userPhone = tbxPhone.Text;
-				newUser.billAddress = BLAddress.fillAddress('B', tbxBillAddress.Text, tbxBillSuburb.Text, ddlBillState.SelectedValue, Convert.ToInt32(tbxBillPostCode.Text));
-				newUser.postAddress = BLAddress.fillAddress('P', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text));
-				newUser.userPassword = tbxPassword.Text;
-
-				newUser.userAdmin = false;
-				newUser.userActive = true;
+	            BLUser newUser = new BLUser
+	            {
+		            userFirstName = tbxFirstName.Text,
+		            userLastName = tbxLastName.Text,
+		            userEmail = tbxEmail.Text,
+		            userPhone = tbxPhone.Text,
+		            billAddress = BLAddress.fillAddress('B', tbxBillAddress.Text, tbxBillSuburb.Text, ddlBillState.SelectedValue, Convert.ToInt32(tbxBillPostCode.Text)),
+		            postAddress = BLAddress.fillAddress('P', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text)),
+		            userPassword = tbxPassword.Text,
+		            userAdmin = false,
+		            userActive = true
+	            };
 
 				BLUser.addUser(newUser);
 				

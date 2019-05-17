@@ -43,52 +43,6 @@ CREATE USER jerseysure
 	WITH DEFAULT_SCHEMA = dbo
 GO*/
 
-
---===================================================================================
-    -- Database Types, Procedures and Functions for Build
---===================================================================================
-
--- TVP for inserting player details
-CREATE TYPE PLAYERTYPE AS TABLE
-(
-    playID INT,
-    playFirstName VARCHAR(30),
-    playLastName VARCHAR(30),
-    teamID CHAR(3),
-    jerNumber INT,
-    PRIMARY KEY (playFirstName, playLastName, teamID, jerNumber)
-)
-GO
-
--- Stored procedure to insert player details
-CREATE PROCEDURE usp_addPlayers
-  @player PLAYERTYPE READONLY
-AS
-BEGIN
-  INSERT INTO Player (playID, playFirstName, playLastName)
-  SELECT playID, playFirstName, playLastName
-  FROM @player
-  INSERT INTO JerseyNumber (playID, jerNumber, teamID)
-  SELECT playID, jerNumber, teamID
-  FROM @player
-END
-GO
-
-CREATE PROCEDURE usp_addNewPlayer
-  @player PLAYERTYPE READONLY
-AS
-BEGIN
-  INSERT INTO Player (playFirstName, playLastName)
-  SELECT playFirstName, playLastName
-  FROM @player
-  INSERT INTO JerseyNumber (playID, jerNumber, teamID)
-  SELECT SCOPE_IDENTITY(), jerNumber, teamID
-  FROM @player
-END
-GO
-
-
-
 --===================================================================================
     -- Database Build
 --===================================================================================
@@ -270,6 +224,49 @@ CREATE TABLE PayPalPM
     ordID INT UNIQUE NOT NULL,
     FOREIGN KEY (ordID) REFERENCES Orders(ordID),
 )
+
+--===================================================================================
+    -- Database Types, Procedures and Functions for Populate
+--===================================================================================
+
+-- TVP for inserting player details
+CREATE TYPE PLAYERTYPE AS TABLE
+(
+    playID INT,
+    playFirstName VARCHAR(30),
+    playLastName VARCHAR(30),
+    teamID CHAR(3),
+    jerNumber INT,
+    PRIMARY KEY (playFirstName, playLastName, teamID, jerNumber)
+)
+GO
+
+-- Stored procedure to insert player details
+CREATE PROCEDURE usp_addPlayers
+  @player PLAYERTYPE READONLY
+AS
+BEGIN
+  INSERT INTO Player (playID, playFirstName, playLastName)
+  SELECT playID, playFirstName, playLastName
+  FROM @player
+  INSERT INTO JerseyNumber (playID, jerNumber, teamID)
+  SELECT playID, jerNumber, teamID
+  FROM @player
+END
+GO
+
+CREATE PROCEDURE usp_addNewPlayer
+  @player PLAYERTYPE READONLY
+AS
+BEGIN
+  INSERT INTO Player (playFirstName, playLastName)
+  SELECT playFirstName, playLastName
+  FROM @player
+  INSERT INTO JerseyNumber (playID, jerNumber, teamID)
+  SELECT SCOPE_IDENTITY(), jerNumber, teamID
+  FROM @player
+END
+GO
 
 --===================================================================================
     -- Database Populate
@@ -486,6 +483,10 @@ GO
 INSERT INTO PayPalPM
     VALUES ('johnsmith@jerseyshure.com.au', 2)
 GO
+
+--===================================================================================
+    -- Database Types, Procedures and Functions for Application
+--===================================================================================
 
 CREATE PROCEDURE usp_getProducts
 AS
