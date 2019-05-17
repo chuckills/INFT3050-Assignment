@@ -27,7 +27,7 @@
                     </asp:TableRow>
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">Email address</asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox></asp:TableCell>
                         <%--Validation--%>
                         <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
                     </asp:TableRow>
@@ -99,7 +99,7 @@
                 </asp:Table> 
 
             <%--Table for postal address--%>
-                <asp:Table ID="tblPost" runat="server" Visible="False">
+                <asp:Table ID="tblPost" runat="server">
                     <asp:TableHeaderRow runat="server">
                         <asp:TableHeaderCell runat="server">Postage address</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
@@ -152,13 +152,12 @@
                         <asp:TableHeaderCell runat="server">Login details</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow runat="server">
-                        <asp:TableCell runat="server">Admin&nbsp;<asp:CheckBox ID="cbxAdmin" runat="server" /></asp:TableCell>
                         <asp:TableCell runat="server">Active&nbsp;<asp:CheckBox ID="cbxActive" runat="server" /></asp:TableCell>
                         <asp:TableCell runat="server"></asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server"><asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-danger" OnClick="btnUpdate_Click" /></asp:TableCell>
-                        <asp:TableCell runat="server"></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-danger" OnClick="btnCancel_Click" /></asp:TableCell>
                     </asp:TableRow>
                 </asp:Table> 
 

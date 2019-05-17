@@ -19,11 +19,25 @@ namespace Assignment_2.UL
 			tbxEmail2.Text = user.userEmail;
 			tbxPhone.Text = user.userPhone;
 			cbxActive.Checked = user.userActive;
-			cbxAdmin.Checked = user.userAdmin;
-			tbxBillAddress.Text = user.billAddress.addStreet;
-			tbxBillSuburb.Text = user.billAddress.addSuburb;
-			ddlBillState.SelectedValue = user.billAddress.addState;
-			tbxBillPostCode.Text = user.billAddress.addZip.ToString();
+			if (!user.userAdmin)
+			{
+				tbxBillAddress.Text = user.billAddress.addStreet;
+				tbxBillSuburb.Text = user.billAddress.addSuburb;
+				ddlBillState.SelectedValue = user.billAddress.addState;
+				tbxBillPostCode.Text = user.billAddress.addZip.ToString();
+			}
+			else
+			{
+				tbxBillAddress.Enabled = false;
+				tbxBillSuburb.Enabled = false;
+				ddlBillState.Enabled = false;
+				tbxBillPostCode.Enabled = false;
+				rfvBillAddress.Enabled = false;
+				rfvBillSuburb.Enabled = false;
+				rfvBillState.Enabled = false;
+				rfvBillPostCode.Enabled = false;
+				rxvBillPostcode.Enabled = false;
+			}
 			tbxPostAddress.Text = user.postAddress.addStreet;
 			tbxPostSuburb.Text = user.postAddress.addSuburb;
 			ddlPostState.SelectedValue = user.postAddress.addState;
@@ -35,5 +49,11 @@ namespace Assignment_2.UL
         {
 
         }
-    }
+
+        // Handles update of the selected product
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+			Response.Redirect("~/UL/AdminManageUserAccounts.aspx");
+        }
+	}
 }

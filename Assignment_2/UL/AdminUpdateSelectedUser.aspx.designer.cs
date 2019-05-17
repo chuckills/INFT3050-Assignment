@@ -310,15 +310,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.Table tblLogin;
         
         /// <summary>
-        /// cbxAdmin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbxAdmin;
-        
-        /// <summary>
         /// cbxActive control.
         /// </summary>
         /// <remarks>
@@ -335,5 +326,14 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpdate;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }

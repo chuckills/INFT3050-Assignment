@@ -12,7 +12,6 @@
                 <asp:BoundField DataField="userLastName" HeaderText="LastName" ReadOnly="True" />  
                 <asp:BoundField DataField="userEmail" HeaderText="Email" ReadOnly="True" /> 
                 <asp:BoundField DataField="userPhone" HeaderText="Phone" ReadOnly="True" />  
-                <asp:BoundField DataField="userUserName" HeaderText="UserName" ReadOnly="True" />   
                 <asp:BoundField DataField="userAdmin" HeaderText="Admin" ReadOnly="True" /> 
                 <asp:BoundField DataField="userActive" HeaderText="Active" ReadOnly="True" /> 
                 <asp:CommandField ShowSelectButton="True" />
