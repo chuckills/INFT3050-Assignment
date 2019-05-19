@@ -28,6 +28,11 @@ namespace Assignment_2.UL
             }
         }
 
+        protected void checkExists(object sender, ServerValidateEventArgs args)
+        {
+	        args.IsValid = !BLUser.checkUser(args.Value);
+        }
+
         // Submission of registration form
         protected void btnSubmit_Click(object sender, EventArgs e)
         {

@@ -112,6 +112,17 @@ namespace Assignment_2.BL
 			return this;
 		}
 
+		public static bool checkUser(string user)
+		{
+			DALSelect check = new DALSelect();
+
+			bool found;
+
+			check.getUserData(user, out found);
+
+			return found;
+		}
+
 		public static int addUser(BLUser newUser)
 		{
 			DALInsert user = new DALInsert();
