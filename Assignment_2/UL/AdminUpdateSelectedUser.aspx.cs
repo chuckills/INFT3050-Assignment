@@ -79,5 +79,17 @@ namespace Assignment_2.UL
         {
 			Response.Redirect("~/UL/AdminManageUserAccounts.aspx");
         }
+
+        protected void checkExists(object sender, ServerValidateEventArgs args)
+        {
+	        if (BLUser.checkUser(args.Value) == Convert.ToInt32(lblUserID.Text))
+	        {
+		        args.IsValid = true;
+	        }
+	        else
+	        {
+		        args.IsValid = BLUser.checkUser(args.Value) == 0;
+	        }
+        }
 	}
 }

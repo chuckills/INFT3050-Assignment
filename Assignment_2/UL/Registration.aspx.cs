@@ -23,7 +23,7 @@ namespace Assignment_2.UL
 
         protected void checkExists(object sender, ServerValidateEventArgs args)
         {
-	        args.IsValid = !BLUser.checkUser(args.Value);
+	        args.IsValid = BLUser.checkUser(args.Value) == 0;
         }
 
         // Submission of registration form

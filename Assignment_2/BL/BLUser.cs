@@ -112,15 +112,19 @@ namespace Assignment_2.BL
 			return this;
 		}
 
-		public static bool checkUser(string user)
+		public static int checkUser(string userName)
 		{
 			DALSelect check = new DALSelect();
 
 			bool found;
 
-			check.getUserData(user, out found);
+			DataRow userData =  check.getUserData(userName, out found);
 
-			return found;
+			if(found)
+				return Convert.ToInt32(userData["userID"]);
+			
+			return 0;
+			
 		}
 
 		public static int addUser(BLUser newUser)

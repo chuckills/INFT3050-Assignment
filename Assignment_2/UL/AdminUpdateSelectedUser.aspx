@@ -33,8 +33,10 @@
                         <asp:TableCell runat="server">Email address</asp:TableCell>
                         <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox></asp:TableCell>
                         <%--Validation--%>
-                        <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
-                    </asp:TableRow>
+                        <asp:TableCell runat="server">
+                            <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="csvEmail" runat="server" ErrorMessage="Email already registered" CssClass="text-danger" OnServerValidate="checkExists" ControlToValidate="tbxEmail" Display="Dynamic" SetFocusOnError="True"></asp:CustomValidator>
+                        </asp:TableCell></asp:TableRow>
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">Confirm email address</asp:TableCell>
                         <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail2" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox></asp:TableCell>
