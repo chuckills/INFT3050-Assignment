@@ -591,18 +591,72 @@ BEGIN TRANSACTION
             INSERT INTO AddressTypes
                 VALUES ('B', @userID, @addID)
         END
-        IF NOT EXISTS(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
-            BEGIN
-                INSERT INTO Address(addStreet, addSuburb, addState, addZip)
-                    VALUES(@postStreet, @postSuburb, @postState, @postZip)
-                SET @addID = SCOPE_IDENTITY()
-            END
-        ELSE
-            BEGIN
-                SELECT @addID = addID FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState
-            END
-        INSERT INTO AddressTypes
-            VALUES ('P', @userID, @addID)
+    IF NOT EXISTS(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
+        BEGIN
+            INSERT INTO Address(addStreet, addSuburb, addState, addZip)
+                VALUES(@postStreet, @postSuburb, @postState, @postZip)
+            SET @addID = SCOPE_IDENTITY()
+        END
+    ELSE
+        BEGIN
+            SELECT @addID = addID FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState
+        END
+    INSERT INTO AddressTypes
+        VALUES ('P', @userID, @addID)
+COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_updateUser
+    @userID INT,
+    @userFirst VARCHAR(30),
+    @userLast VARCHAR(30),
+    @userEmail VARCHAR(255),
+    @userPhone CHAR(10),
+    @userAdmin BIT,
+    @userActive BIT,
+    @billStreet VARCHAR(255),
+    @billSuburb VARCHAR(30),
+    @billState VARCHAR(3),
+    @billZip INT,
+    @postStreet VARCHAR(255),
+    @postSuburb VARCHAR(30),
+    @postState VARCHAR(3),
+    @postZip INT
+AS
+BEGIN TRANSACTION
+    UPDATE Users
+    SET userFirstName = @userFirst, userLastName = @userLast, userEmail = @userEmail, userPhone = @userPhone, userActive = @userActive
+    WHERE userID = @userID
+    DECLARE @addID INT
+    IF @userAdmin != 1
+        BEGIN
+            IF NOT EXISTS(SELECT * FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState)
+                BEGIN
+                    INSERT INTO Address(addStreet, addSuburb, addState, addZip)
+                        VALUES(@billStreet, @billSuburb, @billState, @billZip)
+                    SET @addID = SCOPE_IDENTITY()
+                END
+            ELSE
+                BEGIN
+                    SELECT @addID = addID FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState
+                END
+            UPDATE AddressTypes
+            SET addID = @addID
+            WHERE atType = 'B' AND userID = @userID
+        END
+    IF NOT EXISTS(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
+        BEGIN
+            INSERT INTO Address(addStreet, addSuburb, addState, addZip)
+                VALUES(@postStreet, @postSuburb, @postState, @postZip)
+            SET @addID = SCOPE_IDENTITY()
+        END
+    ELSE
+        BEGIN
+            SELECT @addID = addID FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState
+        END
+    UPDATE AddressTypes
+    SET addID = @addID
+    WHERE atType = 'P' AND userID = @userID
 COMMIT TRANSACTION
 GO
 

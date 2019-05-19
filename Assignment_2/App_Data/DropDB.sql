@@ -44,6 +44,8 @@ DROP PROCEDURE usp_getUsers
 GO
 DROP PROCEDURE usp_addUser
 GO
+DROP PROCEDURE usp_updateUser
+GO
 DROP PROCEDURE usp_getTeams
 GO
 DROP PROCEDURE usp_getAddress
