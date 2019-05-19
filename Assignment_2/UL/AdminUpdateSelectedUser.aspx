@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Update Item" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminUpdateSelectedUser.aspx.cs" Inherits="Assignment_2.UL.AdminUpdateSelectedUser" %>
+﻿<%@ Page Title="Update User" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="AdminUpdateSelectedUser.aspx.cs" Inherits="Assignment_2.UL.AdminUpdateSelectedUser" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
     <%-- Page to update a User details --%>
@@ -13,6 +13,10 @@
                     <asp:TableHeaderRow runat="server">
                         <asp:TableHeaderCell runat="server">Your Details</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
+                    <asp:TableRow runat="server">
+                        <asp:TableCell runat="server">User ID</asp:TableCell>
+                        <asp:TableCell runat="server"><asp:Label ID="lblUserID" runat="server" Text="Label"></asp:Label></asp:TableCell>
+                    </asp:TableRow>
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">First name</asp:TableCell>
                         <asp:TableCell runat="server"><asp:TextBox ID="tbxFirstName" runat="server" CssClass="form-control"></asp:TextBox></asp:TableCell>

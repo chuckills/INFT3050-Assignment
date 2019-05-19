@@ -18,14 +18,7 @@ namespace Assignment_2.UL
         // Makes Postal Address fields visible when unchecked
         protected void cbxPostageSame_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbxPostageSame.Checked)
-            {
-                tblPost.Visible = false;
-            }
-            else
-            {
-                tblPost.Visible = true;
-            }
+	        tblPost.Visible = !cbxPostageSame.Checked;
         }
 
         protected void checkExists(object sender, ServerValidateEventArgs args)
@@ -60,8 +53,14 @@ namespace Assignment_2.UL
 	            };
 
 				BLUser.addUser(newUser);
+
+				newUser.login(newUser.userEmail, newUser.userPassword);
 				
-                Response.Redirect("~/UL/Login.aspx");
+				Session["CurrentUser"] = newUser;
+				Session["UserName"] = newUser.userEmail;
+				Session["LoginStatus"] = "User";
+
+				Response.Redirect("~/UL/Default");
             }
         }
     }

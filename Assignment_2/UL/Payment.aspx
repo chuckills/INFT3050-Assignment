@@ -32,7 +32,7 @@
             <%-- Validation for expiration date --%>
             <asp:TableCell runat="server">
                 <asp:RequiredFieldValidator ID="rfvExpiration" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxExpiration" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="rxvExpiration" runat="server" ErrorMessage="Invalid Expiry" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxExpiration" ValidationExpression="\([0][1-9]|[1][0-2])-[2-9][0-9]{3}$"></asp:RegularExpressionValidator>
+                <asp:RegularExpressionValidator ID="rxvExpiration" runat="server" ErrorMessage="Invalid Expiry" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxExpiration" ValidationExpression="0?[1-9]-[2-9][0-9]{3}|1[0-2]-[2-9][0-9]{3}"></asp:RegularExpressionValidator>
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">

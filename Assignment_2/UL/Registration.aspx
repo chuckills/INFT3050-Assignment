@@ -1,9 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="Assignment_2.UL.Registration" %>
+﻿<%@ Page Title="User Registration" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="Assignment_2.UL.Registration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
-<br />
-<h1>New User Registration</h1>
-    
+    <br />
+    <h1>New User Registration</h1>
+    <hr/>
+
 <%--Table for User Details--%>
     <asp:Table ID="tblDetails" runat="server">
         <asp:TableHeaderRow runat="server">

@@ -134,5 +134,10 @@ namespace Assignment_2.BL
 			return rows;
 		}
 
+		public static bool updateUser(BLUser user)
+		{
+			return DALUpdate.updateUser(user);
+		}
+
     }
 }
