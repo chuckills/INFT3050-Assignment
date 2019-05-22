@@ -2,11 +2,6 @@
 -- INFT3050 Assignment 1
 -- Database creation script
 
-
---==================================================================================
--- This section was used to create the database on SQL Server Developer Edition
--- Uncomment if you need to run. I don't think this is needed though.
---==================================================================================
 use master
 go
 
@@ -14,16 +9,7 @@ CREATE DATABASE JerseySure
 GO
 
 --==================================================================================
---==================================================================================
---**********************************************************************************
---**********************************************************************************
--- Ben said it was OK to leave the login part commented for now
---**********************************************************************************
---**********************************************************************************
-
---==================================================================================
--- This section was used to create the database user login
--- Uncomment if you need to run it
+-- Creates the required user login for SQL Authentication
 --==================================================================================
 
 CREATE LOGIN jerseysure WITH PASSWORD = N'password'
