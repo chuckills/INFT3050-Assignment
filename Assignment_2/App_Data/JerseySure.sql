@@ -25,17 +25,6 @@ GO
 -- This section was used to create the database user login
 -- Uncomment if you need to run it
 --==================================================================================
-USE JerseySure
-GO
-
-DROP USER jerseysure
-GO
-
-USE master
-GO
-
-DROP LOGIN jerseysure
-GO
 
 CREATE LOGIN jerseysure WITH PASSWORD = N'password'
 GO
@@ -676,4 +665,7 @@ AS
 BEGIN
     SELECT teamID, concat(teamLocale, ' ' + teamName) AS teamFull FROM Team
 END
+GO
+
+USE master
 GO

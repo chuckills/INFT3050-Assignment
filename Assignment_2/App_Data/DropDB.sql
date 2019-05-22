@@ -1,3 +1,5 @@
+USE JerseySure
+GO
 DROP TABLE PayPalPM
 GO
 DROP TABLE CreditCardPM
@@ -51,4 +53,20 @@ GO
 DROP PROCEDURE usp_getAddress
 GO
 DROP TYPE PLAYERTYPE
+GO
+DROP USER jerseysure
+GO
+USE master
+GO
+DROP LOGIN jerseysure
+GO
+
+DECLARE @command VARCHAR(MAX)
+SELECT @command = 'KILL ' + CAST(session_id AS VARCHAR)
+FROM sys.dm_exec_sessions
+WHERE DB_NAME(database_id) = 'JerseySure'
+EXECUTE (@command)
+GO
+
+DROP DATABASE JerseySure
 GO
