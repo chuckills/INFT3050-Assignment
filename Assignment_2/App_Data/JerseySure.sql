@@ -8,6 +8,8 @@ go
 CREATE DATABASE JerseySure
 GO
 
+SET DATEFORMAT dmy
+GO
 --==================================================================================
 -- Creates the required user login for SQL Authentication
 --==================================================================================
@@ -67,8 +69,8 @@ CREATE TABLE JerseyNumber
 CREATE TABLE Image
 (
     imgID INT IDENTITY PRIMARY KEY,
-    imgFront VARCHAR(40) NOT NULL, -- Front view file
-    imgBack VARCHAR(40) NOT NULL, -- Back view file
+    imgFront VARCHAR(255) NOT NULL, -- Front view file
+    imgBack VARCHAR(255) NOT NULL, -- Back view file
 )
 
 -- Details to identify the products carried
@@ -89,21 +91,15 @@ CREATE TABLE Product
     CHECK (prodPrice >= 0),
 )
 
-CREATE TABLE Size
-(
-    sizeID VARCHAR(3) PRIMARY KEY,
-    CHECK (sizeID IN ('S', 'M', 'L', 'XL', 'XXL'))
-)
-
 CREATE TABLE Stock
 (
     sizeID VARCHAR(3) NOT NULL,
     prodNumber VARCHAR(8) NOT NULL,
     stkLevel INT NOT NULL DEFAULT 0,
     PRIMARY KEY (sizeID, prodNumber),
-    FOREIGN KEY (sizeID) REFERENCES Size(sizeID),
     FOREIGN KEY (prodNumber) REFERENCES Product(prodNumber),
-    CHECK (stkLevel >= 0)
+    CHECK (stkLevel >= 0),
+    CHECK (sizeID IN ('S', 'M', 'L', 'XL', 'XXL'))
 )
 
 -- Table of users, both admin and customer
@@ -184,8 +180,8 @@ CREATE TABLE CartItem
     FOREIGN KEY (userID) REFERENCES Users(userID),
     FOREIGN KEY (ordID) REFERENCES Orders(ordID),
     FOREIGN KEY (prodNumber) REFERENCES Product(prodNumber),
-    FOREIGN KEY (sizeID) REFERENCES Size(sizeID),
-    CHECK (cartQuantity >= 0)
+    CHECK (cartQuantity >= 0),
+    CHECK (sizeID IN ('S', 'M', 'L', 'XL', 'XXL'))
 )
 
 -- Table of credit card information for order payment
@@ -194,21 +190,14 @@ CREATE TABLE CreditCardPM
     ccNumber CHAR(16) PRIMARY KEY,
     ccType VARCHAR(5) NOT NULL,
     ccHolderName VARCHAR(60) NOT NULL,
-    ccExpiryMM INT NOT NULL,
-    ccExpiryYYYY INT NOT NULL,
+    ccExpiry DATE,
+    --ccExpiryMM INT NOT NULL,
+    --ccExpiryYYYY INT NOT NULL,
     ordID INT UNIQUE NOT NULL,
     FOREIGN KEY (ordID) REFERENCES Orders(ordID),
     CHECK (ccType IN ('MCARD', 'VISA', 'AMEX')),
-    CHECK (ccExpiryYYYY >= year(getdate()) AND ccExpiryMM >= 1 AND ccExpiryMM <= 12),
+    CHECK (year(ccExpiry) >= year(getdate()) AND month(ccExpiry) >= 1 AND month(ccExpiry) <= 12),
     CHECK (isnumeric(ccNumber) = 1)
-)
-
--- Table of PayPal information for order payment
-CREATE TABLE PayPalPM
-(
-    ppUsername VARCHAR(255) PRIMARY KEY,
-    ordID INT UNIQUE NOT NULL,
-    FOREIGN KEY (ordID) REFERENCES Orders(ordID),
 )
 
 --===================================================================================
@@ -336,16 +325,6 @@ GO
 SET IDENTITY_INSERT Player OFF
 GO
 
--- Size
---===================================================================================
-INSERT INTO Size
-    VALUES ('S'),
-           ('M'),
-           ('L'),
-           ('XL'),
-           ('XXL')
-GO
-
 -- Product
 --===================================================================================
 
@@ -368,13 +347,41 @@ INSERT INTO Stock (prodNumber, sizeID, stkLevel)
            ('BOS00001', 'L', 2),
            ('BOS00001', 'XL', 3),
            ('BOS00001', 'XXL', 4),
-           ('GSW00002', 'S', 5),
-           ('LAL00003', 'L', 6),
-           ('HOU00004', 'M', 7),
-           ('PHX00005', 'S', 8),
+           ('GSW00002', 'S', 4),
+           ('GSW00002', 'M', 3),
+           ('GSW00002', 'L', 2),
+           ('GSW00002', 'XL', 1),
+           ('GSW00002', 'XXL', 0),
+           ('LAL00003', 'S', 0),
+           ('LAL00003', 'M', 0),
+           ('LAL00003', 'L', 0),
+           ('LAL00003', 'XL', 0),
+           ('LAL00003', 'XXL', 0),
+           ('HOU00004', 'S', 1),
+           ('HOU00004', 'M', 0),
+           ('HOU00004', 'L', 0),
+           ('HOU00004', 'XL', 4),
+           ('HOU00004', 'XXL', 0),
+           ('PHX00005', 'S', 5),
+           ('PHX00005', 'M', 6),
+           ('PHX00005', 'L', 8),
+           ('PHX00005', 'XL', 10),
+           ('PHX00005', 'XXL', 3),
            ('OKC00006', 'S', 9),
+           ('OKC00006', 'M', 0),
+           ('OKC00006', 'L', 0),
+           ('OKC00006', 'XL', 2),
+           ('OKC00006', 'XXL', 1),
+           ('CHA00007', 'S', 10),
            ('CHA00007', 'M', 10),
-           ('IND00008', 'M', 11)
+           ('CHA00007', 'L', 0),
+           ('CHA00007', 'XL', 6),
+           ('CHA00007', 'XXL', 1),
+           ('IND00008', 'S', 11),
+           ('IND00008', 'M', 3),
+           ('IND00008', 'L', 5),
+           ('IND00008', 'XL', 0),
+           ('IND00008', 'XXL', 2)
 
 -- Shipping
 --===================================================================================
@@ -460,14 +467,8 @@ GO
 --===================================================================================
 
 INSERT INTO CreditCardPM
-    VALUES ('9876543210123456', 'MCARD', 'Tyrrion B Lannister', 8, 2020, 1)
-GO
-
--- PayPalPM
---===================================================================================
-
-INSERT INTO PayPalPM
-    VALUES ('johnsmith@jerseyshure.com.au', 2)
+    VALUES ('9876543210123456', 'MCARD', 'Tyrrion B Lannister', '01-08-2020', 1),
+           ('8888543210123456', 'VISA', 'John Smith', '01-12-2021', 2)
 GO
 
 --===================================================================================
@@ -564,7 +565,7 @@ BEGIN TRANSACTION
     SET @userID = SCOPE_IDENTITY()
     IF @userAdmin != 1
         BEGIN
-            IF NOT EXISTS(SELECT * FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState)
+            IF NOT exists(SELECT * FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState)
                 BEGIN
                     INSERT INTO Address(addStreet, addSuburb, addState, addZip)
                         VALUES(@billStreet, @billSuburb, @billState, @billZip)
@@ -577,7 +578,7 @@ BEGIN TRANSACTION
             INSERT INTO AddressTypes
                 VALUES ('B', @userID, @addID)
         END
-    IF NOT EXISTS(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
+    IF NOT exists(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
         BEGIN
             INSERT INTO Address(addStreet, addSuburb, addState, addZip)
                 VALUES(@postStreet, @postSuburb, @postState, @postZip)
@@ -616,7 +617,7 @@ BEGIN TRANSACTION
     DECLARE @addID INT
     IF @userAdmin != 1
         BEGIN
-            IF NOT EXISTS(SELECT * FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState)
+            IF NOT exists(SELECT * FROM Address WHERE @billStreet = addStreet AND @billSuburb = addSuburb AND @billState = addState)
                 BEGIN
                     INSERT INTO Address(addStreet, addSuburb, addState, addZip)
                         VALUES(@billStreet, @billSuburb, @billState, @billZip)
@@ -630,7 +631,7 @@ BEGIN TRANSACTION
             SET addID = @addID
             WHERE atType = 'B' AND userID = @userID
         END
-    IF NOT EXISTS(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
+    IF NOT exists(SELECT * FROM Address WHERE @postStreet = addStreet AND @postSuburb = addSuburb AND @postState = addState)
         BEGIN
             INSERT INTO Address(addStreet, addSuburb, addState, addZip)
                 VALUES(@postStreet, @postSuburb, @postState, @postZip)
@@ -651,6 +652,84 @@ AS
 BEGIN
     SELECT teamID, concat(teamLocale, ' ' + teamName) AS teamFull FROM Team
 END
+GO
+
+CREATE PROCEDURE usp_getProductStock
+    @prodNumber VARCHAR(8)
+AS
+BEGIN
+    SELECT stkLevel
+    FROM Stock
+    WHERE prodNumber = @prodNumber
+    ORDER BY CASE
+        WHEN sizeID = 'S' THEN '1'
+        WHEN sizeID = 'M' THEN '2'
+        WHEN sizeID = 'L' THEN '3'
+        WHEN sizeID = 'XL' THEN '4'
+        WHEN sizeID = 'XXL' THEN '5'
+        ELSE sizeID END
+END
+GO
+
+CREATE PROCEDURE usp_addProduct
+    @playFirst VARCHAR(30),
+	@playLast VARCHAR(30),
+	@jerNumber INT,
+	@teamID CHAR(3),
+	@prodDescription TEXT,
+	@prodPrice MONEY,
+	@imgFront VARCHAR(255),
+	@imgBack VARCHAR(255),
+	@stkSmall INT,
+	@stkMedium INT,
+	@stkLarge INT,
+	@stkXLge INT,
+	@stkXXL INT
+AS
+BEGIN TRANSACTION
+    DECLARE @playerID INT
+    IF NOT exists(SELECT playID FROM Player WHERE playFirstName = @playFirst AND playLastName = @playLast)
+        BEGIN
+            INSERT INTO Player(playFirstName, playLastName)
+                VALUES (@playFirst, @playLast)
+            SET @playerID = SCOPE_IDENTITY()
+        END
+    ELSE
+        BEGIN
+            SELECT @playerID = playID FROM Player WHERE playFirstName = @playFirst AND playLastName = @playLast
+        END
+    IF NOT exists(SELECT * FROM JerseyNumber WHERE @playerID = playID AND @teamID = teamID AND @jerNumber = jerNumber)
+        BEGIN
+            INSERT INTO JerseyNumber(jerNumber, teamID, playID)
+                VALUES (@jerNumber, @teamID, @playerID)
+        END
+    DECLARE @imgID INT
+    IF NOT exists(SELECT imgID FROM Image WHERE imgFront = @imgFront AND imgBack = @imgBack)
+        BEGIN
+            INSERT INTO Image(imgFront, imgBack)
+                VALUES (@imgFront, @imgBack)
+            SET @imgID = SCOPE_IDENTITY()
+        END
+    ELSE
+        BEGIN
+            SELECT @imgID = imgID FROM Image WHERE imgFront = @imgFront AND imgBack = @imgBack
+        END
+    DECLARE @prodNum VARCHAR(8)
+    IF NOT exists(SELECT * FROM Product p, JerseyNumber j WHERE p.imgID = @imgID AND p.teamID = @teamID AND p.playID = @playerID AND j.jerNumber = @jerNumber)
+        BEGIN
+            INSERT INTO Product(prodDescription, prodPrice, teamID, playID, imgID)
+                VALUES (@prodDescription, @prodPrice, @teamID, @playerID, @imgID);
+            SELECT @prodNum = prodNumber
+            FROM Product
+            WHERE prodID = SCOPE_IDENTITY()
+        END
+    INSERT INTO Stock(sizeID, prodNumber, stkLevel)
+        VALUES ('S', @prodNum, @stkSmall),
+               ('M', @prodNum, @stkMedium),
+               ('L', @prodNum, @stkLarge),
+               ('XL', @prodNum, @stkXLge),
+               ('XXL', @prodNum, @stkXXL)
+COMMIT TRANSACTION
 GO
 
 USE master

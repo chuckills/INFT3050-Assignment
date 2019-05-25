@@ -51,6 +51,37 @@ namespace Assignment_2.DAL
 			return productDataSet.Tables["Product"].Rows[0];
 		}
 
+		public int[] getStock(string productNumber)
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+			DataSet stockDataSet = new DataSet();
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+				SqlDataAdapter adapter = new SqlDataAdapter();
+				SqlCommand command = new SqlCommand("usp_getProductStock", connection);
+
+				command.CommandType = CommandType.StoredProcedure;
+				command.Parameters.AddWithValue("@prodNumber", productNumber);
+				adapter.SelectCommand = command;
+
+				adapter.Fill(stockDataSet, "Stock");
+			}
+
+			DataTable stockTable = stockDataSet.Tables["Stock"];
+
+			int[] stock = new int[5];
+
+			for (int i = 0; i < stockTable.Rows.Count; i++) //DataRow row in stockTable.Rows)
+			{
+				stock[i] = Convert.ToInt32(stockTable.Rows[i]["stkLevel"]);
+			}
+
+			return stock;
+
+		}
+
 		public DataRow getUserData(string user, out bool result)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;

@@ -19,6 +19,7 @@ namespace Assignment_2.BL
 		public string playLastName { get; set; }
 		public int jerNumber { get; set; }
 		public string[] image { get; set; }
+		public int[] stock { get; set; }
 
 		public static DataSet getProducts()
 		{
@@ -50,8 +51,18 @@ namespace Assignment_2.BL
 			image = new string[2];
 			image[0] = productData["imgFront"].ToString();
 			image[1] = productData["imgBack"].ToString();
+			stock = product.getStock(productNumber);
 
 			return this;
+		}
+
+		public static bool addProduct(BLProduct newProduct)
+		{
+			DALInsert product = new DALInsert();
+
+			int rows = product.addNewProduct(newProduct);
+
+			return rows > 0;
 		}
 	}
 }

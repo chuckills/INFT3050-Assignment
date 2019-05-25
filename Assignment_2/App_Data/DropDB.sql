@@ -1,7 +1,5 @@
 USE JerseySure
 GO
-DROP TABLE PayPalPM
-GO
 DROP TABLE CreditCardPM
 GO
 DROP TABLE CartItem
@@ -13,8 +11,6 @@ GO
 DROP TABLE Stock
 GO
 DROP TABLE Product
-GO
-DROP TABLE Size
 GO
 DROP TABLE Image
 GO
@@ -38,6 +34,8 @@ DROP PROCEDURE usp_getProducts
 GO
 DROP PROCEDURE usp_selectProduct
 GO
+DROP PROCEDURE usp_addProduct
+GO
 DROP PROCEDURE usp_getUser
 GO
 DROP PROCEDURE usp_getSingleUser
@@ -51,6 +49,8 @@ GO
 DROP PROCEDURE usp_getTeams
 GO
 DROP PROCEDURE usp_getAddress
+GO
+DROP PROCEDURE usp_getProductStock
 GO
 DROP TYPE PLAYERTYPE
 GO
