@@ -37,10 +37,6 @@ namespace Assignment_2.UL
 
 	            newUser.login(newUser.userEmail, newUser.userPassword);
 
-	            Session["CurrentUser"] = newUser;
-	            Session["UserName"] = newUser.userEmail;
-	            Session["LoginStatus"] = "Admin";
-
 				Response.Redirect("~/UL/Default");
             }
         }
