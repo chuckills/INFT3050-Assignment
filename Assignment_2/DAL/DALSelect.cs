@@ -29,6 +29,28 @@ namespace Assignment_2.DAL
 
 		}
 
+        public DataSet getProductsSearch(string search)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+            DataSet productDataSet = new DataSet();
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand command = new SqlCommand("usp_getProductsSearch", connection);
+
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@search", search);
+
+                adapter.SelectCommand = command;
+
+                adapter.Fill(productDataSet, "Products");
+            }
+
+            return productDataSet;
+        }
+
 		public DataRow selectProduct(string productNumber)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;

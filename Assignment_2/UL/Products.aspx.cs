@@ -12,8 +12,26 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        rptProducts.DataSource = BLProduct.getProducts();
-	        rptProducts.DataBind();
+            string searchParameter;
+            // If page is reached via search input field: display corresponding products
+            if (HttpContext.Current.Session["SearchString"] != null)
+            {
+                // Get search input
+                searchParameter = HttpContext.Current.Session["SearchString"].ToString();
+                // Get products from query
+                rptProducts.DataSource = BLProduct.getProductsSearch(searchParameter);
+                rptProducts.DataBind();
+                // Display search input for results
+                searchLabel.Text = "Search results for \"" + searchParameter + "\"...";
+                // Remove from session
+                HttpContext.Current.Session.Remove("SearchString");
+            }
+            // Otherwise, show all products
+            else
+            {
+                rptProducts.DataSource = BLProduct.getProducts();
+                rptProducts.DataBind();
+            }
         }
 
 		protected void btnBuy_Click(object sender, EventArgs e)

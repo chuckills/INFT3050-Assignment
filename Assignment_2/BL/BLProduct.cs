@@ -27,6 +27,12 @@ namespace Assignment_2.BL
 			return products.getProducts();
 		}
 
+        public static DataSet getProductsSearch(string search)
+        {
+            DALSelect products = new DALSelect();
+            return products.getProductsSearch(search);
+        }
+
 		public static DataSet getTeams()
 		{
 			DALSelect teams = new DALSelect();

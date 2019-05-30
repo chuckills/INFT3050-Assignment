@@ -2,6 +2,9 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
+        <div class="margin-space-top-20">
+            <asp:Label runat="server" ID="searchLabel" CssClass="search-heading"></asp:Label>
+        </div>
         <div class="row margin-space-top-20">
             <asp:Repeater ID="rptProducts" runat="server">
                 <ItemTemplate>

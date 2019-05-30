@@ -23,6 +23,7 @@ namespace Assignment_2.UL
 
         protected void SubmitSearch_Click(object sender, EventArgs e)
         {
+            HttpContext.Current.Session["SearchString"] = SearchTextBox.Text;
             Response.Redirect("~/UL/Products.aspx");
         }
     }
