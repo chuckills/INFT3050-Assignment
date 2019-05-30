@@ -117,13 +117,14 @@ namespace Assignment_2.DAL
 				
 				command.CommandType = CommandType.StoredProcedure;
 
-				SqlParameter found = new SqlParameter();
-				found.ParameterName = "@result";
-				found.SqlDbType = SqlDbType.Int;
-				found.Direction = ParameterDirection.Output;
+				SqlParameter found = new SqlParameter
+				{
+					ParameterName = "@result",
+					SqlDbType = SqlDbType.Int,
+					Direction = ParameterDirection.Output
+				};
 
 				command.Parameters.Add(found);
-
 				command.Parameters.AddWithValue("@user", user);
 
 				adapter.SelectCommand = command;

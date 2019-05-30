@@ -84,14 +84,8 @@ namespace Assignment_2.BL
 			userAdmin = Convert.ToBoolean(userData["userAdmin"]);
 			userActive = Convert.ToBoolean(userData["userActive"]);
 
-			if (!userAdmin)
-			{
-				billAddress = new BLAddress().getAddress(userID, 'B');
-			}
-			else
-			{
-				billAddress = null;
-			}
+			billAddress = !userAdmin ? new BLAddress().getAddress(userID, 'B') : billAddress = null;
+			
 			postAddress = new BLAddress().getAddress(userID, 'P');
 		}
 

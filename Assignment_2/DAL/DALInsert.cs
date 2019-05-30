@@ -29,10 +29,22 @@ namespace Assignment_2.DAL
 				command.Parameters.AddWithValue("@userPassword", user.userPassword);
 				command.Parameters.AddWithValue("@userAdmin", user.userAdmin);
 				command.Parameters.AddWithValue("@userActive", user.userActive);
-				command.Parameters.AddWithValue("@billStreet", user.billAddress.addStreet);
-				command.Parameters.AddWithValue("@billSuburb", user.billAddress.addSuburb);
-				command.Parameters.AddWithValue("@billState", user.billAddress.addState);
-				command.Parameters.AddWithValue("@billZip", user.billAddress.addZip);
+
+				SqlParameter billStreet = new SqlParameter("@billStreet", SqlDbType.VarChar);
+				SqlParameter billSuburb = new SqlParameter("@billSuburb", SqlDbType.VarChar);
+				SqlParameter billState = new SqlParameter("@billState", SqlDbType.Char);
+				SqlParameter billZip = new SqlParameter("@billZip", SqlDbType.Int);
+				
+				billStreet.Value = user.userAdmin ? "" : user.billAddress.addStreet;
+				billSuburb.Value = user.userAdmin ? "" : user.billAddress.addSuburb;
+				billState.Value = user.userAdmin ? "" : user.billAddress.addState;
+				billZip.Value = user.userAdmin ? 0 : user.billAddress.addZip;
+
+				command.Parameters.Add(billStreet);
+				command.Parameters.Add(billSuburb);
+				command.Parameters.Add(billState);
+				command.Parameters.Add(billZip);
+
 				command.Parameters.AddWithValue("@postStreet", user.postAddress.addStreet);
 				command.Parameters.AddWithValue("@postSuburb", user.postAddress.addSuburb);
 				command.Parameters.AddWithValue("@postState", user.postAddress.addState);
