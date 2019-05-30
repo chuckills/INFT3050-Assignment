@@ -42,5 +42,34 @@ namespace Assignment_2.UL
                 Response.Redirect("~/UL/Cart.aspx");
             }
         }
-    }
+
+		protected void checkStock(object sender, ServerValidateEventArgs args)
+		{
+			BLProduct productData = Session["Product"] as BLProduct;
+			
+			switch (rblSizeOption.SelectedValue)
+			{
+				case "S":
+					args.IsValid = productData.stock[0] >= Convert.ToInt32(tbxQuantity.Text) && productData.stock[0] > 0;
+					csvQuantity.ErrorMessage = productData.stock[0] > 0 ? "Select " + productData.stock[0] + " or less." : "Out of stock";
+					break;
+				case "M":
+					args.IsValid = productData.stock[1] >= Convert.ToInt32(tbxQuantity.Text) && productData.stock[1] > 0;
+					csvQuantity.ErrorMessage = productData.stock[1] > 0 ? "Select " + productData.stock[1] + " or less." : "Out of stock";
+					break;
+				case "L":
+					args.IsValid = productData.stock[2] >= Convert.ToInt32(tbxQuantity.Text) && productData.stock[2] > 0;
+					csvQuantity.ErrorMessage = productData.stock[2] > 0 ? "Select " + productData.stock[2] + " or less." : "Out of stock";
+					break;
+				case "XL":
+					args.IsValid = productData.stock[3] >= Convert.ToInt32(tbxQuantity.Text) && productData.stock[3] > 0;
+					csvQuantity.ErrorMessage = productData.stock[3] > 0 ? "Select " + productData.stock[3] + " or less." : "Out of stock";
+					break;
+				case "XXL":
+					args.IsValid = productData.stock[4] >= Convert.ToInt32(tbxQuantity.Text) && productData.stock[4] > 0;
+					csvQuantity.ErrorMessage = productData.stock[4] > 0 ? "Select " + productData.stock[4] + " or less." : "Out of stock";
+					break;
+			}
+		}
+	}
 }

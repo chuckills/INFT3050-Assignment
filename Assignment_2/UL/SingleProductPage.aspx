@@ -29,8 +29,8 @@
                 <div class="center-text">
                     <asp:RequiredFieldValidator ID="rfvQuantity" runat="server" ErrorMessage="Please select a quantity" ControlToValidate="tbxQuantity" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" />
                     <asp:RegularExpressionValidator ID="rxvQuantity" runat="server" ErrorMessage="Select a whole number" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxQuantity" ValidationExpression="\d+" />
-                    
-                    </div>
+                    <asp:CustomValidator ID="csvQuantity" runat="server" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxQuantity" OnServerValidate="checkStock"></asp:CustomValidator>
+                <%--</div>--%>
 
                 <!-- Quantity -->
                 <div id="quantity-select" class="input-group d-flex justify-content-center">
