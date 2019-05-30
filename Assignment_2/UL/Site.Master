@@ -98,6 +98,7 @@
                                 <a runat="server" href="~/UL/PurchaseHistory" class="dropdown-item">Purchase History</a>
                         <%  } %>
                             <div class="dropdown-divider"></div>
+                            <a runat="server" href="~/UL/ChangePassword" class="dropdown-item">Update Password</a> 
                             <a runat="server" href="~/UL/AccountSettings" class="dropdown-item">Settings</a> 
                     <%  }
 
