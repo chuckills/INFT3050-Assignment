@@ -485,7 +485,7 @@ END
 GO
 
 CREATE PROCEDURE usp_getProductsSearch
-	@search VARCHAR(27)
+	@search VARCHAR(30)
 AS
 BEGIN
     SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack

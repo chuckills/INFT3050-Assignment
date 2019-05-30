@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -19,10 +20,15 @@ namespace Assignment_2.UL
                 // Get search input
                 searchParameter = HttpContext.Current.Session["SearchString"].ToString();
                 // Get products from query
-                rptProducts.DataSource = BLProduct.getProductsSearch(searchParameter);
+                DataSet productSearch = BLProduct.getProductsSearch(searchParameter);
+                int count = productSearch.Tables["Products"].Rows.Count;
+                rptProducts.DataSource = productSearch;
                 rptProducts.DataBind();
                 // Display search input for results
-                searchLabel.Text = "Search results for \"" + searchParameter + "\"...";
+                if (count == 0)
+                    searchLabel.Text = "No search results for \"" + searchParameter + "\"...";
+                else
+                    searchLabel.Text = "Search results for \"" + searchParameter + "\"...";
                 // Remove from session
                 HttpContext.Current.Session.Remove("SearchString");
             }
