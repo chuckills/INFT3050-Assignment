@@ -40,15 +40,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.TextBox Password2TextBox;
         
         /// <summary>
-        /// CompareValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
-        
-        /// <summary>
         /// rfvPassword2 control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassword2;
         
         /// <summary>
+        /// CompareValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        
+        /// <summary>
         /// SubmitButton control.
         /// </summary>
         /// <remarks>
@@ -65,14 +65,5 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SubmitButton;
-        
-        /// <summary>
-        /// NoMatchErrorLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NoMatchErrorLabel;
     }
 }

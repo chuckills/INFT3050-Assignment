@@ -27,12 +27,8 @@ namespace Assignment_2.UL
 
         protected void SubmitSearch_Click(object sender, EventArgs e)
         {
-            //if (SearchTextBox.Text != "")
-            //{
-                HttpContext.Current.Session["SearchString"] = SearchTextBox.Text;
-                Response.Redirect("~/UL/Products.aspx");
-            //}
-      
+            HttpContext.Current.Session["SearchString"] = SearchTextBox.Text;
+            Response.Redirect("~/UL/Products.aspx");
         }
     }
 }
