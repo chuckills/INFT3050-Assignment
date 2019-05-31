@@ -3,7 +3,7 @@
 
 <br />
 
-Thank you for your enquiry, we will get back to you as soon as possible
+Thank you for your enquiry, we will get back to you as soon as possible.
 
 <br /><br />
 
