@@ -17,12 +17,12 @@
                 </div>
                 <!-- Size selection -->
                 <div>
-                    <asp:RadioButtonList ID="rblSizeOption" runat="server" RepeatDirection="Horizontal" CellPadding="10">
-                        <asp:ListItem Text="S" Value="S" />
-                        <asp:ListItem Text="M" Value="M" />
-                        <asp:ListItem Text="L" Value="L" />
-                        <asp:ListItem Text="XL" Value="XL" />
-                        <asp:ListItem Text="XXL" Value="XXL" />
+                    <asp:RadioButtonList ID="rblSizeOption" runat="server" RepeatDirection="Horizontal" CellPadding="10" OnSelectedIndexChanged="rblSizeOption_SelectedIndexChanged">
+                        <asp:ListItem Text=" S" Value="S" />
+                        <asp:ListItem Text=" M" Value="M" />
+                        <asp:ListItem Text=" L" Value="L" />
+                        <asp:ListItem Text=" XL" Value="XL" />
+                        <asp:ListItem Text=" XXL" Value="XXL" />
                     </asp:RadioButtonList>
                 </div>
                 <!-- Validator for quantity selection -->
@@ -30,7 +30,7 @@
                     <asp:RequiredFieldValidator ID="rfvQuantity" runat="server" ErrorMessage="Please select a quantity" ControlToValidate="tbxQuantity" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" />
                     <asp:RegularExpressionValidator ID="rxvQuantity" runat="server" ErrorMessage="Select a whole number" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxQuantity" ValidationExpression="\d+" />
                     <asp:CustomValidator ID="csvQuantity" runat="server" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxQuantity" OnServerValidate="checkStock"></asp:CustomValidator>
-                <%--</div>--%>
+                </div>
 
                 <!-- Quantity -->
                 <div id="quantity-select" class="input-group d-flex justify-content-center">
@@ -40,6 +40,8 @@
                 <!-- Add to cart -->
                 <div class="d-flex justify-content-center">
                     <asp:LinkButton ID="btnAddToCart" runat="server" CssClass="btn btn-danger" OnClick="btnAddToCart_Click">Add to Cart</asp:LinkButton>
+                    <asp:Label ID="lblNoStock" runat="server" CssClass="text-danger" Text="No Stock"></asp:Label>
+
                 </div>
             </div>
             <div class="col-sm">
