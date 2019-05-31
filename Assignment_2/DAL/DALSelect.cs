@@ -29,7 +29,7 @@ namespace Assignment_2.DAL
 
 		}
 
-        public DataSet getProductsSearch(string search)
+		public DataSet getProductsSearch(string search)
         {
             string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
