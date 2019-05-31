@@ -490,7 +490,7 @@ AS
 BEGIN
     SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
     FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
-    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID 
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID
 		AND (t.teamLocale LIKE '%'+@search+'%' OR t.teamName LIKE '%'+@search+'%' OR pl.playFirstName LIKE '%'+@search+'%' OR pl.playLastName LIKE '%'+@search+'%')
 END
 GO
@@ -658,7 +658,18 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
-CREATE PROCEDURE  usp_getTeams
+CREATE PROCEDURE usp_changeUserPassword
+    @username VARCHAR(255),
+    @password VARCHAR(32)
+AS
+BEGIN
+    UPDATE Users
+    SET userPassword = @password
+    WHERE userEmail = @username
+END
+GO
+
+CREATE PROCEDURE usp_getTeams
 AS
 BEGIN
     SELECT teamID, concat(teamLocale, ' ' + teamName) AS teamFull FROM Team
