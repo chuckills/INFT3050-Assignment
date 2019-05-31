@@ -15,8 +15,13 @@ namespace Assignment_2.UL
 
         }
 
-        // Handles submission of admin registration form
-        protected void btnSubmit_Click(object sender, EventArgs e)
+        protected void checkExists(object sender, ServerValidateEventArgs args)
+        {
+	        args.IsValid = BLUser.checkUser(args.Value + "@jerseysure.com.au") == 0;
+        }
+
+		// Handles submission of admin registration form
+		protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (IsValid)
             {
