@@ -52,7 +52,7 @@
                   <span class="navbar-toggler-icon"></span>
             </button>
               
-              <asp:Label ID="lblUser" CssClass="text-white" runat="server"></asp:Label>
+              <asp:Label ID="lblUser" runat="server"></asp:Label>
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">

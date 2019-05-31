@@ -36,6 +36,7 @@ namespace Assignment_2.UL
 						LoginErrorLabel.Text = "User account is suspended. Contact admin.";
 						break;
 					default:
+						Session["Name"] = user.userFirstName;
 						Session["CurrentUser"] = user;
 						Session["UserName"] = user.userEmail;
 						if (user.userAdmin)
