@@ -127,6 +127,7 @@
     <Content Include="UL\AdminUpdateSelectedItem.aspx" />
     <Content Include="App_Data\DropDB.sql" />
     <Content Include="UL\Cart.aspx" />
+    <Content Include="UL\ChangePassword.aspx" />
     <Content Include="UL\Contact.aspx" />
     <Content Include="UL\ContactResponse.aspx" />
     <Content Include="UL\Content\bootstrap-grid.css" />
@@ -349,6 +350,13 @@
     </Compile>
     <Compile Include="UL\Cart.aspx.designer.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UL\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="UL\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
