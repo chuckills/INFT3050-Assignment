@@ -35,8 +35,6 @@ namespace Assignment_2.UL
 
 	            BLUser.addUser(newUser);
 
-	            newUser.login(newUser.userEmail, newUser.userPassword);
-
 				Response.Redirect("~/UL/Default");
             }
         }
