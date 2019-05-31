@@ -100,7 +100,11 @@
             <asp:TableCell runat="server"><asp:TextBox ID="tbxUsername" CssClass="form-control" runat="server"></asp:TextBox></asp:TableCell>
             
             <%-- Validation for username --%>
-            <asp:TableCell runat="server">@jerseysure.com.au<asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
+            <asp:TableCell runat="server">
+                @jerseysure.com.au
+                <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="rxvUsername" runat="server" ErrorMessage="Username must only contain alphanumeric characters" ControlToValidate="tbxUsername" CssClass="text-danger" Display="Dynamic" ValidationExpression="^([a-zA-Z0-9]{1,255})$"></asp:RegularExpressionValidator>
+            </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
             <asp:TableCell runat="server">Password</asp:TableCell>

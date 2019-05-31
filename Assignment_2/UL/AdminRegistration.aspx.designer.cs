@@ -193,6 +193,15 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUsername;
         
         /// <summary>
+        /// rxvUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvUsername;
+        
+        /// <summary>
         /// tbxPassword control.
         /// </summary>
         /// <remarks>
