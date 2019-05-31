@@ -54,6 +54,8 @@ DROP PROCEDURE usp_getAddress
 GO
 DROP PROCEDURE usp_getProductStock
 GO
+DROP PROCEDURE usp_changeUserPassword
+GO
 DROP TYPE PLAYERTYPE
 GO
 DROP USER jerseysure
