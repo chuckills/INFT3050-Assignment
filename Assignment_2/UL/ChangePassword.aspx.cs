@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment_2.BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,20 @@ namespace Assignment_2.UL
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {
+            bool status = false;
+            if (IsValid)
+            {
+                // Get current user from the session
+                BLUser user = HttpContext.Current.Session["CurrentUser"] as BLUser;
+                string newPassword = Password2TextBox.Text;
+                // Run and learn success status
+                status = BLUser.updateUserPassword(user, newPassword);
+            }
 
+            if (status)
+                Response.Redirect("~/UL/Status?status=success");
+            else
+                Response.Redirect("~/UL/Status?status=failed");
         }
     }
 }

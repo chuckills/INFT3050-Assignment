@@ -73,6 +73,11 @@ namespace Assignment_2.BL
 			return pass;
 		}
 
+        public static bool updateUserPassword(BLUser user, string password)
+        {
+            return DALUpdate.updateUserPassword(user, hashPassword(password));
+        }
+
 		private void fillUser(DataRow userData)
 		{
 			userID = Convert.ToInt32(userData["userID"]);
