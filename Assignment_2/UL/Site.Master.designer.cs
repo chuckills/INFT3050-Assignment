@@ -49,6 +49,15 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navbardrop;
         
         /// <summary>
+        /// pnlSearchPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSearchPanel;
+        
+        /// <summary>
         /// SearchTextBox control.
         /// </summary>
         /// <remarks>
