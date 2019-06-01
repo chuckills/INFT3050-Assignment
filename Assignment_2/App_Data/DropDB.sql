@@ -56,6 +56,8 @@ DROP PROCEDURE usp_getProductStock
 GO
 DROP PROCEDURE usp_changeUserPassword
 GO
+DROP PROCEDURE usp_getShipping
+GO
 DROP TYPE PLAYERTYPE
 GO
 DROP USER jerseysure

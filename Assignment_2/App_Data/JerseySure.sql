@@ -175,6 +175,7 @@ CREATE TABLE CartItem
     prodNumber VARCHAR(8) NOT NULL,
     sizeID VARCHAR(3) NOT NULL,
     cartQuantity INT NOT NULL, -- Quantity of the product to order
+    cartUnitPrice MONEY NOT NULL,
     cartProductTotal MONEY NOT NULL, -- cartQuantity * prodPrice
     PRIMARY KEY (userID, ordID, sizeID, prodNumber),
     FOREIGN KEY (userID) REFERENCES Users(userID),
@@ -447,8 +448,8 @@ SET IDENTITY_INSERT Orders ON
 GO
 
 INSERT INTO Orders (ordID, ordSubTotal, ordTotal, ordGST, ordPaid, shipID, userID)
-    VALUES (1, 200, 210, 21, 1, 1, 1),
-           (2, 100, 199.99, 19.99, 1, 4, 3)
+    VALUES (1, 200, 210, 19.0909, 1, 1, 1),
+           (2, 100, 199.99, 18.0909, 1, 4, 3)
 GO
 
 SET IDENTITY_INSERT Orders OFF
@@ -673,6 +674,13 @@ CREATE PROCEDURE usp_getTeams
 AS
 BEGIN
     SELECT teamID, concat(teamLocale, ' ' + teamName) AS teamFull FROM Team
+END
+GO
+
+CREATE PROCEDURE usp_getShipping
+AS
+BEGIN
+    SELECT shipID, concat(shipType, ' ' + cast(shipDays AS VARCHAR(2)) + ' days' + ' $' + cast(shipCost AS VARCHAR(8))) AS shipFull FROM Shipping
 END
 GO
 
