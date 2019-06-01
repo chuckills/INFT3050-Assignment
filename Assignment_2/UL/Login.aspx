@@ -17,7 +17,8 @@
                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="PasswordTextBox"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:Button ID="LoginButton" runat="server" Text="Login" CssClass="btn btn-danger" OnClick="LoginButton_Click"/>
+                    <asp:Button ID="LoginButton" runat="server" Text="Login" CssClass="btn btn-danger" OnClick="LoginButton_Click" />
+                    <asp:Button ID="ForgotPasswordButton" runat="server" Text="Forgot Password?" CssClass="btn btn-outline-danger"  />
                 </div>
                 <div class="form-group">
                     <asp:Label ID="LoginErrorLabel" runat="server" ForeColor="Red"></asp:Label>
