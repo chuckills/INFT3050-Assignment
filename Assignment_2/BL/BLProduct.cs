@@ -23,27 +23,22 @@ namespace Assignment_2.BL
 
 		public static DataSet getProducts()
 		{
-			DALSelect products = new DALSelect();
-			return products.getProducts();
+			return DALSelect.getProducts();
 		}
 
         public static DataSet getProductsSearch(string search)
         {
-            DALSelect products = new DALSelect();
-            return products.getProductsSearch(search);
+            return DALSelect.getProductsSearch(search);
         }
 
 		public static DataSet getTeams()
 		{
-			DALSelect teams = new DALSelect();
-			return teams.getTeams();
+			return DALSelect.getTeams();
 		}
 
 		public BLProduct selectProduct(string productNumber)
 		{
-			DALSelect product = new DALSelect();
-
-			DataRow productData = product.selectProduct(productNumber);
+			DataRow productData = DALSelect.selectProduct(productNumber);
 
 			prodNumber = productData["prodNumber"].ToString();
 			prodDescription = productData["prodDescription"].ToString();
@@ -57,7 +52,7 @@ namespace Assignment_2.BL
 			image = new string[2];
 			image[0] = productData["imgFront"].ToString();
 			image[1] = productData["imgBack"].ToString();
-			stock = product.getStock(productNumber);
+			stock = DALSelect.getStock(productNumber);
 
 			return this;
 		}

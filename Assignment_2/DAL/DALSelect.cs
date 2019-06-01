@@ -10,7 +10,7 @@ namespace Assignment_2.DAL
 {
 	public class DALSelect
 	{
-		public DataSet getProducts()
+		public static DataSet getProducts()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
@@ -29,7 +29,7 @@ namespace Assignment_2.DAL
 
 		}
 
-		public DataSet getProductsSearch(string search)
+		public static DataSet getProductsSearch(string search)
         {
             string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
@@ -51,7 +51,7 @@ namespace Assignment_2.DAL
             return productDataSet;
         }
 
-		public DataRow selectProduct(string productNumber)
+		public static DataRow selectProduct(string productNumber)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
@@ -73,7 +73,7 @@ namespace Assignment_2.DAL
 			return productDataSet.Tables["Product"].Rows[0];
 		}
 
-		public int[] getStock(string productNumber)
+		public static int[] getStock(string productNumber)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
@@ -182,7 +182,25 @@ namespace Assignment_2.DAL
 			return userDataSet.Tables["User"].Rows[0];
 		}
 
-		public DataSet getTeams()
+		public static DataSet getShippingOptions()
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+			DataSet shipDataSet = new DataSet();
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+				SqlDataAdapter adapter = new SqlDataAdapter("usp_getShipping", connection);
+
+				adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+				adapter.Fill(shipDataSet, "Shipping");
+			}
+
+			return shipDataSet;
+		}
+
+		public static DataSet getTeams()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 

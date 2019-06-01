@@ -18,9 +18,30 @@ namespace Assignment_2.UL
 	        double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
 
 	        lblAmount.Text = string.Format("{0:C}", amount);
+
+	        ddlShipping.DataSource = BLShipping.getShippingMethods();
+			ddlShipping.DataBind();
+
+			BLUser user = Session["CurrentUser"] as BLUser;
+
+			lblFirst.Text = user.userFirstName;
+			lblLast.Text = user.userLastName;
+			lblBillStreet.Text = user.billAddress.addStreet;
+			lblBillSuburb.Text = user.billAddress.addSuburb;
+			lblBillState.Text = user.billAddress.addState;
+			lblBillZip.Text = user.billAddress.addZip.ToString();
+			lblPostStreet.Text = user.postAddress.addStreet;
+			lblPostSuburb.Text = user.postAddress.addSuburb;
+			lblPostState.Text = user.postAddress.addState;
+			lblPostZip.Text = user.postAddress.addZip.ToString();
+		}
+
+        protected void addDefaultItem(object sender, EventArgs e)
+        {
+	        ddlShipping.Items.Insert(0, new ListItem("Select a shipping method...", ""));
         }
-		
-        protected void btnSubmit_Click(object sender, EventArgs e)
+
+		protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (IsValid)
             {
@@ -41,6 +62,8 @@ namespace Assignment_2.UL
 				switch (result.Result.TransactionResult)
 				{
 					case (TransactionResult.Approved):
+						
+
 						Session.Remove("Cart");
 						Session["Cart"] = new BLShoppingCart();
 						Session["Result"] = TransactionResult.Approved;

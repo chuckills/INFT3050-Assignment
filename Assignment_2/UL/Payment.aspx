@@ -5,9 +5,60 @@
 <br />
 <h1>Payment</h1>
     <hr/>
+    
+    <asp:Table ID="tblOrderDetails" runat="server">
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server"><asp:Label ID="lblFirst" runat="server"></asp:Label>&nbsp;<asp:Label ID="lblLast" runat="server"></asp:Label></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server" VerticalAlign="Top">Bill to:</asp:TableCell>
+            <asp:TableCell runat="server">
+                <asp:Label ID="lblBillStreet" runat="server"></asp:Label><br/>
+                <asp:Label ID="lblBillSuburb" runat="server"></asp:Label>&nbsp;
+                <asp:Label ID="lblBillState" runat="server"></asp:Label>&nbsp;
+                <asp:Label ID="lblBillZip" runat="server"></asp:Label><br/>
+            </asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server" VerticalAlign="Top">Post to:</asp:TableCell>
+            <asp:TableCell runat="server">
+                <asp:Label ID="lblPostStreet" runat="server"></asp:Label><br/>
+                <asp:Label ID="lblPostSuburb" runat="server"></asp:Label>&nbsp;
+                <asp:Label ID="lblPostState" runat="server"></asp:Label>&nbsp;
+                <asp:Label ID="lblPostZip" runat="server"></asp:Label><br/>
+            </asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server"></asp:TableCell>
+        </asp:TableRow>
+       
+
+    </asp:Table>
+
     <%-- Table for Card Details --%>
 
     <asp:Table ID="tblDetails" runat="server">
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server">Shipping Method&nbsp;</asp:TableCell>
+            <asp:TableCell runat="server"><asp:DropDownList ID="ddlShipping" CssClass="form-control" DataTextField="shipFull" DataValueField="shipID" runat="server" OnDataBound="addDefaultItem"></asp:DropDownList></asp:TableCell>
+            
+        </asp:TableRow>
         <asp:TableRow runat="server">
             <asp:TableCell runat="server">Credit card number</asp:TableCell>
             <asp:TableCell runat="server"><asp:TextBox ID="tbxCardNumber" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox></asp:TableCell>
@@ -36,7 +87,7 @@
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server">Card security code></asp:TableCell>
+            <asp:TableCell runat="server">Card security code</asp:TableCell>
             <asp:TableCell runat="server"><asp:TextBox ID="tbxCSC" CssClass="form-control" runat="server" TextMode="Number"></asp:TextBox></asp:TableCell>
            
             <%-- Validation for CSC --%>

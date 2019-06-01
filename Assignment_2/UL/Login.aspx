@@ -4,7 +4,7 @@
 <%-- Combined user and admin login page --%>
     
     <div class="container">
-        <div class="row">
+        <asp:Panel ID="Panel1" CssClass="row" runat="server" DefaultButton="LoginButton">
             <div class="col"></div>
             <div class="col">
                 <h2 class="margin-space-top-50   padding-bottom-15"><%: Title %></h2>
@@ -17,7 +17,7 @@
                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="PasswordTextBox"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <asp:Button ID="LoginButton" runat="server" Text="Login" CssClass="btn btn-danger" OnClick="LoginButton_Click" />
+                    <asp:Button ID="LoginButton" runat="server" Text="Login" CssClass="btn btn-danger" OnClick="LoginButton_Click"/>
                 </div>
                 <div class="form-group">
                     <asp:Label ID="LoginErrorLabel" runat="server" ForeColor="Red"></asp:Label>
@@ -27,6 +27,6 @@
                 </div>
             </div>
             <div class="col"></div>
-        </div>
+        </asp:Panel>
     </div>
 </asp:Content>

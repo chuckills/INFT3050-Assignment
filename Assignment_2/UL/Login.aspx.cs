@@ -8,11 +8,11 @@ using System.Web.UI.WebControls;
 
 namespace Assignment_2.UL
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+	        UsernameTextBox.Focus();
         }
 
         // Checks login credentials and updates login status accordingly if it correct

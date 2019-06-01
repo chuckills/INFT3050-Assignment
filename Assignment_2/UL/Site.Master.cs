@@ -21,8 +21,6 @@ namespace Assignment_2.UL
 	        {
 		        lblUser.Text = "";
 	        }
-
-			MainContent.Controls[0].Focus();
         }
 
         protected void SubmitSearch_Click(object sender, EventArgs e)

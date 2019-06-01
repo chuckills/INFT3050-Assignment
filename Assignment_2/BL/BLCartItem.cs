@@ -15,12 +15,14 @@ namespace Assignment_2.BL
 		public BLProduct Product { get; set; }
         public string Size { get; set; }
 		public int Quantity { get; set; }
+		public double ItemTotal { get; set; }
 
-        public BLCartItem(BLProduct product, string size, int quantity)
+		public BLCartItem(BLProduct product, string size, int quantity)
         {
 	        Product = product;
             Size = size;
             Quantity = quantity;
+            ItemTotal = Product.prodPrice * Quantity;
         }
 
         // String representation for model and display on user views
