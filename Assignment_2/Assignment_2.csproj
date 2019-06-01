@@ -141,6 +141,7 @@
     <Content Include="UL\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\JerseySure.sql" />
+    <Content Include="UL\ForgotPassword.aspx" />
     <Content Include="UL\GuestRegistration.aspx" />
     <Content Include="UL\Images\JerseyAdmin.png" />
     <Content Include="UL\Images\jerseys\Jersey.png" />
@@ -264,11 +265,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\BLAddress.cs" />
+    <Compile Include="BL\BLEmail.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="BL\BLPurchase.cs" />
     <Compile Include="BL\INFT3050PaymentFactory.cs" />
     <Compile Include="BL\INFT3050PaymentSystem.cs" />
     <Compile Include="BL\IPaymentSystem.cs" />
+    <Compile Include="BL\RandomCode.cs" />
     <Compile Include="DAL\DALArchive.cs" />
     <Compile Include="DAL\DALInsert.cs" />
     <Compile Include="DAL\DALSelect.cs" />
@@ -375,6 +378,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="UL\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="UL\GuestRegistration.aspx.cs">
       <DependentUpon>GuestRegistration.aspx</DependentUpon>

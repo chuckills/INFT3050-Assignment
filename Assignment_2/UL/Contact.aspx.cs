@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
-
+using Assignment_2.BL;
 
 namespace Assignment_2.UL
 {
@@ -25,12 +25,9 @@ namespace Assignment_2.UL
             if (IsValid)
             {
                 // Send email with query information
-                // Sourced from: https://www.c-sharpcorner.com/UploadFile/2a6dc5/how-to-send-a-email-using-Asp-Net-C-Sharp/
-                string to = tbxEmail.Text;
-                string from = "jerseysure3050@gmail.com";
+                BLEmail email = new BLEmail();
 
-                MailMessage message = new MailMessage(from, to);
-
+                // Generate message body for email
                 string mailbody =
                       "<p>"
                     + tbxName.Text + ","
@@ -54,26 +51,7 @@ namespace Assignment_2.UL
                     + "The JerseySure Team"
                     + "</p>";
 
-                message.Subject = "Contact Form Query - JerseySure";
-                message.Body = mailbody;
-                message.BodyEncoding = Encoding.UTF8;
-                message.IsBodyHtml = true;
-
-                SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
-                System.Net.NetworkCredential basicCredential1 = new
-                System.Net.NetworkCredential("jerseysure3050@gmail.com", "MoreSecurePassword");
-                client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
-                client.Credentials = basicCredential1;
-                try
-                {
-                    client.Send(message);
-                }
-
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                email.SendEmail(tbxEmail.Text, "Contact Form Query - JerseySure", mailbody);
 
                 Response.Redirect("~/UL/ContactResponse.aspx");
             }
