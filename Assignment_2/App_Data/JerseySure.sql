@@ -694,6 +694,14 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE usp_getShipDetails
+    @shipID INT
+AS
+BEGIN
+    SELECT * FROM Shipping WHERE shipID = @shipID
+END
+GO
+
 CREATE PROCEDURE usp_getProductStock
     @prodNumber VARCHAR(8)
 AS
