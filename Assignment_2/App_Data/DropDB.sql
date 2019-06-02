@@ -64,6 +64,8 @@ DROP PROCEDURE usp_getShipDetails
 GO
 DROP PROCEDURE usp_getUserOrders
 GO
+DROP PROCEDURE usp_getSingleOrder
+GO
 DROP PROCEDURE usp_getOrderItems
 GO
 DROP TYPE PLAYERTYPE

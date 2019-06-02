@@ -788,6 +788,14 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE usp_getSingleOrder
+    @orderID INT
+AS
+BEGIN
+    SELECT * FROM Orders WHERE ordID = @orderID
+END
+GO
+
 CREATE PROCEDURE usp_getOrderItems
     @orderID INT
 AS
