@@ -780,5 +780,23 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+CREATE PROCEDURE usp_getUserOrders
+    @userID INT
+AS
+BEGIN
+    SELECT * FROM Orders WHERE userID = @userID;
+END
+GO
+
+CREATE PROCEDURE usp_getOrderItems
+    @orderID INT
+AS
+BEGIN
+    SELECT c.prodNumber, c.sizeID, c.cartQuantity, pl.playFirstName, pl.playLastName, pr.prodDescription, c.cartUnitPrice
+    FROM Orders o, CartItem c, Users u, Product pr, Player pl
+    WHERE o.ordID = @orderID AND o.userID = u.userID AND c.ordID = o.ordID AND c.prodNumber = pr.prodNumber AND pr.playID = pl.playID
+END
+GO
+
 USE master
 GO
