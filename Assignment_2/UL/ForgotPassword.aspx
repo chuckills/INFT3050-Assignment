@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Get New Password" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="ForgotPassword.aspx.cs" Inherits="Assignment_2.UL.ForgotPassword" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
-        <div class="row">
+        <asp:Panel ID="Panel1" CssClass="row" runat="server" DefaultButton="RequestButton">
             <div class="col"></div>
             <div class="col">
                 <h2 class="margin-space-top-50 padding-bottom-15"><%: Title %></h2>
@@ -25,6 +25,6 @@
                 </div>
             </div>
             <div class="col"></div>
-        </div>
+        </asp:Panel>
     </div>
 </asp:Content>

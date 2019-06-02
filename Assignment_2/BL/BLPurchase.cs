@@ -45,7 +45,8 @@ namespace Assignment_2.BL
 
 		public static int storePurchase(BLPurchase purchase, string[] card)
 		{
-			return 0;
+			DALInsert newPurchase = new DALInsert();
+			return newPurchase.addNewPurchase(purchase, card);
 		}
 	}
 }
