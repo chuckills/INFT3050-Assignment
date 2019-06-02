@@ -780,6 +780,21 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+CREATE PROCEDURE usp_addShipping
+	@type VARCHAR(15),
+	@days INT,
+	@cost MONEY
+AS
+BEGIN TRANSACTION
+	DECLARE @shippingID INT
+	IF NOT exists(SELECT shipID FROM Shipping WHERE shipType = @type)
+        BEGIN
+            INSERT INTO Shipping(shipType, shipDays, shipCost)
+                VALUES (@type, @days, @cost);
+        END
+COMMIT TRANSACTION
+GO
+
 CREATE PROCEDURE usp_getUserOrders
     @userID INT
 AS
