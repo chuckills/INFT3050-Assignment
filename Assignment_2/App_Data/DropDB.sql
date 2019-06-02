@@ -42,6 +42,8 @@ DROP PROCEDURE usp_getUser
 GO
 DROP PROCEDURE usp_getSingleUser
 GO
+DROP PROCEDURE usp_getUserByEmail
+GO
 DROP PROCEDURE usp_getUsers
 GO
 DROP PROCEDURE usp_addUser

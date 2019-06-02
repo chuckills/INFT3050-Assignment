@@ -51,9 +51,17 @@ namespace Assignment_2.UL
                     + "The JerseySure Team"
                     + "</p>";
 
-                email.SendEmail(tbxEmail.Text, "Contact Form Query - JerseySure", mailbody);
+                try
+                {
+                    email.SendEmail(tbxEmail.Text, "Contact Form Query - JerseySure", mailbody);
+                }
+                catch (Exception ex)
+                {
+                    // Display error page for unable to send email
+                    Response.Redirect("~/UL/ErrorPage?status=1");
+                }
 
-                Response.Redirect("~/UL/ContactResponse.aspx");
+                Response.Redirect("~/UL/SuccessPage?status=2");
             }
         }
     }

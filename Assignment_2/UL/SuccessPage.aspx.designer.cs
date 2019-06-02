@@ -10,7 +10,7 @@
 namespace Assignment_2.UL {
     
     
-    public partial class Status {
+    public partial class SuccessPage {
         
         /// <summary>
         /// StatusLabel control.

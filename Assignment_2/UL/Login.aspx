@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group">
                     <asp:Button ID="LoginButton" runat="server" Text="Login" CssClass="btn btn-danger" OnClick="LoginButton_Click" />
-                    <asp:Button ID="ForgotPasswordButton" runat="server" Text="Forgot Password?" CssClass="btn btn-outline-danger"  CausesValidation="False" />
+                    <asp:Button ID="ForgotPasswordButton" runat="server" Text="Forgot Password?" CssClass="btn btn-outline-danger"  CausesValidation="False" OnClick="ForgotPasswordButton_Click" />
                 </div>
                 <div class="form-group">
                     <asp:Label ID="LoginErrorLabel" runat="server" ForeColor="Red"></asp:Label>

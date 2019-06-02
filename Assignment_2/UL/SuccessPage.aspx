@@ -1,5 +1,5 @@
-﻿<%@ Page Title="Status" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Status.aspx.cs" Inherits="Assignment_2.UL.Status" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">   
+﻿<%@ Page Title="Success" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="SuccessPage.aspx.cs" Inherits="Assignment_2.UL.SuccessPage" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="margin-space-top-20">
         <asp:Label ID="StatusLabel" runat="server" Text="Label" CssClass="h2"></asp:Label>
     </div>

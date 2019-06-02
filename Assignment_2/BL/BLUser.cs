@@ -111,7 +111,18 @@ namespace Assignment_2.BL
 			return this;
 		}
 
-		public static int checkUser(string userName)
+        public BLUser getUserByEmail(string email)
+        {
+            DALSelect user = new DALSelect();
+
+            DataRow userData = user.getUserByEmail(email);
+
+            fillUser(userData);
+
+            return this;
+        }
+
+        public static int checkUser(string userName)
 		{
 			DALSelect check = new DALSelect();
 
@@ -125,6 +136,18 @@ namespace Assignment_2.BL
 			return 0;
 			
 		}
+
+        public static bool checkUserEmail(string email)
+        {
+            DALSelect user = new DALSelect();
+
+            bool found;
+
+            DataRow userData = user.getUserData(email, out found);
+
+            return found;
+        }
+    
 
 		public static int addUser(BLUser newUser)
 		{

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
 namespace Assignment_2.BL
 {
-    public class RandomCode
+    public class BLPassword
     {
         // Generate a random string with a given size
         // Sourced from: https://www.c-sharpcorner.com/article/generating-random-number-and-string-in-C-Sharp/
-        public string RandomString(int size, bool lowerCase)
+        public static string RandomString(int size, bool lowerCase)
         {
             StringBuilder builder = new StringBuilder();
             Random random = new Random();
@@ -22,7 +23,26 @@ namespace Assignment_2.BL
             }
             if (lowerCase)
                 return builder.ToString().ToLower();
-            return builder.ToString();
+            return hashPassword(builder.ToString());
+        }
+
+        private static string hashPassword(string pass)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                byte[] passHash = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
+
+                StringBuilder sb = new StringBuilder();
+
+                foreach (byte b in passHash)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+
+                pass = sb.ToString();
+            }
+
+            return pass;
         }
     }
 }

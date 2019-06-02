@@ -182,7 +182,29 @@ namespace Assignment_2.DAL
 			return userDataSet.Tables["User"].Rows[0];
 		}
 
-		public static DataSet getShippingOptions()
+        public DataRow getUserByEmail(string email)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+            DataSet userDataSet = new DataSet();
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand command = new SqlCommand("usp_getUserByEmail", connection);
+
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@email", email);
+                adapter.SelectCommand = command;
+
+                adapter.Fill(userDataSet, "User");
+
+            }
+
+            return userDataSet.Tables["User"].Rows[0];
+        }
+
+        public static DataSet getShippingOptions()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 

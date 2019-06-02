@@ -52,5 +52,10 @@ namespace Assignment_2.UL
 				}
             }
         }
+
+        protected void ForgotPasswordButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UL/ForgotPassword");
+        }
     }
 }

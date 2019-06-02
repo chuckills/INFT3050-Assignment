@@ -542,6 +542,16 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE usp_getUserByEmail
+    @email VARCHAR(255)
+AS
+BEGIN
+    SELECT *
+    FROM Users
+    WHERE userEmail = @email
+END
+GO
+
 CREATE PROCEDURE usp_getAddress
     @user INT, @type CHAR(1)
 AS
