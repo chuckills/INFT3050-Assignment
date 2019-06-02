@@ -108,8 +108,19 @@
             <asp:TableCell ColumnSpan="2" runat="server"><hr/></asp:TableCell> 
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/></asp:TableCell>
+            <asp:TableCell runat="server"> 
+                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                    <ProgressTemplate>
+                        Processing....
+                        <br/>
+                    </ProgressTemplate>
+                </asp:UpdateProgress> 
+                <asp:UpdatePanel runat="server" id="UpdatePanel1">
+                    <ContentTemplate>
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/>
+                    </ContentTemplate>
+                </asp:UpdatePanel> 
+            </asp:TableCell>
         </asp:TableRow>
     </asp:Table>  
-       
 </asp:Content>

@@ -3,7 +3,7 @@
 
 <br />
 
-Your payment has been successful
+Payment system returned <asp:Label ID="lblResult" runat="server"></asp:Label>
 
 <br /><br />
 

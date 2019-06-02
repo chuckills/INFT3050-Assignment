@@ -11,7 +11,7 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+	        lblResult.Text = Session["Result"].ToString();
         }
     }
 }
