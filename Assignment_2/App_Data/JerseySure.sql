@@ -458,10 +458,10 @@ GO
 -- CartItem
 --===================================================================================
 
-INSERT INTO CartItem (userID, ordID, prodNumber, sizeID, cartQuantity, cartProductTotal)
-    VALUES (1, 1, 'BOS00001', 'L', 1, 100),
-           (1, 1, 'BOS00001', 'S', 1, 100),
-           (3, 2, 'LAL00003', 'XXL', 1, 100)
+INSERT INTO CartItem (userID, ordID, prodNumber, sizeID, cartQuantity, cartProductTotal, cartUnitPrice)
+    VALUES (1, 1, 'BOS00001', 'L', 1, 100, 100),
+           (1, 1, 'BOS00001', 'S', 1, 100, 100),
+           (3, 2, 'LAL00003', 'XXL', 1, 100, 100)
 GO
 
 -- CreditCardPM
