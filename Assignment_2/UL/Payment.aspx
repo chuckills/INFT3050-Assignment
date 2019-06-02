@@ -52,11 +52,13 @@
     </asp:Table>
 
     <%-- Table for Card Details --%>
-
+    
     <asp:Table ID="tblDetails" runat="server">
         <asp:TableRow runat="server">
             <asp:TableCell runat="server">Shipping Method&nbsp;</asp:TableCell>
-            <asp:TableCell runat="server"><asp:DropDownList ID="ddlShipping" CssClass="form-control" DataTextField="shipFull" DataValueField="shipID" runat="server" OnDataBound="addDefaultItem"></asp:DropDownList></asp:TableCell>
+            <asp:TableCell runat="server">
+                <asp:DropDownList ID="ddlShipping" CssClass="form-control" DataTextField="shipFull" DataValueField="shipID" runat="server" OnDataBound="addDefaultItem" OnSelectedIndexChanged="ddlShipping_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+            </asp:TableCell>
             
         </asp:TableRow>
         <asp:TableRow runat="server">

@@ -88,5 +88,10 @@ namespace Assignment_2.DAL
 			}
 			return rows;
 		}
+
+		public int addNewPurchase(BLPurchase purchase, string[] card)
+		{
+			return 0;
+		}
 	}
 }

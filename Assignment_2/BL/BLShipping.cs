@@ -14,17 +14,20 @@ namespace Assignment_2.BL
 		public double Cost { get; set; }
 		public int Wait { get; set; }
 
-		public BLShipping(int id, string method, double cost, int wait)
-		{
-			Id = id;
-			Method = method;
-			Cost = cost;
-			Wait = wait;
-		}
-
 		public static DataSet getShippingMethods()
 		{
 			return DALSelect.getShippingOptions();
+		}
+
+		public BLShipping getShipping(int shipID)
+		{
+			DataRow shipping =  DALSelect.getShippingDetails(shipID);
+			Id = Convert.ToInt32(shipping["shipID"]);
+			Method = shipping["shipType"].ToString();
+			Cost = Convert.ToDouble(shipping["shipCost"]);
+			Wait = Convert.ToInt32(shipping["shipDays"]);
+
+			return this;
 		}
 	}
 }

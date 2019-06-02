@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using Assignment_2.DAL;
+using INFT3050.PaymentSystem;
 
 namespace Assignment_2.BL
 {
@@ -14,16 +16,36 @@ namespace Assignment_2.BL
 		public BLShipping Shipping { get; set; }
 		public double Gst { get; set; }
 
-		public BLPurchase(BLShoppingCart cart, BLUser user, int ship)
+		public BLPurchase(BLShoppingCart cart, BLUser user, BLShipping ship)
 		{
 			Cart = cart;
 			User = user;
-			DataRow shipSelection = DALSelect.getShippingDetails(ship);
-			Shipping.Id = Convert.ToInt32(shipSelection["shipID"]);
-			Shipping.Method = shipSelection["shipType"].ToString();
-			Shipping.Cost = Convert.ToDouble(shipSelection["shipCost"]);
-			Shipping.Wait = Convert.ToInt32(shipSelection["shipDays"]);
-			Gst = (cart.Amount + Shipping.Cost) / 11;
+			Shipping = ship;
+			Gst = (Cart.Amount + Shipping.Cost) / 11;
+		}
+
+		public TransactionResult processPurchase(string[] card)
+		{
+			IPaymentSystem paymentSystem = INFT3050PaymentFactory.Create();
+
+			PaymentRequest pr = new PaymentRequest
+			{
+				Amount = Convert.ToDecimal(Cart.Amount + Shipping.Cost),
+				CardName = card[0],
+				CardNumber = card[1],
+				CVC = Convert.ToInt32(card[2]),
+				Expiry = Convert.ToDateTime("01-" + card[3]),
+				Description = "BCD Group - JerseySure"
+			};
+
+			Task<PaymentResult> result = paymentSystem.MakePayment(pr);
+
+			return result.Result.TransactionResult;
+		}
+
+		public static int storePurchase(BLPurchase purchase, string[] card)
+		{
+			return 0;
 		}
 	}
 }
