@@ -82,16 +82,13 @@ namespace Assignment_2.UL
 			{
 				case "MCARD":
 				case "VISA":
-					args.IsValid = tbxCardNumber.Text.Length == 16;
+					args.IsValid = tbxCardNumber.Text.Length == 16 && tbxCardNumber.Text.All(char.IsDigit);
 					break;
 				case "AMEX":
-					args.IsValid = tbxCardNumber.Text.Length == 15;
+					args.IsValid = tbxCardNumber.Text.Length == 15 && tbxCardNumber.Text.All(char.IsDigit);
 					break;
 				case "DINR":
-					args.IsValid = tbxCardNumber.Text.Length == 14;
-					break;
-				default:
-					args.IsValid = false;
+					args.IsValid = tbxCardNumber.Text.Length == 14 && tbxCardNumber.Text.All(char.IsDigit);
 					break;
 			}
 		}

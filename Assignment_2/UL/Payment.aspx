@@ -68,8 +68,7 @@
             <%-- Validation for card number --%>
             <asp:TableCell runat="server">
                 <asp:RequiredFieldValidator ID="rfvNumber" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxCardNumber" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="rxvNumber" runat="server" ErrorMessage="Invalid CC Number" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxCardNumber" ValidationExpression="\d{14,16}"></asp:RegularExpressionValidator>
-                <asp:CustomValidator ID="csvNumber" runat="server" ErrorMessage="Invalid CC Number" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxCardNumber" ></asp:CustomValidator>
+                <asp:CustomValidator ID="csvNumber" runat="server" ErrorMessage="Invalid CC Number" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxCardNumber" OnServerValidate="checkNumber" SetFocusOnError="True"></asp:CustomValidator>
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
@@ -82,7 +81,7 @@
         <asp:TableRow runat="server">
             <asp:TableCell runat="server">Card Type&nbsp;</asp:TableCell>
             <asp:TableCell runat="server">
-                <asp:DropDownList ID="ddlCardType" CssClass="form-control" DataTextField="shipFull" DataValueField="shipID" runat="server" OnDataBound="addDefaultItem" OnSelectedIndexChanged="ddlShipping_SelectedIndexChanged" AutoPostBack="True">
+                <asp:DropDownList ID="ddlCardType" CssClass="form-control" runat="server">
                     <asp:ListItem Enabled="true" Text="Select card type..." Value="None"></asp:ListItem>
                     <asp:ListItem Text="MasterCard" Value="MCARD"></asp:ListItem>
                     <asp:ListItem Text="Visa" Value="VISA"></asp:ListItem>
