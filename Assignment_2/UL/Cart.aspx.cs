@@ -1,4 +1,5 @@
 ﻿using Assignment_2.BL;
+using Microsoft.AspNet.FriendlyUrls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,23 +55,33 @@ namespace Assignment_2.UL
 					cart.calculate();
                 }
             }
-            Response.Redirect("~/UL/Cart.aspx");
+            Response.Redirect("~/UL/Cart");
         }
 
         // Attaches total cost of cart as parameter and redirects to payment form
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
-            string cartTotal = Cost.Text;
-
-            Session["Cost"] = cartTotal;
-
-            if (Session["LoginStatus"].ToString().Equals("LoggedOut"))
+            BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
+            // Cannot checkout unless items are in the cart
+            if (!cart.isEmpty())
             {
-                Response.Redirect("~/UL/GuestRegistration.aspx");
+                string cartTotal = Cost.Text;
+
+                Session["Cost"] = cartTotal;
+
+                if (Session["LoginStatus"].ToString().Equals("LoggedOut"))
+                {
+                    // Unable to checkout without a registered account
+                    Response.Redirect("~/UL/ErrorPage?status=4");
+                }
+                else
+                {
+                    Response.Redirect("~/UL/Payment");
+                }
             }
             else
             {
-                Response.Redirect("~/UL/Payment.aspx");
+                ErrorLabel.Text = "Cannot perform checkout with no items in cart.";
             }
         }
     }

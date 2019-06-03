@@ -48,6 +48,9 @@
                 <div>
                     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/UL/Products.aspx">Continue shopping?</asp:HyperLink>
                 </div>
+                <div class="margin-space-top-20">
+                    <asp:Label ID="ErrorLabel" runat="server" ForeColor="Red"></asp:Label>
+                </div>
             </div>
         </div>
     </div>

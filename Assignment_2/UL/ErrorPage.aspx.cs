@@ -29,6 +29,9 @@ namespace Assignment_2.UL
                     case 3:
                         passwordNotUpdated();
                         break;
+                    case 4:
+                        checkoutNotAvailable();
+                        break;
                     default:
                         defaultError();
                         break;
@@ -51,15 +54,15 @@ namespace Assignment_2.UL
 
         protected void unauthorized()
         {
-            StatusLabel.Text = "Error: Unauthorized";
+            StatusLabel.Text = "Sorry, Unauthorized";
             DescriptionLabel.Text = "The page you have requested requires a user to be logged in.";
-            ResultingButton.Text = "Return Home";
-            ResultingButton.PostBackUrl = "~/UL/Default";
+            ResultingButton.Text = "Login";
+            ResultingButton.PostBackUrl = "~/UL/Login";
         }
 
         protected void emailFailure()
         {
-            StatusLabel.Text = "Error: Failed to send email";
+            StatusLabel.Text = "Sorry, Failed to send email";
             DescriptionLabel.Text = "Something went wrong in trying to send an email to the email " +
                 "address specified for your account. Please ensure you have a valid email attached to your account.";
             ResultingButton.Text = "Check Email";
@@ -68,7 +71,7 @@ namespace Assignment_2.UL
 
         protected void verificationError()
         {
-            StatusLabel.Text = "Error: Account verification failure";
+            StatusLabel.Text = "Sorry, Account verification failure";
             DescriptionLabel.Text = "Our efforts to verify your account failed. This is most likely due to a safety" +
                 " precaution in attempt to protect your account.";
             ResultingButton.Text = "Return Home";
@@ -77,10 +80,18 @@ namespace Assignment_2.UL
 
         protected void passwordNotUpdated()
         {
-            StatusLabel.Text = "Error: Password Update Failure";
+            StatusLabel.Text = "Sorry, Password Update Failure";
             DescriptionLabel.Text = "User password was unable to be updated at this time.";
             ResultingButton.Text = "Try Again";
             ResultingButton.PostBackUrl = "~/UL/ChangePassword";
+        }
+
+        protected void checkoutNotAvailable()
+        {
+            StatusLabel.Text = "Sorry, Unable to Checkout";
+            DescriptionLabel.Text = "Checkout can only be completed by a registered account.";
+            ResultingButton.Text = "Register";
+            ResultingButton.PostBackUrl = "~/UL/Registration";
         }
 
         protected void noTransactionMade()
