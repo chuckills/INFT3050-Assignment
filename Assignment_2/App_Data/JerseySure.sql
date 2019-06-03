@@ -144,8 +144,10 @@ CREATE TABLE Shipping
 (
     shipID INT IDENTITY PRIMARY KEY,
     shipType VARCHAR(15) NOT NULL, -- Type of shipping
+	shipDescription VARCHAR(255) NOT NULL,
     shipDays INT NOT NULL, -- Average number of days to ship
     shipCost MONEY NOT NULL,
+	shipActive BIT NOT NULL DEFAULT 1,
     UNIQUE (shipType, shipDays),
     CHECK (shipDays >= 0),
     CHECK (shipCost >= 0)
@@ -390,11 +392,11 @@ INSERT INTO Stock (prodNumber, sizeID, stkLevel)
 SET IDENTITY_INSERT Shipping ON
 GO
 
-INSERT INTO Shipping (shipID, shipType, shipDays, shipCost)
-    VALUES (1, 'Regular', 7, 10.00),
-           (2, 'Express', 3, 15.00),
-           (3, 'Courier', 1, 20.00),
-           (4, 'The Flash', 0, 99.99)
+INSERT INTO Shipping (shipID, shipType, shipDescription, shipDays, shipCost, shipActive)
+    VALUES (1, 'Regular', 'Regular mail delivery', 7, 10.00, 1),
+           (2, 'Express', 'Express post mail delivery', 3, 15.00, 1),
+           (3, 'Courier', 'Overnight Delivery', 1, 20.00, 1),
+           (4, 'The Flash', 'Fast as you like', 0, 99.99, 1)
 GO
 
 SET IDENTITY_INSERT Shipping OFF
@@ -690,7 +692,14 @@ GO
 CREATE PROCEDURE usp_getShipping
 AS
 BEGIN
-    SELECT shipID, concat(shipType, ' ' + cast(shipDays AS VARCHAR(2)) + ' days' + ' $' + cast(shipCost AS VARCHAR(8))) AS shipFull FROM Shipping
+    SELECT shipID, concat(shipType, ' ' + cast(shipDays AS VARCHAR(2)) + ' days' + ' $' + cast(shipCost AS VARCHAR(8))) AS shipFull FROM Shipping WHERE shipActive = 1
+END
+GO
+
+CREATE PROCEDURE usp_getShippingTable
+AS
+BEGIN
+	SELECT * FROM Shipping
 END
 GO
 
@@ -782,17 +791,36 @@ GO
 
 CREATE PROCEDURE usp_addShipping
 	@type VARCHAR(15),
+	@description VARCHAR(255),
 	@days INT,
 	@cost MONEY
 AS
 BEGIN TRANSACTION
-	DECLARE @shippingID INT
 	IF NOT exists(SELECT shipID FROM Shipping WHERE shipType = @type)
         BEGIN
-            INSERT INTO Shipping(shipType, shipDays, shipCost)
-                VALUES (@type, @days, @cost);
+            INSERT INTO Shipping(shipType, shipDescription, shipDays, shipCost)
+                VALUES (@type, @description, @days, @cost);
         END
 COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_toggleShipActive
+    @shipID INT
+AS
+BEGIN
+    IF (SELECT shipActive FROM Shipping WHERE shipID = @shipID) = 1
+        BEGIN
+            UPDATE Shipping
+            SET shipActive = 0
+            WHERE shipID = @shipID
+        END
+    ELSE
+        BEGIN
+            UPDATE Shipping
+            SET shipActive = 1
+            WHERE shipID = @shipID
+        END
+END
 GO
 
 CREATE PROCEDURE usp_getUserOrders

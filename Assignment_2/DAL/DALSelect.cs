@@ -222,6 +222,24 @@ namespace Assignment_2.DAL
 			return shipDataSet;
 		}
 
+        public static DataSet getShippingTable()
+        {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+	        DataSet shipDataSet = new DataSet();
+
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlDataAdapter adapter = new SqlDataAdapter("usp_getShippingTable", connection);
+
+		        adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+		        adapter.Fill(shipDataSet, "Shipping");
+	        }
+
+	        return shipDataSet;
+        }
+
 		public static DataRow getShippingDetails(int shipID)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;

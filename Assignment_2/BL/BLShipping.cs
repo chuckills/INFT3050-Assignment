@@ -29,5 +29,15 @@ namespace Assignment_2.BL
 
 			return this;
 		}
+
+		public static DataSet getShippingTable()
+		{
+			return DALSelect.getShippingTable();
+		}
+
+		public static void toggleActive(int shipID)
+		{
+			DALUpdate.toggleShipActive(shipID);
+		}
 	}
 }

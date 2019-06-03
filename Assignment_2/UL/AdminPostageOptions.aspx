@@ -4,27 +4,27 @@
 <br />
 <h1>Add Postage Option</h1>
     
-    <asp:ListView ID="lsvPostage" runat="server" ItemType="System.String"
-                  SelectMethod="GetPostageOptions">
-        <EmptyDataTemplate>
-            <li class="list-group-item">No postage options defined...</li>
-        </EmptyDataTemplate>
+    <asp:ListView runat="server" ID="lsvPostage">
         <ItemTemplate>
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-6">
-                        <%#:Item %> 
+                    <%-- Data-bound content. --%>
+                        <asp:Label ID="lblShipID" runat="server" Text='<%#Eval("shipID") %>' />.&nbsp;<asp:Label ID="lblShipType" runat="server" Text='<%#Eval("shipType") %>' />
+                        ,&nbsp;<asp:Label ID="lblShipDesc" runat="server" Text='<%#Eval("shipDescription") %>' />,&nbsp;<asp:Label ID="lblShipCost" runat="server" Text='<%#string.Format("{0:C}",Eval("shipCost")) %>' />
                     </div>
                     <div class="col">
-                        <asp:CheckBox ID="cbxRemove" runat="server" Text="&nbsp;Remove" AutoPostBack="False" />
+                        <asp:CheckBox ID="cbxActive" runat="server" OnCheckedChanged="cbxActive_CheckedChanged" Checked='<%# Eval("shipActive") %>' Text="&nbsp;Active" AutoPostBack="True" />
                     </div>
                 </div>
             </li>
         </ItemTemplate>
     </asp:ListView>
-    <div class="margin-space-bottom-50">
+    
+    <hr/>
+    <%--<div class="margin-space-bottom-50">
         <asp:LinkButton ID="btnRemove" runat="server" CssClass="btn btn-danger" OnClick="btnRemove_Click" CausesValidation="False">Remove Selected</asp:LinkButton>
-    </div>
+    </div>--%>
 <%--Table for Postage options--%>
     <asp:Table ID="tblOptions" runat="server">
         <asp:TableHeaderRow runat="server">

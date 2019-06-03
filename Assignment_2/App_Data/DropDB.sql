@@ -68,6 +68,12 @@ DROP PROCEDURE usp_getSingleOrder
 GO
 DROP PROCEDURE usp_getOrderItems
 GO
+DROP PROCEDURE usp_getShippingTable
+GO
+DROP PROCEDURE usp_addShipping
+GO
+DROP PROCEDURE usp_toggleShipActive
+GO
 DROP TYPE PLAYERTYPE
 GO
 DROP USER jerseysure

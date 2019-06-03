@@ -71,5 +71,10 @@ namespace Assignment_2.DAL
             return rows > 0;
         }
 
+        public static void toggleShipActive(int shipID)
+        {
+
+        }
+
 	}
 }

@@ -91,7 +91,7 @@ namespace Assignment_2.DAL
 
 		public int addNewPurchase(BLPurchase purchase, string[] card)
 		{
-			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+			/*string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 			int rows;
 
 			using (SqlConnection connection = new SqlConnection(cs))
@@ -118,7 +118,7 @@ namespace Assignment_2.DAL
 
 				rows = command.ExecuteNonQuery();
 			}
-			return rows;
+			return rows;*/
 
 			/*
 				ordID INT IDENTITY PRIMARY KEY,
@@ -145,39 +145,12 @@ namespace Assignment_2.DAL
 			    ordID INT UNIQUE NOT NULL,
 
 			 */
-
+			return 0;
 		}
 
-        public int addPostageOption(BLShipping option)
+		public int addPostageOption(BLShipping option)
         {
-            string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
-            int rows;
-
-            using (SqlConnection connection = new SqlConnection(cs))
-            {
-                SqlCommand command = new SqlCommand("usp_addProduct", connection);
-
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.AddWithValue("@playFirst", product.playFirstName);
-                command.Parameters.AddWithValue("@playLast", product.playLastName);
-                command.Parameters.AddWithValue("@jerNumber", product.jerNumber);
-                command.Parameters.AddWithValue("@teamID", product.teamID);
-                command.Parameters.AddWithValue("@prodDescription", product.prodDescription);
-                command.Parameters.AddWithValue("@prodPrice", product.prodPrice);
-                command.Parameters.AddWithValue("@imgFront", product.image[0]);
-                command.Parameters.AddWithValue("@imgBack", product.image[1]);
-                command.Parameters.AddWithValue("@stkSmall", product.stock[0]);
-                command.Parameters.AddWithValue("@stkMedium", product.stock[1]);
-                command.Parameters.AddWithValue("@stkLarge", product.stock[2]);
-                command.Parameters.AddWithValue("@stkXLge", product.stock[3]);
-                command.Parameters.AddWithValue("@stkXXL", product.stock[4]);
-
-                connection.Open();
-
-                rows = command.ExecuteNonQuery();
-            }
-            return rows;
+	        return 0;
         }
     }
 }

@@ -22,15 +22,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.ListView lsvPostage;
         
         /// <summary>
-        /// btnRemove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRemove;
-        
-        /// <summary>
         /// tblOptions control.
         /// </summary>
         /// <remarks>
