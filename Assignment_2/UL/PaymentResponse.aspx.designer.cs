@@ -10,7 +10,7 @@
 namespace Assignment_2.UL {
     
     
-    public partial class PaymentConfirm {
+    public partial class PaymentResponse {
         
         /// <summary>
         /// lblResult control.
