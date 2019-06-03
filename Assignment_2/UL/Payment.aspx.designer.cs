@@ -157,6 +157,15 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvNumber;
         
         /// <summary>
+        /// csvNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator csvNumber;
+        
+        /// <summary>
         /// tbxCardName control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,24 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvName;
+        
+        /// <summary>
+        /// ddlCardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCardType;
+        
+        /// <summary>
+        /// rfvCardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCardType;
         
         /// <summary>
         /// tbxExpiration control.

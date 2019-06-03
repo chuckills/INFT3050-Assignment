@@ -76,6 +76,26 @@ namespace Assignment_2.UL
 			}
         }
 
+		protected void checkNumber(object sender, ServerValidateEventArgs args)
+		{
+			switch (ddlCardType.SelectedValue)
+			{
+				case "MCARD":
+				case "VISA":
+					args.IsValid = tbxCardNumber.Text.Length == 16;
+					break;
+				case "AMEX":
+					args.IsValid = tbxCardNumber.Text.Length == 15;
+					break;
+				case "DINR":
+					args.IsValid = tbxCardNumber.Text.Length == 14;
+					break;
+				default:
+					args.IsValid = false;
+					break;
+			}
+		}
+
 		protected void ddlShipping_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			BLShipping shipping = new BLShipping();

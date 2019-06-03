@@ -190,15 +190,14 @@ CREATE TABLE CartItem
 -- Table of credit card information for order payment
 CREATE TABLE CreditCardPM
 (
-    ccNumber CHAR(16) PRIMARY KEY,
+    ccNumber VARCHAR(16) PRIMARY KEY,
     ccType VARCHAR(5) NOT NULL,
     ccHolderName VARCHAR(60) NOT NULL,
     ccExpiry DATE,
-    --ccExpiryMM INT NOT NULL,
-    --ccExpiryYYYY INT NOT NULL,
     ordID INT UNIQUE NOT NULL,
     FOREIGN KEY (ordID) REFERENCES Orders(ordID),
-    CHECK (ccType IN ('MCARD', 'VISA', 'AMEX')),
+	CHECK (len(ccNumber) >= 14 AND len(ccNumber) <= 16),
+    CHECK (ccType IN ('MCARD', 'VISA', 'AMEX', 'DINR')),
     CHECK (year(ccExpiry) >= year(getdate()) AND month(ccExpiry) >= 1 AND month(ccExpiry) <= 12),
     CHECK (isnumeric(ccNumber) = 1)
 )
