@@ -161,8 +161,8 @@ namespace Assignment_2.DAL
 
                 command.Parameters.AddWithValue("@type", option.Method);
                 command.Parameters.AddWithValue("@description", option.Description);
-                command.Parameters.AddWithValue("@days", option.Cost);
-                command.Parameters.AddWithValue("@cost", option.Wait);
+                command.Parameters.AddWithValue("@days", option.Wait);
+                command.Parameters.AddWithValue("@cost", option.Cost);
 
                 connection.Open();
 

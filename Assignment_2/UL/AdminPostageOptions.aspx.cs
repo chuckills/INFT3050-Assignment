@@ -31,7 +31,7 @@ namespace Assignment_2.UL
                 {
                     Method = tbxMethodName.Text,
                     Description = tbxDescription.Text,
-                    Cost = Double.Parse(tbxPrice.Text),
+                    Cost = Convert.ToDouble(tbxPrice.Text),
                     Wait = Convert.ToInt32(tbxAvgTime.Text)
                 };
 

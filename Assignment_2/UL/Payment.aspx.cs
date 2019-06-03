@@ -91,6 +91,8 @@ namespace Assignment_2.UL
 					args.IsValid = tbxCardNumber.Text.Length == 14 && tbxCardNumber.Text.All(char.IsDigit);
 					break;
 			}
+
+			csvNumber.ErrorMessage = "Invalid CC Number";
 		}
 
 		protected void ddlShipping_SelectedIndexChanged(object sender, EventArgs e)
