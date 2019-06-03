@@ -76,23 +76,21 @@ namespace Assignment_2.UL
 			}
         }
 
-		protected void checkNumber(object sender, ServerValidateEventArgs args)
+		protected void checkCardNumber(object sender, ServerValidateEventArgs args)
 		{
-			switch (ddlCardType.SelectedValue)
+			switch (rblCardType.SelectedValue)
 			{
 				case "MCARD":
 				case "VISA":
-					args.IsValid = tbxCardNumber.Text.Length == 16 && tbxCardNumber.Text.All(char.IsDigit);
+					args.IsValid = args.Value.Length == 16 && args.Value.All(char.IsDigit);
 					break;
 				case "AMEX":
-					args.IsValid = tbxCardNumber.Text.Length == 15 && tbxCardNumber.Text.All(char.IsDigit);
+					args.IsValid = args.Value.Length == 15 && args.Value.All(char.IsDigit);
 					break;
 				case "DINR":
-					args.IsValid = tbxCardNumber.Text.Length == 14 && tbxCardNumber.Text.All(char.IsDigit);
+					args.IsValid = args.Value.Length == 14 && args.Value.All(char.IsDigit);
 					break;
 			}
-
-			csvNumber.ErrorMessage = "Invalid CC Number";
 		}
 
 		protected void ddlShipping_SelectedIndexChanged(object sender, EventArgs e)

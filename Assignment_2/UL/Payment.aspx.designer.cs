@@ -112,15 +112,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.Label lblPostZip;
         
         /// <summary>
-        /// tblDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblDetails;
-        
-        /// <summary>
         /// ddlShipping control.
         /// </summary>
         /// <remarks>
@@ -128,6 +119,42 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlShipping;
+        
+        /// <summary>
+        /// tblCardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblCardType;
+        
+        /// <summary>
+        /// rblCardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblCardType;
+        
+        /// <summary>
+        /// rfvCardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCardType;
+        
+        /// <summary>
+        /// tblDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblDetails;
         
         /// <summary>
         /// tbxCardNumber control.
@@ -148,13 +175,13 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNumber;
         
         /// <summary>
-        /// csvNumber control.
+        /// csvNumberVal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator csvNumber;
+        protected global::System.Web.UI.WebControls.CustomValidator csvNumberVal;
         
         /// <summary>
         /// tbxCardName control.
@@ -173,24 +200,6 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvName;
-        
-        /// <summary>
-        /// ddlCardType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCardType;
-        
-        /// <summary>
-        /// rfvCardType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCardType;
         
         /// <summary>
         /// tbxExpiration control.
@@ -256,22 +265,22 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.Label lblAmount;
         
         /// <summary>
-        /// UpdateProgress1 control.
+        /// upgProcessing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.UpdateProgress upgProcessing;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// uplProcessing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel uplProcessing;
         
         /// <summary>
         /// btnSubmit control.
