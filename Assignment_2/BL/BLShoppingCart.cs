@@ -37,6 +37,12 @@ namespace Assignment_2.BL
 			}
         }
 
+        // Determines status of whether cart contains any items currently
+        public bool isEmpty()
+        {
+            return (Items.Count == 0);
+        }
+
         // Returns string representation of shopping cart model
         public override string ToString()
         {
