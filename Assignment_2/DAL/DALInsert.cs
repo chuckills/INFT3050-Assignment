@@ -150,7 +150,25 @@ namespace Assignment_2.DAL
 
 		public int addPostageOption(BLShipping option)
         {
-	        return 0;
+            string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+            int rows;
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                SqlCommand command = new SqlCommand("usp_addShipping", connection);
+
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@type", option.Method);
+                command.Parameters.AddWithValue("@description", option.Description);
+                command.Parameters.AddWithValue("@days", option.Cost);
+                command.Parameters.AddWithValue("@cost", option.Wait);
+
+                connection.Open();
+
+                rows = command.ExecuteNonQuery();
+            }
+            return rows;
         }
     }
 }

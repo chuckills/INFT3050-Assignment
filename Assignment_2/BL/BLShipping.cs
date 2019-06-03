@@ -11,6 +11,7 @@ namespace Assignment_2.BL
 	{
 		public int Id { get; set; }
 		public string Method { get; set; }
+        public string Description { get; set; }
 		public double Cost { get; set; }
 		public int Wait { get; set; }
 
@@ -24,11 +25,19 @@ namespace Assignment_2.BL
 			DataRow shipping =  DALSelect.getShippingDetails(shipID);
 			Id = Convert.ToInt32(shipping["shipID"]);
 			Method = shipping["shipType"].ToString();
+            Description = shipping["shipDescription"].ToString();
 			Cost = Convert.ToDouble(shipping["shipCost"]);
 			Wait = Convert.ToInt32(shipping["shipDays"]);
 
 			return this;
 		}
+
+        public static bool addShipping(BLShipping shipping)
+        {
+            DALInsert shippingOption = new DALInsert();
+
+            return (shippingOption.addPostageOption(shipping) > 0);
+        }
 
 		public static DataSet getShippingTable()
 		{

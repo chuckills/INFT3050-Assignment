@@ -26,6 +26,18 @@ namespace Assignment_2.UL
             if (IsValid)
             {
                 //postageList.Add(tbxMethodName.Text + ", " + tbxDescription.Text + ", " + tbxAvgTime.Text + ", " + "$" + tbxPrice.Text);
+
+                BLShipping shipping = new BLShipping
+                {
+                    Method = tbxMethodName.Text,
+                    Description = tbxDescription.Text,
+                    Cost = Double.Parse(tbxPrice.Text),
+                    Wait = Convert.ToInt32(tbxAvgTime.Text)
+                };
+
+                BLShipping.addShipping(shipping);
+
+                // Redirect to updated postage options
                 Response.Redirect("~/UL/AdminPostageOptions.aspx");
             }
         }

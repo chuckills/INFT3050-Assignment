@@ -1,4 +1,5 @@
 -- Gregory Choice, Christopher Booth, Dylan Cawsey
+-- Gregory Choice, Christopher Booth, Dylan Cawsey
 -- INFT3050 Assignment 1
 -- Database creation script
 
