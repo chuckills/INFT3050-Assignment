@@ -13,8 +13,11 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        lsvPostage.DataSource = BLShipping.getShippingTable();
-	        lsvPostage.DataBind();
+	        if (!IsPostBack)
+	        {
+		        lsvPostage.DataSource = BLShipping.getShippingTable();
+		        lsvPostage.DataBind();
+	        }
         }
 
         // Adds postage option to currently available options
@@ -29,32 +32,11 @@ namespace Assignment_2.UL
 
         protected void cbxActive_CheckedChanged(object sender, EventArgs e)
         {
-			//BLShipping.toggleActive();
-        }
-
-		// Removes specified postage option from currently available
-		protected void btnRemove_Click(object sender, EventArgs e)
-		{
-            /*CheckBox selected;
-
-            // Iterates through all options and removes specified option
-            ListViewDataItem currDataItem;
-            if (lsvPostage.Items.Count > 0)
-            {
-                for (int i = lsvPostage.Items.Count - 1; i >= 0; i--)
-                {
-                    currDataItem = lsvPostage.Items[i];
-                    selected = currDataItem.FindControl("cbxRemove") as CheckBox;
-                    if (selected.Checked)
-                    {
-                        postageList.RemoveAt(lsvPostage.Items[i].DisplayIndex);
-                    }
-                }
-
-                // Update session of postage options and redirect 
-                Session["PostList"] = postageList;
-                Response.Redirect("~/UL/AdminPostageOptions.aspx");
-            }*/
-        }
+			ListViewItem item = (sender as CheckBox).NamingContainer as ListViewItem;
+	        int index = Convert.ToInt32((item.FindControl("lblShipID") as Label).Text);
+			BLShipping.toggleActive(index);
+			lsvPostage.DataSource = BLShipping.getShippingTable();
+			lsvPostage.DataBind();
+		}
 	}
 }

@@ -71,10 +71,27 @@ namespace Assignment_2.DAL
             return rows > 0;
         }
 
-        public static void toggleShipActive(int shipID)
+        public static bool toggleShipActive(int shipID)
         {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+	        int rows;
 
-        }
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlCommand command = new SqlCommand("usp_toggleShipActive", connection)
+		        {
+			        CommandType = CommandType.StoredProcedure
+		        };
+
+		        command.Parameters.AddWithValue("@shipID", shipID);
+
+		        connection.Open();
+
+		        rows = command.ExecuteNonQuery();
+	        }
+
+	        return rows > 0;
+		}
 
 	}
 }
