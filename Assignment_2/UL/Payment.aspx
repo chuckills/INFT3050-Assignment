@@ -37,6 +37,12 @@
                 <asp:DropDownList ID="ddlShipping" CssClass="form-control" DataTextField="shipFull" DataValueField="shipID" runat="server" OnDataBound="addDefaultItem" OnSelectedIndexChanged="ddlShipping_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
             </asp:TableCell>
         </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server">
+                <asp:RequiredFieldValidator ID="RequiredShipping" runat="server" ErrorMessage="No shipping option selected" ControlToValidate="ddlShipping" ForeColor="red"></asp:RequiredFieldValidator>
+            </asp:TableCell>
+        </asp:TableRow>
         <%--<asp:TableRow runat="server">
             <asp:TableCell runat="server"></asp:TableCell>
             <asp:TableCell runat="server"></asp:TableCell>
