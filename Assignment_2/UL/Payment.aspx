@@ -76,8 +76,15 @@
             <%-- Validation for card number --%>
             <asp:TableCell runat="server">
                 <asp:RequiredFieldValidator ID="rfvNumber" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxCardNumber" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:CustomValidator ID="csvNumberVal" runat="server" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxCardNumber" ErrorMessage="Invalid Number" OnServerValidate="checkCardNumber" SetFocusOnError="True"></asp:CustomValidator>
-                </asp:TableCell>
+                <asp:UpdatePanel ID="uplCard" runat="server">
+                    <ContentTemplate>
+                        <asp:CustomValidator ID="csvNumberVal" runat="server" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxCardNumber" ErrorMessage="Invalid Number" OnServerValidate="checkCardNumber" SetFocusOnError="True"></asp:CustomValidator>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnSubmit" EventName="Click"/>
+                    </Triggers>
+                </asp:UpdatePanel>
+            </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
             <asp:TableCell runat="server">Name on credit card</asp:TableCell>
@@ -123,7 +130,7 @@
         </asp:TableRow>
         <asp:TableRow runat="server">
             <asp:TableCell runat="server"> 
-                <asp:UpdateProgress ID="upgProcessing" runat="server" AssociatedUpdatePanelID="uplProcessing">
+                <asp:UpdateProgress ID="upgProcessing" runat="server" AssociatedUpdatePanelID="uplProcessing" DisplayAfter="100">
                     <ProgressTemplate>
                         Processing payment....
                         <br/>
@@ -133,7 +140,7 @@
                     <ContentTemplate>
                         <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/>
                     </ContentTemplate>
-                </asp:UpdatePanel> 
+                </asp:UpdatePanel>
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>  
