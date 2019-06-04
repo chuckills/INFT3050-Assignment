@@ -11,14 +11,11 @@
                 </div>
                 <div class="form-group">
                     <asp:TextBox ID="Password2TextBox" CssClass="form-control" runat="server" Placeholder="Confirm Password" TextMode="Password"></asp:TextBox>
-                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="Password2TextBox" CssClass="ValidationError" ControlToCompare="Password1TextBox" ErrorMessage="No Match" ToolTip="Password must be the same" />
                     <asp:RequiredFieldValidator ID="rfvPassword2" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="Password2TextBox"></asp:RequiredFieldValidator>
+                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="Password2TextBox" CssClass="text-danger" ControlToCompare="Password1TextBox" ErrorMessage="Passwords do not match" ToolTip="Password must be the same" />
                 </div>
                 <div class="form-group">
                     <asp:Button ID="SubmitButton" runat="server" Text="Update" CssClass="btn btn-danger" OnClick="SubmitButton_Click" />
-                </div>
-                <div class="form-group">
-                    <asp:Label ID="NoMatchErrorLabel" runat="server" ForeColor="Red"></asp:Label>
                 </div>
             </div>
             <div class="col"></div>

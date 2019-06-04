@@ -21,8 +21,7 @@
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">Team</asp:TableCell>
                         <asp:TableCell runat="server">
-                            <asp:DropDownList ID="ddlTeam" CssClass="form-control" runat="server" DataSourceID="dsTeams" DataTextField="teamFull" DataValueField="teamID" OnDataBound="addDefaultItem"></asp:DropDownList>
-                            <asp:SqlDataSource ID="dsTeams" runat="server" ConnectionString="<%$ ConnectionStrings:JerseySure %>" SelectCommand="usp_getTeams" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                            <asp:DropDownList ID="ddlTeam" CssClass="form-control" runat="server" DataTextField="teamFull" DataValueField="teamID" OnDataBound="addDefaultItem"></asp:DropDownList>
                         </asp:TableCell>
                         <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvTeam" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="ddlTeam" InitialValue=""></asp:RequiredFieldValidator></asp:TableCell>
                     </asp:TableRow>

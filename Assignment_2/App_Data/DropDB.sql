@@ -42,6 +42,8 @@ DROP PROCEDURE usp_getUser
 GO
 DROP PROCEDURE usp_getSingleUser
 GO
+DROP PROCEDURE usp_getUserByEmail
+GO
 DROP PROCEDURE usp_getUsers
 GO
 DROP PROCEDURE usp_addUser
@@ -53,6 +55,28 @@ GO
 DROP PROCEDURE usp_getAddress
 GO
 DROP PROCEDURE usp_getProductStock
+GO
+DROP PROCEDURE usp_changeUserPassword
+GO
+DROP PROCEDURE usp_getShipping
+GO
+DROP PROCEDURE usp_getShipDetails
+GO
+DROP PROCEDURE usp_getUserOrders
+GO
+DROP PROCEDURE usp_getSingleOrder
+GO
+DROP PROCEDURE usp_getOrderItems
+GO
+DROP PROCEDURE usp_getShippingTable
+GO
+DROP PROCEDURE usp_addShipping
+GO
+DROP PROCEDURE usp_toggleShipActive
+GO
+DROP PROCEDURE usp_addNewOrder
+GO
+DROP PROCEDURE usp_addOrderItems
 GO
 DROP TYPE PLAYERTYPE
 GO

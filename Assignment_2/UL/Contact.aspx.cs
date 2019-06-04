@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
+using Assignment_2.BL;
 
 namespace Assignment_2.UL
 {
@@ -19,7 +24,44 @@ namespace Assignment_2.UL
         {
             if (IsValid)
             {
-                Response.Redirect("~/UL/ContactResponse.aspx");
+                // Send email with query information
+                BLEmail email = new BLEmail();
+
+                // Generate message body for email
+                string mailbody =
+                      "<p>"
+                    + tbxName.Text + ","
+                    + "</p>"
+                    + "<p>"
+                    + "This is a courtesy email to inform you that we have "
+                    + "received your enquiry and will respond within two business days."
+                    + "</p>"
+                    + "<br/>"
+                    + "<p>"
+                    + "Outlined below is a summary of your submitted enquiry:"
+                    + "</p>"
+                    + "<p>"
+                    + "\"" + tbxQuery.Text + "\""
+                    + "</p>"
+                    + "<br/>"
+                    + "<p>"
+                    + "Kind Regards,"
+                    + "</p>"
+                    + "<p>"
+                    + "The JerseySure Team"
+                    + "</p>";
+
+                try
+                {
+                    email.SendEmail(tbxEmail.Text, "Contact Form Query - JerseySure", mailbody);
+                }
+                catch (Exception ex)
+                {
+                    // Display error page for unable to send email
+                    Response.Redirect("~/UL/ErrorPage?status=1");
+                }
+
+                Response.Redirect("~/UL/SuccessPage?status=2");
             }
         }
     }

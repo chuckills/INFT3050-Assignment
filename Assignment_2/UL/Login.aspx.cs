@@ -8,11 +8,11 @@ using System.Web.UI.WebControls;
 
 namespace Assignment_2.UL
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+	        UsernameTextBox.Focus();
         }
 
         // Checks login credentials and updates login status accordingly if it correct
@@ -36,6 +36,7 @@ namespace Assignment_2.UL
 						LoginErrorLabel.Text = "User account is suspended. Contact admin.";
 						break;
 					default:
+						Session["Name"] = user.userFirstName;
 						Session["CurrentUser"] = user;
 						Session["UserName"] = user.userEmail;
 						if (user.userAdmin)
@@ -50,6 +51,11 @@ namespace Assignment_2.UL
 						break;
 				}
             }
+        }
+
+        protected void ForgotPasswordButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UL/ForgotPassword");
         }
     }
 }

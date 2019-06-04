@@ -13,6 +13,9 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+	        ddlTeam.DataSource = BLProduct.getTeams();
+	        ddlTeam.DataBind();
+
 			BLProduct product = Session["Product"] as BLProduct;
 			tbxFirstName.Text = product.playFirstName;
 			tbxLastName.Text = product.playLastName;

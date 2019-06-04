@@ -52,7 +52,7 @@
                   <span class="navbar-toggler-icon"></span>
             </button>
               
-              <asp:Label ID="lblUser" CssClass="text-white" runat="server"></asp:Label>
+            <asp:Label ID="lblUser" runat="server"></asp:Label>
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -73,9 +73,20 @@
                         <li class="nav-item">
                             <a runat="server" href="~/UL/Contact" class="nav-link">Contact</a>
                         </li>
+                      <li class="nav-item">
+                          <a runat="server" href="~/UL/Cart" class="nav-link">Cart</a>
+                      </li>
                  <% }
                     else
                     { %>
+                      <li class="nav-item dropdown">
+                          <a runat="server" href="#" class="nav-link dropdown-toggle admin-nav-link" id="A1" data-toggle="dropdown">Admin</a>
+                          <div class="dropdown-menu">
+                              <a runat="server" href="~/UL/AdminRegistration" class="dropdown-item">Admin Registration</a>
+                              <a runat="server" href="~/UL/AdminManageUserAccounts" class="dropdown-item">Manage User Accounts</a>
+                              <a runat="server" href="~/UL/AdminPostageOptions" class="dropdown-item">Postage Options</a>
+                          </div>
+                      </li>
                         <li class="nav-item dropdown">
                             <a runat="server" href="#" 
                                 class="nav-link dropdown-toggle admin-nav-link" id="A2" data-toggle="dropdown">Product Management</a>
@@ -109,47 +120,17 @@
                     <%  } %>
                     </div>
                 </li>
-                <% // Display admin tab in main navigation bar if user is an admin
-                    if (LoginStatus.Equals("Admin"))
+                <% 
+                    if (!LoginStatus.Equals("Admin"))
+                    // Only display search to a non-admin user
                     { %>
-                        <li class="nav-item dropdown">
-                            <a runat="server" href="#" class="nav-link dropdown-toggle admin-nav-link" id="A1" data-toggle="dropdown">Admin</a>
-                            <div class="dropdown-menu">
-                                <a runat="server" href="~/UL/AdminRegistration" class="dropdown-item">Admin Registration</a>
-                                <a runat="server" href="~/UL/AdminManageUserAccounts" class="dropdown-item">Manage User Accounts</a>
-                                <a runat="server" href="~/UL/AdminPostageOptions" class="dropdown-item">Postage Options</a>
-                            </div>
-                        </li>
-                 <% }
-                    // Only display cart and product search to a non-admin user
-                    else
-                    { %>
-                        <li class="nav-item">
-                          <a runat="server" href="~/UL/Cart" class="nav-link">Cart</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <!-- Search form -->
-                            <asp:Panel runat="server" DefaultButton="SubmitSearch">
-                                <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" Placeholder="Search Products..." MaxLength="30"></asp:TextBox>
-                                <asp:Button ID="SubmitSearch" runat="server" Text="Button" OnClick="SubmitSearch_Click" CssClass="hide" />
+                            <asp:Panel ID="pnlSearchPanel" runat="server" DefaultButton="SubmitSearch">
+                                <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" Placeholder="Search Products..." MaxLength="30" CausesValidation="False" ></asp:TextBox>
+                                <asp:Button ID="SubmitSearch" runat="server" Text="Button" OnClick="SubmitSearch_Click" CssClass="hide" CausesValidation="False" />
                             </asp:Panel>
-                            
-
-                            <%--<div class="active-pink-4 mb-4 search-navbar">
-                                <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" Placeholder="Search Products..."></asp:TextBox>
-                                <asp:Button ID="SubmitSearch" runat="server" Text="Button" OnClick="SubmitSearch_Click" CssClass="hide" />
-                            </div>
-
-                            <script>
-                                function button_click(objTextBox,objBtnID)
-                                {
-                                    if(window.event.keyCode==13)
-                                    {
-                                        document.getElementById(objBtnID).focus();
-                                        document.getElementById(objBtnID).click();
-                                    }
-                                }
-                            </script>--%>
                         </li>
                  <% } %>
               </ul>
@@ -158,8 +139,7 @@
         </nav>
 
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
         </div>
 
     </form>

@@ -58,6 +58,7 @@ namespace Assignment_2.UL
 				
 				Session["CurrentUser"] = newUser;
 				Session["UserName"] = newUser.userEmail;
+				Session["Name"] = newUser.userFirstName;
 				Session["LoginStatus"] = "User";
 
 				Response.Redirect("~/UL/Default");

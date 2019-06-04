@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,9 +12,10 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        if (Session["UserName"] != null)
+	        if (Session["Name"] != null)
 	        {
-		        lblUser.Text = "Hi, " + Session["UserName"].ToString();
+		        lblUser.ForeColor = Session["LoginStatus"].ToString() == "Admin" ? Color.Red : Color.White;
+		        lblUser.Text = "Hi, " + Session["Name"];
 	        }
 	        else
 	        {
@@ -23,12 +25,11 @@ namespace Assignment_2.UL
 
         protected void SubmitSearch_Click(object sender, EventArgs e)
         {
-            //if (SearchTextBox.Text != "")
-            //{
-                HttpContext.Current.Session["SearchString"] = SearchTextBox.Text;
-                Response.Redirect("~/UL/Products.aspx");
-            //}
-      
+	        if (SearchTextBox.Text != "")
+	        {
+		        HttpContext.Current.Session["SearchString"] = SearchTextBox.Text;
+		        Response.Redirect("~/UL/Products.aspx");
+	        }
         }
     }
 }

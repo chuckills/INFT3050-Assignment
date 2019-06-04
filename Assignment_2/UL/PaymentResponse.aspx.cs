@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Assignment_2.UL
 {
-    public partial class PaymentConfirm : System.Web.UI.Page
+    public partial class PaymentResponse : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+	        lblResult.Text = Session["Result"].ToString();
         }
     }
 }

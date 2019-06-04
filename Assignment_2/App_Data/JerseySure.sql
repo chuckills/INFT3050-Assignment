@@ -144,8 +144,10 @@ CREATE TABLE Shipping
 (
     shipID INT IDENTITY PRIMARY KEY,
     shipType VARCHAR(15) NOT NULL, -- Type of shipping
+	shipDescription VARCHAR(255) NOT NULL,
     shipDays INT NOT NULL, -- Average number of days to ship
     shipCost MONEY NOT NULL,
+	shipActive BIT NOT NULL DEFAULT 1,
     UNIQUE (shipType, shipDays),
     CHECK (shipDays >= 0),
     CHECK (shipCost >= 0)
@@ -158,7 +160,7 @@ CREATE TABLE Orders
     ordDate DATE NOT NULL DEFAULT getdate(),
     ordSubTotal MONEY NOT NULL, -- Subtotal of all products
     ordTotal MONEY NOT NULL, -- Total price, Subtotal + Shipping
-    ordGST MONEY NOT NULL, -- ordTotal * 0.1
+    ordGST MONEY NOT NULL, -- ordTotal / 11
     ordPaid BIT DEFAULT 0 NOT NULL, -- Paid or not paid?
     shipID INT NOT NULL, -- ID of the shipping method
 	userID INT NOT NULL, -- ID of the user,
@@ -175,6 +177,7 @@ CREATE TABLE CartItem
     prodNumber VARCHAR(8) NOT NULL,
     sizeID VARCHAR(3) NOT NULL,
     cartQuantity INT NOT NULL, -- Quantity of the product to order
+    cartUnitPrice MONEY NOT NULL,
     cartProductTotal MONEY NOT NULL, -- cartQuantity * prodPrice
     PRIMARY KEY (userID, ordID, sizeID, prodNumber),
     FOREIGN KEY (userID) REFERENCES Users(userID),
@@ -187,15 +190,15 @@ CREATE TABLE CartItem
 -- Table of credit card information for order payment
 CREATE TABLE CreditCardPM
 (
-    ccNumber CHAR(16) PRIMARY KEY,
+    ccNumber VARCHAR(16),
     ccType VARCHAR(5) NOT NULL,
     ccHolderName VARCHAR(60) NOT NULL,
     ccExpiry DATE,
-    --ccExpiryMM INT NOT NULL,
-    --ccExpiryYYYY INT NOT NULL,
     ordID INT UNIQUE NOT NULL,
+    PRIMARY KEY (ccNumber, ordID),
     FOREIGN KEY (ordID) REFERENCES Orders(ordID),
-    CHECK (ccType IN ('MCARD', 'VISA', 'AMEX')),
+	CHECK (len(ccNumber) >= 14 AND len(ccNumber) <= 16),
+    CHECK (ccType IN ('MCARD', 'VISA', 'AMEX', 'DINR')),
     CHECK (year(ccExpiry) >= year(getdate()) AND month(ccExpiry) >= 1 AND month(ccExpiry) <= 12),
     CHECK (isnumeric(ccNumber) = 1)
 )
@@ -389,11 +392,11 @@ INSERT INTO Stock (prodNumber, sizeID, stkLevel)
 SET IDENTITY_INSERT Shipping ON
 GO
 
-INSERT INTO Shipping (shipID, shipType, shipDays, shipCost)
-    VALUES (1, 'Regular', 7, 10.00),
-           (2, 'Express', 3, 15.00),
-           (3, 'Courier', 1, 20.00),
-           (4, 'The Flash', 0, 99.99)
+INSERT INTO Shipping (shipID, shipType, shipDescription, shipDays, shipCost, shipActive)
+    VALUES (1, 'Regular', 'Regular mail delivery', 7, 10.00, 1),
+           (2, 'Express', 'Express post mail delivery', 3, 15.00, 1),
+           (3, 'Courier', 'Overnight Delivery', 1, 20.00, 1),
+           (4, 'The Flash', 'Fast as you like', 0, 99.99, 1)
 GO
 
 SET IDENTITY_INSERT Shipping OFF
@@ -447,8 +450,8 @@ SET IDENTITY_INSERT Orders ON
 GO
 
 INSERT INTO Orders (ordID, ordSubTotal, ordTotal, ordGST, ordPaid, shipID, userID)
-    VALUES (1, 200, 210, 21, 1, 1, 1),
-           (2, 100, 199.99, 19.99, 1, 4, 3)
+    VALUES (1, 200, 210, 19.0909, 1, 1, 1),
+           (2, 100, 199.99, 18.0909, 1, 4, 3)
 GO
 
 SET IDENTITY_INSERT Orders OFF
@@ -457,10 +460,10 @@ GO
 -- CartItem
 --===================================================================================
 
-INSERT INTO CartItem (userID, ordID, prodNumber, sizeID, cartQuantity, cartProductTotal)
-    VALUES (1, 1, 'BOS00001', 'L', 1, 100),
-           (1, 1, 'BOS00001', 'S', 1, 100),
-           (3, 2, 'LAL00003', 'XXL', 1, 100)
+INSERT INTO CartItem (userID, ordID, prodNumber, sizeID, cartQuantity, cartProductTotal, cartUnitPrice)
+    VALUES (1, 1, 'BOS00001', 'L', 1, 100, 100),
+           (1, 1, 'BOS00001', 'S', 1, 100, 100),
+           (3, 2, 'LAL00003', 'XXL', 1, 100, 100)
 GO
 
 -- CreditCardPM
@@ -490,7 +493,7 @@ AS
 BEGIN
     SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
     FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
-    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID 
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID
 		AND (t.teamLocale LIKE '%'+@search+'%' OR t.teamName LIKE '%'+@search+'%' OR pl.playFirstName LIKE '%'+@search+'%' OR pl.playLastName LIKE '%'+@search+'%')
 END
 GO
@@ -538,6 +541,16 @@ BEGIN
     SELECT *
     FROM Users
     WHERE userID = @user
+END
+GO
+
+CREATE PROCEDURE usp_getUserByEmail
+    @email VARCHAR(255)
+AS
+BEGIN
+    SELECT *
+    FROM Users
+    WHERE userEmail = @email
 END
 GO
 
@@ -658,10 +671,43 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
-CREATE PROCEDURE  usp_getTeams
+CREATE PROCEDURE usp_changeUserPassword
+    @username VARCHAR(255),
+    @password VARCHAR(32)
+AS
+BEGIN
+    UPDATE Users
+    SET userPassword = @password
+    WHERE userEmail = @username
+END
+GO
+
+CREATE PROCEDURE usp_getTeams
 AS
 BEGIN
     SELECT teamID, concat(teamLocale, ' ' + teamName) AS teamFull FROM Team
+END
+GO
+
+CREATE PROCEDURE usp_getShipping
+AS
+BEGIN
+    SELECT shipID, concat(shipType, ' ' + cast(shipDays AS VARCHAR(2)) + ' days' + ' $' + cast(shipCost AS VARCHAR(8))) AS shipFull FROM Shipping WHERE shipActive = 1
+END
+GO
+
+CREATE PROCEDURE usp_getShippingTable
+AS
+BEGIN
+	SELECT * FROM Shipping
+END
+GO
+
+CREATE PROCEDURE usp_getShipDetails
+    @shipID INT
+AS
+BEGIN
+    SELECT * FROM Shipping WHERE shipID = @shipID
 END
 GO
 
@@ -740,6 +786,103 @@ BEGIN TRANSACTION
                ('L', @prodNum, @stkLarge),
                ('XL', @prodNum, @stkXLge),
                ('XXL', @prodNum, @stkXXL)
+COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_addShipping
+	@type VARCHAR(15),
+	@description VARCHAR(255),
+	@days INT,
+	@cost MONEY
+AS
+BEGIN TRANSACTION
+	IF NOT exists(SELECT shipID FROM Shipping WHERE shipType = @type)
+        BEGIN
+            INSERT INTO Shipping(shipType, shipDescription, shipDays, shipCost)
+                VALUES (@type, @description, @days, @cost);
+        END
+COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_toggleShipActive
+    @shipID INT
+AS
+BEGIN
+    IF (SELECT shipActive FROM Shipping WHERE shipID = @shipID) = 1
+        BEGIN
+            UPDATE Shipping
+            SET shipActive = 0
+            WHERE shipID = @shipID
+        END
+    ELSE
+        BEGIN
+            UPDATE Shipping
+            SET shipActive = 1
+            WHERE shipID = @shipID
+        END
+END
+GO
+
+CREATE PROCEDURE usp_getUserOrders
+    @userID INT
+AS
+BEGIN
+    SELECT * FROM Orders WHERE userID = @userID;
+END
+GO
+
+CREATE PROCEDURE usp_getSingleOrder
+    @orderID INT
+AS
+BEGIN
+    SELECT * FROM Orders WHERE ordID = @orderID
+END
+GO
+
+CREATE PROCEDURE usp_getOrderItems
+    @orderID INT
+AS
+BEGIN
+    SELECT c.prodNumber, c.sizeID, c.cartQuantity, pl.playFirstName, pl.playLastName, pr.prodDescription, c.cartUnitPrice
+    FROM Orders o, CartItem c, Users u, Product pr, Player pl
+    WHERE o.ordID = @orderID AND o.userID = u.userID AND c.ordID = o.ordID AND c.prodNumber = pr.prodNumber AND pr.playID = pl.playID
+END
+GO
+
+CREATE PROCEDURE usp_addNewOrder
+    @ordID INT OUTPUT,
+    @ordSubTotal MONEY,
+    @ordTotal MONEY,
+    @ordGST MONEY,
+    @ordPaid BIT,
+    @shipID INT,
+    @userID INT,
+    @ccHolderName VARCHAR(30),
+    @ccNumber VARCHAR(16),
+    @ccExpiry DATE,
+    @ccType VARCHAR(5)
+AS
+BEGIN TRANSACTION
+    INSERT INTO Orders(ordSubTotal, ordTotal, ordGST, ordPaid, shipID, userID)
+        VALUES (@ordSubTotal, @ordTotal, @ordGST, @ordPaid, @shipID, @userID)
+    SET @ordID = SCOPE_IDENTITY()
+    INSERT INTO CreditCardPM(ccNumber, ccType, ccHolderName, ccExpiry, ordID)
+        VALUES (@ccNumber, @ccType, @ccHolderName, @ccExpiry, @ordID)
+COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_addOrderItems
+    @userID INT,
+	@ordID INT,
+	@prodNumber VARCHAR(8),
+	@sizeID VARCHAR(3),
+	@cartQuantity INT,
+	@cartUnitPrice MONEY,
+	@cartProductTotal MONEY
+AS
+BEGIN TRANSACTION
+    INSERT INTO CartItem(userID, ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal)
+        VALUES (@userID, @ordID, @prodNumber, @sizeID, @cartQuantity, @cartUnitPrice, @cartProductTotal)
 COMMIT TRANSACTION
 GO
 

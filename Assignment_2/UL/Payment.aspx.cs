@@ -15,55 +15,99 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
+	        if (!IsPostBack)
+	        {
+		        double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
 
-	        lblAmount.Text = string.Format("{0:C}", amount);
+		        lblAmount.Text = string.Format("{0:C}", amount);
+
+		        ddlShipping.DataSource = BLShipping.getShippingMethods();
+		        ddlShipping.DataBind();
+
+		        BLUser user = Session["CurrentUser"] as BLUser;
+
+		        lblFirst.Text = user.userFirstName;
+		        lblLast.Text = user.userLastName;
+		        lblBillStreet.Text = user.billAddress.addStreet;
+		        lblBillSuburb.Text = user.billAddress.addSuburb;
+		        lblBillState.Text = user.billAddress.addState;
+		        lblBillZip.Text = user.billAddress.addZip.ToString();
+		        lblPostStreet.Text = user.postAddress.addStreet;
+		        lblPostSuburb.Text = user.postAddress.addSuburb;
+		        lblPostState.Text = user.postAddress.addState;
+		        lblPostZip.Text = user.postAddress.addZip.ToString();
+	        }
         }
-		
-        protected void btnSubmit_Click(object sender, EventArgs e)
+
+        protected void addDefaultItem(object sender, EventArgs e)
+        {
+	        ddlShipping.Items.Insert(0, new ListItem("Select a shipping method...", ""));
+        }
+
+		protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (IsValid)
             {
-	            IPaymentSystem paymentSystem = INFT3050PaymentFactory.Create();
+				BLPurchase purchase = new BLPurchase(Session["Cart"] as BLShoppingCart, Session["CurrentUser"] as BLUser, Session["Shipping"] as BLShipping);
 
-	            PaymentRequest pr = new PaymentRequest
-	            {
-		            Amount = Convert.ToDecimal((Session["Cart"] as BLShoppingCart).Amount),
-		            CardNumber = tbxCardNumber.Text,
-		            CardName = tbxCardName.Text,
-		            CVC = Convert.ToInt32(tbxCSC.Text),
-		            Expiry = Convert.ToDateTime("01-" + tbxExpiration.Text),
-		            Description = "BCD Group - JerseySure"
-	            };
+				string[] card = {tbxCardName.Text, tbxCardNumber.Text, tbxCSC.Text, tbxExpiration.Text, rblCardType.SelectedValue};
 
-				Task<PaymentResult> result = paymentSystem.MakePayment(pr);
+				TransactionResult result = purchase.processPurchase(card);
 
-				switch (result.Result.TransactionResult)
+				Session["Result"] = result;
+
+				switch (result)
 				{
-					case (TransactionResult.Approved):
+					case TransactionResult.Approved:
+
+						int rows = BLPurchase.storePurchase(purchase, card);
+
 						Session.Remove("Cart");
 						Session["Cart"] = new BLShoppingCart();
-						Session["Result"] = TransactionResult.Approved;
 						Response.Redirect("~/UL/PaymentConfirmation.aspx");
 						break;
-					case (TransactionResult.Declined):
-						Session["Result"] = TransactionResult.Declined;
-						Response.Redirect("~/UL/PaymentResponse.aspx");
-						break;
-					case (TransactionResult.InvalidCard):
-						Session["Result"] = TransactionResult.InvalidCard;
-						Response.Redirect("~/UL/PaymentResponse.aspx");
-						break;
-					case (TransactionResult.InvalidExpiry):
-						Session["Result"] = TransactionResult.InvalidExpiry;
-						Response.Redirect("~/UL/PaymentResponse.aspx");
-						break;
-					case (TransactionResult.ConnectionFailure):
-						Session["Result"] = TransactionResult.ConnectionFailure;
+					case TransactionResult.Declined:
+					case TransactionResult.InvalidCard:
+					case TransactionResult.InvalidExpiry:
+					case TransactionResult.ConnectionFailure:
 						Response.Redirect("~/UL/PaymentResponse.aspx");
 						break;
 				}
 			}
         }
-    }
+
+		protected void checkCardNumber(object sender, ServerValidateEventArgs args)
+		{
+			switch (rblCardType.SelectedValue)
+			{
+				case "MCARD":
+				case "VISA":
+					args.IsValid = args.Value.Length == 16 && args.Value.All(char.IsDigit);
+					break;
+				case "AMEX":
+					args.IsValid = args.Value.Length == 15 && args.Value.All(char.IsDigit);
+					break;
+				case "DINR":
+					args.IsValid = args.Value.Length == 14 && args.Value.All(char.IsDigit);
+					break;
+			}
+		}
+
+		protected void ddlShipping_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			BLShipping shipping = new BLShipping();
+			double amount;
+
+			if (ddlShipping.SelectedValue != "")
+			{
+				shipping = shipping.getShipping(Convert.ToInt32(ddlShipping.SelectedValue));
+				Session["Shipping"] = shipping;
+				amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount) + shipping.Cost;
+			}
+			else
+				amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
+
+			lblAmount.Text = string.Format("{0:C}", amount);
+		}
+	}
 }

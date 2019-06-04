@@ -88,5 +88,82 @@ namespace Assignment_2.DAL
 			}
 			return rows;
 		}
-	}
+
+		public int addNewPurchase(BLPurchase purchase, string[] card)
+		{
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+			int rows;
+
+			using (SqlConnection connection = new SqlConnection(cs))
+			{
+				SqlCommand command = new SqlCommand("usp_addNewOrder", connection);
+
+				SqlParameter orderID = new SqlParameter
+				{
+					ParameterName = "@ordID",
+					SqlDbType = SqlDbType.Int,
+					Direction = ParameterDirection.Output
+				};
+
+				command.CommandType = CommandType.StoredProcedure;
+
+				command.Parameters.Add(orderID);
+				command.Parameters.AddWithValue("@ordSubTotal", purchase.Cart.Amount);
+				command.Parameters.AddWithValue("@ordTotal", purchase.Cart.Amount + purchase.Shipping.Cost);
+				command.Parameters.AddWithValue("@ordGST", (purchase.Cart.Amount + purchase.Shipping.Cost)/11);
+				command.Parameters.AddWithValue("@ordPaid", true);
+				command.Parameters.AddWithValue("@shipID", purchase.Shipping.Id);
+				command.Parameters.AddWithValue("@userID", purchase.User.userID);
+				command.Parameters.AddWithValue("@ccHolderName", card[0]);
+				command.Parameters.AddWithValue("@ccNumber", card[1]);
+				command.Parameters.AddWithValue("@ccExpiry", "1-" + card[3]);
+				command.Parameters.AddWithValue("@ccType", card[4]);
+
+				connection.Open();
+				
+				rows = command.ExecuteNonQuery();
+
+				foreach (BLCartItem item in purchase.Cart.Items)
+				{
+					command = new SqlCommand("usp_addOrderItems", connection);
+					command.CommandType = CommandType.StoredProcedure;
+
+					command.Parameters.AddWithValue("@userID", purchase.User.userID);
+					command.Parameters.AddWithValue("@ordID", orderID.Value);
+					command.Parameters.AddWithValue("@prodNumber", item.Product.prodNumber);
+					command.Parameters.AddWithValue("@sizeID", item.Size);
+					command.Parameters.AddWithValue("@cartQuantity", item.Quantity);
+					command.Parameters.AddWithValue("@cartUnitPrice", item.ItemTotal / item.Quantity);
+					command.Parameters.AddWithValue("@cartProductTotal", item.ItemTotal);
+					
+					rows += command.ExecuteNonQuery();
+				}
+			}
+
+			return rows;
+		}
+
+		public int addPostageOption(BLShipping option)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+            int rows;
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                SqlCommand command = new SqlCommand("usp_addShipping", connection);
+
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@type", option.Method);
+                command.Parameters.AddWithValue("@description", option.Description);
+                command.Parameters.AddWithValue("@days", option.Wait);
+                command.Parameters.AddWithValue("@cost", option.Cost);
+
+                connection.Open();
+
+                rows = command.ExecuteNonQuery();
+            }
+            return rows;
+        }
+    }
 }

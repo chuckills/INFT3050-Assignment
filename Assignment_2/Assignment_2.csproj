@@ -129,7 +129,6 @@
     <Content Include="UL\Cart.aspx" />
     <Content Include="UL\ChangePassword.aspx" />
     <Content Include="UL\Contact.aspx" />
-    <Content Include="UL\ContactResponse.aspx" />
     <Content Include="UL\Content\bootstrap-grid.css" />
     <Content Include="UL\Content\bootstrap-grid.min.css" />
     <Content Include="UL\Content\bootstrap-reboot.css" />
@@ -138,9 +137,11 @@
     <Content Include="UL\Content\bootstrap.min.css" />
     <Content Include="UL\Content\Site.css" />
     <Content Include="UL\Content\style.css" />
+    <Content Include="UL\ErrorPage.aspx" />
     <Content Include="UL\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\JerseySure.sql" />
+    <Content Include="UL\ForgotPassword.aspx" />
     <Content Include="UL\GuestRegistration.aspx" />
     <Content Include="UL\Images\JerseyAdmin.png" />
     <Content Include="UL\Images\jerseys\Jersey.png" />
@@ -252,6 +253,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="UL\SingleProductPage.aspx" />
     <Content Include="UL\Site.Master" />
+    <Content Include="UL\SuccessPage.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -263,11 +265,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\BLAddress.cs" />
+    <Compile Include="BL\BLEmail.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="BL\BLPurchase.cs" />
     <Compile Include="BL\INFT3050PaymentFactory.cs" />
     <Compile Include="BL\INFT3050PaymentSystem.cs" />
     <Compile Include="BL\IPaymentSystem.cs" />
+    <Compile Include="BL\BLPassword.cs" />
+    <Compile Include="BL\BLShipping.cs" />
     <Compile Include="DAL\DALArchive.cs" />
     <Compile Include="DAL\DALInsert.cs" />
     <Compile Include="DAL\DALSelect.cs" />
@@ -365,15 +370,22 @@
     <Compile Include="UL\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UL\ContactResponse.aspx.cs">
-      <DependentUpon>ContactResponse.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UL\ContactResponse.aspx.designer.cs">
-      <DependentUpon>ContactResponse.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="UL\ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UL\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="UL\GuestRegistration.aspx.cs">
       <DependentUpon>GuestRegistration.aspx</DependentUpon>
@@ -472,6 +484,13 @@
     </Compile>
     <Compile Include="UL\Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UL\SuccessPage.aspx.cs">
+      <DependentUpon>SuccessPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\SuccessPage.aspx.designer.cs">
+      <DependentUpon>SuccessPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
