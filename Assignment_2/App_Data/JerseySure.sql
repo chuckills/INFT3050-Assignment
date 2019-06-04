@@ -849,6 +849,18 @@ BEGIN
 END
 GO
 
+CREATE TYPE CARTITEMTYPE AS TABLE
+(
+    userID INT,
+	prodNumber VARCHAR(8),
+	sizeID VARCHAR(3),
+	cartQuantity INT,
+	cartUnitPrice MONEY,
+	cartProductTotal MONEY
+    PRIMARY KEY (userID, prodNumber, sizeID)
+)
+GO
+
 CREATE PROCEDURE usp_addNewOrder
     @ordID INT OUTPUT,
     @ordSubTotal MONEY,
@@ -860,7 +872,8 @@ CREATE PROCEDURE usp_addNewOrder
     @ccHolderName VARCHAR(30),
     @ccNumber VARCHAR(16),
     @ccExpiry DATE,
-    @ccType VARCHAR(5)
+    @ccType VARCHAR(5),
+    @cartItems CARTITEMTYPE READONLY
 AS
 BEGIN TRANSACTION
     INSERT INTO Orders(ordSubTotal, ordTotal, ordGST, ordPaid, shipID, userID)
@@ -868,21 +881,8 @@ BEGIN TRANSACTION
     SET @ordID = SCOPE_IDENTITY()
     INSERT INTO CreditCardPM(ccNumber, ccType, ccHolderName, ccExpiry, ordID)
         VALUES (@ccNumber, @ccType, @ccHolderName, @ccExpiry, @ordID)
-COMMIT TRANSACTION
-GO
-
-CREATE PROCEDURE usp_addOrderItems
-    @userID INT,
-	@ordID INT,
-	@prodNumber VARCHAR(8),
-	@sizeID VARCHAR(3),
-	@cartQuantity INT,
-	@cartUnitPrice MONEY,
-	@cartProductTotal MONEY
-AS
-BEGIN TRANSACTION
-    INSERT INTO CartItem(userID, ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal)
-        VALUES (@userID, @ordID, @prodNumber, @sizeID, @cartQuantity, @cartUnitPrice, @cartProductTotal)
+    INSERT INTO CartItem (userID, ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal)
+        SELECT userID, @ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal FROM @cartItems
 COMMIT TRANSACTION
 GO
 

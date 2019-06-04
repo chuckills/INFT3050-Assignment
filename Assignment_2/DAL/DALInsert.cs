@@ -119,25 +119,29 @@ namespace Assignment_2.DAL
 				command.Parameters.AddWithValue("@ccExpiry", "1-" + card[3]);
 				command.Parameters.AddWithValue("@ccType", card[4]);
 
+				DataTable cartItems = new DataTable("CartItems");
+				cartItems.Columns.Add("userID", typeof(int));
+				cartItems.Columns.Add("prodNumber", typeof(string));
+				cartItems.Columns.Add("sizeID", typeof(string));
+				cartItems.Columns.Add("cartQuantity", typeof(int));
+				cartItems.Columns.Add("cartUnitPrice", typeof(double));
+				cartItems.Columns.Add("cartProductTotal", typeof(double));
+				foreach (BLCartItem item in purchase.Cart.Items)
+				{
+					cartItems.Rows.Add(purchase.User.userID, item.Product.prodNumber, item.Size, item.Quantity, item.ItemTotal / item.Quantity, item.ItemTotal);
+				}
+
+				SqlParameter parameter = new SqlParameter
+				{
+					ParameterName = "@cartItems",
+					SqlDbType = SqlDbType.Structured,
+					Value = cartItems
+				};
+				command.Parameters.Add(parameter);
+
 				connection.Open();
 				
 				rows = command.ExecuteNonQuery();
-
-				foreach (BLCartItem item in purchase.Cart.Items)
-				{
-					command = new SqlCommand("usp_addOrderItems", connection);
-					command.CommandType = CommandType.StoredProcedure;
-
-					command.Parameters.AddWithValue("@userID", purchase.User.userID);
-					command.Parameters.AddWithValue("@ordID", orderID.Value);
-					command.Parameters.AddWithValue("@prodNumber", item.Product.prodNumber);
-					command.Parameters.AddWithValue("@sizeID", item.Size);
-					command.Parameters.AddWithValue("@cartQuantity", item.Quantity);
-					command.Parameters.AddWithValue("@cartUnitPrice", item.ItemTotal / item.Quantity);
-					command.Parameters.AddWithValue("@cartProductTotal", item.ItemTotal);
-					
-					rows += command.ExecuteNonQuery();
-				}
 			}
 
 			return rows;
