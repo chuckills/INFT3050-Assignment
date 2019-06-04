@@ -9,7 +9,7 @@ namespace Assignment_2.BL
 {
     public class BLEmail
     {
-        public void SendEmail(string to, string subject, string mailbody)
+        public static void SendEmail(string to, string subject, string mailbody)
         {
             // Send email with query information
             // Sourced from: https://www.c-sharpcorner.com/UploadFile/2a6dc5/how-to-send-a-email-using-Asp-Net-C-Sharp/

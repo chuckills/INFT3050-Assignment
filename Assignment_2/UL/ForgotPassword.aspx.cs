@@ -30,8 +30,6 @@ namespace Assignment_2.UL
                 BLUser.updateUserPassword(user, randomCode);
 
                 // Attach email address and hashed password as parameters for url to update password (sent in the email)
-                BLEmail email = new BLEmail();
-
                 string mailbody =
                     "<p>"
                     + "Hi,"
@@ -53,7 +51,7 @@ namespace Assignment_2.UL
 
                 try
                 {
-                    email.SendEmail(EmailTextBox.Text, "Verification Link - JerseySure", mailbody);
+                    BLEmail.SendEmail(EmailTextBox.Text, "Verification Link - JerseySure", mailbody);
                 }
                 catch (Exception ex)
                 {
