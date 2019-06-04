@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Assignment_2.BL;
 
 namespace Assignment_2.UL
 {
@@ -25,7 +26,7 @@ namespace Assignment_2.UL
                 + "</p>"
                 + "<div>"
                 + "<table style=\"border-collapse: collapse; border: 1px solid black;\">"
-                +"<tr>"
+                + "<tr>"
                 + "<th style=\"border: 1px solid black; padding: 2px 5px;\">Quantity</th>"
                 + "<th style=\"border: 1px solid black; padding: 2px 5px;\">Size</th>"
                 + "<th style=\"border: 1px solid black; padding: 2px 5px;\">Item</th>"
@@ -36,42 +37,42 @@ namespace Assignment_2.UL
             {
                 mailbody +=
                     "<tr>"
-                    + "<td style=\"border: 1px solid black; padding: 2px 5px;\">" +item.Quantity +"</td>"
+                    + "<td style=\"border: 1px solid black; padding: 2px 5px;\">" + item.Quantity + "</td>"
                     + "<td style=\"border: 1px solid black; padding: 2px 5px;\">" + item.Size + "</td>"
-                    + "<td style=\"border: 1px solid black; padding: 2px 5px;\">" 
+                    + "<td style=\"border: 1px solid black; padding: 2px 5px;\">"
                     + item.Product.playFirstName
                     + " "
                     + item.Product.playLastName
                     + " - "
-                    + item.Product.prodDescription 
+                    + item.Product.prodDescription
                     + "</td>"
                     + "<td style=\"border: 1px solid black; padding: 2px 5px;\">$" + item.ItemTotal + "</td>"
                     + "</tr>";
             }
 
 
-                mailbody +=
-                "<tr>"
-                + "<td style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
-                + "<th style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
-                + "<td style=\"border: 1px solid black; padding: 2px 5px;\">Shipping: " + shipping.Method + "</td>"
-                + "<td style=\"border: 1px solid black; padding: 2px 5px;\">$" + shipping.Cost + "</td>"
-                + "</tr>"
-                +"<tr>"
-                + "<td style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
-                + "<td style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
-                + "<th style=\"border: 1px solid black; padding: 2px 5px;\">Total</td>"
-                + "<td style=\"border: 1px solid black; padding: 2px 5px;\">$" + (cart.Amount + shipping.Cost) + "</td>"
-                + "</tr>"
-                + "</table>"
-                + "</div>"
-                + "<br/>"
-                + "<p>"
-                + "Kind Regards,"
-                + "</p>"
-                + "<p>"
-                + "The JerseySure Team"
-                + "</p>";
+            mailbody +=
+            "<tr>"
+            + "<td style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
+            + "<th style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
+            + "<td style=\"border: 1px solid black; padding: 2px 5px;\">Shipping: " + shipping.Method + "</td>"
+            + "<td style=\"border: 1px solid black; padding: 2px 5px;\">$" + shipping.Cost + "</td>"
+            + "</tr>"
+            + "<tr>"
+            + "<td style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
+            + "<td style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
+            + "<th style=\"border: 1px solid black; padding: 2px 5px;\">Total</td>"
+            + "<td style=\"border: 1px solid black; padding: 2px 5px;\">$" + (cart.Amount + shipping.Cost) + "</td>"
+            + "</tr>"
+            + "</table>"
+            + "</div>"
+            + "<br/>"
+            + "<p>"
+            + "Kind Regards,"
+            + "</p>"
+            + "<p>"
+            + "The JerseySure Team"
+            + "</p>";
 
             try
             {
@@ -83,8 +84,11 @@ namespace Assignment_2.UL
             }
 
             // Remove cart from session
-            Session.Remove("Cart");
-            Session["Cart"] = new BLShoppingCart();
+            if (!IsPostBack)
+            {
+                Session.Remove("Cart");
+                Session["Cart"] = new BLShoppingCart();
+            }
         }
     }
 }
