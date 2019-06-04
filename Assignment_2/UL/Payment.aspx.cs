@@ -62,8 +62,6 @@ namespace Assignment_2.UL
 
 						int rows = BLPurchase.storePurchase(purchase, card);
 
-						Session.Remove("Cart");
-						Session["Cart"] = new BLShoppingCart();
 						Response.Redirect("~/UL/PaymentConfirmation.aspx");
 						break;
 					case TransactionResult.Declined:
