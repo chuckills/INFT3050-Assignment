@@ -74,6 +74,10 @@ DROP PROCEDURE usp_addShipping
 GO
 DROP PROCEDURE usp_toggleShipActive
 GO
+DROP PROCEDURE usp_addNewOrder
+GO
+DROP PROCEDURE usp_addOrderItems
+GO
 DROP TYPE PLAYERTYPE
 GO
 DROP USER jerseysure

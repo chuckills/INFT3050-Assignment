@@ -45,7 +45,7 @@ namespace Assignment_2.UL
 	            BLProduct productData = Session["Product"] as BLProduct;
 
 				BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
-                cart.AddCartItem(new BLCartItem(productData, rblSizeOption.SelectedItem.Text, int.Parse(tbxQuantity.Text)));
+                cart.AddCartItem(new BLCartItem(productData, rblSizeOption.SelectedItem.Value, int.Parse(tbxQuantity.Text)));
 
                 Response.Redirect("~/UL/Cart.aspx");
             }

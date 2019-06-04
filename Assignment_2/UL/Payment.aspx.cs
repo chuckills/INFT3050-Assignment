@@ -50,7 +50,7 @@ namespace Assignment_2.UL
             {
 				BLPurchase purchase = new BLPurchase(Session["Cart"] as BLShoppingCart, Session["CurrentUser"] as BLUser, Session["Shipping"] as BLShipping);
 
-				string[] card = {tbxCardName.Text, tbxCardNumber.Text, tbxCSC.Text, tbxExpiration.Text};
+				string[] card = {tbxCardName.Text, tbxCardNumber.Text, tbxCSC.Text, tbxExpiration.Text, rblCardType.SelectedValue};
 
 				TransactionResult result = purchase.processPurchase(card);
 

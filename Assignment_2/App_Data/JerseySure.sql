@@ -1,5 +1,4 @@
 -- Gregory Choice, Christopher Booth, Dylan Cawsey
--- Gregory Choice, Christopher Booth, Dylan Cawsey
 -- INFT3050 Assignment 1
 -- Database creation script
 
@@ -161,7 +160,7 @@ CREATE TABLE Orders
     ordDate DATE NOT NULL DEFAULT getdate(),
     ordSubTotal MONEY NOT NULL, -- Subtotal of all products
     ordTotal MONEY NOT NULL, -- Total price, Subtotal + Shipping
-    ordGST MONEY NOT NULL, -- ordTotal * 0.1
+    ordGST MONEY NOT NULL, -- ordTotal / 11
     ordPaid BIT DEFAULT 0 NOT NULL, -- Paid or not paid?
     shipID INT NOT NULL, -- ID of the shipping method
 	userID INT NOT NULL, -- ID of the user,
@@ -191,11 +190,12 @@ CREATE TABLE CartItem
 -- Table of credit card information for order payment
 CREATE TABLE CreditCardPM
 (
-    ccNumber VARCHAR(16) PRIMARY KEY,
+    ccNumber VARCHAR(16),
     ccType VARCHAR(5) NOT NULL,
     ccHolderName VARCHAR(60) NOT NULL,
     ccExpiry DATE,
     ordID INT UNIQUE NOT NULL,
+    PRIMARY KEY (ccNumber, ordID),
     FOREIGN KEY (ordID) REFERENCES Orders(ordID),
 	CHECK (len(ccNumber) >= 14 AND len(ccNumber) <= 16),
     CHECK (ccType IN ('MCARD', 'VISA', 'AMEX', 'DINR')),
@@ -847,6 +847,43 @@ BEGIN
     FROM Orders o, CartItem c, Users u, Product pr, Player pl
     WHERE o.ordID = @orderID AND o.userID = u.userID AND c.ordID = o.ordID AND c.prodNumber = pr.prodNumber AND pr.playID = pl.playID
 END
+GO
+
+CREATE PROCEDURE usp_addNewOrder
+    @ordID INT OUTPUT,
+    @ordSubTotal MONEY,
+    @ordTotal MONEY,
+    @ordGST MONEY,
+    @ordPaid BIT,
+    @shipID INT,
+    @userID INT,
+    @ccHolderName VARCHAR(30),
+    @ccNumber VARCHAR(16),
+    @ccExpiry DATE,
+    @ccType VARCHAR(5)
+AS
+BEGIN TRANSACTION
+    INSERT INTO Orders(ordSubTotal, ordTotal, ordGST, ordPaid, shipID, userID)
+        VALUES (@ordSubTotal, @ordTotal, @ordGST, @ordPaid, @shipID, @userID)
+    SET @ordID = SCOPE_IDENTITY()
+    INSERT INTO CreditCardPM(ccNumber, ccType, ccHolderName, ccExpiry, ordID)
+        VALUES (@ccNumber, @ccType, @ccHolderName, @ccExpiry, @ordID)
+COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_addOrderItems
+    @userID INT,
+	@ordID INT,
+	@prodNumber VARCHAR(8),
+	@sizeID VARCHAR(3),
+	@cartQuantity INT,
+	@cartUnitPrice MONEY,
+	@cartProductTotal MONEY
+AS
+BEGIN TRANSACTION
+    INSERT INTO CartItem(userID, ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal)
+        VALUES (@userID, @ordID, @prodNumber, @sizeID, @cartQuantity, @cartUnitPrice, @cartProductTotal)
+COMMIT TRANSACTION
 GO
 
 USE master

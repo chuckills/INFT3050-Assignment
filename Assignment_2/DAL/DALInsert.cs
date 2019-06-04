@@ -91,61 +91,56 @@ namespace Assignment_2.DAL
 
 		public int addNewPurchase(BLPurchase purchase, string[] card)
 		{
-			/*string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 			int rows;
 
 			using (SqlConnection connection = new SqlConnection(cs))
 			{
 				SqlCommand command = new SqlCommand("usp_addNewOrder", connection);
 
+				SqlParameter orderID = new SqlParameter
+				{
+					ParameterName = "@ordID",
+					SqlDbType = SqlDbType.Int,
+					Direction = ParameterDirection.Output
+				};
+
 				command.CommandType = CommandType.StoredProcedure;
 
-				command.Parameters.AddWithValue("@playFirst", purchase.);
-				command.Parameters.AddWithValue("@playLast", product.playLastName);
-				command.Parameters.AddWithValue("@jerNumber", product.jerNumber);
-				command.Parameters.AddWithValue("@teamID", product.teamID);
-				command.Parameters.AddWithValue("@prodDescription", product.prodDescription);
-				command.Parameters.AddWithValue("@prodPrice", product.prodPrice);
-				command.Parameters.AddWithValue("@imgFront", product.image[0]);
-				command.Parameters.AddWithValue("@imgBack", product.image[1]);
-				command.Parameters.AddWithValue("@stkSmall", product.stock[0]);
-				command.Parameters.AddWithValue("@stkMedium", product.stock[1]);
-				command.Parameters.AddWithValue("@stkLarge", product.stock[2]);
-				command.Parameters.AddWithValue("@stkXLge", product.stock[3]);
-				command.Parameters.AddWithValue("@stkXXL", product.stock[4]);
+				command.Parameters.Add(orderID);
+				command.Parameters.AddWithValue("@ordSubTotal", purchase.Cart.Amount);
+				command.Parameters.AddWithValue("@ordTotal", purchase.Cart.Amount + purchase.Shipping.Cost);
+				command.Parameters.AddWithValue("@ordGST", (purchase.Cart.Amount + purchase.Shipping.Cost)/11);
+				command.Parameters.AddWithValue("@ordPaid", true);
+				command.Parameters.AddWithValue("@shipID", purchase.Shipping.Id);
+				command.Parameters.AddWithValue("@userID", purchase.User.userID);
+				command.Parameters.AddWithValue("@ccHolderName", card[0]);
+				command.Parameters.AddWithValue("@ccNumber", card[1]);
+				command.Parameters.AddWithValue("@ccExpiry", "1-" + card[3]);
+				command.Parameters.AddWithValue("@ccType", card[4]);
 
 				connection.Open();
-
+				
 				rows = command.ExecuteNonQuery();
+
+				foreach (BLCartItem item in purchase.Cart.Items)
+				{
+					command = new SqlCommand("usp_addOrderItems", connection);
+					command.CommandType = CommandType.StoredProcedure;
+
+					command.Parameters.AddWithValue("@userID", purchase.User.userID);
+					command.Parameters.AddWithValue("@ordID", orderID.Value);
+					command.Parameters.AddWithValue("@prodNumber", item.Product.prodNumber);
+					command.Parameters.AddWithValue("@sizeID", item.Size);
+					command.Parameters.AddWithValue("@cartQuantity", item.Quantity);
+					command.Parameters.AddWithValue("@cartUnitPrice", item.ItemTotal / item.Quantity);
+					command.Parameters.AddWithValue("@cartProductTotal", item.ItemTotal);
+					
+					rows += command.ExecuteNonQuery();
+				}
 			}
-			return rows;*/
 
-			/*
-				ordID INT IDENTITY PRIMARY KEY,
-				ordDate DATE NOT NULL DEFAULT getdate(),
-			    ordSubTotal MONEY NOT NULL, -- Subtotal of all products
-			    ordTotal MONEY NOT NULL, -- Total price, Subtotal + Shipping
-			    ordGST MONEY NOT NULL, -- ordTotal * 0.1
-			    ordPaid BIT DEFAULT 0 NOT NULL, -- Paid or not paid?
-			    shipID INT NOT NULL, -- ID of the shipping method
-				userID INT NOT NULL, -- ID of the user, 
-
-				userID INT NOT NULL,
-			    ordID INT NOT NULL,
-			    prodNumber VARCHAR(8) NOT NULL,
-			    sizeID VARCHAR(3) NOT NULL,
-			    cartQuantity INT NOT NULL, -- Quantity of the product to order
-			    cartUnitPrice MONEY NOT NULL,
-			    cartProductTotal MONEY NOT NULL, -- cartQuantity * prodPrice
-
-				ccNumber CHAR(16) PRIMARY KEY,
-			    ccType VARCHAR(5) NOT NULL,
-			    ccHolderName VARCHAR(60) NOT NULL,
-			    ccExpiry DATE,
-			    ordID INT UNIQUE NOT NULL,
-
-			 */
-			return 0;
+			return rows;
 		}
 
 		public int addPostageOption(BLShipping option)
