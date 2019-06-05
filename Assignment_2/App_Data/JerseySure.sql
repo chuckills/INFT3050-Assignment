@@ -862,7 +862,7 @@ CREATE TYPE CARTITEMTYPE AS TABLE
 GO
 
 CREATE PROCEDURE usp_addNewOrder
-    @ordID INT OUTPUT,
+    @ordID INT,
     @ordSubTotal MONEY,
     @ordTotal MONEY,
     @ordGST MONEY,

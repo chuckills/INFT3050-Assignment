@@ -98,16 +98,6 @@ namespace Assignment_2.DAL
 			{
 				SqlCommand command = new SqlCommand("usp_addNewOrder", connection);
 
-				SqlParameter orderID = new SqlParameter
-				{
-					ParameterName = "@ordID",
-					SqlDbType = SqlDbType.Int,
-					Direction = ParameterDirection.Output
-				};
-
-				command.CommandType = CommandType.StoredProcedure;
-
-				command.Parameters.Add(orderID);
 				command.Parameters.AddWithValue("@ordSubTotal", purchase.Cart.Amount);
 				command.Parameters.AddWithValue("@ordTotal", purchase.Cart.Amount + purchase.Shipping.Cost);
 				command.Parameters.AddWithValue("@ordGST", (purchase.Cart.Amount + purchase.Shipping.Cost)/11);
