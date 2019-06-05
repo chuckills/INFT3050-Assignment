@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="Assignment_2.UL.Payment" %>
+﻿<%@ Page Title="Payment" Language="C#" MasterPageFile="~/UL/Site.Master" AutoEventWireup="true" CodeBehind="Payment.aspx.cs" Inherits="Assignment_2.UL.Payment" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 
@@ -53,7 +53,7 @@
         <asp:TableRow runat="server">
             <asp:TableCell runat="server">
                 <asp:RadioButtonList ID="rblCardType" runat="server" RepeatDirection="Horizontal">
-                    <asp:ListItem Value="MCARD">&nbsp;MasterCard&nbsp;</asp:ListItem>
+                    <asp:ListItem Value="MCARD" Selected ="true">&nbsp;MasterCard&nbsp;</asp:ListItem>
                     <asp:ListItem Value="VISA">&nbsp;Visa&nbsp;</asp:ListItem>
                     <asp:ListItem Value="AMEX">&nbsp;American Express&nbsp;</asp:ListItem>
                     <asp:ListItem Value="DINR">&nbsp;Diner's Club&nbsp;</asp:ListItem>

@@ -1,5 +1,6 @@
 ﻿using Assignment_2.BL;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -15,7 +16,13 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        if (!IsPostBack)
+            //if (!Request.IsSecureConnection)
+            //{
+            //    string url = ConfigurationManager.AppSettings["SecurePath"] + "~/UL/Payment";
+            //    Response.Redirect(url);
+            //}
+            
+            if (!IsPostBack)
 	        {
 		        double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
 

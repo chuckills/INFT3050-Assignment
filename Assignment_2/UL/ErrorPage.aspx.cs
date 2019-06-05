@@ -89,9 +89,9 @@ namespace Assignment_2.UL
         protected void checkoutNotAvailable()
         {
             StatusLabel.Text = "Sorry, Unable to Checkout";
-            DescriptionLabel.Text = "Checkout can only be completed by a registered account.";
-            ResultingButton.Text = "Register";
-            ResultingButton.PostBackUrl = "~/UL/Registration";
+            DescriptionLabel.Text = "Please log in to continue checkout.";
+            ResultingButton.Text = "Login";
+            ResultingButton.PostBackUrl = "~/UL/Login";
         }
 
         protected void noTransactionMade()

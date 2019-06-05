@@ -1,6 +1,7 @@
 ﻿using Assignment_2.BL;
 using Microsoft.AspNet.FriendlyUrls;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -76,7 +77,8 @@ namespace Assignment_2.UL
                 }
                 else
                 {
-                    Response.Redirect("~/UL/Payment");
+                    // Security for cart page
+                    Response.Redirect(ConfigurationManager.AppSettings["SecurePath"] + "~/UL/Payment");
                 }
             }
             else
