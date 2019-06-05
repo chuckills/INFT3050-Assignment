@@ -45,8 +45,7 @@ namespace Assignment_2.UL
 							lowStock.Text = "Some sizes on backorder";
 							break;
 						}
-						else
-							lowStock.Text = "Some sizes zero stock";
+						lowStock.Text = "Some sizes zero stock";
 					}
 				}
 			}
