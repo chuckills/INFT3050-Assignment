@@ -40,7 +40,13 @@ namespace Assignment_2.UL
 					if (quantity <= 0)
 					{
 						lowStock.Visible = true;
-						lowStock.Text = quantity < 0 ? "Some sizes on backorder" : "Some sizes depleted";
+						if (quantity < 0)
+						{
+							lowStock.Text = "Some sizes on backorder";
+							break;
+						}
+						else
+							lowStock.Text = "Some sizes zero stock";
 					}
 				}
 			}
