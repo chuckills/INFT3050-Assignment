@@ -883,6 +883,9 @@ BEGIN TRANSACTION
         VALUES (@ccNumber, @ccType, @ccHolderName, @ccExpiry, @ordID)
     INSERT INTO CartItem (userID, ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal)
         SELECT userID, @ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal FROM @cartItems
+    UPDATE Stock
+    SET stkLevel = stkLevel - cartQuantity
+    FROM @cartItems c WHERE c.prodNumber = Stock.prodNumber AND c.sizeID = Stock.sizeID
 COMMIT TRANSACTION
 GO
 
