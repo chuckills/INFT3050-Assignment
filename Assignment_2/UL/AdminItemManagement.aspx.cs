@@ -27,5 +27,23 @@ namespace Assignment_2.UL
 			Session["Product"] = product.selectProduct(row.Cells[0].Text);
 			Response.Redirect("~/UL/AdminUpdateSelectedItem.aspx");
 		}
+
+		protected void gvProducts_RowDataBound(object sender, GridViewRowEventArgs e)
+		{
+			if (e.Row.RowIndex >= 0)
+			{
+				BLProduct product = new BLProduct();
+				product = product.selectProduct(e.Row.Cells[0].Text);
+				Label lowStock = e.Row.FindControl("lblLowStock") as Label;
+				foreach (int quantity in product.stock)
+				{
+					if (quantity <= 0)
+					{
+						lowStock.Visible = true;
+						lowStock.Text = quantity < 0 ? "Some sizes on backorder" : "Some sizes depleted";
+					}
+				}
+			}
+		}
 	}
 }

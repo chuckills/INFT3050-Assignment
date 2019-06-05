@@ -98,7 +98,6 @@ CREATE TABLE Stock
     stkLevel INT NOT NULL DEFAULT 0,
     PRIMARY KEY (sizeID, prodNumber),
     FOREIGN KEY (prodNumber) REFERENCES Product(prodNumber),
-    CHECK (stkLevel >= 0),
     CHECK (sizeID IN ('S', 'M', 'L', 'XL', 'XXL'))
 )
 

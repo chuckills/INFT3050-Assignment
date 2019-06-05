@@ -6,7 +6,7 @@
      <div class="container">
          <h2>Product Management</h2>
 
-         <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged">
+         <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged" OnRowDataBound="gvProducts_RowDataBound">
              <Columns>  
                  <asp:BoundField DataField="prodNumber" HeaderText="ID" ReadOnly="True" />  
                  <asp:BoundField DataField="prodDescription" HeaderText="Description" ReadOnly="True" />  
@@ -18,8 +18,13 @@
                  <asp:BoundField DataField="playLastName" HeaderText="Player LName" ReadOnly="True" /> 
                  <asp:BoundField DataField="jerNumber" HeaderText="Number" ReadOnly="True" /> 
                  <asp:BoundField DataField="imgFront" HeaderText="imgFront" ReadOnly="True" />  
-                 <asp:BoundField DataField="imgBack" HeaderText="imgBack" ReadOnly="True" />  
-                 <asp:CommandField ShowSelectButton="True" />  
+                 <asp:BoundField DataField="imgBack" HeaderText="imgBack" ReadOnly="True" />
+                 <asp:CommandField ShowSelectButton="True" />   
+                 <asp:templatefield headertext="Stock">
+                     <itemtemplate>
+                         <asp:label id="lblLowStock" CssClass="text-danger" Visible="False" runat="server"/> 
+                     </itemtemplate>
+                 </asp:templatefield>
              </Columns>
          </asp:GridView>
     </div>
