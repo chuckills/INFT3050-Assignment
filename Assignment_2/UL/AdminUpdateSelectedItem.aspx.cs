@@ -13,24 +13,37 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        ddlTeam.DataSource = BLProduct.getTeams();
-	        ddlTeam.DataBind();
+	        if (!IsPostBack)
+	        {
+		        ddlTeam.DataSource = BLProduct.getTeams();
+		        ddlTeam.DataBind();
 
-			BLProduct product = Session["Product"] as BLProduct;
-			tbxFirstName.Text = product.playFirstName;
-			tbxLastName.Text = product.playLastName;
-			tbxDescription.Text = product.prodDescription;
-			ddlTeam.SelectedValue = product.teamID;
-			imgFront.ImageUrl = "~/UL/Images/jerseys/" + product.image[0];
-			imgBack.ImageUrl = "~/UL/Images/jerseys/" + product.image[1];
-			tbxJerNumber.Text = product.jerNumber.ToString();
-			tbxPrice.Text = string.Format("{0:.2f}", product.prodPrice);
-			tbxSmall.Text = product.stock[0].ToString();
-			tbxMedium.Text = product.stock[1].ToString();
-			tbxLarge.Text = product.stock[2].ToString();
-			tbxXLge.Text = product.stock[3].ToString();
-			tbxXXL.Text = product.stock[4].ToString();
-		}
+		        BLProduct product = Session["Product"] as BLProduct;
+		        tbxFirstName.Text = product.playFirstName;
+		        tbxLastName.Text = product.playLastName;
+		        tbxDescription.Text = product.prodDescription;
+		        ddlTeam.SelectedValue = product.teamID;
+		        imgFront.ImageUrl = "~/UL/Images/jerseys/" + product.image[0];
+		        imgBack.ImageUrl = "~/UL/Images/jerseys/" + product.image[1];
+		        tbxJerNumber.Text = product.jerNumber.ToString();
+		        tbxPrice.Text = string.Format("{0:.2f}", product.prodPrice);
+		        tbxSmall.Text = product.stock[0].ToString();
+		        tbxMedium.Text = product.stock[1].ToString();
+		        tbxLarge.Text = product.stock[2].ToString();
+		        tbxXLge.Text = product.stock[3].ToString();
+		        tbxXXL.Text = product.stock[4].ToString();
+		        if (product.prodActive)
+		        {
+			        RemoveProductButton.CssClass = "btn btn-danger";
+			        RemoveProductButton.Text = "Active";
+		        }
+		        else
+		        {
+			        RemoveProductButton.CssClass = "btn btn-outline-danger";
+			        RemoveProductButton.Text = "Inactive";
+		        }
+	        }
+        }
 
         protected void addDefaultItem(object sender, EventArgs e)
         {
@@ -73,7 +86,29 @@ namespace Assignment_2.UL
         // Handles removal of the selected product
         protected void RemoveProductButton_Click(object sender, EventArgs e)
         {
+	        BLProduct product = Session["Product"] as BLProduct;
 
+			if (product.prodActive)
+	        {
+		        RemoveProductButton.CssClass = "btn btn-outline-danger";
+		        RemoveProductButton.Text = "Inactive";
+		        product.prodActive = false;
+	        }
+	        else
+	        {
+				RemoveProductButton.CssClass = "btn btn-danger";
+				RemoveProductButton.Text = "Active";
+				product.prodActive = true;
+	        }
+
+			Session["Product"] = product;
+
+			BLProduct.toggleActive(product.prodNumber);
         }
-    }
+
+		protected void btnCancel_Click(object sender, EventArgs e)
+		{
+			Response.Redirect("~/UL/AdminItemManagement.aspx");
+		}
+	}
 }

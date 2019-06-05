@@ -151,19 +151,15 @@
                     <asp:TableRow runat="server" Height="10">
                     </asp:TableRow>
                 </asp:Table> 
-
             <%--Table for login details--%>
-                <asp:Table ID="tblLogin" runat="server">
-                    <asp:TableHeaderRow runat="server">
-                        <asp:TableHeaderCell runat="server">Login details</asp:TableHeaderCell>
-                    </asp:TableHeaderRow>
+                <asp:Table ID="tblButtons" runat="server">
                     <asp:TableRow runat="server">
-                        <asp:TableCell runat="server">Active&nbsp;<asp:CheckBox ID="cbxActive" runat="server" /></asp:TableCell>
-                        <asp:TableCell runat="server"></asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow runat="server">
-                        <asp:TableCell runat="server"><asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-danger" OnClick="btnUpdate_Click" /></asp:TableCell>
-                        <asp:TableCell runat="server"><asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-danger" OnClick="btnCancel_Click" /></asp:TableCell>
+                        <asp:TableCell ColumnSpan="2" runat="server">
+                            <br/>
+                            <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-danger" OnClick="btnUpdate_Click" />&nbsp;
+                            <asp:Button ID="btnActive" runat="server" Text="Active" CssClass="btn btn-danger" OnClick="btnActive_Click" CausesValidation="False" />&nbsp;
+                            <asp:Button ID="btnCancel" runat="server" Text="Back" CssClass="btn btn-danger" OnClick="btnCancel_Click" CausesValidation="False" />
+                        </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table> 
 

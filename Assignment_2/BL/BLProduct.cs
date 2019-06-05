@@ -12,6 +12,7 @@ namespace Assignment_2.BL
 		public string prodNumber { get; set; }
 		public string prodDescription { get; set; }
 		public double prodPrice { get; set; }
+		public bool prodActive { get; set; }
 		public string teamID { get; set; }
 		public string teamLocale { get; set; }
 		public string teamName { get; set; }
@@ -43,6 +44,7 @@ namespace Assignment_2.BL
 			prodNumber = productData["prodNumber"].ToString();
 			prodDescription = productData["prodDescription"].ToString();
 			prodPrice = Convert.ToDouble(productData["prodPrice"]);
+			prodActive = Convert.ToBoolean(productData["prodActive"]);
 			teamID = productData["teamID"].ToString();
 			teamLocale = productData["teamLocale"].ToString();
 			teamName = productData["teamName"].ToString();
@@ -64,6 +66,11 @@ namespace Assignment_2.BL
 			int rows = product.addNewProduct(newProduct);
 
 			return rows > 0;
+		}
+
+		public static void toggleActive(string prodNum)
+		{
+			DALUpdate.toggleProductActive(prodNum);
 		}
 	}
 }

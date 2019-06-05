@@ -22,7 +22,6 @@ namespace Assignment_2.UL
 		        tbxEmail.Text = user.userEmail;
 		        tbxEmail2.Text = user.userEmail;
 		        tbxPhone.Text = user.userPhone;
-		        cbxActive.Checked = user.userActive;
 		        if (!user.userAdmin)
 		        {
 			        tbxBillAddress.Text = user.billAddress.addStreet;
@@ -47,7 +46,18 @@ namespace Assignment_2.UL
 		        tbxPostSuburb.Text = user.postAddress.addSuburb;
 		        ddlPostState.SelectedValue = user.postAddress.addState;
 		        tbxPostPostCode.Text = user.postAddress.addZip.ToString();
-	        }
+
+		        if (user.userActive)
+		        {
+			        btnActive.CssClass = "btn btn-danger";
+			        btnActive.Text = "Active";
+		        }
+				else
+		        {
+			        btnActive.CssClass = "btn btn-outline-danger";
+			        btnActive.Text = "Inactive";
+		        }
+			}
         }
 
         // Handles update of the selected product
@@ -64,9 +74,9 @@ namespace Assignment_2.UL
 			        userPhone = tbxPhone.Text,
 			        billAddress = BLAddress.fillAddress('B', tbxBillAddress.Text, tbxBillSuburb.Text, ddlBillState.SelectedValue, Convert.ToInt32(tbxBillPostCode.Text)),
 			        postAddress = BLAddress.fillAddress('P', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text)),
-			        userAdmin = false,
-			        userActive = true
-		        };
+			        userAdmin = (Session["User"] as BLUser).userAdmin,
+			        userActive = (Session["User"] as BLUser).userActive
+				};
 
 		        Session["User"] = currentUser;
 
@@ -90,6 +100,28 @@ namespace Assignment_2.UL
 	        {
 		        args.IsValid = BLUser.checkUser(args.Value) == 0;
 	        }
+        }
+
+        protected void btnActive_Click(object sender, EventArgs e)
+        {
+	        BLUser user = Session["User"] as BLUser;
+
+	        if (user.userActive)
+	        {
+		        btnActive.CssClass = "btn btn-outline-danger";
+		        btnActive.Text = "Inactive";
+		        user.userActive = false;
+	        }
+	        else
+	        {
+		        btnActive.CssClass = "btn btn-danger";
+		        btnActive.Text = "Active";
+		        user.userActive = true;
+	        }
+
+	        Session["User"] = user;
+
+			BLUser.toggleActive(user.userID);
         }
 	}
 }

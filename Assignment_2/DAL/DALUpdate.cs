@@ -30,7 +30,6 @@ namespace Assignment_2.DAL
 				command.Parameters.AddWithValue("@userEmail", user.userEmail);
 				command.Parameters.AddWithValue("@userPhone", user.userPhone);
 				command.Parameters.AddWithValue("@userAdmin", user.userAdmin);
-				command.Parameters.AddWithValue("@userActive", user.userActive);
 				command.Parameters.AddWithValue("@billStreet", user.billAddress.addStreet);
 				command.Parameters.AddWithValue("@billSuburb", user.billAddress.addSuburb);
 				command.Parameters.AddWithValue("@billState", user.billAddress.addState);
@@ -70,8 +69,51 @@ namespace Assignment_2.DAL
 
             return rows > 0;
         }
+        public static bool toggleUserActive(int userID)
+        {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+	        int rows;
 
-        public static bool toggleShipActive(int shipID)
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlCommand command = new SqlCommand("usp_toggleUserActive", connection)
+		        {
+			        CommandType = CommandType.StoredProcedure
+		        };
+
+		        command.Parameters.AddWithValue("@userID", userID);
+
+		        connection.Open();
+
+		        rows = command.ExecuteNonQuery();
+	        }
+
+	        return rows > 0;
+        }
+
+        public static bool toggleProductActive(string prodNum)
+        {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+	        int rows;
+
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlCommand command = new SqlCommand("usp_toggleProductActive", connection)
+		        {
+			        CommandType = CommandType.StoredProcedure
+		        };
+
+		        command.Parameters.AddWithValue("@prodNum", prodNum);
+
+		        connection.Open();
+
+		        rows = command.ExecuteNonQuery();
+	        }
+
+	        return rows > 0;
+        }
+
+		public static bool toggleShipActive(int shipID)
         {
 	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 	        int rows;
@@ -92,6 +134,13 @@ namespace Assignment_2.DAL
 
 	        return rows > 0;
 		}
+
+        public static int updateProduct(BLProduct product)
+        {
+
+
+	        return 0;
+        }
 
 	}
 }

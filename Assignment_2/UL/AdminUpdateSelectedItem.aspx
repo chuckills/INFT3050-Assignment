@@ -95,7 +95,9 @@
 
                 <div class="form-group">
                     <asp:Button ID="UpdateProductButton" runat="server" Text="Update" CssClass="btn btn-danger" OnClick="UpdateProductButton_Click" />&nbsp;
-                    <asp:Button ID="RemoveProductButton" runat="server" Text="Remove Product" CssClass="btn btn-danger" OnClick="RemoveProductButton_Click" />
+                    <asp:Button ID="RemoveProductButton" runat="server" Text="Active" CssClass="btn btn-danger" OnClick="RemoveProductButton_Click" CausesValidation="False" />&nbsp;
+                    <asp:Button ID="btnCancel" runat="server" Text="Back" CssClass="btn btn-danger" OnClick="btnCancel_Click" CausesValidation="False" />
+
                 </div>
             </div>
             <div class="col"></div>

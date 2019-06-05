@@ -273,7 +273,6 @@
     <Compile Include="BL\IPaymentSystem.cs" />
     <Compile Include="BL\BLPassword.cs" />
     <Compile Include="BL\BLShipping.cs" />
-    <Compile Include="DAL\DALArchive.cs" />
     <Compile Include="DAL\DALInsert.cs" />
     <Compile Include="DAL\DALSelect.cs" />
     <Compile Include="DAL\DALUpdate.cs" />

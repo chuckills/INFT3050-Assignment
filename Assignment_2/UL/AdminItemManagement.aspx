@@ -19,10 +19,10 @@
                  <asp:BoundField DataField="jerNumber" HeaderText="Number" ReadOnly="True" /> 
                  <asp:BoundField DataField="imgFront" HeaderText="imgFront" ReadOnly="True" />  
                  <asp:BoundField DataField="imgBack" HeaderText="imgBack" ReadOnly="True" />
+                 <asp:BoundField DataField="prodActive" HeaderText="Active" ReadOnly="True" />
                  <asp:CommandField ShowSelectButton="True" ButtonType="Button"> 
                     <ControlStyle CssClass="btn btn-outline-danger"></ControlStyle>
                  </asp:CommandField>
-                 
                  <asp:templatefield ItemStyle-Wrap="False" HeaderText="Stock">
                      <itemtemplate>
                          <asp:label id="lblLowStock" CssClass="text-danger" Visible="False" runat="server"/> 
