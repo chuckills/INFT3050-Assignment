@@ -98,6 +98,8 @@ namespace Assignment_2.DAL
 			{
 				SqlCommand command = new SqlCommand("usp_addNewOrder", connection);
 
+				command.CommandType = CommandType.StoredProcedure;
+
 				command.Parameters.AddWithValue("@ordSubTotal", purchase.Cart.Amount);
 				command.Parameters.AddWithValue("@ordTotal", purchase.Cart.Amount + purchase.Shipping.Cost);
 				command.Parameters.AddWithValue("@ordGST", (purchase.Cart.Amount + purchase.Shipping.Cost)/11);
@@ -116,18 +118,19 @@ namespace Assignment_2.DAL
 				cartItems.Columns.Add("cartQuantity", typeof(int));
 				cartItems.Columns.Add("cartUnitPrice", typeof(double));
 				cartItems.Columns.Add("cartProductTotal", typeof(double));
+
 				foreach (BLCartItem item in purchase.Cart.Items)
 				{
 					cartItems.Rows.Add(purchase.User.userID, item.Product.prodNumber, item.Size, item.Quantity, item.ItemTotal / item.Quantity, item.ItemTotal);
 				}
 
-				SqlParameter parameter = new SqlParameter
+				SqlParameter items = new SqlParameter
 				{
 					ParameterName = "@cartItems",
 					SqlDbType = SqlDbType.Structured,
 					Value = cartItems
 				};
-				command.Parameters.Add(parameter);
+				command.Parameters.Add(items);
 
 				connection.Open();
 				

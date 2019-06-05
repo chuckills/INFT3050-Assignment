@@ -4,6 +4,7 @@
     <div class="container">
         
         <h2>User Management</h2>
+        <hr/>
 
         <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged" HeaderStyle-HorizontalAlign="Center">
             <Columns>  

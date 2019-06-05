@@ -81,7 +81,11 @@ namespace Assignment_2.UL
 		        Session["User"] = currentUser;
 
 		        BLUser.updateUser(currentUser);
-	        }
+
+				Session.Remove("User");
+
+		        Response.Redirect("~/UL/AdminManageUserAccounts.aspx");
+			}
         }
 
         // Handles update of the selected product

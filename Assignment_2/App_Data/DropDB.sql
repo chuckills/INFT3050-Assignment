@@ -38,6 +38,8 @@ DROP PROCEDURE usp_selectProduct
 GO
 DROP PROCEDURE usp_addProduct
 GO
+DROP PROCEDURE usp_updateProduct
+GO
 DROP PROCEDURE usp_getUser
 GO
 DROP PROCEDURE usp_getSingleUser
@@ -72,11 +74,19 @@ DROP PROCEDURE usp_getShippingTable
 GO
 DROP PROCEDURE usp_addShipping
 GO
+DROP PROCEDURE usp_toggleProductActive
+GO
+DROP PROCEDURE usp_toggleUserActive
+GO
 DROP PROCEDURE usp_toggleShipActive
 GO
 DROP PROCEDURE usp_addNewOrder
 GO
 DROP TYPE PLAYERTYPE
+GO
+DROP TYPE CARTITEMTYPE
+GO
+DROP TYPE STOCKTYPE
 GO
 DROP USER jerseysure
 GO

@@ -72,5 +72,10 @@ namespace Assignment_2.BL
 		{
 			DALUpdate.toggleProductActive(prodNum);
 		}
+
+		public static bool updateProduct(BLProduct product)
+		{
+			return DALUpdate.updateProduct(product);
+		}
 	}
 }

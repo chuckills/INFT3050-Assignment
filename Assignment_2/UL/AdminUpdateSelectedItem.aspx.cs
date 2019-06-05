@@ -26,7 +26,7 @@ namespace Assignment_2.UL
 		        imgFront.ImageUrl = "~/UL/Images/jerseys/" + product.image[0];
 		        imgBack.ImageUrl = "~/UL/Images/jerseys/" + product.image[1];
 		        tbxJerNumber.Text = product.jerNumber.ToString();
-		        tbxPrice.Text = string.Format("{0:.2f}", product.prodPrice);
+		        tbxPrice.Text = string.Format("{0:F2}", product.prodPrice);
 		        tbxSmall.Text = product.stock[0].ToString();
 		        tbxMedium.Text = product.stock[1].ToString();
 		        tbxLarge.Text = product.stock[2].ToString();
@@ -60,9 +60,9 @@ namespace Assignment_2.UL
 
         protected void checkValidImage(object sender, ServerValidateEventArgs args)
         {
-	        CustomValidator csv = sender as CustomValidator;
+	        CustomValidator customVal = sender as CustomValidator;
 
-	        FileUpload file = tblImage.FindControl(csv.ControlToValidate) as FileUpload;
+	        FileUpload file = tblImage.FindControl(customVal.ControlToValidate) as FileUpload;
 
 	        args.IsValid = file.PostedFile.ContentLength > 0 && (file.PostedFile.ContentType.Contains("image/jpeg") || file.PostedFile.ContentType.Contains("image/png"));
         }
@@ -80,8 +80,31 @@ namespace Assignment_2.UL
 		// Handles update of the selected product
 		protected void UpdateProductButton_Click(object sender, EventArgs e)
         {
+	        if (IsValid)
+	        {
+				BLProduct currentProduct = Session["Product"] as BLProduct;
+				
+				currentProduct.prodDescription = tbxDescription.Text;
+				if (fuImgFront.HasFile)
+					currentProduct.image[0] = fuImgFront.FileName;
+				if (fuImgBack.HasFile)
+					currentProduct.image[1] = fuImgBack.FileName;
+				currentProduct.prodPrice = Convert.ToDouble(tbxPrice.Text);
+				currentProduct.stock[0] = Convert.ToInt32(tbxSmall.Text);
+				currentProduct.stock[1] = Convert.ToInt32(tbxMedium.Text);
+				currentProduct.stock[2] = Convert.ToInt32(tbxLarge.Text);
+				currentProduct.stock[3] = Convert.ToInt32(tbxXLge.Text);
+				currentProduct.stock[4] = Convert.ToInt32(tbxXXL.Text);
 
-        }
+				Session["Product"] = currentProduct;
+
+		        BLProduct.updateProduct(currentProduct);
+
+				Session.Remove("Product");
+
+		        Response.Redirect("~/UL/AdminItemManagement.aspx");
+			}
+		}
 
         // Handles removal of the selected product
         protected void RemoveProductButton_Click(object sender, EventArgs e)
