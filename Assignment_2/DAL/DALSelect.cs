@@ -11,15 +11,17 @@ namespace Assignment_2.DAL
 {
 	public class DALSelect
 	{
-		public static DataSet getProducts()
+		public static DataSet getProducts(bool admin)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
 			DataSet productDataSet = new DataSet();
 
+			string commandString = admin ? "usp_getAllProducts" : "usp_getProducts";
+
 			using (SqlConnection connection = new SqlConnection(cs))
 			{
-				SqlDataAdapter adapter = new SqlDataAdapter("usp_getProducts", connection);
+				SqlDataAdapter adapter = new SqlDataAdapter(commandString, connection);
 
 				adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 

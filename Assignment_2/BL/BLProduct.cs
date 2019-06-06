@@ -22,9 +22,9 @@ namespace Assignment_2.BL
 		public string[] image { get; set; }
 		public int[] stock { get; set; }
 
-		public static DataSet getProducts()
+		public static DataSet getProducts(bool admin)
 		{
-			return DALSelect.getProducts();
+			return DALSelect.getProducts(admin);
 		}
 
         public static DataSet getProductsSearch(string search)

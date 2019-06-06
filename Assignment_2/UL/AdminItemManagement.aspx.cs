@@ -13,7 +13,7 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        gvProducts.DataSource = BLProduct.getProducts();
+	        gvProducts.DataSource = BLProduct.getProducts(true);
 	        gvProducts.DataBind();
 		}
 

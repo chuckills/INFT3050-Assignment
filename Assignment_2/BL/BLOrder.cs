@@ -13,6 +13,7 @@ namespace Assignment_2.BL
 		public int OrderID { get; set; }
 		public DataRow OrderDetails { get; set; }
 		public DataTable OrderItems { get; set; }
+		public DataRow ShippingDetails { get; set; }
 		
 		public static DataSet getUserOrders(BLUser user)
 		{
@@ -24,6 +25,7 @@ namespace Assignment_2.BL
 			OrderID = orderID;
 			OrderDetails = DALSelect.getOrder(orderID);
 			OrderItems = DALSelect.getOrderItems(orderID);
+			ShippingDetails = DALSelect.getShippingDetails(Convert.ToInt32(OrderDetails["shipID"]));
 
 			return this;
 		}
