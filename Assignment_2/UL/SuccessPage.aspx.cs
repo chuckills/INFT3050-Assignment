@@ -26,6 +26,9 @@ namespace Assignment_2.UL
                     case 2:
                         contactSent();
                         break;
+                    case 3:
+                        adminAdded();
+                        break;
                     default:
                         defaultSuccess();
                         break;
@@ -49,8 +52,7 @@ namespace Assignment_2.UL
         protected void verificationSent()
         {
             StatusLabel.Text = "Verification Email Sent";
-            DescriptionLabel.Text = "A verification email was successfully sent to the email address " +
-                "attached to your account.";
+            DescriptionLabel.Text = "A verification email was successfully sent to the specified email address.";
             ResultingButton.Text = "Return Home";
             ResultingButton.PostBackUrl = "~/UL/Default";
         }
@@ -70,6 +72,14 @@ namespace Assignment_2.UL
                 "as soon as we can.";
             ResultingButton.Text = "Return Home";
             ResultingButton.PostBackUrl = "~/UL/Default";
+        }
+
+        protected void adminAdded()
+        {
+            StatusLabel.Text = "Admin Account Added";
+            DescriptionLabel.Text = "Admin account has been verified by email and successfully added to our system.";
+            ResultingButton.Text = "View Accounts";
+            ResultingButton.PostBackUrl = "~/UL/AdminManageUserAccounts";
         }
 
         protected void noTransactionMade()

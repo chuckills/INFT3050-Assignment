@@ -96,14 +96,13 @@
             <asp:TableHeaderCell runat="server">Login details</asp:TableHeaderCell>
         </asp:TableHeaderRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server">Username</asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxUsername" CssClass="form-control" runat="server"></asp:TextBox></asp:TableCell>
+            <asp:TableCell runat="server">Email</asp:TableCell>
+            <asp:TableCell runat="server"><asp:TextBox ID="tbxUsername" CssClass="form-control" runat="server" TextMode="Email"></asp:TextBox></asp:TableCell>
             
             <%-- Validation for username --%>
             <asp:TableCell runat="server">
                 <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="rxvUsername" runat="server" ErrorMessage="Username must only contain alphanumeric characters" ControlToValidate="tbxUsername" CssClass="text-danger" Display="Dynamic" ValidationExpression="^([a-zA-Z0-9]{1,255})$"></asp:RegularExpressionValidator>
-                <asp:CustomValidator ID="csvUser" runat="server" ErrorMessage="User already registered" CssClass="text-danger" OnServerValidate="checkExists" ControlToValidate="tbxUsername" Display="Dynamic" SetFocusOnError="True"></asp:CustomValidator>
+                <asp:CustomValidator ID="csvUser" runat="server" ErrorMessage="Email address already registered" CssClass="text-danger" OnServerValidate="checkExists" ControlToValidate="tbxUsername" Display="Dynamic" SetFocusOnError="True"></asp:CustomValidator>
 
             </asp:TableCell>
         </asp:TableRow>

@@ -23,7 +23,7 @@ namespace Assignment_2
             routes.MapPageRoute("AdminItemManagementInsert", "AdminItemManagementInsert", "~/UL/AdminItemManagementInsert.aspx");
             routes.MapPageRoute("AdminManageUserAccounts", "AdminManageUserAccounts", "~/UL/AdminManageUserAccounts.aspx");
             routes.MapPageRoute("AdminPostageOptions", "AdminPostageOptions", "~/UL/AdminPostageOptions.aspx");
-            routes.MapPageRoute("AdminRegistration", "AdminRegistration", "~/UL/AdminRegistration.aspx");
+            routes.MapPageRoute("AdminRegistration", "AdminRegistration/{*vc}", "~/UL/AdminRegistration.aspx");
             routes.MapPageRoute("AdminTransactions", "AdminTransactions", "~/UL/AdminTransactions.aspx");
             routes.MapPageRoute("AdminUpdateSelectedItem", "AdminUpdateSelectedItem", "~/UL/AdminUpdateSelectedItem.aspx");
             routes.MapPageRoute("AdminUpdateSelectedUser", "AdminUpdateSelectedUser", "~/UL/AdminUpdateSelectedUser.aspx");
@@ -44,8 +44,9 @@ namespace Assignment_2
 			routes.MapPageRoute("Registration", "Registration", "~/UL/Registration.aspx");
 			routes.MapPageRoute("SingleProductPage", "SingleProductPage", "~/UL/SingleProductPage.aspx");
 			routes.MapPageRoute("SuccessPage", "SuccessPage/{status}", "~/UL/SuccessPage.aspx");
+            routes.MapPageRoute("ViewSingleOrder", "ViewSingleOrder", "~/UL/ViewSingleOrder.aspx");
 
 
-		}
+        }
     }
 }

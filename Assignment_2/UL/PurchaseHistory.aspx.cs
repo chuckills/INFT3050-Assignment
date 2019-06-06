@@ -33,9 +33,10 @@ namespace Assignment_2.UL
             int orderID = Convert.ToInt32(gvOrders.SelectedRow.Cells[0].Text);
 
             BLOrder order = new BLOrder();
-            order.getOrder(orderID);
+           
+            Session["Order"] = order.getOrder(orderID);
 			
-            Response.Redirect("");
+            Response.Redirect("~/UL/ViewSingleOrder");
         }
     }
 }
