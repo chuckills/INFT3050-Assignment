@@ -36,7 +36,7 @@ namespace Assignment_2.UL
             // Otherwise, show all products
             else
             {
-                rptProducts.DataSource = BLProduct.getProducts();
+                rptProducts.DataSource = BLProduct.getProducts(false);
                 rptProducts.DataBind();
             }
         }
