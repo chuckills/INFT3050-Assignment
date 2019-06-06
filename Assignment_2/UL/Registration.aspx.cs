@@ -12,7 +12,11 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Page only accessible when no user account has been logged in
+            if (!Session["LoginStatus"].Equals("LoggedOut"))
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
 
         // Makes Postal Address fields visible when unchecked

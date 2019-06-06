@@ -13,12 +13,21 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Calculate total cost of the cart
-            int total = 0;
-            BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
+            // Page is not viewable on admin site
+            if (!Session["LoginStatus"].Equals("Admin"))
+            {
+                // Calculate total cost of the cart
+                int total = 0;
+                BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
 			
-            // Display updated cost
-            Cost.Text = string.Format("{0:C}", cart.Amount);
+                // Display updated cost
+                Cost.Text = string.Format("{0:C}", cart.Amount);
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
+            
         }
 
         // Returns currently stored cart items in the session

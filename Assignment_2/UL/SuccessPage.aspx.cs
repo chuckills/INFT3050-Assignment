@@ -38,7 +38,6 @@ namespace Assignment_2.UL
             {
                 noTransactionMade();
             }
-            
         }
 
         protected void defaultSuccess()

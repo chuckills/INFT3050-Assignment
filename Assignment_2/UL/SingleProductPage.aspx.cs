@@ -13,28 +13,36 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			BLProduct product = new BLProduct();
+            // Page not accessible on admin site
+            if (!Session["LoginStatus"].Equals("Admin"))
+            {
+                BLProduct product = new BLProduct();
 
-			product = product.selectProduct(Session["productNumber"].ToString());
+                product = product.selectProduct(Session["productNumber"].ToString());
 
-			Session["Product"] = product;
+                Session["Product"] = product;
 
-			lblTitle.Text = product.playFirstName + " " + product.playLastName + " " + product.teamLocale + " " + product.teamName;
-			lblDescription.Text = product.prodDescription;
-			lblPrice.Text = string.Format("{0:C0}", product.prodPrice);
+                lblTitle.Text = product.playFirstName + " " + product.playLastName + " " + product.teamLocale + " " + product.teamName;
+                lblDescription.Text = product.prodDescription;
+                lblPrice.Text = string.Format("{0:C0}", product.prodPrice);
 
-			imgFront.ImageUrl = "Images\\jerseys\\" + product.image[0];
-			imgBack.ImageUrl = "Images\\jerseys\\" + product.image[1];
+                imgFront.ImageUrl = "Images\\jerseys\\" + product.image[0];
+                imgBack.ImageUrl = "Images\\jerseys\\" + product.image[1];
 
-			rblSizeOption.Items[0].Enabled = product.stock[0] > 0;
-			rblSizeOption.Items[1].Enabled = product.stock[1] > 0;
-			rblSizeOption.Items[2].Enabled = product.stock[2] > 0;
-			rblSizeOption.Items[3].Enabled = product.stock[3] > 0;
-			rblSizeOption.Items[4].Enabled = product.stock[4] > 0;
+                rblSizeOption.Items[0].Enabled = product.stock[0] > 0;
+                rblSizeOption.Items[1].Enabled = product.stock[1] > 0;
+                rblSizeOption.Items[2].Enabled = product.stock[2] > 0;
+                rblSizeOption.Items[3].Enabled = product.stock[3] > 0;
+                rblSizeOption.Items[4].Enabled = product.stock[4] > 0;
 
-			btnAddToCart.Visible = tbxQuantity.Visible = rblSizeOption.Visible = product.stock.Sum() > 0;
-			csvQuantity.Enabled = rfvQuantity.Enabled = rxvQuantity.Enabled = rfvSize.Enabled = product.stock.Sum() > 0;
-			lblNoStock.Visible = product.stock.Sum() == 0;
+                btnAddToCart.Visible = tbxQuantity.Visible = rblSizeOption.Visible = product.stock.Sum() > 0;
+                csvQuantity.Enabled = rfvQuantity.Enabled = rxvQuantity.Enabled = rfvSize.Enabled = product.stock.Sum() > 0;
+                lblNoStock.Visible = product.stock.Sum() == 0;
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
 		}
 
 		// Adds current product to cart; gets shopping cart model from session and updates (then writes back to session).

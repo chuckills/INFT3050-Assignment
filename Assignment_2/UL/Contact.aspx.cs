@@ -16,7 +16,11 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Page is not accessible on admin site
+            if (Session["LoginStatus"].Equals("Admin"))
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
 
         // Redirect to contact enquiry received message

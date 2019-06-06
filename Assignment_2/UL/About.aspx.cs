@@ -11,7 +11,11 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Not a page featured in the Admin site
+            if (Session["LoginStatus"].Equals("Admin"))
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
     }
 }

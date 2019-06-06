@@ -12,7 +12,15 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        UsernameTextBox.Focus();
+            // Page only accessible if no account has been logged in
+            if (Session["LoginStatus"].Equals("LoggedOut"))
+            {
+                UsernameTextBox.Focus();
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
 
         // Checks login credentials and updates login status accordingly if it correct

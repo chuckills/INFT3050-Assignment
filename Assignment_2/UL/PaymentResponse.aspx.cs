@@ -11,7 +11,15 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        lblResult.Text = Session["Result"].ToString();
+            // Page only accessible by logged in user
+            if (Session["LoginStatus"].Equals("User"))
+            {
+                lblResult.Text = Session["Result"].ToString();
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/0");
+            }
         }
     }
 }

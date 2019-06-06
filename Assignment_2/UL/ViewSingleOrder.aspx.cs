@@ -12,21 +12,29 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			BLOrder order = Session["Order"] as BLOrder;
+            // Page only accessible by logged in user
+            if (Session["LoginStatus"].Equals("User"))
+            {
+                BLOrder order = Session["Order"] as BLOrder;
 
-			lblOrderID.Text = order.OrderID.ToString();
-			lblDate.Text = string.Format("{0:d}", order.OrderDetails["ordDate"]);
+                lblOrderID.Text = order.OrderID.ToString();
+                lblDate.Text = string.Format("{0:d}", order.OrderDetails["ordDate"]);
 
-			lblSubtotal.Text = string.Format("{0:C}", order.OrderDetails["ordSubTotal"]);
-			
-			lblShip.Text = order.ShippingDetails["shipType"].ToString();
-			lblShipCost.Text = string.Format("{0:C}", order.ShippingDetails["shipCost"]);
+                lblSubtotal.Text = string.Format("{0:C}", order.OrderDetails["ordSubTotal"]);
 
-			lblTotal.Text = string.Format("{0:C}", order.OrderDetails["ordTotal"]);
-			lblGst.Text = string.Format("{0:C}", order.OrderDetails["ordGST"]);
+                lblShip.Text = order.ShippingDetails["shipType"].ToString();
+                lblShipCost.Text = string.Format("{0:C}", order.ShippingDetails["shipCost"]);
 
-			lsvItems.DataSource = order.OrderItems;
-			lsvItems.DataBind();
+                lblTotal.Text = string.Format("{0:C}", order.OrderDetails["ordTotal"]);
+                lblGst.Text = string.Format("{0:C}", order.OrderDetails["ordGST"]);
+
+                lsvItems.DataSource = order.OrderItems;
+                lsvItems.DataBind();
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/0");
+            }
         }
     }
 }

@@ -12,7 +12,11 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Page only accessible if no account has been logged in
+            if (!Session["LoginStatus"].Equals("LoggedOut"))
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
 
         protected void RequestButton_Click(object sender, EventArgs e)

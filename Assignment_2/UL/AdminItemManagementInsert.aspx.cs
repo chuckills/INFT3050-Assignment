@@ -13,11 +13,19 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        if (!IsPostBack)
-	        {
-		        ddlTeam.DataSource = BLProduct.getTeams();
-		        ddlTeam.DataBind();
-	        }
+            // Page only accessible by admin
+            if (Session["LoginStatus"].Equals("Admin"))
+            {
+                if (!IsPostBack)
+	            {
+		            ddlTeam.DataSource = BLProduct.getTeams();
+		            ddlTeam.DataBind();
+	            }
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
 
         protected void addDefaultItem(object sender, EventArgs e)

@@ -14,30 +14,38 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string searchParameter;
-            // If page is reached via search input field: display corresponding products
-            if (HttpContext.Current.Session["SearchString"] != null)
+            // Page not accessible on admin site
+            if (!Session["LoginStatus"].Equals("Admin"))
             {
-                // Get search input
-                searchParameter = HttpContext.Current.Session["SearchString"].ToString();
-                // Get products from query
-                DataSet productSearch = BLProduct.getProductsSearch(searchParameter);
-                int count = productSearch.Tables["Products"].Rows.Count;
-                rptProducts.DataSource = productSearch;
-                rptProducts.DataBind();
-                // Display search input for results
-                if (count == 0)
-                    searchLabel.Text = "No search results for \"" + searchParameter + "\"...";
+                string searchParameter;
+                // If page is reached via search input field: display corresponding products
+                if (HttpContext.Current.Session["SearchString"] != null)
+                {
+                    // Get search input
+                    searchParameter = HttpContext.Current.Session["SearchString"].ToString();
+                    // Get products from query
+                    DataSet productSearch = BLProduct.getProductsSearch(searchParameter);
+                    int count = productSearch.Tables["Products"].Rows.Count;
+                    rptProducts.DataSource = productSearch;
+                    rptProducts.DataBind();
+                    // Display search input for results
+                    if (count == 0)
+                        searchLabel.Text = "No search results for \"" + searchParameter + "\"...";
+                    else
+                        searchLabel.Text = "Search results for \"" + searchParameter + "\"...";
+                    // Remove from session
+                    HttpContext.Current.Session.Remove("SearchString");
+                }
+                // Otherwise, show all products
                 else
-                    searchLabel.Text = "Search results for \"" + searchParameter + "\"...";
-                // Remove from session
-                HttpContext.Current.Session.Remove("SearchString");
+                {
+                    rptProducts.DataSource = BLProduct.getProducts(false);
+                    rptProducts.DataBind();
+                }
             }
-            // Otherwise, show all products
             else
             {
-                rptProducts.DataSource = BLProduct.getProducts(false);
-                rptProducts.DataBind();
+                Response.Redirect("~/UL/ErrorPage/5");
             }
         }
 

@@ -13,8 +13,16 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        gvProducts.DataSource = BLProduct.getProducts(true);
-	        gvProducts.DataBind();
+            // Page only accessible by admin
+            if (Session["LoginStatus"].Equals("Admin"))
+            {
+                gvProducts.DataSource = BLProduct.getProducts(true);
+	            gvProducts.DataBind();
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
 		}
 
         // Redirect to appropriate update page

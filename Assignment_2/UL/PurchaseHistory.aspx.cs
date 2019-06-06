@@ -13,16 +13,17 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            BLUser user = Session["CurrentUser"] as BLUser;
-
+            // Page only accessible to a logged in user
             if (Session["LoginStatus"].ToString().Equals("User"))
             {
+                BLUser user = Session["CurrentUser"] as BLUser;
                 gvOrders.DataSource = BLOrder.getUserOrders(user);
                 gvOrders.DataBind();
             }
             else
             {
                 // Unauthorised
+                Response.Redirect("~/UL/ErrorPage/0");
             }
         }
 

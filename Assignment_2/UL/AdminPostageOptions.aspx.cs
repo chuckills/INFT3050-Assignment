@@ -13,11 +13,19 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        if (!IsPostBack)
-	        {
-		        lsvPostage.DataSource = BLShipping.getShippingTable();
-		        lsvPostage.DataBind();
-	        }
+            // Page only accessible by admin
+            if (Session["LoginStatus"].Equals("Admin"))
+            {
+                if (!IsPostBack)
+	            {
+		            lsvPostage.DataSource = BLShipping.getShippingTable();
+		            lsvPostage.DataBind();
+	            }
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
 
         // Adds postage option to currently available options

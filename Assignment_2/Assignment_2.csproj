@@ -142,7 +142,6 @@
     <Content Include="Global.asax" />
     <Content Include="App_Data\JerseySure.sql" />
     <Content Include="UL\ForgotPassword.aspx" />
-    <Content Include="UL\GuestRegistration.aspx" />
     <Content Include="UL\Images\JerseyAdmin.png" />
     <Content Include="UL\Images\jerseys\Jersey.png" />
     <Content Include="UL\Login.aspx" />
@@ -388,13 +387,6 @@
     </Compile>
     <Compile Include="UL\ForgotPassword.aspx.designer.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UL\GuestRegistration.aspx.cs">
-      <DependentUpon>GuestRegistration.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UL\GuestRegistration.aspx.designer.cs">
-      <DependentUpon>GuestRegistration.aspx</DependentUpon>
     </Compile>
     <Compile Include="UL\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

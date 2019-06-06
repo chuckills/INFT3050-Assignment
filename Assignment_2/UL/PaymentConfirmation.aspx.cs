@@ -12,24 +12,32 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Send confirmation of order to account email address
-            BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
-            BLShipping shipping = Session["Shipping"] as BLShipping;
+            // Page only accessible to a logged in user
+            if (Session["LoginStatus"].Equals("User"))
+            {
+                // Send confirmation of order to account email address
+                BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
+                BLShipping shipping = Session["Shipping"] as BLShipping;
 
-			string mailbody = BLPurchase.generateOrderSummary(Session["Name"].ToString(), cart, shipping);
+			    string mailbody = BLPurchase.generateOrderSummary(Session["Name"].ToString(), cart, shipping);
 			
-            try
-            {
-                BLEmail.SendEmail(Session["UserName"].ToString(), "Order Receipt - JerseySure", mailbody);
-            }
-            catch (Exception ex)
-            {
-                Response.Redirect("~/UL/ErrorPage/1");
-            }
+                try
+                {
+                    BLEmail.SendEmail(Session["UserName"].ToString(), "Order Receipt - JerseySure", mailbody);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/UL/ErrorPage/1");
+                }
 
-            // Remove cart from session
-            Session.Remove("Cart");
-            Session["Cart"] = new BLShoppingCart();
+                // Remove cart from session
+                Session.Remove("Cart");
+                Session["Cart"] = new BLShoppingCart();
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/0");
+            }
         }
     }
 }

@@ -11,12 +11,20 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Change Login Status and redirect to home page
-            Session["LoginStatus"] = "LoggedOut";
-            Session.Remove("UserName");
-			Session.Remove("User");
-			Session.Remove("Name");
-			Response.Redirect("~/UL/Default");
+            // Page only accessible if not account has been logged in
+            if (!Session["LoginStatus"].Equals("LoggedOut"))
+            {
+                // Change Login Status and redirect to home page
+                Session["LoginStatus"] = "LoggedOut";
+                Session.Remove("UserName");
+			    Session.Remove("User");
+			    Session.Remove("Name");
+			    Response.Redirect("~/UL/Default");
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/0");
+            }
         }
     }
 }

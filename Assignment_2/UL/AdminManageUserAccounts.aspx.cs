@@ -12,8 +12,16 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        gvUsers.DataSource = BLUser.getUsers();
-			gvUsers.DataBind();
+            // Page only accessible by admin
+            if (Session["LoginStatus"].Equals("Admin"))
+            {
+                gvUsers.DataSource = BLUser.getUsers();
+			    gvUsers.DataBind();
+            }
+            else
+            {
+                Response.Redirect("~/UL/ErrorPage/5");
+            }
         }
 
 		protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
