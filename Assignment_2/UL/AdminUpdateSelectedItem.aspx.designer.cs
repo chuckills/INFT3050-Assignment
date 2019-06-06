@@ -193,6 +193,60 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.WebControls.TextBox tbxXXL;
         
         /// <summary>
+        /// tblStockVal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblStockVal;
+        
+        /// <summary>
+        /// rxvSmall control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvSmall;
+        
+        /// <summary>
+        /// rxvMedium control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvMedium;
+        
+        /// <summary>
+        /// rxvLarge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvLarge;
+        
+        /// <summary>
+        /// rxvXLge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvXLge;
+        
+        /// <summary>
+        /// rxvXXL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator rxvXXL;
+        
+        /// <summary>
         /// tblImage control.
         /// </summary>
         /// <remarks>
