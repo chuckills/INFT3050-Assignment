@@ -30,9 +30,7 @@ namespace Assignment_2.UL
         // Redirect to appropriate update page
         protected void gvOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GridViewRow row = gvOrders.SelectedRow;
-
-            int orderID = Convert.ToInt32(row.Cells[0].Text);
+            int orderID = Convert.ToInt32(gvOrders.SelectedRow.Cells[0].Text);
 
             BLOrder order = new BLOrder();
             order.getOrder(orderID);
