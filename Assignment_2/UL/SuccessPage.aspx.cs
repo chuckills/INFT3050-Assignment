@@ -11,9 +11,9 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(Request.QueryString["status"]))
+            if (!string.IsNullOrEmpty(RouteData.Values["status"].ToString()))
             {
-                int successCode = Int32.Parse(Request.QueryString["status"]);
+                int successCode = Convert.ToInt32(RouteData.Values["status"]);
 
                 switch (successCode)
                 {
