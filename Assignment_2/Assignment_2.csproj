@@ -254,6 +254,7 @@
     <Content Include="UL\SingleProductPage.aspx" />
     <Content Include="UL\Site.Master" />
     <Content Include="UL\SuccessPage.aspx" />
+    <Content Include="UL\ViewSingleOrder.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -264,8 +265,10 @@
     <Content Include="UL\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\JerseyResolver.cs" />
     <Compile Include="BL\BLAddress.cs" />
     <Compile Include="BL\BLEmail.cs" />
+    <Compile Include="BL\BLOrder.cs" />
     <Compile Include="BL\BLProduct.cs" />
     <Compile Include="BL\BLPurchase.cs" />
     <Compile Include="BL\INFT3050PaymentFactory.cs" />
@@ -490,6 +493,13 @@
     </Compile>
     <Compile Include="UL\SuccessPage.aspx.designer.cs">
       <DependentUpon>SuccessPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UL\ViewSingleOrder.aspx.cs">
+      <DependentUpon>ViewSingleOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\ViewSingleOrder.aspx.designer.cs">
+      <DependentUpon>ViewSingleOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

@@ -10,7 +10,7 @@
 namespace Assignment_2.UL {
     
     
-    public partial class PurchaseHistory {
+    public partial class ViewSingleOrder {
         
         /// <summary>
         /// gvOrders control.

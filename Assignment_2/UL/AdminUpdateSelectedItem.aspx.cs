@@ -95,14 +95,14 @@ namespace Assignment_2.UL
 				currentProduct.stock[2] = Convert.ToInt32(tbxLarge.Text);
 				currentProduct.stock[3] = Convert.ToInt32(tbxXLge.Text);
 				currentProduct.stock[4] = Convert.ToInt32(tbxXXL.Text);
-
+				
 				Session["Product"] = currentProduct;
 
 		        BLProduct.updateProduct(currentProduct);
 
 				Session.Remove("Product");
 
-		        Response.Redirect("~/UL/AdminItemManagement.aspx");
+		        Response.Redirect("~/UL/AdminItemManagement");
 			}
 		}
 
@@ -131,7 +131,7 @@ namespace Assignment_2.UL
 
 		protected void btnCancel_Click(object sender, EventArgs e)
 		{
-			Response.Redirect("~/UL/AdminItemManagement.aspx");
+			Response.Redirect("~/UL/AdminItemManagement");
 		}
 	}
 }

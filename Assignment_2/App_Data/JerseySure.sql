@@ -477,12 +477,21 @@ GO
     -- Database Types, Procedures and Functions for Application
 --===================================================================================
 
-CREATE PROCEDURE usp_getProducts
+CREATE PROCEDURE usp_getAllProducts
 AS
 BEGIN
     SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
     FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
     WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID
+END
+GO
+
+CREATE PROCEDURE usp_getProducts
+AS
+BEGIN
+    SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
+    FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID AND pr.prodActive = 1
 END
 GO
 
@@ -492,7 +501,7 @@ AS
 BEGIN
     SELECT pr.prodNumber, pr.prodDescription, pr.prodPrice, pr.prodActive, t.teamID, t.teamLocale, t.teamName, pl.playFirstName, pl.playLastName, j.jerNumber, i.imgFront, i.imgBack
     FROM Product pr, Team t, Player pl, Image i, JerseyNumber j
-    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID
+    WHERE pr.teamID = t.teamID AND pr.playID = pl.playID AND pr.imgID = i.imgID AND t.teamID = j.teamID AND pl.playID = j.playID AND pr.prodActive = 1
 		AND (t.teamLocale LIKE '%'+@search+'%' OR t.teamName LIKE '%'+@search+'%' OR pl.playFirstName LIKE '%'+@search+'%' OR pl.playLastName LIKE '%'+@search+'%')
 END
 GO

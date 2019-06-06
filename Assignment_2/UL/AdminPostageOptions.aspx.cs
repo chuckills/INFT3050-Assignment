@@ -38,7 +38,7 @@ namespace Assignment_2.UL
                 BLShipping.addShipping(shipping);
 
                 // Redirect to updated postage options
-                Response.Redirect("~/UL/AdminPostageOptions.aspx");
+                Response.Redirect("~/UL/AdminPostageOptions");
             }
         }
 

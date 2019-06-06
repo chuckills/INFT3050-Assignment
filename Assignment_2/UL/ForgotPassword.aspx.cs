@@ -39,7 +39,7 @@ namespace Assignment_2.UL
                     + "Below is the verification link needed to update your password (click to update):"
                     + "</p>"
                     + "<p>"
-                    + "http://localhost:50446/UL/ChangePassword?email=" + EmailTextBox.Text + "&pass=" + randomCode
+                    + "http://localhost:50446/UL/ChangePassword/" + EmailTextBox.Text + "/" + randomCode
                     + "</p>"
                     + "<br/>"
                     + "<p>"
@@ -56,12 +56,12 @@ namespace Assignment_2.UL
                 catch (Exception ex)
                 {
                     // Display error page for unable to send email
-                    Response.Redirect("~/UL/ErrorPage?status=1");
+                    Response.Redirect("~/UL/ErrorPage/1");
                 }
                 
 
                 // Display success status of email being sent
-                Response.Redirect("~/UL/SuccessPage?status=0");
+                Response.Redirect("~/UL/SuccessPage/0");
             }
         }
 

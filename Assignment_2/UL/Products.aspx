@@ -10,7 +10,7 @@
                 <ItemTemplate>
                     <div class="col-sm-3">
                         <h2 class="product-buy-heading"><%# DataBinder.Eval(Container.DataItem, "playFirstName") + "<br/>" + DataBinder.Eval(Container.DataItem, "playLastName")%></h2>
-                        <img alt="" src="Images/jerseys/<%# DataBinder.Eval(Container.DataItem, "imgFront") %>" class="d-block w-100" />
+                        <img alt="" src="/UL/Images/jerseys/<%# DataBinder.Eval(Container.DataItem, "imgFront") %>" class="d-block w-100" />
                         <h3 class="product-price-title"><%# string.Format("{0:C0}", DataBinder.Eval(Container.DataItem, "prodPrice")) %></h3>
                         <div class="d-flex justify-content-center">
                             <asp:LinkButton ID="btnBuy" runat="server" CssClass="product-buy-btn btn btn-danger" onClick="btnBuy_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "prodNumber") %>'>Buy</asp:LinkButton>

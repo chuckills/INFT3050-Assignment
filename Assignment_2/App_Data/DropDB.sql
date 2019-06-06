@@ -30,6 +30,8 @@ DROP PROCEDURE usp_addNewPlayer
 GO
 DROP PROCEDURE usp_addPlayers
 GO
+DROP PROCEDURE usp_getAllProducts
+GO
 DROP PROCEDURE usp_getProducts
 GO
 DROP PROCEDURE usp_getProductsSearch

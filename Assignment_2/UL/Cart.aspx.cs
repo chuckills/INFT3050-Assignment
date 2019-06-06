@@ -73,7 +73,7 @@ namespace Assignment_2.UL
                 if (Session["LoginStatus"].ToString().Equals("LoggedOut"))
                 {
                     // Unable to checkout without a registered account
-                    Response.Redirect("~/UL/ErrorPage?status=4");
+                    Response.Redirect("~/UL/ErrorPage/4");
                 }
                 else
                 {

@@ -89,7 +89,7 @@ namespace Assignment_2.BL
 			"<tr>"
 			+ "<td style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
 			+ "<th style=\"border: 1px solid black; padding: 2px 5px;\"></td>"
-			+ "<td style=\"border: 1px solid black; padding: 2px 5px;\">Shipping: " + shipping.Method + "</td>"
+			+ "<td style=\"border: 1px solid black; padding: 2px 5px;\">Shipping - " + shipping.Method + "</td>"
 			+ "<td style=\"border: 1px solid black; padding: 2px 5px;\">$" + shipping.Cost + "</td>"
 			+ "</tr>"
 			+ "<tr>"
@@ -110,5 +110,6 @@ namespace Assignment_2.BL
 
 			return mailbody;
 		}
-	}
+		
+    }
 }

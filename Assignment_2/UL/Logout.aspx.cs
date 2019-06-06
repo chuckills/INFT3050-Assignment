@@ -16,7 +16,7 @@ namespace Assignment_2.UL
             Session.Remove("UserName");
 			Session.Remove("User");
 			Session.Remove("Name");
-			Response.Redirect("~/UL/");
+			Response.Redirect("~/UL/Default");
         }
     }
 }

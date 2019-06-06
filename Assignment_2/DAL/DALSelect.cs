@@ -5,20 +5,23 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using Assignment_2.BL;
 
 namespace Assignment_2.DAL
 {
 	public class DALSelect
 	{
-		public static DataSet getProducts()
+		public static DataSet getProducts(bool admin)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
 
 			DataSet productDataSet = new DataSet();
 
+			string commandString = admin ? "usp_getAllProducts" : "usp_getProducts";
+
 			using (SqlConnection connection = new SqlConnection(cs))
 			{
-				SqlDataAdapter adapter = new SqlDataAdapter("usp_getProducts", connection);
+				SqlDataAdapter adapter = new SqlDataAdapter(commandString, connection);
 
 				adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
@@ -303,5 +306,71 @@ namespace Assignment_2.DAL
 
 			return addressDataSet.Tables["Address"].Rows[0];
 		}
+
+        public static DataSet getUserOrders(BLUser user)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+            DataSet orderDataSet = new DataSet();
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand command = new SqlCommand("usp_getUserOrders", connection);
+
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@userID", user.userID);
+
+                adapter.SelectCommand = command;
+
+                adapter.Fill(orderDataSet, "Address");
+            }
+
+            return orderDataSet;
+        }
+
+        public static DataRow getOrder(int orderID)
+        {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+	        DataSet userDataSet = new DataSet();
+
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlDataAdapter adapter = new SqlDataAdapter();
+		        SqlCommand command = new SqlCommand("usp_getSingleOrder", connection);
+
+		        command.CommandType = CommandType.StoredProcedure;
+		        command.Parameters.AddWithValue("@orderID", orderID);
+		        adapter.SelectCommand = command;
+
+		        adapter.Fill(userDataSet, "Order");
+
+	        }
+
+	        return userDataSet.Tables["Order"].Rows[0];
+		}
+
+        public static DataTable getOrderItems(int orderID)
+        {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+	        DataSet userDataSet = new DataSet();
+
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlDataAdapter adapter = new SqlDataAdapter();
+		        SqlCommand command = new SqlCommand("usp_getOrderItems", connection);
+
+		        command.CommandType = CommandType.StoredProcedure;
+		        command.Parameters.AddWithValue("@orderID", orderID);
+		        adapter.SelectCommand = command;
+
+		        adapter.Fill(userDataSet, "Items");
+
+	        }
+
+	        return userDataSet.Tables["Items"];
+        }
 	}
 }

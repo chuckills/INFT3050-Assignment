@@ -57,10 +57,10 @@ namespace Assignment_2.UL
                 catch (Exception ex)
                 {
                     // Display error page for unable to send email
-                    Response.Redirect("~/UL/ErrorPage?status=1");
+                    Response.Redirect("~/UL/ErrorPage/1");
                 }
 
-                Response.Redirect("~/UL/SuccessPage?status=2");
+                Response.Redirect("~/UL/SuccessPage/2");
             }
         }
     }

@@ -13,8 +13,11 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        ddlTeam.DataSource = BLProduct.getTeams();
-			ddlTeam.DataBind();
+	        if (!IsPostBack)
+	        {
+		        ddlTeam.DataSource = BLProduct.getTeams();
+		        ddlTeam.DataBind();
+	        }
         }
 
         protected void addDefaultItem(object sender, EventArgs e)
@@ -43,15 +46,15 @@ namespace Assignment_2.UL
 						tbxXLge.Text == "" ? 0 : Convert.ToInt32(tbxXLge.Text),
 						tbxXXL.Text == "" ? 0 : Convert.ToInt32(tbxXXL.Text)
 					}
-			};
+				};
 
 				uploadImageFile(fuImgFront);
 				uploadImageFile(fuImgBack);
 
 				if (BLProduct.addProduct(newProduct))
-					Response.Redirect("~/UL/AdminItemManagement.aspx");
+					Response.Redirect("~/UL/AdminItemManagement");
 				else
-					Response.Redirect("~/UL/AdminItemManagementInsert.aspx");
+					Response.Redirect("~/UL/AdminItemManagementInsert");
 			}
 		}
 

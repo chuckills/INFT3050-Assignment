@@ -56,13 +56,26 @@
                         <asp:TableCell runat="server">XXL</asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow runat="server">
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxSmall" runat="server" Width="40" CssClass="form-control" TextMode="Number"></asp:TextBox></asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxMedium" runat="server" Width="40" CssClass="form-control" TextMode="Number"></asp:TextBox></asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxLarge" runat="server" Width="40" CssClass="form-control" TextMode="Number"></asp:TextBox></asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxXLge" runat="server" Width="40" CssClass="form-control" TextMode="Number"></asp:TextBox></asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxXXL" runat="server" Width="40" CssClass="form-control" TextMode="Number"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxSmall" runat="server" Width="40" CssClass="form-control"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxMedium" runat="server" Width="40" CssClass="form-control"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxLarge" runat="server" Width="40" CssClass="form-control"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxXLge" runat="server" Width="40" CssClass="form-control"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxXXL" runat="server" Width="40" CssClass="form-control"></asp:TextBox></asp:TableCell>
                     </asp:TableRow>
-                    <asp:TableRow runat="server"><asp:TableCell runat="server"><br/></asp:TableCell></asp:TableRow>
+                </asp:Table>
+                
+                <asp:Table ID="tblStockVal" runat="server">
+                    <asp:TableRow runat="server">
+                        <asp:TableCell runat="server">
+                            <asp:RegularExpressionValidator runat="server" ID="rxvSmall" ErrorMessage="S quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxSmall" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvMedium" ErrorMessage="M quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxMedium" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvLarge" ErrorMessage="L quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxLarge" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvXLge" ErrorMessage="XL quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxXLge" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvXXL" ErrorMessage="XXL quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxXXL" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
+                                
+                            <br/>
+                        </asp:TableCell>
+                    </asp:TableRow>
                 </asp:Table>
 
                 <asp:Table ID="tblImage" runat="server">

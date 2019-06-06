@@ -40,7 +40,7 @@ namespace Assignment_2.UL
             // Redirect if form submission was valid
             if (IsValid)
             {
-                Response.Redirect("~/UL/Payment.aspx");
+                Response.Redirect("~/UL/Payment");
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        gvProducts.DataSource = BLProduct.getProducts();
+	        gvProducts.DataSource = BLProduct.getProducts(true);
 	        gvProducts.DataBind();
 		}
 
@@ -25,7 +25,7 @@ namespace Assignment_2.UL
 			BLProduct product = new BLProduct();
 
 			Session["Product"] = product.selectProduct(row.Cells[0].Text);
-			Response.Redirect("~/UL/AdminUpdateSelectedItem.aspx");
+			Response.Redirect("~/UL/AdminUpdateSelectedItem");
 		}
 
 		protected void gvProducts_RowDataBound(object sender, GridViewRowEventArgs e)
