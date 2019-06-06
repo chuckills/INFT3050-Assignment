@@ -4,8 +4,9 @@
     <div class="container">
         
         <h2>User Management</h2>
+        <hr/>
 
-        <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged">
+        <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged" HeaderStyle-HorizontalAlign="Center">
             <Columns>  
                 <asp:BoundField DataField="userID" HeaderText="ID" ReadOnly="True" />  
                 <asp:BoundField DataField="userFirstName" HeaderText="FirstName" ReadOnly="True" />  
@@ -14,7 +15,7 @@
                 <asp:BoundField DataField="userPhone" HeaderText="Phone" ReadOnly="True" />  
                 <asp:BoundField DataField="userAdmin" HeaderText="Admin" ReadOnly="True" /> 
                 <asp:BoundField DataField="userActive" HeaderText="Active" ReadOnly="True" /> 
-                <asp:CommandField ShowSelectButton="True" />
+                <asp:CommandField ShowSelectButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-outline-danger" />
             </Columns>  
         </asp:GridView>
     </div>

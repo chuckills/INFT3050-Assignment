@@ -37,6 +37,12 @@
                 <asp:DropDownList ID="ddlShipping" CssClass="form-control" DataTextField="shipFull" DataValueField="shipID" runat="server" OnDataBound="addDefaultItem" OnSelectedIndexChanged="ddlShipping_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
             </asp:TableCell>
         </asp:TableRow>
+        <asp:TableRow runat="server">
+            <asp:TableCell runat="server"></asp:TableCell>
+            <asp:TableCell runat="server">
+                <asp:RequiredFieldValidator ID="RequiredShipping" runat="server" ErrorMessage="No shipping option selected" ControlToValidate="ddlShipping" ForeColor="red"></asp:RequiredFieldValidator>
+            </asp:TableCell>
+        </asp:TableRow>
         <%--<asp:TableRow runat="server">
             <asp:TableCell runat="server"></asp:TableCell>
             <asp:TableCell runat="server"></asp:TableCell>
@@ -60,7 +66,7 @@
                 </asp:RadioButtonList>
             </asp:TableCell>
             <asp:TableCell runat="server">
-                <asp:RequiredFieldValidator ID="rfvCardType" runat="server" ErrorMessage="Required" CssClass="text-danger" InitialValue="None" ControlToValidate="rblCardType" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvCardType" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="rblCardType" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>
@@ -76,7 +82,7 @@
             <%-- Validation for card number --%>
             <asp:TableCell runat="server">
                 <asp:RequiredFieldValidator ID="rfvNumber" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxCardNumber" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:UpdatePanel ID="uplCard" runat="server">
+                <asp:UpdatePanel ID="uplCardNumber" runat="server">
                     <ContentTemplate>
                         <asp:CustomValidator ID="csvNumberVal" runat="server" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxCardNumber" ErrorMessage="Invalid Number" OnServerValidate="checkCardNumber" SetFocusOnError="True"></asp:CustomValidator>
                     </ContentTemplate>

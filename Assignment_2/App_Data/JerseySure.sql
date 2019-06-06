@@ -98,7 +98,6 @@ CREATE TABLE Stock
     stkLevel INT NOT NULL DEFAULT 0,
     PRIMARY KEY (sizeID, prodNumber),
     FOREIGN KEY (prodNumber) REFERENCES Product(prodNumber),
-    CHECK (stkLevel >= 0),
     CHECK (sizeID IN ('S', 'M', 'L', 'XL', 'XXL'))
 )
 
@@ -624,7 +623,6 @@ CREATE PROCEDURE usp_updateUser
     @userEmail VARCHAR(255),
     @userPhone CHAR(10),
     @userAdmin BIT,
-    @userActive BIT,
     @billStreet VARCHAR(255),
     @billSuburb VARCHAR(30),
     @billState VARCHAR(3),
@@ -636,7 +634,7 @@ CREATE PROCEDURE usp_updateUser
 AS
 BEGIN TRANSACTION
     UPDATE Users
-    SET userFirstName = @userFirst, userLastName = @userLast, userEmail = @userEmail, userPhone = @userPhone, userActive = @userActive
+    SET userFirstName = @userFirst, userLastName = @userLast, userEmail = @userEmail, userPhone = @userPhone
     WHERE userID = @userID
     DECLARE @addID INT
     IF @userAdmin != 1
@@ -669,6 +667,25 @@ BEGIN TRANSACTION
     SET addID = @addID
     WHERE atType = 'P' AND userID = @userID
 COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_toggleUserActive
+    @userID INT
+AS
+BEGIN
+    IF (SELECT userActive FROM Users WHERE userID = @userID) = 1
+        BEGIN
+            UPDATE Users
+            SET userActive = 0
+            WHERE userID = @userID
+        END
+    ELSE
+        BEGIN
+            UPDATE Users
+            SET userActive = 1
+            WHERE userID = @userID
+        END
+END
 GO
 
 CREATE PROCEDURE usp_changeUserPassword
@@ -789,6 +806,53 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+CREATE TYPE STOCKTYPE AS TABLE
+(
+    sizeID VARCHAR(3) PRIMARY KEY,
+    stkLevel INT
+)
+GO
+
+CREATE PROCEDURE usp_updateProduct
+    @prodNumber VARCHAR(8),
+    @prodDescription TEXT,
+    @prodPrice MONEY,
+    @imgFront VARCHAR(255),
+    @imgBack VARCHAR(255),
+    @stock STOCKTYPE READONLY
+AS
+BEGIN TRANSACTION
+    UPDATE Product
+    SET prodDescription = @prodDescription, prodPrice = @prodPrice
+    WHERE prodNumber = @prodNumber
+    UPDATE Image
+    SET imgFront = @imgFront, imgBack = @imgBack
+    WHERE imgID = (SELECT imgID FROM Product WHERE prodNumber = @prodNumber)
+    UPDATE Stock
+    SET stkLevel = s.stkLevel
+    FROM @stock s WHERE @prodNumber = Stock.prodNumber AND s.sizeID = Stock.sizeID
+COMMIT TRANSACTION
+GO
+
+CREATE PROCEDURE usp_toggleProductActive
+    @prodNum VARCHAR(8)
+AS
+BEGIN
+    IF (SELECT prodActive FROM Product WHERE prodNumber = @prodNum) = 1
+        BEGIN
+            UPDATE Product
+            SET prodActive = 0
+            WHERE prodNumber = @prodNum
+        END
+    ELSE
+        BEGIN
+            UPDATE Product
+            SET prodActive = 1
+            WHERE prodNumber = @prodNum
+        END
+END
+GO
+
 CREATE PROCEDURE usp_addShipping
 	@type VARCHAR(15),
 	@description VARCHAR(255),
@@ -849,8 +913,19 @@ BEGIN
 END
 GO
 
+CREATE TYPE CARTITEMTYPE AS TABLE
+(
+    userID INT,
+	prodNumber VARCHAR(8),
+	sizeID VARCHAR(3),
+	cartQuantity INT,
+	cartUnitPrice MONEY,
+	cartProductTotal MONEY
+    PRIMARY KEY (userID, prodNumber, sizeID)
+)
+GO
+
 CREATE PROCEDURE usp_addNewOrder
-    @ordID INT OUTPUT,
     @ordSubTotal MONEY,
     @ordTotal MONEY,
     @ordGST MONEY,
@@ -860,29 +935,21 @@ CREATE PROCEDURE usp_addNewOrder
     @ccHolderName VARCHAR(30),
     @ccNumber VARCHAR(16),
     @ccExpiry DATE,
-    @ccType VARCHAR(5)
+    @ccType VARCHAR(5),
+    @cartItems CARTITEMTYPE READONLY
 AS
 BEGIN TRANSACTION
+    DECLARE @ordID INT
     INSERT INTO Orders(ordSubTotal, ordTotal, ordGST, ordPaid, shipID, userID)
         VALUES (@ordSubTotal, @ordTotal, @ordGST, @ordPaid, @shipID, @userID)
     SET @ordID = SCOPE_IDENTITY()
     INSERT INTO CreditCardPM(ccNumber, ccType, ccHolderName, ccExpiry, ordID)
         VALUES (@ccNumber, @ccType, @ccHolderName, @ccExpiry, @ordID)
-COMMIT TRANSACTION
-GO
-
-CREATE PROCEDURE usp_addOrderItems
-    @userID INT,
-	@ordID INT,
-	@prodNumber VARCHAR(8),
-	@sizeID VARCHAR(3),
-	@cartQuantity INT,
-	@cartUnitPrice MONEY,
-	@cartProductTotal MONEY
-AS
-BEGIN TRANSACTION
-    INSERT INTO CartItem(userID, ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal)
-        VALUES (@userID, @ordID, @prodNumber, @sizeID, @cartQuantity, @cartUnitPrice, @cartProductTotal)
+    INSERT INTO CartItem (userID, ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal)
+        SELECT userID, @ordID, prodNumber, sizeID, cartQuantity, cartUnitPrice, cartProductTotal FROM @cartItems
+    UPDATE Stock
+    SET stkLevel = stkLevel - cartQuantity
+    FROM @cartItems c WHERE c.prodNumber = Stock.prodNumber AND c.sizeID = Stock.sizeID
 COMMIT TRANSACTION
 GO
 

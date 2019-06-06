@@ -160,6 +160,11 @@ namespace Assignment_2.BL
 			return rows;
 		}
 
+		public static void toggleActive(int userID)
+		{
+			DALUpdate.toggleUserActive(userID);
+		}
+
 		public static bool updateUser(BLUser user)
 		{
 			return DALUpdate.updateUser(user);

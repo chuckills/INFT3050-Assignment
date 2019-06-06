@@ -25,7 +25,6 @@ namespace Assignment_2.UL
             if (IsValid)
             {
                 // Send email with query information
-                BLEmail email = new BLEmail();
 
                 // Generate message body for email
                 string mailbody =
@@ -53,7 +52,7 @@ namespace Assignment_2.UL
 
                 try
                 {
-                    email.SendEmail(tbxEmail.Text, "Contact Form Query - JerseySure", mailbody);
+                    BLEmail.SendEmail(tbxEmail.Text, "Contact Form Query - JerseySure", mailbody);
                 }
                 catch (Exception ex)
                 {

@@ -10,24 +10,24 @@
                 <asp:Table ID="tblProduct" runat="server">
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">First Name</asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxFirstName" runat="server" CssClass="form-control"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxFirstName" runat="server" CssClass="form-control" Enabled="False"></asp:TextBox></asp:TableCell>
                         <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvFirstName" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxFirstName"></asp:RequiredFieldValidator></asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">Last Name</asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxLastName" runat="server" CssClass="form-control"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxLastName" runat="server" CssClass="form-control" Enabled="False"></asp:TextBox></asp:TableCell>
                         <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvLastName" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxLastName"></asp:RequiredFieldValidator></asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">Team</asp:TableCell>
                         <asp:TableCell runat="server">
-                            <asp:DropDownList ID="ddlTeam" CssClass="form-control" runat="server" DataTextField="teamFull" DataValueField="teamID" OnDataBound="addDefaultItem"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlTeam" CssClass="form-control" runat="server" Enabled="False" DataTextField="teamFull" DataValueField="teamID" OnDataBound="addDefaultItem"></asp:DropDownList>
                             </asp:TableCell>
                         <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvTeam" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="ddlTeam" InitialValue=""></asp:RequiredFieldValidator></asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">Jersey Number</asp:TableCell>
-                        <asp:TableCell runat="server"><asp:TextBox ID="tbxJerNumber" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox></asp:TableCell>
+                        <asp:TableCell runat="server"><asp:TextBox ID="tbxJerNumber" runat="server" CssClass="form-control" Enabled="False" TextMode="Number"></asp:TextBox></asp:TableCell>
                         <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvNumber" runat="server" ErrorMessage="Required" CssClass="text-danger" Display="Dynamic" ControlToValidate="tbxJerNumber"></asp:RequiredFieldValidator></asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow runat="server">
@@ -95,7 +95,9 @@
 
                 <div class="form-group">
                     <asp:Button ID="UpdateProductButton" runat="server" Text="Update" CssClass="btn btn-danger" OnClick="UpdateProductButton_Click" />&nbsp;
-                    <asp:Button ID="RemoveProductButton" runat="server" Text="Remove Product" CssClass="btn btn-danger" OnClick="RemoveProductButton_Click" />
+                    <asp:Button ID="RemoveProductButton" runat="server" Text="Active" CssClass="btn btn-danger" OnClick="RemoveProductButton_Click" CausesValidation="False" />&nbsp;
+                    <asp:Button ID="btnCancel" runat="server" Text="Back" CssClass="btn btn-danger" OnClick="btnCancel_Click" CausesValidation="False" />
+
                 </div>
             </div>
             <div class="col"></div>
