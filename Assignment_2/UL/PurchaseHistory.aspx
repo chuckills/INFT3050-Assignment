@@ -8,10 +8,10 @@
     <asp:GridView ID="gvOrders" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvOrders_SelectedIndexChanged">
         <Columns>  
             <asp:BoundField DataField="ordID" HeaderText="Order ID" ReadOnly="True" />  
-            <asp:BoundField DataField="ordDate" HeaderText="Date Ordered" ReadOnly="True" />  
-            <asp:BoundField DataField="ordSubTotal" HeaderText="Subtotal" ReadOnly="True" />  
-            <asp:BoundField DataField="ordTotal" HeaderText="Total" ReadOnly="True" />  
-            <asp:BoundField DataField="ordGST" HeaderText="GST" ReadOnly="True" /> 
+            <asp:BoundField DataField="ordDate" HeaderText="Date Ordered" ReadOnly="True" DataFormatString="{0:d}" />  
+            <asp:BoundField DataField="ordSubTotal" HeaderText="Subtotal" ReadOnly="True" DataFormatString="{0:C}" />  
+            <asp:BoundField DataField="ordTotal" HeaderText="Total" ReadOnly="True" DataFormatString="{0:C}" />  
+            <asp:BoundField DataField="ordGST" HeaderText="GST" ReadOnly="True" DataFormatString="{0:C}" /> 
             <asp:BoundField DataField="ordPaid" HeaderText="Paid" ReadOnly="True" />
             <asp:CommandField ShowSelectButton="True" ButtonType="Button"> 
                 <ControlStyle CssClass="btn btn-outline-danger"></ControlStyle>

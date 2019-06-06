@@ -2,23 +2,33 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <br />
-    <h1>Your Purchase History</h1>
+    <h1>Order #<asp:Label ID="lblOrderID" runat="server"></asp:Label></h1>
     <hr />
 
-
-    <asp:GridView ID="gvOrders" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvOrders_SelectedIndexChanged">
-        <Columns>  
-            <asp:BoundField DataField="ordID" HeaderText="Order ID" ReadOnly="True" />  
-            <asp:BoundField DataField="ordDate" HeaderText="Date Ordered" ReadOnly="True" />  
-            <asp:BoundField DataField="ordSubTotal" HeaderText="Subtotal" ReadOnly="True" />  
-            <asp:BoundField DataField="ordTotal" HeaderText="Total" ReadOnly="True" />  
-            <asp:BoundField DataField="ordGST" HeaderText="GST" ReadOnly="True" /> 
-            <asp:BoundField DataField="ordPaid" HeaderText="Paid" ReadOnly="True" />
-            <asp:CommandField ShowSelectButton="True" ButtonType="Button"> 
-                <ControlStyle CssClass="btn btn-outline-danger"></ControlStyle>
-            </asp:CommandField>
-        </Columns>
-        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-    </asp:GridView>
+    Date:&nbsp;<asp:Label ID="lblDate" runat="server"></asp:Label>
+    <hr/>
+    <asp:ListView runat="server" ID="lsvItems">
+        <ItemTemplate>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-6">
+                        <%-- Data-bound content. --%>
+                        <asp:Label ID="lblprodNum" runat="server" Text='<%#Eval("prodNumber") %>' />,&nbsp;<asp:Label ID="lblSize" runat="server" Text='<%#Eval("sizeID") %>' />
+                        ,&nbsp;<asp:Label ID="lblFirst" runat="server" Text='<%#Eval("playFirstName") %>' />,&nbsp;<asp:Label ID="lblLast" runat="server" Text='<%#Eval("playLastName") %>' />
+                        ,&nbsp;<asp:Label ID="lblDescription" runat="server" Text='<%#Eval("prodDescription") %>' />,&nbsp;<asp:Label ID="lblQuantity" runat="server" Text='<%#Eval("cartQuantity") %>' />
+                        ,&nbsp;<asp:Label ID="lblUnit" runat="server" Text='<%#string.Format("{0:C}",Eval("cartUnitPrice")) %>' />
+                    </div>
+                </div>
+            </li>
+        </ItemTemplate>
+    </asp:ListView>
+    <hr/>
+    Subtotal:&nbsp;<asp:Label ID="lblSubtotal" runat="server"></asp:Label>
+    <br/>
+    Shipping:&nbsp;<asp:Label ID="lblShip" runat="server"></asp:Label><asp:Label ID="lblShipCost" runat="server"></asp:Label>
+    <br/>
+    Total:&nbsp;<asp:Label ID="lblTotal" runat="server"></asp:Label>
+    <br/>
+    GST included:&nbsp;<asp:Label ID="lblGst" runat="server"></asp:Label>
 
 </asp:Content>
