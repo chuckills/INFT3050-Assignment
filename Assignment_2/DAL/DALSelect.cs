@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using Assignment_2.BL;
 
 namespace Assignment_2.DAL
 {
@@ -303,5 +304,27 @@ namespace Assignment_2.DAL
 
 			return addressDataSet.Tables["Address"].Rows[0];
 		}
-	}
+
+        public static DataSet getUserOrders(BLUser user)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+            DataSet orderDataSet = new DataSet();
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand command = new SqlCommand("usp_getUserOrders", connection);
+
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@userID", user.userID);
+
+                adapter.SelectCommand = command;
+
+                adapter.Fill(orderDataSet, "Address");
+            }
+
+            return orderDataSet;
+        }
+    }
 }

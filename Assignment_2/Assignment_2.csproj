@@ -254,6 +254,7 @@
     <Content Include="UL\SingleProductPage.aspx" />
     <Content Include="UL\Site.Master" />
     <Content Include="UL\SuccessPage.aspx" />
+    <Content Include="UL\ViewSingleOrder.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -490,6 +491,13 @@
     </Compile>
     <Compile Include="UL\SuccessPage.aspx.designer.cs">
       <DependentUpon>SuccessPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UL\ViewSingleOrder.aspx.cs">
+      <DependentUpon>ViewSingleOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UL\ViewSingleOrder.aspx.designer.cs">
+      <DependentUpon>ViewSingleOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

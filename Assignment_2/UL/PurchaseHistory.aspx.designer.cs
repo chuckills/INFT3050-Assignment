@@ -13,12 +13,12 @@ namespace Assignment_2.UL {
     public partial class PurchaseHistory {
         
         /// <summary>
-        /// lsvHistory control.
+        /// gvOrders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lsvHistory;
+        protected global::System.Web.UI.WebControls.GridView gvOrders;
     }
 }

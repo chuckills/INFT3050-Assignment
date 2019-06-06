@@ -4,22 +4,20 @@
     
     <br />
     <h1>Your Purchase History</h1>
-    
 
-    <asp:ListView ID="lsvHistory" runat="server" ItemType="System.String"
-                  SelectMethod="GetPurchaseHistory">
-        <EmptyDataTemplate>
-            <li class="list-group-item">No orders for this user...</li>
-        </EmptyDataTemplate>
-        <ItemTemplate>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-6">
-                        <%#:Item %> 
-                    </div>
-                </div>
-            </li>
-        </ItemTemplate>
-    </asp:ListView>
+    <asp:GridView ID="gvOrders" runat="server" AllowPaging="True" AutoGenerateColumns="False">
+        <Columns>  
+            <asp:BoundField DataField="ordID" HeaderText="Order ID" ReadOnly="True" />  
+            <asp:BoundField DataField="ordDate" HeaderText="Date Ordered" ReadOnly="True" />  
+            <asp:BoundField DataField="ordSubTotal" HeaderText="Subtotal" ReadOnly="True" />  
+            <asp:BoundField DataField="ordTotal" HeaderText="Total" ReadOnly="True" />  
+            <asp:BoundField DataField="ordGST" HeaderText="GST" ReadOnly="True" /> 
+            <asp:BoundField DataField="ordPaid" HeaderText="Paid" ReadOnly="True" />
+            <asp:CommandField ShowSelectButton="True" ButtonType="Button"> 
+                <ControlStyle CssClass="btn btn-outline-danger"></ControlStyle>
+            </asp:CommandField>
+        </Columns>
+        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+    </asp:GridView>
 
 </asp:Content>

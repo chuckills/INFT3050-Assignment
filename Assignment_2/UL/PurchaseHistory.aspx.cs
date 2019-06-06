@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment_2.BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,26 +14,29 @@ namespace Assignment_2.UL
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Stores placeholder values in session as demonstration
-            purchaseList = Session["PurchaseList"] as List<String>;
-            if (purchaseList == null)
+            BLUser user = Session["CurrentUser"] as BLUser;
+
+            if (Session["LoginStatus"].ToString().Equals("User"))
             {
-                purchaseList = new List<String>()
-                {
-                    "9967 2019-04-12 BOS00001 XL $100",
-                    "8087 2018-04-12 BOS00001 XL $95",
-                    "6678 2017-04-12 BOS00001 XL $90",
-                    "3585 2016-04-12 BOS00001 XL $90"
-                };
-                
-                Session["PurchaseList"] = purchaseList;
+                gvOrders.DataSource = BLPurchase.getUserOrders(user);
+                gvOrders.DataBind();
+            }
+            else
+            {
+                // Unauthorised
             }
         }
 
-        // Returns current purchase history information
-        public List<String> GetPurchaseHistory()
+        // COPIED FROM AdminItemManagment.aspx.cs
+        // Redirect to appropriate update page
+        protected void gvProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            return purchaseList;
+            GridViewRow row = gvProducts.SelectedRow;
+
+            BLProduct product = new BLProduct();
+
+            Session["Product"] = product.selectProduct(row.Cells[0].Text);
+            Response.Redirect("~/UL/AdminUpdateSelectedItem.aspx");
         }
     }
 }
