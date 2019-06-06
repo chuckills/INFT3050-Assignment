@@ -32,7 +32,7 @@ namespace Assignment_2.UL
         {
             GridViewRow row = gvOrders.SelectedRow;
 
-            int orderID = Convert.ToInt32(row.Cells[0]);
+            int orderID = Convert.ToInt32(row.Cells[0].Text);
 
             BLOrder order = new BLOrder();
             order.getOrder(orderID);
