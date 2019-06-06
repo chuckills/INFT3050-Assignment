@@ -102,7 +102,7 @@ namespace Assignment_2.UL
 
 				Session.Remove("Product");
 
-		        Response.Redirect("~/UL/AdminItemManagement.aspx");
+		        Response.Redirect("~/UL/AdminItemManagement");
 			}
 		}
 
@@ -131,7 +131,7 @@ namespace Assignment_2.UL
 
 		protected void btnCancel_Click(object sender, EventArgs e)
 		{
-			Response.Redirect("~/UL/AdminItemManagement.aspx");
+			Response.Redirect("~/UL/AdminItemManagement");
 		}
 	}
 }

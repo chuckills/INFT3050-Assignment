@@ -23,7 +23,7 @@ namespace Assignment_2.UL
 			BLUser user = new BLUser();
 
 			Session["User"] = user.getUser(Convert.ToInt32(row.Cells[0].Text));
-			Response.Redirect("~/UL/AdminUpdateSelectedUser.aspx");
+			Response.Redirect("~/UL/AdminUpdateSelectedUser");
 		}
 
 		/* 

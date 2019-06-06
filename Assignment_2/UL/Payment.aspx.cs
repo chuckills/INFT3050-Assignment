@@ -60,13 +60,13 @@ namespace Assignment_2.UL
 				{
 					case TransactionResult.Approved:
 						int rows = BLPurchase.storePurchase(purchase, card);
-						Response.Redirect("~/UL/PaymentConfirmation.aspx");
+						Response.Redirect("~/UL/PaymentConfirmation");
 						break;
 					case TransactionResult.Declined:
 					case TransactionResult.InvalidCard:
 					case TransactionResult.InvalidExpiry:
 					case TransactionResult.ConnectionFailure:
-						Response.Redirect("~/UL/PaymentResponse.aspx");
+						Response.Redirect("~/UL/PaymentResponse");
 						break;
 				}
 			}

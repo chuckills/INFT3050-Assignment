@@ -49,9 +49,9 @@ namespace Assignment_2.UL
 				uploadImageFile(fuImgBack);
 
 				if (BLProduct.addProduct(newProduct))
-					Response.Redirect("~/UL/AdminItemManagement.aspx");
+					Response.Redirect("~/UL/AdminItemManagement");
 				else
-					Response.Redirect("~/UL/AdminItemManagementInsert.aspx");
+					Response.Redirect("~/UL/AdminItemManagementInsert");
 			}
 		}
 

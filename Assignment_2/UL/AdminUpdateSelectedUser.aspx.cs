@@ -84,14 +84,14 @@ namespace Assignment_2.UL
 
 				Session.Remove("User");
 
-		        Response.Redirect("~/UL/AdminManageUserAccounts.aspx");
+		        Response.Redirect("~/UL/AdminManageUserAccounts");
 			}
         }
 
         // Handles update of the selected product
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-			Response.Redirect("~/UL/AdminManageUserAccounts.aspx");
+			Response.Redirect("~/UL/AdminManageUserAccounts");
         }
 
         protected void checkExists(object sender, ServerValidateEventArgs args)
