@@ -10,7 +10,7 @@
     
     <%-- Hero image of mainpage --%>
     <div>
-        <img alt="" src="Images/wade-back.jpg" class="d-block w-100" id="hero-img"/>
+        <img alt="" src="/UL/Images/wade-back.jpg" class="d-block w-100" id="hero-img"/>
     </div>
 
 </asp:Content>

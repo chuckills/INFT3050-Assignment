@@ -12,12 +12,12 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(Request.QueryString["email"])
-                && string.IsNullOrEmpty(Request.QueryString["pass"])))
+            if (!(string.IsNullOrEmpty(RouteData.Values["email"].ToString())
+                && string.IsNullOrEmpty(RouteData.Values["pass"].ToString())))
             {
                 // Get request parameters
-                string email = Request.QueryString["email"];
-                string password = Request.QueryString["pass"];
+                string email = RouteData.Values["email"].ToString();
+                string password = RouteData.Values["pass"].ToString();
 
                 // Retrieve user corresponding to email address of account
                 BLUser user = new BLUser();
@@ -31,15 +31,15 @@ namespace Assignment_2.UL
                 {
                     case (0):
                         // Username does not exist
-                        Response.Redirect("~/UL/ErrorPage?status=2");
+                        Response.Redirect("~/UL/ErrorPage/2");
                         break;
                     case (-1):
                         // Incorrect password
-                        Response.Redirect("~/UL/ErrorPage?status=2");
+                        Response.Redirect("~/UL/ErrorPage/2");
                         break;
                     case (-2):
                         // Suspended account
-                        Response.Redirect("~/UL/ErrorPage?status=2");
+                        Response.Redirect("~/UL/ErrorPage/2");
                         break;
                     default:
                         // Allow update password - create temporary login
@@ -52,7 +52,7 @@ namespace Assignment_2.UL
                 if (HttpContext.Current.Session["CurrentUser"] == null)
                 {
                     // Unauthorised
-                    Response.Redirect("~/UL/ErrorPage?status=0");
+                    Response.Redirect("~/UL/ErrorPage/0");
                 }
             }
         }
@@ -83,16 +83,16 @@ namespace Assignment_2.UL
                     }
                     else
                     {
-                        Response.Redirect("~/UL/ErrorPage?status=0");
+                        Response.Redirect("~/UL/ErrorPage/0");
                     }
                 }
                 
             }
 
             if (status)
-                Response.Redirect("~/UL/SuccessPage?status=1");
+                Response.Redirect("~/UL/SuccessPage/1");
             else
-                Response.Redirect("~/UL/ErrorPage?status=3");
+                Response.Redirect("~/UL/ErrorPage/3");
         }
     }
 }

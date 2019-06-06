@@ -265,6 +265,7 @@
     <Content Include="UL\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\JerseyResolver.cs" />
     <Compile Include="BL\BLAddress.cs" />
     <Compile Include="BL\BLEmail.cs" />
     <Compile Include="BL\BLProduct.cs" />

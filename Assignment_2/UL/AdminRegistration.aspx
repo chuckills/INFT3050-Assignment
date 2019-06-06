@@ -101,7 +101,6 @@
             
             <%-- Validation for username --%>
             <asp:TableCell runat="server">
-                @jerseysure.com.au
                 <asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="rxvUsername" runat="server" ErrorMessage="Username must only contain alphanumeric characters" ControlToValidate="tbxUsername" CssClass="text-danger" Display="Dynamic" ValidationExpression="^([a-zA-Z0-9]{1,255})$"></asp:RegularExpressionValidator>
                 <asp:CustomValidator ID="csvUser" runat="server" ErrorMessage="User already registered" CssClass="text-danger" OnServerValidate="checkExists" ControlToValidate="tbxUsername" Display="Dynamic" SetFocusOnError="True"></asp:CustomValidator>

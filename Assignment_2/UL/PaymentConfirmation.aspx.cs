@@ -24,7 +24,7 @@ namespace Assignment_2.UL
             }
             catch (Exception ex)
             {
-                Response.Redirect("~/UL/ErrorPage?status=1");
+                Response.Redirect("~/UL/ErrorPage/1");
             }
 
             // Remove cart from session

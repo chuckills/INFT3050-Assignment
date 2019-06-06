@@ -17,7 +17,7 @@
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col">
-                                        <img alt="" src="Images\jerseys\<%#:Item.Product.image[0] %>" class="cart-product-icon" />
+                                        <img alt="" src="\UL\Images\jerseys\<%#:Item.Product.image[0] %>" class="cart-product-icon" />
                                     </div>
                                     <div class="col-6 center-text">
                                         <%#:Item.ToString() %>

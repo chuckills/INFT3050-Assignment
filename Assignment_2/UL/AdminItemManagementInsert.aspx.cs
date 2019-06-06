@@ -43,7 +43,7 @@ namespace Assignment_2.UL
 						tbxXLge.Text == "" ? 0 : Convert.ToInt32(tbxXLge.Text),
 						tbxXXL.Text == "" ? 0 : Convert.ToInt32(tbxXXL.Text)
 					}
-			};
+				};
 
 				uploadImageFile(fuImgFront);
 				uploadImageFile(fuImgBack);

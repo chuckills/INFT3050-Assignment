@@ -45,7 +45,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark header-black static-top">
           <div class="container">
             <a class="navbar-brand" href="Default">
-                  <img src="Images/Jersey.png" alt="Jersey Sure Logo" id="hero-logo">
+                  <img src="/UL/Images/Jersey.png" alt="Jersey Sure Logo" id="hero-logo">
             </a>
               
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,7 +116,7 @@
                         // Otherwise give the option to login 
                         else
                         { %>
-                            <a runat="server" href="~/UL/Login" class="dropdown-item">Login</a>
+                            <a runat="server" href="~/UL/Login.aspx" class="dropdown-item">Login</a>
                     <%  } %>
                     </div>
                 </li>

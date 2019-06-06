@@ -17,7 +17,7 @@ namespace Assignment_2.UL
 
         protected void checkExists(object sender, ServerValidateEventArgs args)
         {
-	        args.IsValid = BLUser.checkUser(args.Value + "@jerseysure.com.au") == 0;
+	        args.IsValid = BLUser.checkUser(args.Value) == 0;
         }
 
 		// Handles submission of admin registration form
@@ -29,7 +29,7 @@ namespace Assignment_2.UL
 	            {
 		            userFirstName = tbxFirstName.Text,
 		            userLastName = tbxLastName.Text,
-		            userEmail = tbxUsername.Text + "@jerseysure.com.au",
+		            userEmail = tbxUsername.Text,
 		            userPhone = tbxPhone.Text,
 		            billAddress = null,
 		            postAddress = BLAddress.fillAddress('P', tbxAddress.Text, tbxSuburb.Text, ddlState.SelectedValue, Convert.ToInt32(tbxPostCode.Text)),

@@ -95,7 +95,7 @@ namespace Assignment_2.UL
 				currentProduct.stock[2] = Convert.ToInt32(tbxLarge.Text);
 				currentProduct.stock[3] = Convert.ToInt32(tbxXLge.Text);
 				currentProduct.stock[4] = Convert.ToInt32(tbxXXL.Text);
-
+				
 				Session["Product"] = currentProduct;
 
 		        BLProduct.updateProduct(currentProduct);

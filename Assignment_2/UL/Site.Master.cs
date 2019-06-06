@@ -28,7 +28,7 @@ namespace Assignment_2.UL
 	        if (SearchTextBox.Text != "")
 	        {
 		        HttpContext.Current.Session["SearchString"] = SearchTextBox.Text;
-		        Response.Redirect("~/UL/Products.aspx");
+		        Response.Redirect("~/UL/Products");
 	        }
         }
     }
