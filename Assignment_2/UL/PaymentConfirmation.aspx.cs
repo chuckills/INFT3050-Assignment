@@ -14,8 +14,8 @@ namespace Assignment_2.UL
         protected void Page_Load(object sender, EventArgs e)
         {
             // Check for secure connection
-            if (Request.IsSecureConnection)
-            {
+            //if (Request.IsSecureConnection)
+            //{
                 // Page only accessible to a logged in user
                 if (Session["LoginStatus"].Equals("User"))
                 {
@@ -42,13 +42,13 @@ namespace Assignment_2.UL
                 {
                     Response.Redirect("~/UL/ErrorPage/0");
                 }
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 // Make connection secure if it isn't already
-                string url = ConfigurationManager.AppSettings["SecurePath"] + "Payment";
-                Response.Redirect(url);
-            }
+            //    string url = ConfigurationManager.AppSettings["SecurePath"] + "Payment";
+            //    Response.Redirect(url);
+            //}
         }
     }
 }
