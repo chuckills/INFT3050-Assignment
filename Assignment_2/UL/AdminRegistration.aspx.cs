@@ -12,45 +12,7 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Check if query parameter exists
-            if (RouteData.Values["vc"] != null)
-            {
-                // Get query parameter
-                string queryParameter = RouteData.Values["vc"].ToString();
-
-                if (Session["VCode"] != null && Session["TempAdmin"] != null)
-                {
-                    // Get temp data stored in session for admin registration
-                    string verificationCode = Session["VCode"].ToString();
-                    BLUser user = Session["TempAdmin"] as BLUser;
-
-                    if (verificationCode.Equals(queryParameter))
-                    {
-                        // Add admin account
-                        BLUser.addUser(user);
-                        // Destroy temp data in session
-                        Session.Remove("VCode");
-                        Session.Remove("TempAdmin");
-                        // Admin account successfully verified and added
-                        Response.Redirect("~/UL/SuccessPage/3");
-                    }
-                    else
-                    {
-                        // Security measure - remove temp data from session?
-                        Session.Remove("VCode");
-                        Session.Remove("TempAdmin");
-
-                        // Security error - wrong query parameter for verification code
-                        Response.Redirect("~/UL/ErrorPage/2");
-                    }
-                }
-                else
-                {
-                    // Error to represent that verification code and user are not stored
-                    // correctly in the session
-                    Response.Redirect("~/UL/ErrorPage/100"); // Default error page
-                }
-            }
+            
         }
 
         protected void checkExists(object sender, ServerValidateEventArgs args)
@@ -63,7 +25,7 @@ namespace Assignment_2.UL
         {
             if (IsValid)
             {
-                string verificationCode = BLPassword.RandomString(10, true);
+                string password = BLPassword.RandomString(10, true);
                 string mailbody =
                     "<p>"
                     + "Hi,"
@@ -73,7 +35,7 @@ namespace Assignment_2.UL
                     + "Below is the verification link needed to update your password (click to update):"
                     + "</p>"
                     + "<p>"
-                    + "http://localhost:50446/UL/AdminRegistration/" + verificationCode
+                    + "http://localhost:50446/UL/ChangePassword/" + tbxUsername.Text +"/" +password
                     + "</p>"
                     + "<br/>"
                     + "<p>"
@@ -102,17 +64,16 @@ namespace Assignment_2.UL
 		            userPhone = tbxPhone.Text,
 		            billAddress = null,
 		            postAddress = BLAddress.fillAddress('P', tbxAddress.Text, tbxSuburb.Text, ddlState.SelectedValue, Convert.ToInt32(tbxPostCode.Text)),
-		            userPassword = tbxPassword.Text,
+		            userPassword = password,
 		            userAdmin = true,
 		            userActive = true
 	            };
 
-                // Add data to session
-                Session["TempAdmin"] = newUser;
-                Session["VCode"] = verificationCode;
+                // Add admin account
+                BLUser.addUser(newUser);
 
                 // View saying verification email has been sent
-				Response.Redirect("~/UL/SuccessPage/0");
+                Response.Redirect("~/UL/SuccessPage/0");
             }
         }
     }

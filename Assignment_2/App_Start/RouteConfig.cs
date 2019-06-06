@@ -28,7 +28,15 @@ namespace Assignment_2
             routes.MapPageRoute("AdminUpdateSelectedItem", "AdminUpdateSelectedItem", "~/UL/AdminUpdateSelectedItem.aspx");
             routes.MapPageRoute("AdminUpdateSelectedUser", "AdminUpdateSelectedUser", "~/UL/AdminUpdateSelectedUser.aspx");
             routes.MapPageRoute("Cart", "Cart", "~/UL/Cart.aspx");
-            routes.MapPageRoute("ChangePassword", "ChangePassword/{email}/{pass}", "~/UL/ChangePassword.aspx");
+           
+            routes.MapPageRoute(
+               "ChangePassword",
+                "ChangePassword/{email}/{pass}",
+                "~/UL/ChangePassword.aspx",
+                false,
+                new RouteValueDictionary { { "email", string.Empty }, { "pass", string.Empty }}
+            );
+
             routes.MapPageRoute("Contact", "Contact", "~/UL/Contact.aspx");
 			routes.MapPageRoute("Default", "Default", "~/UL/Default.aspx");
 			routes.MapPageRoute("ErrorPage", "ErrorPage/{status}", "~/UL/ErrorPage.aspx");
@@ -45,8 +53,6 @@ namespace Assignment_2
 			routes.MapPageRoute("SingleProductPage", "SingleProductPage", "~/UL/SingleProductPage.aspx");
 			routes.MapPageRoute("SuccessPage", "SuccessPage/{status}", "~/UL/SuccessPage.aspx");
             routes.MapPageRoute("ViewSingleOrder", "ViewSingleOrder", "~/UL/ViewSingleOrder.aspx");
-
-			//routes.MapPageRoute("AdminRegistration", "AdminRegistration/{vc}", "~/UL/AdminRegistration.aspx", false, new RouteValueDictionary {{ "vc", string.Empty } });
 
         }
     }

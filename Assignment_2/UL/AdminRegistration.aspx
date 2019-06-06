@@ -107,26 +107,6 @@
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server">Password</asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxPassword" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for password --%>
-            <asp:TableCell runat="server">
-                <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxPassword" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="rxvPassword" runat="server" ErrorMessage="Password must be 6 or more alphanumeric characters" ControlToValidate="tbxPassword" CssClass="text-danger" Display="Dynamic" ValidationExpression="^([a-zA-Z0-9]{6,255})$"></asp:RegularExpressionValidator>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server">Confirm Password</asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxPassword2" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for password2 --%>
-            <asp:TableCell runat="server">
-                <asp:CompareValidator ID="cpvPassword2" runat="server" ErrorMessage="Passwords do not match" CssClass="text-danger" ControlToValidate="tbxPassword2" ControlToCompare="tbxPassword" SetFocusOnError="True" Operator="Equal" Display="Dynamic"></asp:CompareValidator>
-                <asp:RequiredFieldValidator ID="rfvPassword2" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxPassword2" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
             <asp:TableCell runat="server"><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/></asp:TableCell>
             <asp:TableCell runat="server"></asp:TableCell>
         </asp:TableRow>

@@ -62,7 +62,7 @@ namespace Assignment_2.UL
             bool status = false;
             if (IsValid)
             {
-                if (HttpContext.Current.Session["CurrentUser"] != null)
+                if (!Session["LoginStatus"].Equals("LoggedOut"))
                 {
                     // Get current user from the session
                     BLUser user = HttpContext.Current.Session["CurrentUser"] as BLUser;
@@ -72,7 +72,7 @@ namespace Assignment_2.UL
                 }
                 else
                 {
-                    if (HttpContext.Current.Session["TempUser"] != null)
+                    if (Session["TempUser"] != null)
                     {
                         // Get current user from the session
                         BLUser user = HttpContext.Current.Session["TempUser"] as BLUser;
@@ -80,13 +80,26 @@ namespace Assignment_2.UL
                         // Run and learn success status
                         status = BLUser.updateUserPassword(user, newPassword);
                         HttpContext.Current.Session.Remove("TempUser");
+
+                        // Log user in
+                        Session["Name"] = user.userFirstName;
+                        Session["CurrentUser"] = user;
+                        Session["UserName"] = user.userEmail;
+                        if (user.userAdmin)
+                        {
+                            Session["LoginStatus"] = "Admin";
+                        }
+                        else
+                        {
+                            Session["LoginStatus"] = "User";
+                        }
                     }
                     else
                     {
+                        // Unauthorised
                         Response.Redirect("~/UL/ErrorPage/0");
                     }
                 }
-                
             }
 
             if (status)
