@@ -45,7 +45,8 @@ namespace Assignment_2
 			routes.MapPageRoute("SingleProductPage", "SingleProductPage", "~/UL/SingleProductPage.aspx");
 			routes.MapPageRoute("SuccessPage", "SuccessPage/{status}", "~/UL/SuccessPage.aspx");
 
+			//routes.MapPageRoute("AdminRegistration", "AdminRegistration/{vc}", "~/UL/AdminRegistration.aspx", false, new RouteValueDictionary {{ "vc", string.Empty } });
 
-		}
+        }
     }
 }
