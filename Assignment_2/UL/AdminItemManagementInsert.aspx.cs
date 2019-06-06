@@ -13,8 +13,11 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-	        ddlTeam.DataSource = BLProduct.getTeams();
-			ddlTeam.DataBind();
+	        if (!IsPostBack)
+	        {
+		        ddlTeam.DataSource = BLProduct.getTeams();
+		        ddlTeam.DataBind();
+	        }
         }
 
         protected void addDefaultItem(object sender, EventArgs e)

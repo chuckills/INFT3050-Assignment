@@ -46,6 +46,7 @@ namespace Assignment_2
 			routes.MapPageRoute("SuccessPage", "SuccessPage/{status}", "~/UL/SuccessPage.aspx");
             routes.MapPageRoute("ViewSingleOrder", "ViewSingleOrder", "~/UL/ViewSingleOrder.aspx");
 
+			//routes.MapPageRoute("AdminRegistration", "AdminRegistration/{vc}", "~/UL/AdminRegistration.aspx", false, new RouteValueDictionary {{ "vc", string.Empty } });
 
         }
     }
