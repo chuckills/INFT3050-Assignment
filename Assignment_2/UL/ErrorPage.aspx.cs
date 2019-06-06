@@ -35,6 +35,9 @@ namespace Assignment_2.UL
                     case 5:
                         wrongLoginStatus();
                         break;
+                    case 6:
+                        notSecureConnection();
+                        break;
                     default:
                         defaultError();
                         break;
@@ -93,8 +96,8 @@ namespace Assignment_2.UL
         {
             StatusLabel.Text = "Sorry, Unable to Checkout";
             DescriptionLabel.Text = "Checkout can only be completed by a registered account.";
-            ResultingButton.Text = "Register";
-            ResultingButton.PostBackUrl = "~/UL/Registration";
+            ResultingButton.Text = "Login";
+            ResultingButton.PostBackUrl = "~/UL/Login";
         }
 
         protected void wrongLoginStatus()
@@ -102,6 +105,14 @@ namespace Assignment_2.UL
             StatusLabel.Text = "Sorry, Page not available";
             DescriptionLabel.Text = "The page you are trying to access is not available according to your" +
                 " current login status.";
+            ResultingButton.Text = "Return Home";
+            ResultingButton.PostBackUrl = "~/UL/Default";
+        }
+
+        protected void notSecureConnection()
+        {
+            StatusLabel.Text = "Sorry, Secure connection is required";
+            DescriptionLabel.Text = "The page being request requires a secure connection in order to be viewed.";
             ResultingButton.Text = "Return Home";
             ResultingButton.PostBackUrl = "~/UL/Default";
         }

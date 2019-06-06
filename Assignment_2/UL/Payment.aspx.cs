@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using INFT3050.PaymentSystem;
+using System.Configuration;
 
 namespace Assignment_2.UL
 {
@@ -15,35 +16,45 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Page only available to logged in user
-            if (Session["LoginStatus"].Equals("User"))
+            // Check for secure connection
+            if (Request.IsSecureConnection)
             {
-                if (!IsPostBack)
-	            {
-		            double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
+                // Page only available to logged in user
+                if (Session["LoginStatus"].Equals("User"))
+                {
+                    if (!IsPostBack)
+                    {
+                        double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
 
-		            lblAmount.Text = string.Format("{0:C}", amount);
+                        lblAmount.Text = string.Format("{0:C}", amount);
 
-		            ddlShipping.DataSource = BLShipping.getShippingMethods();
-		            ddlShipping.DataBind();
+                        ddlShipping.DataSource = BLShipping.getShippingMethods();
+                        ddlShipping.DataBind();
 
-		            BLUser user = Session["CurrentUser"] as BLUser;
+                        BLUser user = Session["CurrentUser"] as BLUser;
 
-		            lblFirst.Text = user.userFirstName;
-		            lblLast.Text = user.userLastName;
-		            lblBillStreet.Text = user.billAddress.addStreet;
-		            lblBillSuburb.Text = user.billAddress.addSuburb;
-		            lblBillState.Text = user.billAddress.addState;
-		            lblBillZip.Text = user.billAddress.addZip.ToString();
-		            lblPostStreet.Text = user.postAddress.addStreet;
-		            lblPostSuburb.Text = user.postAddress.addSuburb;
-		            lblPostState.Text = user.postAddress.addState;
-		            lblPostZip.Text = user.postAddress.addZip.ToString();
-	            }
+                        lblFirst.Text = user.userFirstName;
+                        lblLast.Text = user.userLastName;
+                        lblBillStreet.Text = user.billAddress.addStreet;
+                        lblBillSuburb.Text = user.billAddress.addSuburb;
+                        lblBillState.Text = user.billAddress.addState;
+                        lblBillZip.Text = user.billAddress.addZip.ToString();
+                        lblPostStreet.Text = user.postAddress.addStreet;
+                        lblPostSuburb.Text = user.postAddress.addSuburb;
+                        lblPostState.Text = user.postAddress.addState;
+                        lblPostZip.Text = user.postAddress.addZip.ToString();
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/UL/ErrorPage/0");
+                }
             }
             else
             {
-                Response.Redirect("~/UL/ErrorPage/0");
+                // Make connection secure if it isn't already
+                string url = ConfigurationManager.AppSettings["SecurePath"] + "Payment";
+                Response.Redirect(url);
             }
         }
 
