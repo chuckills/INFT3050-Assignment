@@ -5,7 +5,7 @@
     <br />
     <h1>Your Purchase History</h1>
 
-    <asp:GridView ID="gvOrders" runat="server" AllowPaging="True" AutoGenerateColumns="False">
+    <asp:GridView ID="gvOrders" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvOrders_SelectedIndexChanged">
         <Columns>  
             <asp:BoundField DataField="ordID" HeaderText="Order ID" ReadOnly="True" />  
             <asp:BoundField DataField="ordDate" HeaderText="Date Ordered" ReadOnly="True" />  

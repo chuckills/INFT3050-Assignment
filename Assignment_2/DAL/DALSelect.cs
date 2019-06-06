@@ -326,5 +326,49 @@ namespace Assignment_2.DAL
 
             return orderDataSet;
         }
-    }
+
+        public static DataRow getOrder(int orderID)
+        {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+	        DataSet userDataSet = new DataSet();
+
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlDataAdapter adapter = new SqlDataAdapter();
+		        SqlCommand command = new SqlCommand("usp_getSingleOrder", connection);
+
+		        command.CommandType = CommandType.StoredProcedure;
+		        command.Parameters.AddWithValue("@orderID", orderID);
+		        adapter.SelectCommand = command;
+
+		        adapter.Fill(userDataSet, "Order");
+
+	        }
+
+	        return userDataSet.Tables["Order"].Rows[0];
+		}
+
+        public static DataTable getOrderItems(int orderID)
+        {
+	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
+
+	        DataSet userDataSet = new DataSet();
+
+	        using (SqlConnection connection = new SqlConnection(cs))
+	        {
+		        SqlDataAdapter adapter = new SqlDataAdapter();
+		        SqlCommand command = new SqlCommand("usp_getOrderItems", connection);
+
+		        command.CommandType = CommandType.StoredProcedure;
+		        command.Parameters.AddWithValue("@orderID", orderID);
+		        adapter.SelectCommand = command;
+
+		        adapter.Fill(userDataSet, "Items");
+
+	        }
+
+	        return userDataSet.Tables["Items"];
+        }
+	}
 }

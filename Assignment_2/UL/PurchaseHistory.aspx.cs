@@ -1,6 +1,7 @@
 ﻿using Assignment_2.BL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,15 +11,13 @@ namespace Assignment_2.UL
 {
     public partial class PurchaseHistory : System.Web.UI.Page
     {
-        List<String> purchaseList;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             BLUser user = Session["CurrentUser"] as BLUser;
 
             if (Session["LoginStatus"].ToString().Equals("User"))
             {
-                gvOrders.DataSource = BLPurchase.getUserOrders(user);
+                gvOrders.DataSource = BLOrder.getUserOrders(user);
                 gvOrders.DataBind();
             }
             else
@@ -29,14 +28,16 @@ namespace Assignment_2.UL
 
         // COPIED FROM AdminItemManagment.aspx.cs
         // Redirect to appropriate update page
-        protected void gvProducts_SelectedIndexChanged(object sender, EventArgs e)
+        protected void gvOrders_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GridViewRow row = gvProducts.SelectedRow;
+            GridViewRow row = gvOrders.SelectedRow;
 
-            BLProduct product = new BLProduct();
+            int orderID = Convert.ToInt32(row.Cells[0]);
 
-            Session["Product"] = product.selectProduct(row.Cells[0].Text);
-            Response.Redirect("~/UL/AdminUpdateSelectedItem.aspx");
+            BLOrder order = new BLOrder();
+            order.getOrder(orderID);
+			
+            Response.Redirect("");
         }
     }
 }

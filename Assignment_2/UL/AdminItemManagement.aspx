@@ -24,12 +24,12 @@
                  <asp:CommandField ShowSelectButton="True" ButtonType="Button"> 
                     <ControlStyle CssClass="btn btn-outline-danger"></ControlStyle>
                  </asp:CommandField>
-                 <asp:templatefield ItemStyle-Wrap="False" HeaderText="Stock">
-                     <itemtemplate>
+                 <asp:TemplateField ItemStyle-Wrap="False" HeaderText="Stock">
+                     <ItemTemplate>
                          <asp:label id="lblLowStock" CssClass="text-danger" Visible="False" runat="server"/> 
-                     </itemtemplate>
+                     </ItemTemplate>
                      <ItemStyle Wrap="False"></ItemStyle>
-                 </asp:templatefield>
+                 </asp:TemplateField>
              </Columns>
              <HeaderStyle HorizontalAlign="Center" Wrap="False" />
          </asp:GridView>

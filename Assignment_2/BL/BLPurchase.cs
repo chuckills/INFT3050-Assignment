@@ -110,10 +110,6 @@ namespace Assignment_2.BL
 
 			return mailbody;
 		}
-
-        public static DataSet getUserOrders(BLUser user)
-        {
-            return DALSelect.getUserOrders(user);
-        }
+		
     }
 }
