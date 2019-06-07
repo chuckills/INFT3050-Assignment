@@ -44,7 +44,6 @@ namespace Assignment_2.UL
                     "<p>"
                     + "Hi,"
                     + "</p>"
-                    + "<br/>"
                     + "<p>"
                     + "Below is the verification link needed to update your password (click to update):"
                     + "</p>"
@@ -58,7 +57,6 @@ namespace Assignment_2.UL
                     + "<p>"
                     + "The JerseySure Team"
                     + "</p>";
-
                 
                 try
                 {
