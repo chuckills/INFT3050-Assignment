@@ -77,6 +77,8 @@ namespace Assignment_2.UL
         {
             if (IsValid)
             {
+	            lblResult.Text = "";
+
 				BLPurchase purchase = new BLPurchase(Session["Cart"] as BLShoppingCart, Session["CurrentUser"] as BLUser, Session["Shipping"] as BLShipping);
 
 				string[] card = {tbxCardName.Text, tbxCardNumber.Text, tbxCSC.Text, tbxExpiration.Text, rblCardType.SelectedValue};
@@ -92,10 +94,16 @@ namespace Assignment_2.UL
 						Response.Redirect("~/UL/PaymentConfirmation");
 						break;
 					case TransactionResult.Declined:
+						lblResult.Text = "Card reports insufficient funds";
+						break;
 					case TransactionResult.InvalidCard:
+						lblResult.Text = "Card is invalid";
+						break;
 					case TransactionResult.InvalidExpiry:
+						lblResult.Text = "Invalid card expiry date";
+						break;
 					case TransactionResult.ConnectionFailure:
-						Response.Redirect("~/UL/PaymentResponse");
+						lblResult.Text = "Connection failed while processing";
 						break;
 				}
 			}

@@ -139,12 +139,13 @@
                 <asp:UpdateProgress ID="upgProcessing" runat="server" AssociatedUpdatePanelID="uplProcessing" DisplayAfter="100">
                     <ProgressTemplate>
                         Processing payment....
-                        <br/>
                     </ProgressTemplate>
                 </asp:UpdateProgress> 
                 <asp:UpdatePanel runat="server" ID="uplProcessing">
                     <ContentTemplate>
+                        <br/>
                         <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/>
+                        <asp:Label ID="lblResult" CssClass="text-danger" runat="server"></asp:Label>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </asp:TableCell>
