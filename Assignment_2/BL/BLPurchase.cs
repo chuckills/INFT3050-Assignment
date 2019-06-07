@@ -8,6 +8,10 @@ using System.Web.UI;
 using Assignment_2.DAL;
 using INFT3050.PaymentSystem;
 
+/// <summary>
+/// ADO.net model representing a purchase.
+/// </summary>
+
 namespace Assignment_2.BL
 {
 	public class BLPurchase
@@ -17,6 +21,12 @@ namespace Assignment_2.BL
 		public BLShipping Shipping { get; set; }
 		public double Gst { get; set; }
 
+        /// <summary>
+        /// Constructor for model setting all model variables.
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="user"></param>
+        /// <param name="ship"></param>
 		public BLPurchase(BLShoppingCart cart, BLUser user, BLShipping ship)
 		{
 			Cart = cart;
@@ -25,10 +35,15 @@ namespace Assignment_2.BL
 			Gst = (Cart.Amount + Shipping.Cost) / 11;
 		}
 
+        /// <summary>
+        /// Determines whether transaction can be made on the specified card.
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
 		public TransactionResult processPurchase(string[] card)
 		{
 			IPaymentSystem paymentSystem = INFT3050PaymentFactory.Create();
-
+            // Initialise card details
 			PaymentRequest pr = new PaymentRequest
 			{
 				Amount = Convert.ToDecimal(Cart.Amount + Shipping.Cost),
@@ -39,17 +54,31 @@ namespace Assignment_2.BL
 				Description = "BCD Group - JerseySure"
 			};
 
+            // Attempt to process order
 			Task<PaymentResult> result = paymentSystem.MakePayment(pr);
 
 			return result.Result.TransactionResult;
 		}
 
+        /// <summary>
+        /// Adds purchase to database by tying it to the card details ordered under.
+        /// </summary>
+        /// <param name="purchase"></param>
+        /// <param name="card"></param>
+        /// <returns></returns>
 		public static int storePurchase(BLPurchase purchase, string[] card)
 		{
 			DALInsert newPurchase = new DALInsert();
 			return newPurchase.addNewPurchase(purchase, card);
 		}
 
+        /// <summary>
+        /// Generates summary of order to form the message body for an email to be sent to the user.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="cart"></param>
+        /// <param name="shipping"></param>
+        /// <returns></returns>
 		public static string generateOrderSummary(string name, BLShoppingCart cart, BLShipping shipping)
 		{
 			string mailbody =
@@ -68,6 +97,7 @@ namespace Assignment_2.BL
 				+ "<th style=\"border: 1px solid black; padding: 2px 5px;\">Cost</th>"
 				+ "</tr>";
 
+            // Repeat for each item in the order; forming one row in the table
 			foreach (BLCartItem item in cart.Items)
 			{
 				mailbody +=

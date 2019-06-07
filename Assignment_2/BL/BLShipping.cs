@@ -5,6 +5,10 @@ using System.Linq;
 using System.Web;
 using Assignment_2.DAL;
 
+/// <summary>
+/// ADO.net model to represent shipping.
+/// </summary>
+
 namespace Assignment_2.BL
 {
 	public class BLShipping
@@ -15,11 +19,20 @@ namespace Assignment_2.BL
 		public double Cost { get; set; }
 		public int Wait { get; set; }
 
+        /// <summary>
+        /// Returns data set containing all available shipping methods in system.
+        /// </summary>
+        /// <returns></returns>
 		public static DataSet getShippingMethods()
 		{
 			return DALSelect.getShippingOptions();
 		}
 
+        /// <summary>
+        /// Returns ADO.net model for shipping linked to the given shipping ID number.
+        /// </summary>
+        /// <param name="shipID"></param>
+        /// <returns></returns>
 		public BLShipping getShipping(int shipID)
 		{
 			DataRow shipping =  DALSelect.getShippingDetails(shipID);
@@ -32,6 +45,11 @@ namespace Assignment_2.BL
 			return this;
 		}
 
+        /// <summary>
+        /// Adds shipping method to system and returns success status.
+        /// </summary>
+        /// <param name="shipping"></param>
+        /// <returns></returns>
         public static bool addShipping(BLShipping shipping)
         {
             DALInsert shippingOption = new DALInsert();
@@ -39,11 +57,19 @@ namespace Assignment_2.BL
             return (shippingOption.addPostageOption(shipping) > 0);
         }
 
+        /// <summary>
+        /// Returns data set representation of shipping table from the SQL database.
+        /// </summary>
+        /// <returns></returns>
 		public static DataSet getShippingTable()
 		{
 			return DALSelect.getShippingTable();
 		}
 
+        /// <summary>
+        /// Toggles active status for specified shipping method.
+        /// </summary>
+        /// <param name="shipID"></param>
 		public static void toggleActive(int shipID)
 		{
 			DALUpdate.toggleShipActive(shipID);
