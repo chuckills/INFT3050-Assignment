@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.IO;
 using System.Net;
@@ -15,13 +16,23 @@ namespace Assignment_2.UL
     public partial class Contact : Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            // Page is not accessible on admin site
-            if (Session["LoginStatus"].Equals("Admin"))
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-        }
+		{
+			if (!Request.IsSecureConnection)
+			{
+				// Page is not accessible on admin site
+				if (Session["LoginStatus"].Equals("Admin"))
+				{
+					Response.Redirect("~/UL/ErrorPage/5");
+				}
+			}
+			else
+			{
+				// Make connection unsecured if it isn't already
+				string url = ConfigurationManager.AppSettings["UnsecurePath"] + "Contact";
+				Response.Redirect(url);
+
+			}
+		}
 
         // Redirect to contact enquiry received message
         protected void btnSubmit_Click(object sender, EventArgs e)

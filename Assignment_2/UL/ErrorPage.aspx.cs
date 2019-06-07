@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,45 +11,55 @@ namespace Assignment_2.UL
     public partial class ErrorPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(RouteData.Values["status"].ToString()))
-            {
-	            int errorCode = Convert.ToInt32(RouteData.Values["status"]);
+		{
+			if (!Request.IsSecureConnection)
+			{
+				if (!string.IsNullOrEmpty(RouteData.Values["status"].ToString()))
+				{
+					int errorCode = Convert.ToInt32(RouteData.Values["status"]);
 
-                switch (errorCode)
-                {
-                    case 0:
-                        unauthorized();
-                        break;
-                    case 1:
-                        emailFailure();
-                        break;
-                    case 2:
-                        verificationError();
-                        break;
-                    case 3:
-                        passwordNotUpdated();
-                        break;
-                    case 4:
-                        checkoutNotAvailable();
-                        break;
-                    case 5:
-                        wrongLoginStatus();
-                        break;
-                    case 6:
-                        notSecureConnection();
-                        break;
-                    default:
-                        defaultError();
-                        break;
-                }
-            }
-            else
-            {
-                noTransactionMade();
-            }
-            
-        }
+					switch (errorCode)
+					{
+						case 0:
+							unauthorized();
+							break;
+						case 1:
+							emailFailure();
+							break;
+						case 2:
+							verificationError();
+							break;
+						case 3:
+							passwordNotUpdated();
+							break;
+						case 4:
+							checkoutNotAvailable();
+							break;
+						case 5:
+							wrongLoginStatus();
+							break;
+						case 6:
+							notSecureConnection();
+							break;
+						default:
+							defaultError();
+							break;
+					}
+				}
+				else
+				{
+					noTransactionMade();
+				}
+			}
+			else
+			{
+				// Make connection unsecured if it isn't already
+				string url = ConfigurationManager.AppSettings["UnsecurePath"] + "ErrorPage/" + RouteData.Values["status"];
+				Response.Redirect(url);
+
+			}
+
+		}
 
         protected void defaultError()
         {

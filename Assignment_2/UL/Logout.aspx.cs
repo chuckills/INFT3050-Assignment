@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,21 +11,31 @@ namespace Assignment_2.UL
     public partial class Logout : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            // Page only accessible if not account has been logged in
-            if (!Session["LoginStatus"].Equals("LoggedOut"))
-            {
-                // Change Login Status and redirect to home page
-                Session["LoginStatus"] = "LoggedOut";
-                Session.Remove("UserName");
-			    Session.Remove("User");
-			    Session.Remove("Name");
-			    Response.Redirect("~/UL/Default");
-            }
-            else
-            {
-                Response.Redirect("~/UL/ErrorPage/0");
-            }
-        }
+		{
+			if (!Request.IsSecureConnection)
+			{
+				// Page only accessible if not account has been logged in
+				if (!Session["LoginStatus"].Equals("LoggedOut"))
+				{
+					// Change Login Status and redirect to home page
+					Session["LoginStatus"] = "LoggedOut";
+					Session.Remove("UserName");
+					Session.Remove("User");
+					Session.Remove("Name");
+					Response.Redirect("~/UL/Default");
+				}
+				else
+				{
+					Response.Redirect("~/UL/ErrorPage/0");
+				}
+			}
+			else
+			{
+				// Make connection unsecured if it isn't already
+				string url = ConfigurationManager.AppSettings["UnsecurePath"] + "Logout";
+				Response.Redirect(url);
+
+			}
+		}
     }
 }

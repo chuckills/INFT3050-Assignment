@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,35 +11,45 @@ namespace Assignment_2.UL
     public partial class SuccessPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(RouteData.Values["status"].ToString()))
-            {
-                int successCode = Convert.ToInt32(RouteData.Values["status"]);
+		{
+			if (!Request.IsSecureConnection)
+			{
+				if (!string.IsNullOrEmpty(RouteData.Values["status"].ToString()))
+				{
+					int successCode = Convert.ToInt32(RouteData.Values["status"]);
 
-                switch (successCode)
-                {
-                    case 0:
-                        verificationSent();
-                        break;
-                    case 1:
-                        passwordUpdated();
-                        break;
-                    case 2:
-                        contactSent();
-                        break;
-                    case 3:
-                        adminAdded();
-                        break;
-                    default:
-                        defaultSuccess();
-                        break;
-                }
-            }
-            else
-            {
-                noTransactionMade();
-            }
-        }
+					switch (successCode)
+					{
+						case 0:
+							verificationSent();
+							break;
+						case 1:
+							passwordUpdated();
+							break;
+						case 2:
+							contactSent();
+							break;
+						case 3:
+							adminAdded();
+							break;
+						default:
+							defaultSuccess();
+							break;
+					}
+				}
+				else
+				{
+					noTransactionMade();
+				}
+			}
+			else
+			{
+				// Make connection unsecured if it isn't already
+				string url = ConfigurationManager.AppSettings["UnsecurePath"] + "SuccessPage/" + RouteData.Values["status"];
+				Response.Redirect(url);
+
+			}
+		}
 
         protected void defaultSuccess()
         {

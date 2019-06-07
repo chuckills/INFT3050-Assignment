@@ -1,6 +1,7 @@
 ﻿using Assignment_2.BL;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,12 +13,22 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Page only accessible if no account has been logged in
-            if (!Session["LoginStatus"].Equals("LoggedOut"))
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-        }
+	        if (Request.IsSecureConnection)
+	        {
+		        // Page only accessible if no account has been logged in
+		        if (!Session["LoginStatus"].Equals("LoggedOut"))
+		        {
+			        Response.Redirect("~/UL/ErrorPage/5");
+		        }
+			}
+			else
+	        {
+		        // Make connection secure if it isn't already
+		        string url = ConfigurationManager.AppSettings["SecurePath"] + "ForgotPassword";
+		        Response.Redirect(url);
+
+	        }
+		}
 
         protected void RequestButton_Click(object sender, EventArgs e)
         {
