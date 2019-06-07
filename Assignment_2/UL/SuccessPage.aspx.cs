@@ -32,7 +32,10 @@ namespace Assignment_2.UL
 						case 3:
 							adminAdded();
 							break;
-						default:
+                        case 4:
+                            accountUpdateSuccessful();
+                            break;
+                        default:
 							defaultSuccess();
 							break;
 					}
@@ -90,6 +93,14 @@ namespace Assignment_2.UL
             DescriptionLabel.Text = "Admin account has been verified by email and successfully added to our system.";
             ResultingButton.Text = "View Accounts";
             ResultingButton.PostBackUrl = "~/UL/AdminManageUserAccounts";
+        }
+
+        protected void accountUpdateSuccessful()
+        {
+            StatusLabel.Text = "Account update successful";
+            DescriptionLabel.Text = "Changes in account settings have been made.";
+            ResultingButton.Text = "View Changes";
+            ResultingButton.PostBackUrl = "~/UL/AccountSettings";
         }
 
         protected void noTransactionMade()
