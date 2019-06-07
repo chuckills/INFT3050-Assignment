@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,12 +12,21 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Must be logged in to access
-            if (Session["LoginStatus"].Equals("LoggedOut"))
+	        if (Request.IsSecureConnection)
+	        {
+		        // Must be logged in to access
+		        if (Session["LoginStatus"].Equals("LoggedOut"))
+		        {
+			        Response.Redirect("~/UL/ErrorPage/0");
+		        }
+	        }
+	        else
             {
-                Response.Redirect("~/UL/ErrorPage/0");
+	            // Make connection secure if it isn't already
+	            string url = ConfigurationManager.AppSettings["SecurePath"] + "AccountSettings";
+	            Response.Redirect(url);
             }
-        }
+		}
 
         // Makes Postal Address fields visible when unchecked
         protected void cbxPostageSame_CheckedChanged(object sender, EventArgs e)

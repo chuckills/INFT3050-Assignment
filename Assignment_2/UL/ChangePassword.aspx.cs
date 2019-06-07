@@ -1,6 +1,7 @@
 ﻿using Assignment_2.BL;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,50 +13,59 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(RouteData.Values["email"].ToString())
-                && string.IsNullOrEmpty(RouteData.Values["pass"].ToString())))
-            {
-                // Get request parameters
-                string email = RouteData.Values["email"].ToString();
-                string password = RouteData.Values["pass"].ToString();
+	        if (Request.IsSecureConnection)
+	        {
+		        if (!(string.IsNullOrEmpty(RouteData.Values["email"].ToString())
+		              && string.IsNullOrEmpty(RouteData.Values["pass"].ToString())))
+		        {
+			        // Get request parameters
+			        string email = RouteData.Values["email"].ToString();
+			        string password = RouteData.Values["pass"].ToString();
 
-                // Retrieve user corresponding to email address of account
-                BLUser user = new BLUser();
-                user = user.getUserByEmail(email);
+			        // Retrieve user corresponding to email address of account
+			        BLUser user = new BLUser();
+			        user = user.getUserByEmail(email);
 
-                // Check password
+			        // Check password
 
-                int result = user.login(email, password);
+			        int result = user.login(email, password);
 
-                switch (result)
-                {
-                    case (0):
-                        // Username does not exist
-                        Response.Redirect("~/UL/ErrorPage/2");
-                        break;
-                    case (-1):
-                        // Incorrect password
-                        Response.Redirect("~/UL/ErrorPage/2");
-                        break;
-                    case (-2):
-                        // Suspended account
-                        Response.Redirect("~/UL/ErrorPage/2");
-                        break;
-                    default:
-                        // Allow update password - create temporary login
-                        HttpContext.Current.Session["TempUser"] = user;
-                        break;
-                }
-            }
-            else
-            {
-                if (HttpContext.Current.Session["CurrentUser"] == null)
-                {
-                    // Unauthorised
-                    Response.Redirect("~/UL/ErrorPage/0");
-                }
-            }
-        }
+			        switch (result)
+			        {
+				        case (0):
+					        // Username does not exist
+					        Response.Redirect("~/UL/ErrorPage/2");
+					        break;
+				        case (-1):
+					        // Incorrect password
+					        Response.Redirect("~/UL/ErrorPage/2");
+					        break;
+				        case (-2):
+					        // Suspended account
+					        Response.Redirect("~/UL/ErrorPage/2");
+					        break;
+				        default:
+					        // Allow update password - create temporary login
+					        HttpContext.Current.Session["TempUser"] = user;
+					        break;
+			        }
+		        }
+		        else
+		        {
+			        if (HttpContext.Current.Session["CurrentUser"] == null)
+			        {
+				        // Unauthorised
+				        Response.Redirect("~/UL/ErrorPage/0");
+			        }
+		        }
+	        }
+	        else
+	        {
+		        // Make connection secure if it isn't already
+		        string url = ConfigurationManager.AppSettings["SecurePath"] + "ChangePassword";
+		        Response.Redirect(url);
+	        }
+		}
 
         protected void SubmitButton_Click(object sender, EventArgs e)
         {

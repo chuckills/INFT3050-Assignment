@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -13,16 +14,25 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Page only accessible by admin
-            if (Session["LoginStatus"].Equals("Admin"))
-            {
-                gvProducts.DataSource = BLProduct.getProducts(true);
-	            gvProducts.DataBind();
-            }
-            else
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
+	        if (Request.IsSecureConnection)
+	        {
+		        // Page only accessible by admin
+		        if (Session["LoginStatus"].Equals("Admin"))
+		        {
+			        gvProducts.DataSource = BLProduct.getProducts(true);
+			        gvProducts.DataBind();
+		        }
+		        else
+		        {
+			        Response.Redirect("~/UL/ErrorPage/5");
+		        }
+			}
+			else
+	        {
+		        // Make connection secure if it isn't already
+		        string url = ConfigurationManager.AppSettings["SecurePath"] + "AdminItemManagement";
+		        Response.Redirect(url);
+	        }
 		}
 
         // Redirect to appropriate update page

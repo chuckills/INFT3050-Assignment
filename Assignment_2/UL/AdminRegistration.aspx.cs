@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,13 +12,22 @@ namespace Assignment_2.UL
     public partial class AdminRegistration : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            // Page only accessible by admin
-            if (!Session["LoginStatus"].Equals("Admin"))
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-        }
+		{
+			if (Request.IsSecureConnection)
+			{
+				// Page only accessible by admin
+				if (!Session["LoginStatus"].Equals("Admin"))
+				{
+					Response.Redirect("~/UL/ErrorPage/5");
+				}
+			}
+			else
+			{
+				// Make connection secure if it isn't already
+				string url = ConfigurationManager.AppSettings["SecurePath"] + "AdminRegistration";
+				Response.Redirect(url);
+			}
+		}
 
         protected void checkExists(object sender, ServerValidateEventArgs args)
         {

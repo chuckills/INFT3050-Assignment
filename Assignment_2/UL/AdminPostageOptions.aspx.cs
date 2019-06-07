@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -12,21 +13,30 @@ namespace Assignment_2.UL
     public partial class AdminPostageOptions : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            // Page only accessible by admin
-            if (Session["LoginStatus"].Equals("Admin"))
-            {
-                if (!IsPostBack)
-	            {
-		            lsvPostage.DataSource = BLShipping.getShippingTable();
-		            lsvPostage.DataBind();
-	            }
-            }
-            else
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-        }
+		{
+			if (Request.IsSecureConnection)
+			{
+				// Page only accessible by admin
+				if (Session["LoginStatus"].Equals("Admin"))
+				{
+					if (!IsPostBack)
+					{
+						lsvPostage.DataSource = BLShipping.getShippingTable();
+						lsvPostage.DataBind();
+					}
+				}
+				else
+				{
+					Response.Redirect("~/UL/ErrorPage/5");
+				}
+			}
+			else
+			{
+				// Make connection secure if it isn't already
+				string url = ConfigurationManager.AppSettings["SecurePath"] + "AdminPostageOptions";
+				Response.Redirect(url);
+			}
+		}
 
         // Adds postage option to currently available options
         protected void btnSubmit_Click(object sender, EventArgs e)

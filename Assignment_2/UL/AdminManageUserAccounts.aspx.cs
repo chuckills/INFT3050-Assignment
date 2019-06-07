@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -10,19 +11,28 @@ namespace Assignment_2.UL
 {
     public partial class AdminManageUserAccounts : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            // Page only accessible by admin
-            if (Session["LoginStatus"].Equals("Admin"))
-            {
-                gvUsers.DataSource = BLUser.getUsers();
-			    gvUsers.DataBind();
-            }
-            else
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-        }
+	    protected void Page_Load(object sender, EventArgs e)
+	    {
+		    if (Request.IsSecureConnection)
+		    {
+				// Page only accessible by admin
+				if (Session["LoginStatus"].Equals("Admin"))
+			    {
+				    gvUsers.DataSource = BLUser.getUsers();
+				    gvUsers.DataBind();
+			    }
+			    else
+			    {
+				    Response.Redirect("~/UL/ErrorPage/5");
+			    }
+		    }
+		    else
+		    {
+				// Make connection secure if it isn't already
+				string url = ConfigurationManager.AppSettings["SecurePath"] + "AdminManageUserAccounts";
+				Response.Redirect(url);
+			}
+		}
 
 		protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
 		{

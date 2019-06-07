@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -13,20 +14,29 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Page only accessible by admin
-            if (Session["LoginStatus"].Equals("Admin"))
-            {
-                if (!IsPostBack)
-	            {
-		            ddlTeam.DataSource = BLProduct.getTeams();
-		            ddlTeam.DataBind();
-	            }
-            }
-            else
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-        }
+	        if (Request.IsSecureConnection)
+	        {
+		        // Page only accessible by admin
+		        if (Session["LoginStatus"].Equals("Admin"))
+		        {
+			        if (!IsPostBack)
+			        {
+				        ddlTeam.DataSource = BLProduct.getTeams();
+				        ddlTeam.DataBind();
+			        }
+		        }
+		        else
+		        {
+			        Response.Redirect("~/UL/ErrorPage/5");
+		        }
+			}
+			else
+	        {
+		        // Make connection secure if it isn't already
+		        string url = ConfigurationManager.AppSettings["SecurePath"] + "AdminItemManagementInsert";
+		        Response.Redirect(url);
+	        }
+		}
 
         protected void addDefaultItem(object sender, EventArgs e)
         {

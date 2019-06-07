@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -12,46 +13,55 @@ namespace Assignment_2.UL
     public partial class AdminUpdateSelectedItem : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            // Page only accessible by admin
-            if (Session["LoginStatus"].Equals("Admin"))
-            {
-                if (!IsPostBack)
-	            {
-		            ddlTeam.DataSource = BLProduct.getTeams();
-		            ddlTeam.DataBind();
+		{
+			if (Request.IsSecureConnection)
+			{
+				// Page only accessible by admin
+				if (Session["LoginStatus"].Equals("Admin"))
+				{
+					if (!IsPostBack)
+					{
+						ddlTeam.DataSource = BLProduct.getTeams();
+						ddlTeam.DataBind();
 
-		            BLProduct product = Session["Product"] as BLProduct;
-		            tbxFirstName.Text = product.playFirstName;
-		            tbxLastName.Text = product.playLastName;
-		            tbxDescription.Text = product.prodDescription;
-		            ddlTeam.SelectedValue = product.teamID;
-		            imgFront.ImageUrl = "~/UL/Images/jerseys/" + product.image[0];
-		            imgBack.ImageUrl = "~/UL/Images/jerseys/" + product.image[1];
-		            tbxJerNumber.Text = product.jerNumber.ToString();
-		            tbxPrice.Text = string.Format("{0:F2}", product.prodPrice);
-		            tbxSmall.Text = product.stock[0].ToString();
-		            tbxMedium.Text = product.stock[1].ToString();
-		            tbxLarge.Text = product.stock[2].ToString();
-		            tbxXLge.Text = product.stock[3].ToString();
-		            tbxXXL.Text = product.stock[4].ToString();
-		            if (product.prodActive)
-		            {
-			            RemoveProductButton.CssClass = "btn btn-danger";
-			            RemoveProductButton.Text = "Active";
-		            }
-		            else
-		            {
-			            RemoveProductButton.CssClass = "btn btn-outline-danger";
-			            RemoveProductButton.Text = "Inactive";
-		            }
-	            }
-            }
-            else
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-        }
+						BLProduct product = Session["Product"] as BLProduct;
+						tbxFirstName.Text = product.playFirstName;
+						tbxLastName.Text = product.playLastName;
+						tbxDescription.Text = product.prodDescription;
+						ddlTeam.SelectedValue = product.teamID;
+						imgFront.ImageUrl = "~/UL/Images/jerseys/" + product.image[0];
+						imgBack.ImageUrl = "~/UL/Images/jerseys/" + product.image[1];
+						tbxJerNumber.Text = product.jerNumber.ToString();
+						tbxPrice.Text = string.Format("{0:F2}", product.prodPrice);
+						tbxSmall.Text = product.stock[0].ToString();
+						tbxMedium.Text = product.stock[1].ToString();
+						tbxLarge.Text = product.stock[2].ToString();
+						tbxXLge.Text = product.stock[3].ToString();
+						tbxXXL.Text = product.stock[4].ToString();
+						if (product.prodActive)
+						{
+							RemoveProductButton.CssClass = "btn btn-danger";
+							RemoveProductButton.Text = "Active";
+						}
+						else
+						{
+							RemoveProductButton.CssClass = "btn btn-outline-danger";
+							RemoveProductButton.Text = "Inactive";
+						}
+					}
+				}
+				else
+				{
+					Response.Redirect("~/UL/ErrorPage/5");
+				}
+			}
+			else
+			{
+				// Make connection secure if it isn't already
+				string url = ConfigurationManager.AppSettings["SecurePath"] + "AdminUpdateSelectedItem";
+				Response.Redirect(url);
+			}
+		}
 
         protected void addDefaultItem(object sender, EventArgs e)
         {
