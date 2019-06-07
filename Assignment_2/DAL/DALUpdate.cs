@@ -9,8 +9,16 @@ using Assignment_2.BL;
 
 namespace Assignment_2.DAL
 {
+	/// <summary>
+	/// DAL Layer class that handles Update operations on the database
+	/// </summary>
 	public class DALUpdate
 	{
+		/// <summary>
+		/// Updates a user's details
+		/// </summary>
+		/// <param name="user"></param>
+		/// <returns></returns>
 		public static bool updateUser(BLUser user)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -46,6 +54,12 @@ namespace Assignment_2.DAL
 			return rows > 0;
 		}
 
+		/// <summary>
+		/// Updates a user's password
+		/// </summary>
+		/// <param name="user"></param>
+		/// <param name="password"></param>
+		/// <returns></returns>
         public static bool updateUserPassword(BLUser user, string password)
         {
             string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -68,6 +82,12 @@ namespace Assignment_2.DAL
 
             return rows > 0;
         }
+
+		/// <summary>
+		/// Updates a user's access status
+		/// </summary>
+		/// <param name="userID"></param>
+		/// <returns></returns>
         public static bool toggleUserActive(int userID)
         {
 	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -90,6 +110,11 @@ namespace Assignment_2.DAL
 	        return rows > 0;
         }
 
+		/// <summary>
+		/// Updates a product's availability status
+		/// </summary>
+		/// <param name="prodNum"></param>
+		/// <returns></returns>
         public static bool toggleProductActive(string prodNum)
         {
 	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -112,6 +137,11 @@ namespace Assignment_2.DAL
 	        return rows > 0;
         }
 
+		/// <summary>
+		/// Updates a shipping option's availability status
+		/// </summary>
+		/// <param name="shipID"></param>
+		/// <returns></returns>
 		public static bool toggleShipActive(int shipID)
         {
 	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -134,6 +164,11 @@ namespace Assignment_2.DAL
 	        return rows > 0;
 		}
 
+		/// <summary>
+		/// Updates a product's details
+		/// </summary>
+		/// <param name="product"></param>
+		/// <returns></returns>
         public static bool updateProduct(BLProduct product)
         {
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;

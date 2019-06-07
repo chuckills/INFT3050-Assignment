@@ -9,8 +9,16 @@ using Assignment_2.BL;
 
 namespace Assignment_2.DAL
 {
+	/// <summary>
+	/// DAL Layer class to handle Select operations in the database
+	/// </summary>
 	public class DALSelect
 	{
+		/// <summary>
+		/// Selects all the product in the database but filters unavailable products for non-admins
+		/// </summary>
+		/// <param name="admin"></param>
+		/// <returns></returns>
 		public static DataSet getProducts(bool admin)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -32,6 +40,11 @@ namespace Assignment_2.DAL
 
 		}
 
+		/// <summary>
+		/// Selects products that match the search criteria
+		/// </summary>
+		/// <param name="search"></param>
+		/// <returns></returns>
 		public static DataSet getProductsSearch(string search)
         {
             string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -54,6 +67,11 @@ namespace Assignment_2.DAL
             return productDataSet;
         }
 
+		/// <summary>
+		/// Selects a single product
+		/// </summary>
+		/// <param name="productNumber"></param>
+		/// <returns></returns>
 		public static DataRow selectProduct(string productNumber)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -76,6 +94,11 @@ namespace Assignment_2.DAL
 			return productDataSet.Tables["Product"].Rows[0];
 		}
 
+		/// <summary>
+		/// Selects the quantity of product sizes
+		/// </summary>
+		/// <param name="productNumber"></param>
+		/// <returns></returns>
 		public static int[] getStock(string productNumber)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -107,6 +130,12 @@ namespace Assignment_2.DAL
 
 		}
 
+		/// <summary>
+		/// Selects a user by username and checks for existing occurrence
+		/// </summary>
+		/// <param name="user"></param>
+		/// <param name="result"></param>
+		/// <returns></returns>
 		public DataRow getUserData(string user, out bool result)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -145,6 +174,10 @@ namespace Assignment_2.DAL
 			
 		}
 
+		/// <summary>
+		/// Selects all users
+		/// </summary>
+		/// <returns></returns>
 		public DataSet getUsers()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -163,6 +196,12 @@ namespace Assignment_2.DAL
 			return teamsDataSet;
 		}
 
+
+		/// <summary>
+		/// Selects a user by userID
+		/// </summary>
+		/// <param name="userID"></param>
+		/// <returns></returns>
 		public DataRow getSingleUser(int userID)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -185,6 +224,11 @@ namespace Assignment_2.DAL
 			return userDataSet.Tables["User"].Rows[0];
 		}
 
+		/// <summary>
+		/// Selects a user by username
+		/// </summary>
+		/// <param name="email"></param>
+		/// <returns></returns>
         public DataRow getUserByEmail(string email)
         {
             string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -207,6 +251,10 @@ namespace Assignment_2.DAL
             return userDataSet.Tables["User"].Rows[0];
         }
 
+		/// <summary>
+		/// Selects a formatted shipping option list
+		/// </summary>
+		/// <returns></returns>
         public static DataSet getShippingOptions()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -225,6 +273,10 @@ namespace Assignment_2.DAL
 			return shipDataSet;
 		}
 
+		/// <summary>
+		/// Selects all shipping options in a table
+		/// </summary>
+		/// <returns></returns>
         public static DataSet getShippingTable()
         {
 	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -243,6 +295,11 @@ namespace Assignment_2.DAL
 	        return shipDataSet;
         }
 
+		/// <summary>
+		/// Selects a single shipping option
+		/// </summary>
+		/// <param name="shipID"></param>
+		/// <returns></returns>
 		public static DataRow getShippingDetails(int shipID)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -265,6 +322,10 @@ namespace Assignment_2.DAL
 			return userDataSet.Tables["Shipping"].Rows[0];
 		}
 
+		/// <summary>
+		/// Selects all teams from the database
+		/// </summary>
+		/// <returns></returns>
 		public static DataSet getTeams()
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -283,6 +344,12 @@ namespace Assignment_2.DAL
 			return teamsDataSet;
 		}
 
+		/// <summary>
+		/// Selects a user address
+		/// </summary>
+		/// <param name="user"></param>
+		/// <param name="type"></param>
+		/// <returns></returns>
 		public DataRow getAddress(int user, char type)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -307,6 +374,11 @@ namespace Assignment_2.DAL
 			return addressDataSet.Tables["Address"].Rows[0];
 		}
 
+		/// <summary>
+		/// Selects all orders made by a user
+		/// </summary>
+		/// <param name="user"></param>
+		/// <returns></returns>
         public static DataSet getUserOrders(BLUser user)
         {
             string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -329,6 +401,11 @@ namespace Assignment_2.DAL
             return orderDataSet;
         }
 
+		/// <summary>
+		/// Selects a single order made by a user
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <returns></returns>
         public static DataRow getOrder(int orderID)
         {
 	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -351,6 +428,11 @@ namespace Assignment_2.DAL
 	        return userDataSet.Tables["Order"].Rows[0];
 		}
 
+		/// <summary>
+		/// Selects all items on an order
+		/// </summary>
+		/// <param name="orderID"></param>
+		/// <returns></returns>
         public static DataTable getOrderItems(int orderID)
         {
 	        string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;

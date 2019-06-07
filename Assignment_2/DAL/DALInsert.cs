@@ -9,8 +9,17 @@ using Assignment_2.BL;
 
 namespace Assignment_2.DAL
 {
+	/// <summary>
+	/// DAL Layer class to handle insert operations of the database
+	/// </summary>
 	public class DALInsert
 	{
+
+		/// <summary>
+		/// Inserts a new user
+		/// </summary>
+		/// <param name="user"></param>
+		/// <returns></returns>
 		public int addNewUser(BLUser user)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -57,6 +66,11 @@ namespace Assignment_2.DAL
 			return rows;
 		}
 
+		/// <summary>
+		/// Inserts a new product
+		/// </summary>
+		/// <param name="product"></param>
+		/// <returns></returns>
 		public int addNewProduct(BLProduct product)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -89,6 +103,12 @@ namespace Assignment_2.DAL
 			return rows;
 		}
 
+		/// <summary>
+		/// Inserts a new purchase order
+		/// </summary>
+		/// <param name="purchase"></param>
+		/// <param name="card"></param>
+		/// <returns></returns>
 		public int addNewPurchase(BLPurchase purchase, string[] card)
 		{
 			string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
@@ -140,6 +160,11 @@ namespace Assignment_2.DAL
 			return rows;
 		}
 
+		/// <summary>
+		/// Inserts a new postage option
+		/// </summary>
+		/// <param name="option"></param>
+		/// <returns></returns>
 		public int addPostageOption(BLShipping option)
         {
             string cs = ConfigurationManager.ConnectionStrings["JerseySure"].ConnectionString;
