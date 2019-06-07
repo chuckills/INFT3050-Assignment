@@ -6,7 +6,7 @@
         <h2>User Management</h2>
         <hr/>
 
-        <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvUsers_OnRowDataBound" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged" HeaderStyle-HorizontalAlign="Center">
+        <asp:GridView ID="gvUsers" runat="server" OnRowCommand="gvUsers_OnRowCommand" AutoGenerateColumns="False" OnRowDataBound="gvUsers_OnRowDataBound" HeaderStyle-HorizontalAlign="Center">
             <Columns>  
                 <asp:BoundField DataField="userID" HeaderText="ID" ReadOnly="True" />  
                 <asp:BoundField DataField="userFirstName" HeaderText="FirstName" ReadOnly="True" />  
@@ -17,7 +17,7 @@
                 <%--<asp:BoundField DataField="userActive" HeaderText="Active" ReadOnly="True" />--%>
                 <asp:TemplateField HeaderText="Status">
                     <ItemTemplate>
-                        <asp:Button ID="btnActive" runat="server" CausesValidation="false" OnClick="btnActive_Clicked" />
+                        <asp:Button ID="btnActive" runat="server" CausesValidation="false" CommandName="Status"/>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ShowSelectButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-outline-danger" />

@@ -64,14 +64,25 @@ namespace Assignment_2.UL
 		    }
 	    }
 
-	    protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			GridViewRow row = gvUsers.SelectedRow;
+	    protected void gvUsers_OnRowCommand(object sender, GridViewCommandEventArgs e)
+	    {
 
-			BLUser user = new BLUser();
+		    GridViewRow row = gvUsers.Rows[Convert.ToInt32(e.CommandArgument)];
+			switch (e.CommandName)
+		    {
+			    case "Select":
 
-			Session["User"] = user.getUser(Convert.ToInt32(row.Cells[0].Text));
-			Response.Redirect("~/UL/AdminUpdateSelectedUser");
+				    BLUser user = new BLUser();
+
+				    Session["User"] = user.getUser(Convert.ToInt32(row.Cells[0].Text));
+				    Response.Redirect("~/UL/AdminUpdateSelectedUser");
+				    break;
+			    case "Status":
+
+					break;
+			    default:
+				    return;
+		    }
 		}
     }
 }
