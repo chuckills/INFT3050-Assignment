@@ -41,7 +41,10 @@ namespace Assignment_2.UL
 						case 6:
 							notSecureConnection();
 							break;
-						default:
+                        case 7:
+                            purchaseNotAvailable();
+                            break;
+                        default:
 							defaultError();
 							break;
 					}
@@ -118,6 +121,14 @@ namespace Assignment_2.UL
                 " current login status.";
             ResultingButton.Text = "Return Home";
             ResultingButton.PostBackUrl = "~/UL/Default";
+        }
+
+        protected void purchaseNotAvailable()
+        {
+            StatusLabel.Text = "Sorry, Page not available";
+            DescriptionLabel.Text = "Purchase is unable to be made until products are added to cart.";
+            ResultingButton.Text = "Start Shopping";
+            ResultingButton.PostBackUrl = "~/UL/Products";
         }
 
         protected void notSecureConnection()

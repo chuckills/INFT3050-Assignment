@@ -49,7 +49,7 @@ namespace Assignment_2.UL
                     + "Below is the verification link needed to update your password (click to update):"
                     + "</p>"
                     + "<p>"
-                    + "http://localhost:50446/UL/ChangePassword/" + tbxUsername.Text +"/" +password
+                    + "https://localhost:44326/UL/ChangePassword/" + tbxUsername.Text +"/" +password
                     + "</p>"
                     + "<br/>"
                     + "<p>"

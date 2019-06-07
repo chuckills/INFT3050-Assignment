@@ -19,24 +19,32 @@ namespace Assignment_2.UL
                 // Page only accessible to a logged in user
                 if (Session["LoginStatus"].Equals("User"))
                 {
-                    // Send confirmation of order to account email address
+                    // Check if items are still in the cart - otherwise; wrong state
                     BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
-                    BLShipping shipping = Session["Shipping"] as BLShipping;
+                    if (!cart.isEmpty())
+                    { 
+                        // Send confirmation of order to account email address
+                        BLShipping shipping = Session["Shipping"] as BLShipping;
 
-                    string mailbody = BLPurchase.generateOrderSummary(Session["Name"].ToString(), cart, shipping);
+                        string mailbody = BLPurchase.generateOrderSummary(Session["Name"].ToString(), cart, shipping);
 
-                    try
-                    {
-                        BLEmail.SendEmail(Session["UserName"].ToString(), "Order Receipt - JerseySure", mailbody);
+                        try
+                        {
+                            BLEmail.SendEmail(Session["UserName"].ToString(), "Order Receipt - JerseySure", mailbody);
+                        }
+                        catch (Exception ex)
+                        {
+                            Response.Redirect("~/UL/ErrorPage/1");
+                        }
+
+                        // Remove cart from session
+                        Session.Remove("Cart");
+                        Session["Cart"] = new BLShoppingCart();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Response.Redirect("~/UL/ErrorPage/1");
+                        Response.Redirect("~/UL/ErrorPage/7");
                     }
-
-                    // Remove cart from session
-                    Session.Remove("Cart");
-                    Session["Cart"] = new BLShoppingCart();
                 }
                 else
                 {

@@ -19,30 +19,40 @@ namespace Assignment_2.UL
             // Check for secure connection
             if (Request.IsSecureConnection)
             {
+                 
                 // Page only available to logged in user
                 if (Session["LoginStatus"].Equals("User"))
                 {
-                    if (!IsPostBack)
+                    // Check if items are still in the cart - otherwise; wrong state
+                    BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
+                    if (!cart.isEmpty())
                     {
-                        double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
+                        if (!IsPostBack)
+                        {
+                            double amount = Convert.ToDouble((Session["Cart"] as BLShoppingCart).Amount);
 
-                        lblAmount.Text = string.Format("{0:C}", amount);
+                            lblAmount.Text = string.Format("{0:C}", amount);
 
-                        ddlShipping.DataSource = BLShipping.getShippingMethods();
-                        ddlShipping.DataBind();
+                            ddlShipping.DataSource = BLShipping.getShippingMethods();
+                            ddlShipping.DataBind();
 
-                        BLUser user = Session["CurrentUser"] as BLUser;
+                            BLUser user = Session["CurrentUser"] as BLUser;
 
-                        lblFirst.Text = user.userFirstName;
-                        lblLast.Text = user.userLastName;
-                        lblBillStreet.Text = user.billAddress.addStreet;
-                        lblBillSuburb.Text = user.billAddress.addSuburb;
-                        lblBillState.Text = user.billAddress.addState;
-                        lblBillZip.Text = user.billAddress.addZip.ToString();
-                        lblPostStreet.Text = user.postAddress.addStreet;
-                        lblPostSuburb.Text = user.postAddress.addSuburb;
-                        lblPostState.Text = user.postAddress.addState;
-                        lblPostZip.Text = user.postAddress.addZip.ToString();
+                            lblFirst.Text = user.userFirstName;
+                            lblLast.Text = user.userLastName;
+                            lblBillStreet.Text = user.billAddress.addStreet;
+                            lblBillSuburb.Text = user.billAddress.addSuburb;
+                            lblBillState.Text = user.billAddress.addState;
+                            lblBillZip.Text = user.billAddress.addZip.ToString();
+                            lblPostStreet.Text = user.postAddress.addStreet;
+                            lblPostSuburb.Text = user.postAddress.addSuburb;
+                            lblPostState.Text = user.postAddress.addState;
+                            lblPostZip.Text = user.postAddress.addZip.ToString();
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/UL/ErrorPage/7");
                     }
                 }
                 else
