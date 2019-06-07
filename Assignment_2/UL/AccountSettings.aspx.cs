@@ -39,16 +39,16 @@ namespace Assignment_2.UL
                         }
                         else
                         {
-                            tbxBillAddress.Enabled = false;
-                            tbxBillSuburb.Enabled = false;
-                            ddlBillState.Enabled = false;
-                            tbxBillPostCode.Enabled = false;
+	                        tblBill.Visible = false;
+	                        tblBill.Enabled = false;
+							tblPost.Visible = true;
                             rfvBillAddress.Enabled = false;
                             rfvBillSuburb.Enabled = false;
                             rfvBillState.Enabled = false;
                             rfvBillPostCode.Enabled = false;
                             rxvBillPostcode.Enabled = false;
-                        }
+                            cbxPostageSame.Visible = false;
+						}
 
                         tbxPostAddress.Text = user.postAddress.addStreet;
                         tbxPostSuburb.Text = user.postAddress.addSuburb;
@@ -83,8 +83,10 @@ namespace Assignment_2.UL
         {
             if (IsValid)
             {
-                // Fills the hidden address section
-                if (cbxPostageSame.Checked)
+	            BLUser currentUser = Session["CurrentUser"] as BLUser;
+
+				// Fills the hidden address section
+				if (cbxPostageSame.Checked && !currentUser.userAdmin)
                 {
                     tbxPostAddress.Text = tbxBillAddress.Text;
                     tbxPostSuburb.Text = tbxBillSuburb.Text;
@@ -92,39 +94,20 @@ namespace Assignment_2.UL
                     tbxPostPostCode.Text = tbxBillPostCode.Text;
                 }
 
-                BLUser user;
-                if (Session["LoginStatus"].Equals("Admin"))
-                {
-                    user = new BLUser
-                    {
-                        userID = (Session["CurrentUser"] as BLUser).userID,
-                        userFirstName = tbxFirstName.Text,
-                        userLastName = tbxLastName.Text,
-                        userEmail = tbxEmail.Text,
-                        userPhone = tbxPhone.Text,
-                        billAddress = BLAddress.fillAddress('B', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text)),
-                        postAddress = BLAddress.fillAddress('P', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text)),
-                        userAdmin = (Session["CurrentUser"] as BLUser).userAdmin,
-                        userActive = (Session["CurrentUser"] as BLUser).userActive
-                    };
-                }
-                else
-                {
-                    user = new BLUser
-                    {
-                        userID = (Session["CurrentUser"] as BLUser).userID,
-                        userFirstName = tbxFirstName.Text,
-                        userLastName = tbxLastName.Text,
-                        userEmail = tbxEmail.Text,
-                        userPhone = tbxPhone.Text,
-                        billAddress = BLAddress.fillAddress('B', tbxBillAddress.Text, tbxBillSuburb.Text, ddlBillState.SelectedValue, Convert.ToInt32(tbxBillPostCode.Text)),
-                        postAddress = BLAddress.fillAddress('P', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text)),
-                        userAdmin = (Session["CurrentUser"] as BLUser).userAdmin,
-                        userActive = (Session["CurrentUser"] as BLUser).userActive
-                    };
-                }
+                string billPostCode = currentUser.userAdmin ? "0" : tbxBillPostCode.Text;
 
-                
+                BLUser user = new BLUser
+                {
+	                userID = currentUser.userID,
+	                userFirstName = tbxFirstName.Text,
+	                userLastName = tbxLastName.Text,
+	                userEmail = tbxEmail.Text,
+	                userPhone = tbxPhone.Text,
+	                billAddress = BLAddress.fillAddress('B', tbxBillAddress.Text, tbxBillSuburb.Text, ddlBillState.SelectedValue, Convert.ToInt32(billPostCode)),
+	                postAddress = BLAddress.fillAddress('P', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text)),
+	                userAdmin = currentUser.userAdmin,
+	                userActive = currentUser.userActive
+                };
 
                 if (BLUser.updateUser(user))
                 {

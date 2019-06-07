@@ -83,6 +83,8 @@ namespace Assignment_2.UL
         {
 	        if (IsValid)
 	        {
+		        string billPostCode = (Session["User"] as BLUser).userAdmin ? "0" : tbxBillPostCode.Text;
+
 		        BLUser currentUser = new BLUser
 		        {
 					userID = Convert.ToInt32(lblUserID.Text),
@@ -90,7 +92,7 @@ namespace Assignment_2.UL
 			        userLastName = tbxLastName.Text,
 			        userEmail = tbxEmail.Text,
 			        userPhone = tbxPhone.Text,
-			        billAddress = BLAddress.fillAddress('B', tbxBillAddress.Text, tbxBillSuburb.Text, ddlBillState.SelectedValue, Convert.ToInt32(tbxBillPostCode.Text)),
+			        billAddress = BLAddress.fillAddress('B', tbxBillAddress.Text, tbxBillSuburb.Text, ddlBillState.SelectedValue, Convert.ToInt32(billPostCode)),
 			        postAddress = BLAddress.fillAddress('P', tbxPostAddress.Text, tbxPostSuburb.Text, ddlPostState.SelectedValue, Convert.ToInt32(tbxPostPostCode.Text)),
 			        userAdmin = (Session["User"] as BLUser).userAdmin,
 			        userActive = (Session["User"] as BLUser).userActive

@@ -8,8 +8,10 @@ go
 CREATE DATABASE JerseySure
 GO
 
+-- Sets date format to Australian standard
 SET DATEFORMAT dmy
 GO
+
 --==================================================================================
 -- Creates the required user login for SQL Authentication
 --==================================================================================
@@ -477,6 +479,8 @@ GO
     -- Database Types, Procedures and Functions for Application
 --===================================================================================
 
+-- Returns all active and inactive products
+--===================================================================================
 CREATE PROCEDURE usp_getAllProducts
 AS
 BEGIN
@@ -486,6 +490,8 @@ BEGIN
 END
 GO
 
+-- Returns all active products only
+--===================================================================================
 CREATE PROCEDURE usp_getProducts
 AS
 BEGIN
@@ -495,6 +501,8 @@ BEGIN
 END
 GO
 
+-- Returns all active products containing the search parameter
+--===================================================================================
 CREATE PROCEDURE usp_getProductsSearch
 	@search VARCHAR(30)
 AS
@@ -506,6 +514,8 @@ BEGIN
 END
 GO
 
+-- Returns a single product
+--===================================================================================
 CREATE PROCEDURE usp_selectProduct
     @productNumber VARCHAR(8)
 AS
@@ -516,6 +526,8 @@ BEGIN
 END
 GO
 
+-- Returns all users
+--===================================================================================
 CREATE PROCEDURE usp_getUsers
 AS
 BEGIN
@@ -524,6 +536,8 @@ BEGIN
 END
 GO
 
+-- Returns a single user checking for existing email
+--===================================================================================
 CREATE PROCEDURE usp_getUser
     @user VARCHAR(255), @result BIT OUTPUT
 AS
@@ -542,6 +556,8 @@ BEGIN
 END
 GO
 
+-- Returns a single user by userID
+--===================================================================================
 CREATE PROCEDURE usp_getSingleUser
     @user INT
 AS
@@ -552,6 +568,8 @@ BEGIN
 END
 GO
 
+-- Returns a single user by userEmail
+--===================================================================================
 CREATE PROCEDURE usp_getUserByEmail
     @email VARCHAR(255)
 AS
@@ -562,6 +580,8 @@ BEGIN
 END
 GO
 
+-- Returns an address for a user
+--===================================================================================
 CREATE PROCEDURE usp_getAddress
     @user INT, @type CHAR(1)
 AS
@@ -572,6 +592,8 @@ BEGIN
 END
 GO
 
+-- Adds a new user to the database
+--===================================================================================
 CREATE PROCEDURE usp_addUser
     @userFirst VARCHAR(30),
     @userLast VARCHAR(30),
@@ -625,6 +647,8 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+-- Updates an existing user
+--===================================================================================
 CREATE PROCEDURE usp_updateUser
     @userID INT,
     @userFirst VARCHAR(30),
@@ -678,6 +702,8 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+-- Toggles a user's access privileges
+--===================================================================================
 CREATE PROCEDURE usp_toggleUserActive
     @userID INT
 AS
@@ -697,6 +723,8 @@ BEGIN
 END
 GO
 
+-- Changes a user's password
+--===================================================================================
 CREATE PROCEDURE usp_changeUserPassword
     @username VARCHAR(255),
     @password VARCHAR(32)
@@ -708,6 +736,8 @@ BEGIN
 END
 GO
 
+-- Returns all the teams in the database
+--===================================================================================
 CREATE PROCEDURE usp_getTeams
 AS
 BEGIN
@@ -715,6 +745,8 @@ BEGIN
 END
 GO
 
+-- Returns a formatted list of shipping options
+--===================================================================================
 CREATE PROCEDURE usp_getShipping
 AS
 BEGIN
@@ -722,6 +754,8 @@ BEGIN
 END
 GO
 
+-- Returns all the shipping options as a dataset
+--===================================================================================
 CREATE PROCEDURE usp_getShippingTable
 AS
 BEGIN
@@ -729,6 +763,8 @@ BEGIN
 END
 GO
 
+-- Returns a single shipping option
+--===================================================================================
 CREATE PROCEDURE usp_getShipDetails
     @shipID INT
 AS
@@ -737,6 +773,8 @@ BEGIN
 END
 GO
 
+-- Returns the stock levels for all sizes of a product
+--===================================================================================
 CREATE PROCEDURE usp_getProductStock
     @prodNumber VARCHAR(8)
 AS
@@ -754,6 +792,8 @@ BEGIN
 END
 GO
 
+-- Adds a new product to the database
+--===================================================================================
 CREATE PROCEDURE usp_addProduct
     @playFirst VARCHAR(30),
 	@playLast VARCHAR(30),
@@ -815,6 +855,8 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+-- TVP for updating stock quantity when updating a product
+--===================================================================================
 CREATE TYPE STOCKTYPE AS TABLE
 (
     sizeID VARCHAR(3) PRIMARY KEY,
@@ -822,6 +864,8 @@ CREATE TYPE STOCKTYPE AS TABLE
 )
 GO
 
+-- Updates an existing product's details
+--===================================================================================
 CREATE PROCEDURE usp_updateProduct
     @prodNumber VARCHAR(8),
     @prodDescription TEXT,
@@ -843,6 +887,8 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+-- Toggles the status of a product's availability
+--===================================================================================
 CREATE PROCEDURE usp_toggleProductActive
     @prodNum VARCHAR(8)
 AS
@@ -862,6 +908,8 @@ BEGIN
 END
 GO
 
+-- Add a new shipping option to the database
+--===================================================================================
 CREATE PROCEDURE usp_addShipping
 	@type VARCHAR(15),
 	@description VARCHAR(255),
@@ -877,6 +925,8 @@ BEGIN TRANSACTION
 COMMIT TRANSACTION
 GO
 
+-- Toggle the status of availability of a shipping method
+--===================================================================================
 CREATE PROCEDURE usp_toggleShipActive
     @shipID INT
 AS
@@ -896,6 +946,8 @@ BEGIN
 END
 GO
 
+-- Returns all the orders a user has made
+--===================================================================================
 CREATE PROCEDURE usp_getUserOrders
     @userID INT
 AS
@@ -904,6 +956,8 @@ BEGIN
 END
 GO
 
+-- Returns a single order selected by the user
+--===================================================================================
 CREATE PROCEDURE usp_getSingleOrder
     @orderID INT
 AS
@@ -912,6 +966,8 @@ BEGIN
 END
 GO
 
+-- Returns the items purchased on an order
+--===================================================================================
 CREATE PROCEDURE usp_getOrderItems
     @orderID INT
 AS
@@ -922,6 +978,8 @@ BEGIN
 END
 GO
 
+-- TVP for adding cart items when adding an order
+--===================================================================================
 CREATE TYPE CARTITEMTYPE AS TABLE
 (
     userID INT,
@@ -934,6 +992,8 @@ CREATE TYPE CARTITEMTYPE AS TABLE
 )
 GO
 
+-- Adds a new order to the database
+--===================================================================================
 CREATE PROCEDURE usp_addNewOrder
     @ordSubTotal MONEY,
     @ordTotal MONEY,
