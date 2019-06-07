@@ -17,9 +17,9 @@ namespace Assignment_2
 			// Code that runs on application startup
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
+		}
 
-        void Session_Start(object sender, EventArgs e)
+		void Session_Start(object sender, EventArgs e)
         {
             // Initialise shopping cart to empty for each session
             HttpContext.Current.Session["Cart"] = new BLShoppingCart();
@@ -27,5 +27,5 @@ namespace Assignment_2
             // Add variable indicating status of login 
             HttpContext.Current.Session["LoginStatus"] = "LoggedOut";
         }
-    }
+	}
 }

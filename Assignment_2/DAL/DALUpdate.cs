@@ -177,6 +177,5 @@ namespace Assignment_2.DAL
 
 			return rows > 0;
         }
-
 	}
 }

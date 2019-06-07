@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Assignment_2.DAL;
 
 /// <summary>
 /// Model to represent the a shopping cart item.
@@ -25,8 +26,8 @@ namespace Assignment_2.BL
             ItemTotal = Product.prodPrice * Quantity;
         }
 
-        // String representation for model and display on user views
-        public override string ToString()
+		// String representation for model and display on user views
+		public override string ToString()
         {
             return Product.prodNumber +" - Size: " +Size +" x " +Quantity;
         }

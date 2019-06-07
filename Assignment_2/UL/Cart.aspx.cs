@@ -70,7 +70,7 @@ namespace Assignment_2.UL
                 selected = currDataItem.FindControl("cbxRemove") as CheckBox;
                 if (selected.Checked)
                 {
-                    cart.Items.RemoveAt(ItemList.Items[i].DisplayIndex);
+					cart.Items.RemoveAt(ItemList.Items[i].DisplayIndex);
 					cart.calculate();
                 }
             }

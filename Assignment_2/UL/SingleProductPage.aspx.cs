@@ -20,6 +20,7 @@ namespace Assignment_2.UL
 				if (!Session["LoginStatus"].Equals("Admin"))
 				{
 					BLProduct product = new BLProduct();
+					BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
 
 					product = product.selectProduct(Session["productNumber"].ToString());
 
@@ -33,6 +34,37 @@ namespace Assignment_2.UL
 					imgFront.ImageUrl = "Images\\jerseys\\" + product.image[0];
 					imgBack.ImageUrl = "Images\\jerseys\\" + product.image[1];
 
+					if (cart != null)
+					{
+						if (cart.Items.Count > 0)
+						{
+							foreach (BLCartItem item in cart.Items)
+							{
+								if (item.Product.prodNumber == product.prodNumber)
+								{
+									switch (item.Size)
+									{
+										case "S":
+											product.stock[0] -= item.Quantity;
+											break;
+										case "M":
+											product.stock[1] -= item.Quantity;
+											break;
+										case "L":
+											product.stock[2] -= item.Quantity;
+											break;
+										case "XL":
+											product.stock[3] -= item.Quantity;
+											break;
+										case "XXL":
+											product.stock[4] -= item.Quantity;
+											break;
+									}
+								}
+							}
+						}
+					}
+					
 					rblSizeOption.Items[0].Enabled = product.stock[0] > 0;
 					rblSizeOption.Items[1].Enabled = product.stock[1] > 0;
 					rblSizeOption.Items[2].Enabled = product.stock[2] > 0;
@@ -40,8 +72,7 @@ namespace Assignment_2.UL
 					rblSizeOption.Items[4].Enabled = product.stock[4] > 0;
 
 					btnAddToCart.Visible = tbxQuantity.Visible = rblSizeOption.Visible = product.stock.Sum() > 0;
-					csvQuantity.Enabled = rfvQuantity.Enabled =
-						rxvQuantity.Enabled = rfvSize.Enabled = product.stock.Sum() > 0;
+					csvQuantity.Enabled = rfvQuantity.Enabled = rxvQuantity.Enabled = rfvSize.Enabled = product.stock.Sum() > 0;
 					lblNoStock.Visible = product.stock.Sum() == 0;
 				}
 				else
@@ -66,7 +97,22 @@ namespace Assignment_2.UL
 	            BLProduct productData = Session["Product"] as BLProduct;
 
 				BLShoppingCart cart = HttpContext.Current.Session["Cart"] as BLShoppingCart;
-                cart.AddCartItem(new BLCartItem(productData, rblSizeOption.SelectedItem.Value, int.Parse(tbxQuantity.Text)));
+
+				bool existingItem = false;
+
+				foreach (BLCartItem item in cart.Items)
+				{
+					if (item.Product.prodNumber == productData.prodNumber &&
+					    item.Size == rblSizeOption.SelectedItem.Value)
+					{
+						item.Quantity += Convert.ToInt32(tbxQuantity.Text);
+						existingItem = true;
+						break;
+					}
+				}
+				
+				if(!existingItem)
+					cart.AddCartItem(new BLCartItem(productData, rblSizeOption.SelectedItem.Value, Convert.ToInt32(tbxQuantity.Text)));
 
                 Response.Redirect("~/UL/Cart");
             }

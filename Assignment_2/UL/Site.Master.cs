@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Assignment_2.BL;
 
 namespace Assignment_2.UL
 {
@@ -23,7 +24,7 @@ namespace Assignment_2.UL
 	        }
         }
 
-        protected void SubmitSearch_Click(object sender, EventArgs e)
+		protected void SubmitSearch_Click(object sender, EventArgs e)
         {
 	        if (SearchTextBox.Text != "")
 	        {
