@@ -67,11 +67,11 @@
                 <asp:Table ID="tblStockVal" runat="server">
                     <asp:TableRow runat="server">
                         <asp:TableCell runat="server">
-                            <asp:RegularExpressionValidator runat="server" ID="rxvSmall" ErrorMessage="S quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxSmall" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
-                            <asp:RegularExpressionValidator runat="server" ID="rxvMedium" ErrorMessage="M quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxMedium" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
-                            <asp:RegularExpressionValidator runat="server" ID="rxvLarge" ErrorMessage="L quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxLarge" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
-                            <asp:RegularExpressionValidator runat="server" ID="rxvXLge" ErrorMessage="XL quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxXLge" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
-                            <asp:RegularExpressionValidator runat="server" ID="rxvXXL" ErrorMessage="XXL quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxXXL" ValidationExpression="\{d}*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvSmall" ErrorMessage="S quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxSmall" ValidationExpression="\d*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvMedium" ErrorMessage="M quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxMedium" ValidationExpression="\d*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvLarge" ErrorMessage="L quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxLarge" ValidationExpression="\d*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvXLge" ErrorMessage="XL quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxXLge" ValidationExpression="\d*"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator runat="server" ID="rxvXXL" ErrorMessage="XXL quantity invalid " CssClass="text-danger" SetFocusOnError="True" Display="Dynamic" ControlToValidate="tbxXXL" ValidationExpression="\d*"></asp:RegularExpressionValidator>
                                 
                             <br/>
                         </asp:TableCell>
