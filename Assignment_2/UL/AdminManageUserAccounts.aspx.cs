@@ -19,8 +19,11 @@ namespace Assignment_2.UL
 				// Page only accessible by admin
 				if (Session["LoginStatus"].Equals("Admin"))
 			    {
-				    gvUsers.DataSource = BLUser.getUsers();
-				    gvUsers.DataBind();
+				    if (!IsPostBack)
+				    {
+					    gvUsers.DataSource = BLUser.getUsers();
+					    gvUsers.DataBind();
+				    }
 			    }
 			    else
 			    {
@@ -35,31 +38,23 @@ namespace Assignment_2.UL
 			}
 		}
 
-	    protected void btnActive_Clicked(object sender, EventArgs e)
-	    {
-			//-==================================================================
-			//-==================================================================
-			//-==================================================================
-			//-==================================================================
-		}
-
 		protected void gvUsers_OnRowDataBound(object sender, GridViewRowEventArgs e)
 	    {
 		    if (e.Row.RowIndex >= 0)
 		    {
 			    DataRowView rowView = e.Row.DataItem as DataRowView;
+				
+				Button statusButton = e.Row.Cells[6].FindControl("btnStatus") as Button;
 
-				Button btnUserActive = e.Row.FindControl("btnActive") as Button;
-
-			    if (Convert.ToBoolean(rowView["userActive"]))
+				if (Convert.ToBoolean(rowView["userActive"]))
 			    {
-				    btnUserActive.CssClass = "btn btn-danger";
-				    btnUserActive.Text = "Active";
+				    statusButton.CssClass = "btn btn-danger";
+				    statusButton.Text = "Activated";
 			    }
 			    else
 			    {
-				    btnUserActive.CssClass = "btn btn-outline-danger";
-				    btnUserActive.Text = "Suspended";
+				    statusButton.CssClass = "btn btn-outline-danger";
+				    statusButton.Text = "Suspended";
 			    }
 		    }
 	    }
@@ -68,17 +63,32 @@ namespace Assignment_2.UL
 	    {
 
 		    GridViewRow row = gvUsers.Rows[Convert.ToInt32(e.CommandArgument)];
+
+			BLUser user = new BLUser();
+			user = user.getUser(Convert.ToInt32(row.Cells[0].Text));
+			Session["User"] = user;
+
 			switch (e.CommandName)
 		    {
 			    case "Select":
-
-				    BLUser user = new BLUser();
-
-				    Session["User"] = user.getUser(Convert.ToInt32(row.Cells[0].Text));
 				    Response.Redirect("~/UL/AdminUpdateSelectedUser");
 				    break;
 			    case "Status":
+				    Button statusButton = row.Cells[6].FindControl("btnStatus") as Button;
+					BLUser.toggleActive(user.userID);
 
+					if (statusButton.Text != "Activated")
+					{
+						statusButton.CssClass = "btn btn-danger";
+						statusButton.Text = "Activated";
+					}
+					else
+					{
+						statusButton.CssClass = "btn btn-outline-danger";
+						statusButton.Text = "Suspended";
+					}
+				    gvUsers.DataSource = BLUser.getUsers();
+				    gvUsers.DataBind();
 					break;
 			    default:
 				    return;

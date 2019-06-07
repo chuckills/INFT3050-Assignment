@@ -13,15 +13,20 @@
                 <asp:BoundField DataField="userLastName" HeaderText="LastName" ReadOnly="True" />  
                 <asp:BoundField DataField="userEmail" HeaderText="Email" ReadOnly="True" /> 
                 <asp:BoundField DataField="userPhone" HeaderText="Phone" ReadOnly="True" />  
-                <asp:BoundField DataField="userAdmin" HeaderText="Admin" ReadOnly="True" /> 
-                <%--<asp:BoundField DataField="userActive" HeaderText="Active" ReadOnly="True" />--%>
+                <asp:BoundField DataField="userAdmin" HeaderText="Admin" ReadOnly="True" />
                 <asp:TemplateField HeaderText="Status">
                     <ItemTemplate>
-                        <asp:Button ID="btnActive" runat="server" CausesValidation="false" CommandName="Status"/>
+                        <asp:Button ID="btnStatus" runat="server" CausesValidation="False" CommandName="Status" CommandArgument="<%# (Container as GridViewRow).RowIndex %>" Text="Activated" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField ShowSelectButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-outline-danger" />
+                <asp:TemplateField HeaderText="Edit">
+                    <ItemTemplate>
+                        <asp:Button ID="btnSelect" CssClass="btn btn-outline-danger" runat="server" CausesValidation="False" CommandName="Select" CommandArgument="<%# (Container as GridViewRow).RowIndex %>" Text="Select" />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>  
+
+            <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
         </asp:GridView>
     </div>
 </asp:Content>
