@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -34,7 +35,36 @@ namespace Assignment_2.UL
 			}
 		}
 
-		protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
+	    protected void btnActive_Clicked(object sender, EventArgs e)
+	    {
+			//-==================================================================
+			//-==================================================================
+			//-==================================================================
+			//-==================================================================
+		}
+
+		protected void gvUsers_OnRowDataBound(object sender, GridViewRowEventArgs e)
+	    {
+		    if (e.Row.RowIndex >= 0)
+		    {
+			    DataRowView rowView = e.Row.DataItem as DataRowView;
+
+				Button btnUserActive = e.Row.FindControl("btnActive") as Button;
+
+			    if (Convert.ToBoolean(rowView["userActive"]))
+			    {
+				    btnUserActive.CssClass = "btn btn-danger";
+				    btnUserActive.Text = "Active";
+			    }
+			    else
+			    {
+				    btnUserActive.CssClass = "btn btn-outline-danger";
+				    btnUserActive.Text = "Suspended";
+			    }
+		    }
+	    }
+
+	    protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			GridViewRow row = gvUsers.SelectedRow;
 
@@ -43,45 +73,5 @@ namespace Assignment_2.UL
 			Session["User"] = user.getUser(Convert.ToInt32(row.Cells[0].Text));
 			Response.Redirect("~/UL/AdminUpdateSelectedUser");
 		}
-
-		/* 
-         * Temporary Functionality follows these comments
-         */
-
-		/*protected void ViewTransactions_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/UL/PurchaseHistory.aspx");
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            toggleAccount(Button2, lblBadge1);
-        }
-
-        protected void Button4_Click(object sender, EventArgs e)
-        {
-
-            toggleAccount(Button4, lblBadge2);
-        }
-
-        protected void Button6_Click(object sender, EventArgs e)
-        {
-            toggleAccount(Button6, lblBadge3);
-        }
-
-        // Simulates changing the status of a user account
-        private void toggleAccount(Button button, Label label)
-        {
-            if (button.Text == "Activate")
-            {
-                button.Text = "Suspend";
-                label.Text = "Active";
-            }
-            else
-            {
-                button.Text = "Activate";
-                label.Text = "Suspended";
-            }
-        }*/
-	}
+    }
 }

@@ -61,7 +61,7 @@ namespace Assignment_2.UL
 						else
 						{
 							btnActive.CssClass = "btn btn-outline-danger";
-							btnActive.Text = "Inactive";
+							btnActive.Text = "Suspended";
 						}
 					}
 				}
@@ -131,7 +131,7 @@ namespace Assignment_2.UL
 	        if (user.userActive)
 	        {
 		        btnActive.CssClass = "btn btn-outline-danger";
-		        btnActive.Text = "Inactive";
+		        btnActive.Text = "Suspended";
 		        user.userActive = false;
 	        }
 	        else
