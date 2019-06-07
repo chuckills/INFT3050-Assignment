@@ -2,6 +2,7 @@
 using Microsoft.AspNet.FriendlyUrls;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,22 +14,31 @@ namespace Assignment_2.UL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Page is not viewable on admin site
-            if (!Session["LoginStatus"].Equals("Admin"))
-            {
-                // Calculate total cost of the cart
-                int total = 0;
-                BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
-			
-                // Display updated cost
-                Cost.Text = string.Format("{0:C}", cart.Amount);
-            }
-            else
-            {
-                Response.Redirect("~/UL/ErrorPage/5");
-            }
-            
-        }
+	        // Check for secure connection
+	        if (Request.IsSecureConnection)
+	        {
+		        // Page is not viewable on admin site
+		        if (!Session["LoginStatus"].Equals("Admin"))
+		        {
+			        // Calculate total cost of the cart
+			        int total = 0;
+			        BLShoppingCart cart = Session["Cart"] as BLShoppingCart;
+
+			        // Display updated cost
+			        Cost.Text = string.Format("{0:C}", cart.Amount);
+		        }
+		        else
+		        {
+			        Response.Redirect("~/UL/ErrorPage/5");
+		        }
+			}
+			else
+	        {
+		        // Make connection secure if it isn't already
+		        string url = ConfigurationManager.AppSettings["SecurePath"] + "Cart";
+		        Response.Redirect(url);
+	        }
+		}
 
         // Returns currently stored cart items in the session
         public List<BLCartItem> GetCartItems()

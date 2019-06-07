@@ -13,7 +13,7 @@ namespace Assignment_2.UL
         {
             if (!string.IsNullOrEmpty(RouteData.Values["status"].ToString()))
             {
-	            int errorCode = Convert.ToInt32(RouteData.Values["status"]); //Int32.Parse(Request.QueryString["status"]);
+	            int errorCode = Convert.ToInt32(RouteData.Values["status"]);
 
                 switch (errorCode)
                 {
