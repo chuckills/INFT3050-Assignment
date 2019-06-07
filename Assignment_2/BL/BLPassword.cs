@@ -5,12 +5,21 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
+/// <summary>
+/// Contains all password functions required by application.
+/// </summary>
+
 namespace Assignment_2.BL
 {
     public class BLPassword
     {
-        // Generate a random string with a given size
-        // Sourced from: https://www.c-sharpcorner.com/article/generating-random-number-and-string-in-C-Sharp/
+        /// <summary>
+        /// Generates a randomised password of a given size and then returns that password once hashed.
+        /// Sourced from: https://www.c-sharpcorner.com/article/generating-random-number-and-string-in-C-Sharp/
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="lowerCase"></param>
+        /// <returns></returns>
         public static string RandomString(int size, bool lowerCase)
         {
             StringBuilder builder = new StringBuilder();
@@ -26,7 +35,12 @@ namespace Assignment_2.BL
             return hashPassword(builder.ToString());
         }
 
-        private static string hashPassword(string pass)
+        /// <summary>
+        /// Performs MD5 Hash function on input string.
+        /// </summary>
+        /// <param name="pass"></param>
+        /// <returns></returns>
+        public static string hashPassword(string pass)
         {
             using (MD5 md5Hash = MD5.Create())
             {
