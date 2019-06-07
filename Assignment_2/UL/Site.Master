@@ -138,7 +138,7 @@
           </div>
         </nav>
 
-        <div class="container body-content">
+        <div id="body-div" class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
         </div>
 

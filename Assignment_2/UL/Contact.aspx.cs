@@ -20,10 +20,20 @@ namespace Assignment_2.UL
 			if (!Request.IsSecureConnection)
 			{
 				// Page is not accessible on admin site
-				if (Session["LoginStatus"].Equals("Admin"))
+				if (!Session["LoginStatus"].Equals("Admin"))
 				{
-					Response.Redirect("~/UL/ErrorPage/5");
-				}
+                    if (Session["LoginStatus"].Equals("User"))
+                    {
+                        BLUser user = Session["CurrentUser"] as BLUser;
+                        tbxName.Text = user.userFirstName + " " + user.userLastName;
+                        tbxName.Enabled = false;
+                        tbxEmail.Text = user.userEmail;
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/UL/ErrorPage/5");
+                }
 			}
 			else
 			{

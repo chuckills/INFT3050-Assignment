@@ -8,6 +8,6 @@
         <asp:Label ID="DescriptionLabel" runat="server" Text="Label"></asp:Label>
     </div>
     <div>
-        <asp:Button ID="ResultingButton" runat="server" Text="Button" CssClass="btn btn-outline-danger" />
+        <asp:Button ID="ResultingButton" runat="server" Text="Button" CssClass="btn btn-danger" />
     </div>
 </asp:Content>

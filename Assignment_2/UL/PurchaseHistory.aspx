@@ -5,7 +5,7 @@
     <h1>Your Purchase History</h1>
     <hr />
 
-    <asp:GridView ID="gvOrders" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvOrders_SelectedIndexChanged">
+    <asp:GridView ID="gvOrders" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvOrders_SelectedIndexChanged" CssClass="table">
         <Columns>  
             <asp:BoundField DataField="ordID" HeaderText="Order ID" ReadOnly="True" />  
             <asp:BoundField DataField="ordDate" HeaderText="Date Ordered" ReadOnly="True" DataFormatString="{0:d}" />  
@@ -17,7 +17,8 @@
                 <ControlStyle CssClass="btn btn-outline-danger"></ControlStyle>
             </asp:CommandField>
         </Columns>
-        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+        <HeaderStyle HorizontalAlign="Center" CssClass="thead-dark" />
+        <RowStyle HorizontalAlign="Center" />
     </asp:GridView>
 
 </asp:Content>

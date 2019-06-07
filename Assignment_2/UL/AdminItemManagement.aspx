@@ -3,11 +3,11 @@
 <%-- This page will be functionally redesigned once database functions are supported --%>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="container">
-         <h2>Product Management</h2>
+     <div class="container-full">
+         <h2 class="margin-space-top-20 center-text">Product Management</h2>
          <hr/>
 
-         <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged" OnRowDataBound="gvProducts_RowDataBound">
+         <asp:GridView ID="gvProducts" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanged="gvProducts_SelectedIndexChanged" OnRowDataBound="gvProducts_RowDataBound" CssClass="table">
              <Columns>  
                  <asp:BoundField DataField="prodNumber" HeaderText="ID" ReadOnly="True" />  
                  <asp:BoundField DataField="prodDescription" HeaderText="Description" ReadOnly="True" />  
@@ -31,7 +31,13 @@
                      <ItemStyle Wrap="False"></ItemStyle>
                  </asp:TemplateField>
              </Columns>
-             <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+             <HeaderStyle HorizontalAlign="Center" CssClass="thead-dark" />
+             <RowStyle HorizontalAlign="Center" />
          </asp:GridView>
     </div>
+
+    <script>
+        document.getElementById("body-div").classList.add('container-fluid');
+        document.getElementById("body-div").classList.remove('container');
+    </script>
 </asp:Content>

@@ -13,6 +13,15 @@ namespace Assignment_2.UL {
     public partial class Payment {
         
         /// <summary>
+        /// PaymentPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PaymentPanel;
+        
+        /// <summary>
         /// tblOrderDetails control.
         /// </summary>
         /// <remarks>
@@ -301,15 +310,6 @@ namespace Assignment_2.UL {
         protected global::System.Web.UI.UpdatePanel uplProcessing;
         
         /// <summary>
-        /// btnSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
-        /// <summary>
         /// lblResult control.
         /// </summary>
         /// <remarks>
@@ -317,5 +317,14 @@ namespace Assignment_2.UL {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblResult;
+        
+        /// <summary>
+        /// btnSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
     }
 }
