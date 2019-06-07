@@ -23,27 +23,26 @@ namespace Assignment_2
             routes.MapPageRoute("AdminItemManagementInsert", "AdminItemManagementInsert", "~/UL/AdminItemManagementInsert.aspx");
             routes.MapPageRoute("AdminManageUserAccounts", "AdminManageUserAccounts", "~/UL/AdminManageUserAccounts.aspx");
             routes.MapPageRoute("AdminPostageOptions", "AdminPostageOptions", "~/UL/AdminPostageOptions.aspx");
-            routes.MapPageRoute("AdminRegistration", "AdminRegistration/{*vc}", "~/UL/AdminRegistration.aspx");
+            routes.MapPageRoute("AdminRegistration",
+                "AdminRegistration/{vc}",
+                "~/UL/AdminRegistration.aspx", false,
+                new RouteValueDictionary { { "vc", string.Empty } });
             routes.MapPageRoute("AdminTransactions", "AdminTransactions", "~/UL/AdminTransactions.aspx");
             routes.MapPageRoute("AdminUpdateSelectedItem", "AdminUpdateSelectedItem", "~/UL/AdminUpdateSelectedItem.aspx");
             routes.MapPageRoute("AdminUpdateSelectedUser", "AdminUpdateSelectedUser", "~/UL/AdminUpdateSelectedUser.aspx");
             routes.MapPageRoute("Cart", "Cart", "~/UL/Cart.aspx");
-           
             routes.MapPageRoute(
                "ChangePassword",
                 "ChangePassword/{email}/{pass}",
                 "~/UL/ChangePassword.aspx", false,
                 new RouteValueDictionary { { "email", string.Empty }, { "pass", string.Empty }}
             );
-
             routes.MapPageRoute("Contact", "Contact", "~/UL/Contact.aspx");
 			routes.MapPageRoute("Default", "Default", "~/UL/Default.aspx");
-
 			routes.MapPageRoute("ErrorPage", 
 				"ErrorPage/{status}", 
 				"~/UL/ErrorPage.aspx", false,
 				new RouteValueDictionary { { "status", string.Empty } });
-
 			routes.MapPageRoute("ForgotPassword", "ForgotPassword", "~/UL/ForgotPassword.aspx");
 			routes.MapPageRoute("GuestRegistration", "GuestRegistration", "~/UL/GuestRegistration.aspx");
 			routes.MapPageRoute("Login", "Login", "~/UL/Login.aspx");
@@ -55,7 +54,10 @@ namespace Assignment_2
 			routes.MapPageRoute("PurchaseHistory", "PurchaseHistory", "~/UL/PurchaseHistory.aspx");
 			routes.MapPageRoute("Registration", "Registration", "~/UL/Registration.aspx");
 			routes.MapPageRoute("SingleProductPage", "SingleProductPage", "~/UL/SingleProductPage.aspx");
-			routes.MapPageRoute("SuccessPage", "SuccessPage/{status}", "~/UL/SuccessPage.aspx");
+            routes.MapPageRoute("SuccessPage",
+                "SuccessPage/{status}",
+                "~/UL/SuccessPage.aspx", false,
+                new RouteValueDictionary { { "status", string.Empty } });
             routes.MapPageRoute("ViewSingleOrder", "ViewSingleOrder", "~/UL/ViewSingleOrder.aspx");
 
         }
