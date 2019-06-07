@@ -3,10 +3,10 @@
     
     <div class="container">
         
-        <h2>User Management</h2>
+        <h2 class="margin-space-top-20">User Management</h2>
         <hr/>
 
-        <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvUsers_OnRowDataBound" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged" HeaderStyle-HorizontalAlign="Center">
+        <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="False" OnRowDataBound="gvUsers_OnRowDataBound" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged" HeaderStyle-HorizontalAlign="Center" CssClass="table">
             <Columns>  
                 <asp:BoundField DataField="userID" HeaderText="ID" ReadOnly="True" />  
                 <asp:BoundField DataField="userFirstName" HeaderText="FirstName" ReadOnly="True" />  
@@ -22,6 +22,8 @@
                 </asp:TemplateField>
                 <asp:CommandField ShowSelectButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-outline-danger" />
             </Columns>  
+            <HeaderStyle HorizontalAlign="Center" CssClass="thead-dark" />
+            <RowStyle HorizontalAlign="Center" />
         </asp:GridView>
     </div>
 </asp:Content>
