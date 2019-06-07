@@ -149,7 +149,6 @@
     <Content Include="UL\Default.aspx" />
     <Content Include="UL\Payment.aspx" />
     <Content Include="UL\PaymentConfirmation.aspx" />
-    <Content Include="UL\PaymentResponse.aspx" />
     <Content Include="UL\PurchaseHistory.aspx" />
     <Content Include="UL\Registration.aspx" />
     <Content Include="UL\Content\bootstrap.min.css.map" />
@@ -428,13 +427,6 @@
     </Compile>
     <Compile Include="UL\PaymentConfirmation.aspx.designer.cs">
       <DependentUpon>PaymentConfirmation.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UL\PaymentResponse.aspx.cs">
-      <DependentUpon>PaymentResponse.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UL\PaymentResponse.aspx.designer.cs">
-      <DependentUpon>PaymentResponse.aspx</DependentUpon>
     </Compile>
     <Compile Include="UL\Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>
