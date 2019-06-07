@@ -47,6 +47,9 @@ namespace Assignment_2.UL
                         case 8:
                             pageDoesNotExist();
                             break;
+                        case 9:
+                            accountUpdateUnsuccessful();
+                            break;
                         default:
 							defaultError();
 							break;
@@ -148,6 +151,14 @@ namespace Assignment_2.UL
             DescriptionLabel.Text = "No page exists under this URL for our site.";
             ResultingButton.Text = "Return Home";
             ResultingButton.PostBackUrl = "~/UL/Default";
+        }
+
+        protected void accountUpdateUnsuccessful()
+        {
+            StatusLabel.Text = "Sorry, Account update unsuccessful";
+            DescriptionLabel.Text = "Changes in account settings were unable to be made.";
+            ResultingButton.Text = "Try Again";
+            ResultingButton.PostBackUrl = "~/UL/AccountSettings";
         }
 
         protected void noTransactionMade()

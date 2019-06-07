@@ -29,16 +29,9 @@
             <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail" runat="server" TextMode="Email"></asp:TextBox></asp:TableCell>
             
             <%-- Validation for email --%>
-            <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblEmail2" runat="server" Text="Confirm email address" AssociatedControlID="tbxEmail2"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxEmail2" runat="server" TextMode="Email"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for email2 --%>
             <asp:TableCell runat="server">
-                <asp:CompareValidator ID="cpvEmail2" runat="server" ErrorMessage="Emails do not match" CssClass="text-danger" ControlToCompare="tbxEmail" ControlToValidate="tbxEmail2" Operator="Equal" SetFocusOnError="True" Display="Dynamic"></asp:CompareValidator>
-                <asp:RequiredFieldValidator ID="rfvEmail2" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail2" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxEmail" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:CustomValidator ID="csvEmail" runat="server" ErrorMessage="Email already registered" CssClass="text-danger" OnServerValidate="checkExists" ControlToValidate="tbxEmail" Display="Dynamic" SetFocusOnError="True"></asp:CustomValidator>
             </asp:TableCell>
         </asp:TableRow>
         <asp:TableRow runat="server">
@@ -157,48 +150,15 @@
                 <asp:RegularExpressionValidator ID="rxvPostPostcode" runat="server" ErrorMessage="Postcode must be 4 digits" CssClass="text-danger" Display="Dynamic" ValidationExpression="\d{4}" ControlToValidate="tbxBillPostcode"></asp:RegularExpressionValidator>
            </asp:TableCell>
         </asp:TableRow>
-        <asp:TableRow runat="server" Height="10">
-        </asp:TableRow>
-    </asp:Table> 
+    </asp:Table>
 
-<%-- Table for login details section --%>
-    <asp:Table ID="tblLogin" runat="server">
-        <asp:TableHeaderRow runat="server">
-            <asp:TableHeaderCell runat="server">Login details</asp:TableHeaderCell>
-        </asp:TableHeaderRow>
+    <asp:Table ID="tblButtons" runat="server">
         <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblUsername" runat="server" Text="Username" AssociatedControlID="tbxUsername"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxUsername" runat="server"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for username --%>
-            <asp:TableCell runat="server"><asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxUsername" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator></asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblPassword" runat="server" Text="Password" AssociatedControlID="tbxPassword"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxPassword" runat="server" TextMode="Password"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for password --%>
-            <asp:TableCell runat="server">
-                <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxPassword" SetFocusOnError="True" Display="Dynamic"></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="rxvPassword" runat="server" ErrorMessage="Password must be 6 or more alphanumeric characters" ControlToValidate="tbxPassword" CssClass="text-danger" Display="Dynamic" ValidationExpression="^([a-zA-Z0-9]{6,255})$"></asp:RegularExpressionValidator>
+            <asp:TableCell ColumnSpan="2" runat="server">
+                <br/>
+                <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-danger" OnClick="btnUpdate_Click" />&nbsp;
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-danger" OnClick="btnCancel_Click" CausesValidation="False" />
             </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Label ID="lblPassword2" runat="server" Text="Confirm Password" AssociatedControlID="tbxPassword2"></asp:Label></asp:TableCell>
-            <asp:TableCell runat="server"><asp:TextBox ID="tbxPassword2" runat="server" TextMode="Password"></asp:TextBox></asp:TableCell>
-            
-            <%-- Validation for password 2--%>
-            <asp:TableCell runat="server">
-                <asp:CompareValidator ID="cpvPassword2" runat="server" ErrorMessage="Passwords do not match" CssClass="text-danger" ControlToValidate="tbxPassword2" ControlToCompare="tbxPassword" SetFocusOnError="True" Operator="Equal" Display="Dynamic"></asp:CompareValidator>
-                <asp:RequiredFieldValidator ID="rfvPassword2" runat="server" ErrorMessage="Required" CssClass="text-danger" ControlToValidate="tbxPassword2" Display="Dynamic" SetFocusOnError="True"></asp:RequiredFieldValidator>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow runat="server">
-            <asp:TableCell runat="server"><asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-danger"/></asp:TableCell>
-            <asp:TableCell runat="server"></asp:TableCell>
         </asp:TableRow>
     </asp:Table>
-    <div>
-        <asp:Label ID="lblUpdate" runat="server" ForeColor="Red"></asp:Label>
-    </div>
 </asp:Content>
