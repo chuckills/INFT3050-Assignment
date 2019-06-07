@@ -32,14 +32,18 @@ namespace Assignment_2
             routes.MapPageRoute(
                "ChangePassword",
                 "ChangePassword/{email}/{pass}",
-                "~/UL/ChangePassword.aspx",
-                false,
+                "~/UL/ChangePassword.aspx", false,
                 new RouteValueDictionary { { "email", string.Empty }, { "pass", string.Empty }}
             );
 
             routes.MapPageRoute("Contact", "Contact", "~/UL/Contact.aspx");
 			routes.MapPageRoute("Default", "Default", "~/UL/Default.aspx");
-			routes.MapPageRoute("ErrorPage", "ErrorPage/{status}", "~/UL/ErrorPage.aspx");
+
+			routes.MapPageRoute("ErrorPage", 
+				"ErrorPage/{status}", 
+				"~/UL/ErrorPage.aspx", false,
+				new RouteValueDictionary { { "status", string.Empty } });
+
 			routes.MapPageRoute("ForgotPassword", "ForgotPassword", "~/UL/ForgotPassword.aspx");
 			routes.MapPageRoute("GuestRegistration", "GuestRegistration", "~/UL/GuestRegistration.aspx");
 			routes.MapPageRoute("Login", "Login", "~/UL/Login.aspx");
