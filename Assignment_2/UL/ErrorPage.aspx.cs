@@ -44,6 +44,9 @@ namespace Assignment_2.UL
                         case 7:
                             purchaseNotAvailable();
                             break;
+                        case 8:
+                            pageDoesNotExist();
+                            break;
                         default:
 							defaultError();
 							break;
@@ -125,7 +128,7 @@ namespace Assignment_2.UL
 
         protected void purchaseNotAvailable()
         {
-            StatusLabel.Text = "Sorry, Page not available";
+            StatusLabel.Text = "Sorry, Unable to make purchase";
             DescriptionLabel.Text = "Purchase is unable to be made until products are added to cart.";
             ResultingButton.Text = "Start Shopping";
             ResultingButton.PostBackUrl = "~/UL/Products";
@@ -135,6 +138,14 @@ namespace Assignment_2.UL
         {
             StatusLabel.Text = "Sorry, Secure connection is required";
             DescriptionLabel.Text = "The page being request requires a secure connection in order to be viewed.";
+            ResultingButton.Text = "Return Home";
+            ResultingButton.PostBackUrl = "~/UL/Default";
+        }
+
+        protected void pageDoesNotExist()
+        {
+            StatusLabel.Text = "Sorry, No page to display";
+            DescriptionLabel.Text = "No page exists under this URL for our site.";
             ResultingButton.Text = "Return Home";
             ResultingButton.PostBackUrl = "~/UL/Default";
         }
