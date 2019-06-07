@@ -18,11 +18,11 @@ namespace Assignment_2.UL
 				if (!Session["LoginStatus"].Equals("LoggedOut"))
 				{
 					// Change Login Status and redirect to home page
-					Session["LoginStatus"] = "LoggedOut";
 					Session.Remove("UserName");
 					Session.Remove("User");
 					Session.Remove("Name");
-					Response.Redirect("~/UL/Default");
+                    Session["LoginStatus"] = "LoggedOut";
+                    Response.Redirect("~/UL/Default");
 				}
 				else
 				{
@@ -34,7 +34,6 @@ namespace Assignment_2.UL
 				// Make connection unsecured if it isn't already
 				string url = ConfigurationManager.AppSettings["UnsecurePath"] + "Logout";
 				Response.Redirect(url);
-
 			}
 		}
     }

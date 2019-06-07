@@ -14,7 +14,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-10">
-                                <asp:Label ID="lblQuantity" runat="server" Text='<%#Eval("cartQuantity") %>' /> X <asp:Label ID="lblFirst" runat="server" Text='<%#Eval("playFirstName") %>' />
+                                <asp:Label ID="lblQuantity" runat="server" Text='<%#Eval("cartQuantity") %>' /> x <asp:Label ID="lblFirst" runat="server" Text='<%#Eval("playFirstName") %>' />
                                 <asp:Label ID="lblLast" runat="server" Text='<%#Eval("playLastName") %>' /> - <asp:Label ID="lblDescription" runat="server" Text='<%#Eval("prodDescription") %>' /> 
                                 (Size: <asp:Label ID="lblSize" runat="server" Text='<%#Eval("sizeID") %>' />) 
                             </div>
